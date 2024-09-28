@@ -72,31 +72,65 @@ RStudio_DockerHub
 <p>和Python部分一致，请参考Python部分即可。然后点击部署即可。</p>
 <p>由于里面还没有任何用户，Rstudio不允许root用户登录我们只能通过脚本创建用户来登录，脚本已经写好，但是需要注意的是，只能用来创建初始用户，具体的内容可以看脚本的注释，我们通过shell来运行一下，随便开一个用户的桌面：打开shell：</p>
 <p>执行以下命令：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Neo@Bionet:~/Desktop$ docker ps -a </span><br><span class="line">CONTAINER ID   IMAGE                                            COMMAND                  CREATED         STATUS                           PORTS                                                                                            NAMES</span><br><span class="line">eebab0f899d0   rocker/rstudio:4.2.2                             <span class="string">"/init"</span>                  9 minutes ago   Up 9 minutes                     0.0.0.0:10088-&gt;8787/tcp, :::10088-&gt;8787/tcp                                                      XJJ_R422</span><br><span class="line">77d5769f235a   bionet/cuda12_cudnn8_miniconda_ub22.04s:latest   <span class="string">"/bin/bash /start_ss…"</span>   4 hours ago     Up 4 hours                       0.0.0.0:10086-&gt;22/tcp, :::10086-&gt;22/tcp                                                          sxh123</span><br><span class="line">ea1a28e42060   portainer/portainer-ce:latest                    <span class="string">"/portainer"</span>             23 hours ago    Up 23 hours                      0.0.0.0:8000-&gt;8000/tcp, :::8000-&gt;8000/tcp, 0.0.0.0:9443-&gt;9443/tcp, :::9443-&gt;9443/tcp, 9000/tcp   portainer</span><br><span class="line">dbbb1cd0484f   rocker/rstudio:4.2.2                             <span class="string">"/init"</span>                  5 days ago      Up 5 days                        0.0.0.0:8787-&gt;8787/tcp, :::8787-&gt;8787/tcp, 0.0.0.0:8788-&gt;22/tcp, :::8788-&gt;22/tcp                 R_422</span><br><span class="line">6ee3c0747be2   nvidia/cuda:12.2.2-cudnn8-runtime-ubuntu22.04    <span class="string">"/opt/nvidia/nvidia_…"</span>   6 days ago      Exited (137) About an hour ago                                                                                                    pytorch</span><br><span class="line">Neo@Bionet:~/Desktop$ docker <span class="built_in">exec</span> -it  eebab0f899d0 /bin/bash</span><br><span class="line">root@eebab0f899d0:/# </span><br><span class="line">root@eebab0f899d0:/# </span><br><span class="line">root@eebab0f899d0:/# <span class="built_in">cd</span> /home/R_Share/</span><br><span class="line">root@eebab0f899d0:/home/R_Share# <span class="built_in">ls</span></span><br><span class="line">createuser.sh</span><br><span class="line">root@eebab0f899d0:/home/R_Share# ./createuser.sh </span><br></pre></td></tr></tbody></table></figure>
-
+<pre><code class="bash">Neo@Bionet:~/Desktop$ docker ps -a 
+CONTAINER ID   IMAGE                                            COMMAND                  CREATED         STATUS                           PORTS                                                                                            NAMES
+eebab0f899d0   rocker/rstudio:4.2.2                             "/init"                  9 minutes ago   Up 9 minutes                     0.0.0.0:10088-&gt;8787/tcp, :::10088-&gt;8787/tcp                                                      XJJ_R422
+77d5769f235a   bionet/cuda12_cudnn8_miniconda_ub22.04s:latest   "/bin/bash /start_ss…"   4 hours ago     Up 4 hours                       0.0.0.0:10086-&gt;22/tcp, :::10086-&gt;22/tcp                                                          sxh123
+ea1a28e42060   portainer/portainer-ce:latest                    "/portainer"             23 hours ago    Up 23 hours                      0.0.0.0:8000-&gt;8000/tcp, :::8000-&gt;8000/tcp, 0.0.0.0:9443-&gt;9443/tcp, :::9443-&gt;9443/tcp, 9000/tcp   portainer
+dbbb1cd0484f   rocker/rstudio:4.2.2                             "/init"                  5 days ago      Up 5 days                        0.0.0.0:8787-&gt;8787/tcp, :::8787-&gt;8787/tcp, 0.0.0.0:8788-&gt;22/tcp, :::8788-&gt;22/tcp                 R_422
+6ee3c0747be2   nvidia/cuda:12.2.2-cudnn8-runtime-ubuntu22.04    "/opt/nvidia/nvidia_…"   6 days ago      Exited (137) About an hour ago                                                                                                    pytorch
+Neo@Bionet:~/Desktop$ docker exec -it  eebab0f899d0 /bin/bash
+root@eebab0f899d0:/# 
+root@eebab0f899d0:/# 
+root@eebab0f899d0:/# cd /home/R_Share/
+root@eebab0f899d0:/home/R_Share# ls
+createuser.sh
+root@eebab0f899d0:/home/R_Share# ./createuser.sh 
+</code></pre>
 <p>即可完成创建。</p>
 <p>维护篇</p>
 <h2><span id="如何创建新的用户">如何创建新的用户</span></h2><p>当然为了批量添加用户，方便管理，我还编写了一个脚本，一个脚本来添加用户，并设置其密码，具体使用见下图：</p>
 <p>首先打开脚本：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Neo@Bionet:~/Desktop$ <span class="built_in">sudo</span> vim /home/some_scripts/createuser.sh </span><br></pre></td></tr></tbody></table></figure>
-
+<pre><code class="bash">Neo@Bionet:~/Desktop$ sudo vim /home/some_scripts/createuser.sh 
+</code></pre>
 <p><img src="https://s2.loli.net/2024/03/26/UCDLHn8rzvG7VZa.png" alt="image-20240326202700233"></p>
 <p>修改后运行即可：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> /home/some_scripts/createuser.sh </span><br></pre></td></tr></tbody></table></figure>
-
+<pre><code class="bash"> sudo /home/some_scripts/createuser.sh 
+</code></pre>
 <h2><span id="如何备份整个系统">如何备份整个系统</span></h2><p>由于Linux本身万物皆文件的设计理念，加上root用户对几乎全部的系统文件都有访问和更改的权限，因此Linux系统的备份和还原其实非常简单，我们直接打包整个根文件系统就可以了。</p>
 <p>我们可以使用tar命令来打包并压缩文件系统，不过这里在打包的过程中需要排除一些不需要文件，或者与新系统文件冲突的文件，包括<code>/tmp</code>、<code>/proc</code>、<code>/lost+found</code> 等目录。</p>
 <p>找一个你想保存备份文件的目录，运行下面的命令：</p>
-<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -cvpzf ubuntu_backup@`date +%Y-%m+%d`.tar.gz --exclude=/proc --exclude=/tmp --exclude=/boot  --exclude=/lost+found --exclude=/media --exclude=/mnt --exclude=/run /</span><br></pre></td></tr></tbody></table></figure>
-
+<pre><code class="text">tar -cvpzf ubuntu_backup@`date +%Y-%m+%d`.tar.gz --exclude=/proc --exclude=/tmp --exclude=/boot  --exclude=/lost+found --exclude=/media --exclude=/mnt --exclude=/run /
+</code></pre>
 <p>我们会得到一个名为<code>backup.tgz</code>的压缩文件，这个文件包含我们需要备份的系统的全部内容。</p>
 <h3><span id="还原">还原</span></h3><p>如果系统没有出问题可以正常启动的话，那直接在刚刚的压缩包找找到想还原的文件替换就好了。而如果系统无法启动了，或者说想换一块硬盘克隆一样的系统，那么可以按一下步骤操作：</p>
 <ul>
 <li>重装干净的Ubuntu系统。跟上面介绍的一样，使用U盘给目标磁盘重装一个干净的系统，这一步是为了省去自己分配存储空间和挂载的麻烦，如果你会自己配置的话那也可以不做这一步。</li>
 <li>再次使用U盘进入系统，这次选择<code>try ubuntu without installing</code>，然后可以看到挂载好的刚刚安装了干净系统的另一个盘，我们在这里对盘里的根文件系统进行一些文件的提取：</li>
 </ul>
-<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br><span class="line"></span><br><span class="line"># 在tryUbuntu根目录下有media文件夹，里面是U盘文件夹和新安装的系统文件夹，在在里分别用（U盘）和（UBUNTU）表示</span><br><span class="line">cd /media/（U盘）</span><br><span class="line">mount -o remount rw ./</span><br><span class="line"> </span><br><span class="line"># 将新系统根目录下/boot/grub/grub.cfg文件备份到U盘中</span><br><span class="line">sudo cp /media/(Ubuntu)/boot/grub/grub.cfg ./    </span><br><span class="line"> </span><br><span class="line"># 将新系统根目录下/etc/fstab文件备份到U盘中，fstab是与系统开机挂载有关的文件，grub.cfg是与开机引导有关的文件，所以这一步至关重要</span><br><span class="line">sudo cp /media/(UBUNTU)/etc/fstab ./</span><br><span class="line"> </span><br><span class="line"># 这一步删除新装ubuntu全部的系统文件，有用的fstab及grub.cfg已经备份</span><br><span class="line">cd /media/(UBUNTU)</span><br><span class="line">sudo rm -rf ./*</span><br><span class="line"> </span><br><span class="line"># 将U盘中backup.tgz复制到该目录下并解压缩</span><br><span class="line">cp /media/(U盘)/backup.tgz ./</span><br><span class="line">sudo tar xvpfz backup.tgz ./</span><br><span class="line"> </span><br><span class="line"># 创建打包系统时排除的文件</span><br><span class="line">sudo mkdir proc lost+found mnt sys media</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="text">sudo su
 
+# 在tryUbuntu根目录下有media文件夹，里面是U盘文件夹和新安装的系统文件夹，在在里分别用（U盘）和（UBUNTU）表示
+cd /media/（U盘）
+mount -o remount rw ./
+ 
+# 将新系统根目录下/boot/grub/grub.cfg文件备份到U盘中
+sudo cp /media/(Ubuntu)/boot/grub/grub.cfg ./    
+ 
+# 将新系统根目录下/etc/fstab文件备份到U盘中，fstab是与系统开机挂载有关的文件，grub.cfg是与开机引导有关的文件，所以这一步至关重要
+sudo cp /media/(UBUNTU)/etc/fstab ./
+ 
+# 这一步删除新装ubuntu全部的系统文件，有用的fstab及grub.cfg已经备份
+cd /media/(UBUNTU)
+sudo rm -rf ./*
+ 
+# 将U盘中backup.tgz复制到该目录下并解压缩
+cp /media/(U盘)/backup.tgz ./
+sudo tar xvpfz backup.tgz ./
+ 
+# 创建打包系统时排除的文件
+sudo mkdir proc lost+found mnt sys media
+</code></pre>
 <p>这一步完成后，在用我们在新系统中备份的<code>fatab</code>及<code>grub.cfg</code> 文件去替换压缩包中解压出来的同名文件，<code>sudo reboot</code>重启后就发现系统已经恢复到备份时的状态，包括各种框架，环境，系统设置~</p>
 </article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/09/28/Bionet-Server01%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%20%E2%80%94%E2%80%94Docker%E7%AF%87/" title="BionetServer-No1使用说明-进阶（Docker方式）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: BionetServer-No1使用说明-进阶（Docker方式）</span></a><a class="button is-default" href="/2024/09/28/Bionet-Server01%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" title="BionetServer-No1使用说明-基础篇"><span class="has-text-weight-semibold">Next: BionetServer-No1使用说明-基础篇</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/https://github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" onload="initMermaid()"></script><script>function initMermaid() {
  console.log("fuck you");
