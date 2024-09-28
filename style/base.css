@@ -162,7 +162,7 @@
   font-weight: bold;
 }
 
-.mermaid {
+svg {
   display: block !important;
   margin: 0 auto !important;
 }
