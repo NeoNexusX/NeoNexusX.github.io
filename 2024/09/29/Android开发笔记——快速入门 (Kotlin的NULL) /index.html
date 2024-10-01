@@ -199,10 +199,21 @@ if (test.special!=null)
     inlineMath: [['$', '$'], ['\\(', '\\)']],
     displayMath: [['$$', '$$']],
     processEscapes: true,
-    tags: 'ams' // 如果需要支持自动编号
+    tags: 'ams', // 如果需要支持自动编号
+    macros: {
+        RR: '{\\mathbb{R}}',
+        bold: ['{\\bf #1}', 1]
+    }
+    
  },
   options: {
-    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']，
+    enableMenu: true,
+    renderActions: {
+         findScript: [10, function (doc) {
+         return doc.findMath({ script: document.querySelectorAll('script[type^="math/tex"]') });
+      }]
+    }
   },
   startup: {
     ready: () => {
