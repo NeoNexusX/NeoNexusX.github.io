@@ -1,9 +1,7 @@
 <!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>Android开发笔记——快速入门 (Kotlin的延迟初始化与Viewbinding、密封类)</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
 <!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="Android开发笔记——快速入门 (Kotlin的延迟初始化与Viewbinding、密封类)
 
-
 软件环境：
-
 Jetbrains Toolbox
 Android Sudio 2021.1.1 Bumblebee
 JDK 17.0.2
@@ -11,7 +9,6 @@ JDK 17.0.2
 
 
 Kotlin的延迟初始
-
 那么到底该怎么用？
 
 
@@ -19,39 +16,34 @@ Kotlin的密封类和When
 
 
 [TOC]
-Kotlin的延迟初始
-鉴于Kotlin的判空机制，在编译的时候就会检测变量是否存在空的可能，这就导致了一个麻烦，你需要额外多写代码来处理那些可能为空的类，即使在逻辑上他也不可能是NULL的，kotlin的判空机制还是会强制让你增加判空，不过这也不是没有解决办法，下面介绍一个关键字延迟初始化：lateinit
+Kotlin的延迟初始鉴于Kotlin的判空机制，在编译的时候就会检测变量是否存在空的可能，这就导致了一个麻烦，你需要额外多写代码来处理那些可能为空的类，即使在逻辑上他也不可能是NULL的，kotlin的判空机制还是会强制让你增加判空，不过这也不是没有解决办法，下面介绍一个关键字延迟初始化：lateinit
 当你遇到这样一种场景：
-class MainActivity.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+class MainActivity : A.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Android开发笔记——快速入门 (Kotlin的延迟初始化与Viewbinding、密封类)</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Android开发笔记——快速入门 (Kotlin的延迟初始化与Viewbinding、密封类)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">软件环境：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Kotlin的延迟初始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">那么到底该怎么用？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Kotlin的密封类和When</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Android"><i class="tag post-item-tag">Android</i></a><a href="/tags/Viewbinding"><i class="tag post-item-tag">Viewbinding</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Android开发笔记——快速入门 (Kotlin的延迟初始化与Viewbinding、密封类)</h1><time class="has-text-grey" datetime="2024-09-29T14:13:28.512Z">2024-09-29</time><article class="mt-2 post-content"><h1><span id="android开发笔记快速入门-kotlin的延迟初始化与viewbinding-密封类">Android开发笔记——快速入门 (Kotlin的延迟初始化与Viewbinding、密封类)</span></h1>
-<img src="https://s2.loli.net/2024/09/29/kAI59OWGPqluiQN.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1727618527687" style="zoom:50%;">
-<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom: 50%;">
-<h4><span id="软件环境">软件环境：</span></h4>
-<ul>
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Android开发笔记——快速入门 (Kotlin的延迟初始化与Viewbinding、密封类)</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Android开发笔记——快速入门 (Kotlin的延迟初始化与Viewbinding、密封类)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">软件环境：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Kotlin的延迟初始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">那么到底该怎么用？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Kotlin的密封类和When</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Android"><i class="tag post-item-tag">Android</i></a><a href="/tags/Viewbinding"><i class="tag post-item-tag">Viewbinding</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Android开发笔记——快速入门 (Kotlin的延迟初始化与Viewbinding、密封类)</h1><time class="has-text-grey" datetime="2024-09-29T14:13:28.512Z">2024-09-29</time><article class="mt-2 post-content"><h1><span id="android开发笔记快速入门-kotlin的延迟初始化与viewbinding-密封类">Android开发笔记——快速入门 (Kotlin的延迟初始化与Viewbinding、密封类)</span></h1><p><img src="https://s2.loli.net/2024/09/29/kAI59OWGPqluiQN.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1727618527687" style="zoom:50%;"></p>
+<p><img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom: 50%;"></p>
+<h4><span id="软件环境">软件环境：</span></h4><ul>
 <li><strong>Jetbrains Toolbox</strong></li>
 <li><strong>Android Sudio 2021.1.1 Bumblebee</strong></li>
 <li><strong>JDK 17.0.2</strong></li>
 </ul>
 <!-- toc -->
 <ul>
-<li><a href="#kotlin%E7%9A%84%E5%BB%B6%E8%BF%9F%E5%88%9D%E5%A7%8B">Kotlin的延迟初始</a>
-<ul>
-<li><a href="#%E9%82%A3%E4%B9%88%E5%88%B0%E5%BA%95%E8%AF%A5%E6%80%8E%E4%B9%88%E7%94%A8">那么到底该怎么用？</a></li>
+<li><a href="#kotlin的延迟初始">Kotlin的延迟初始</a><ul>
+<li><a href="#那么到底该怎么用">那么到底该怎么用？</a></li>
 </ul>
 </li>
-<li><a href="#kotlin%E7%9A%84%E5%AF%86%E5%B0%81%E7%B1%BB%E5%92%8Cwhen">Kotlin的密封类和When</a></li>
+<li><a href="#kotlin的密封类和when">Kotlin的密封类和When</a></li>
 </ul>
 <!-- tocstop -->
 <p>[TOC]</p>
-<h2><span id="kotlin的延迟初始">Kotlin的延迟初始</span></h2>
-<p>鉴于Kotlin的判空机制，在编译的时候就会检测变量是否存在空的可能，这就导致了一个麻烦，你需要额外多写代码来处理那些可能为空的类，即使在逻辑上他也不可能是NULL的，kotlin的判空机制还是会强制让你增加判空，不过这也不是没有解决办法，下面介绍一个关键字延迟初始化：<code>lateinit</code></p>
+<h2><span id="kotlin的延迟初始">Kotlin的延迟初始</span></h2><p>鉴于Kotlin的判空机制，在编译的时候就会检测变量是否存在空的可能，这就导致了一个麻烦，你需要额外多写代码来处理那些可能为空的类，即使在逻辑上他也不可能是NULL的，kotlin的判空机制还是会强制让你增加判空，不过这也不是没有解决办法，下面介绍一个关键字延迟初始化：<code>lateinit</code></p>
 <p>当你遇到这样一种场景：</p>
-<pre><code class="language-kotlin">class MainActivity : AppCompatActivity() {
+<pre><code class="lang-kotlin">class MainActivity : AppCompatActivity() {
 
     private lateinit var binding :ActivityMainBinding
-    
+
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
@@ -62,7 +54,7 @@ class MainActivity.."><script src="//unpkg.com/valine/dist/Valine.min.js"></scri
 </code></pre>
 <p>我想在MainActivity类里面调用一个viewbinding，可是这个viewbinding只有在oncreate方法里面才能对他进行初始化你如果在类里面直接进行初始化就会产生错误，实际上绑定类调用的<code>layoutInflater</code>并没有在ACT刚开始的时候就完成了初始化，你如果直接调用就会导致报错：</p>
 <p><img src="https://s3.bmp.ovh/imgs/2022/06/23/facbd8d00ebeb0e3.png" alt="2"></p>
-<pre><code class="language-shell"> Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'android.view.LayoutInflater android.view.Window.getLayoutInflater()' on a null object reference
+<pre><code class="lang-shell"> Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'android.view.LayoutInflater android.view.Window.getLayoutInflater()' on a null object reference
     at android.app.Activity.getLayoutInflater(Activity.java:5310)
     at com.example.listviewtest.MainActivity.&lt;init&gt;(MainActivity.kt:16)
     at java.lang.Class.newInstance(Native Method)
@@ -85,21 +77,20 @@ class MainActivity.."><script src="//unpkg.com/valine/dist/Valine.min.js"></scri
 <p>因为获取绑定类的时候使用的是layoutInflate所以关键问题就在于layoutInflate之上：</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/guolin_blog/article/details/121889703?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165215148016780357214066%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;request_id=165215148016780357214066&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-2-121889703-null-null.nonecase&amp;utm_term=layoutinflater&amp;spm=1018.2226.3001.4450">再看LayoutInflater</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/guolin_blog/article/details/12921889?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165215148016780357214066%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;request_id=165215148016780357214066&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-1-12921889-null-null.nonecase&amp;utm_term=layoutinflater&amp;spm=1018.2226.3001.4450">Android LayoutInflater原理分析，带你一步步深入了解View</a>。</p>
-<p>等你看完了以后你会意识到LayoutInflater本质上和Context脱不了干系，每次都调用**LayoutInflater的from()**方法去获取一个LayoutInflater的实例，为什么要传context呢？</p>
+<p>等你看完了以后你会意识到LayoutInflater本质上和Context脱不了干系，每次都调用<strong>LayoutInflater的from()</strong>方法去获取一个LayoutInflater的实例，为什么要传context呢？</p>
 <p>其实本质上只有一种写法：</p>
-<pre><code class="language-kotlin">LayoutInflater layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+<pre><code class="lang-kotlin">LayoutInflater layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 </code></pre>
 <p>只是Android给我们做了一下封装而已。得到了LayoutInflater的实例之后就可以调用它的inflate()方法来加载布局了。这里不在多讨论这个，我们再来看一下什么是Context：</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/guolin_blog/article/details/47028975?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165232423116782248586882%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;request_id=165232423116782248586882&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-6-47028975-null-null.nonecase&amp;utm_term=onCreate&amp;spm=1018.2226.3001.4450">Android Context完全解析</a>。</p>
 <p><img src="https://s3.bmp.ovh/imgs/2022/06/23/1df15d4972330b74.png" alt="img"></p>
 <p>对于ACT来说，执行过程也是大差不大，但是，ACT的layoutInflate是调用的方法获取的对象，为什么会和本ACT中的Context有关系呢？</p>
 <p>我们再来看一下ACT到底如何获取LayoutInflate对象：</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ruancoder/article/details/51760942?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165232543116782350911197%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=165232543116782350911197&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-51760942-null-null.142%5Ev9%5Epc_search_result_control_group,157%5Ev4%5Econtrol&amp;utm_term=getLayoutInflater&amp;spm=1018.2226.3001.4187">获取LayoutInflater的三种方式分析</a>。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ruancoder/article/details/51760942?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165232543116782350911197%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=165232543116782350911197&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-51760942-null-null.142^v9^pc_search_result_control_group,157^v4^control&amp;utm_term=getLayoutInflater&amp;spm=1018.2226.3001.4187">获取LayoutInflater的三种方式分析</a>。</p>
 <p>可以看到本质上ACT调用的还是<code>LayoutInflater.from(context)</code>方法，而context方法在onCreate方法之前是没有进行加载的，所以会产生NULL报错。</p>
-<h3><span id="那么到底该怎么用">那么到底该怎么用？</span></h3>
-<p>回到最初的问题，那我们该怎么办呢？在合适的位置进行初始话的话就要使用lateinit关键字，通过lateinit就可以把对应的全局变量在合适的位置进行初始化。</p>
+<h3><span id="那么到底该怎么用">那么到底该怎么用？</span></h3><p>回到最初的问题，那我们该怎么办呢？在合适的位置进行初始话的话就要使用lateinit关键字，通过lateinit就可以把对应的全局变量在合适的位置进行初始化。</p>
 <p>当然Kotlin也提供了一个固定语法来检测在某个位置的全局变量，注意！是全局变量是否进行了初始化代码如下：</p>
-<pre><code class="language-kotlin">companion object
+<pre><code class="lang-kotlin">companion object
   {
       private lateinit var tester: Zzy
       var signal : Boolean = true
@@ -118,7 +109,7 @@ class MainActivity.."><script src="//unpkg.com/valine/dist/Valine.min.js"></scri
 </code></pre>
 <p><code>::tester.isInitialized</code>来获取对应变量是否进行了初始化，我们在对他取！就可以完成对他的判断了，在没有初始化的地方对其进行初始化。</p>
 <p>zzy类的代码：</p>
-<pre><code class="language-kotlin">class Zzy(val gender: String = "Boy") : Person(22,"zhuzeyu")
+<pre><code class="lang-kotlin">class Zzy(val gender: String = "Boy") : Person(22,"zhuzeyu")
 {
     constructor(iq:Int, eq:Int) : this("man")
     {
@@ -142,16 +133,15 @@ class MainActivity.."><script src="//unpkg.com/valine/dist/Valine.min.js"></scri
 <p>最后运行结果如下：</p>
 <p><img src="https://s3.bmp.ovh/imgs/2022/06/23/b053645a3d413608.png" alt="4"></p>
 <p>最后完整的代码在我的Gitee上全部开源：<a target="_blank" rel="noopener" href="https://gitee.com/jszszzy/android_kotlin">Gitee地址</a>。下载压缩包即可。</p>
-<h2><span id="kotlin的密封类和when">Kotlin的密封类和When</span></h2>
-<p>先来回忆一下，When是如何使用的，请参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_20540901/article/details/123688687?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165234161016781685335776%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;request_id=165234161016781685335776&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-2-123688687-null-null.nonecase&amp;utm_term=when&amp;spm=1018.2226.3001.4450">When的用法</a>。</p>
+<h2><span id="kotlin的密封类和when">Kotlin的密封类和When</span></h2><p>先来回忆一下，When是如何使用的，请参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_20540901/article/details/123688687?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165234161016781685335776%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;request_id=165234161016781685335776&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-2-123688687-null-null.nonecase&amp;utm_term=when&amp;spm=1018.2226.3001.4450">When的用法</a>。</p>
 <p>我们新建一个类，用来反馈某些操作的结果：</p>
-<pre><code class="language-kotlin">interface Result
+<pre><code class="lang-kotlin">interface Result
 class  Success(val msg :String) :Result
 class  Failure(val error :Exception) :Result
 </code></pre>
 <p>可以看到<strong>Success、Failure</strong>都是继承于Result接口的实现。</p>
 <p>我们再来创建一个方法用识别返回的是成功还是失败。</p>
-<pre><code class="language-kotlin">fun When_tester(result: Result)
+<pre><code class="lang-kotlin">fun When_tester(result: Result)
 {
     when(result)
     {
@@ -161,7 +151,7 @@ class  Failure(val error :Exception) :Result
 }
 </code></pre>
 <p>写完以后你觉得需要简写一下，因为函数只有一条语句，于是改成如下操作：</p>
-<pre><code class="language-kotlin">fun When_tester(result: Result)
+<pre><code class="lang-kotlin">fun When_tester(result: Result)
  =   when(result)
     {
         is Success -&gt; println(result.msg)
@@ -169,12 +159,12 @@ class  Failure(val error :Exception) :Result
     }
 </code></pre>
 <p>万恶的编译检查竟然给你报错！</p>
-<pre><code class="language-kotlin">e: D:\Android\Projects\CodeWithKotlin\app\src\main\java\com\example\codewithkotlin\Utils.kt: (25, 14): 'when' expression must be exhaustive, add necessary 'else' branch
+<pre><code class="lang-kotlin">e: D:\Android\Projects\CodeWithKotlin\app\src\main\java\com\example\codewithkotlin\Utils.kt: (25, 14): 'when' expression must be exhaustive, add necessary 'else' branch
 </code></pre>
 <p>问题不大，实际上的简写原则是这样的：</p>
 <p>当你的函数体只有 <strong>一块</strong> 作为返回值的代码时，<strong>可以直接省略大括号，用等号来连接,并且省略return关键字，因为等号足以包含返回值的意思</strong>。</p>
 <p>也就是说你这样写他也是报错的：</p>
-<pre><code class="language-kotlin">fun When_tester(result: Result)
+<pre><code class="lang-kotlin">fun When_tester(result: Result)
 {
     return  when(result)
     {
@@ -187,7 +177,7 @@ class  Failure(val error :Exception) :Result
 <p>实际上你的类就这样两种可能，基本没有可能出现else内的情况，但是！万恶的编译检查竟然给你报错！</p>
 <p>不过Kotlin也针对这种情况给出了解决办法：<strong>密封类</strong>。</p>
 <p>使用方法很简单我们把对应的接口更改成sealed class即可：</p>
-<pre><code class="language-kotlin">sealed class Result 
+<pre><code class="lang-kotlin">sealed class Result 
 class  Success(val msg :String) :Result()
 class  Failure(val error :Exception) :Result()
 </code></pre>
