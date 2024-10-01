@@ -69,10 +69,49 @@ ACT的布局是如何和ACT的显示内容关联起来的？
 <p>对于一个ACT来说想要让其显示到手机上，只需要一个布局文件和一个ACT类来将布局文件加载进来就可以了，对于一个Fragment来说同样也是这样。首先我们创建两个Fragment的布局文件，让他等下填充一个ACT，简单来说就是把一个ACT用两个Fragment布局来填充。</p>
 <p>创建的布局文件如下：</p>
 <p><code>left_fragment.xml</code></p>
-<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:context</span>=<span class="string">".Left_fragment"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">Button</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/button"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_gravity</span>=<span class="string">"center_horizontal"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_marginBottom</span>=<span class="string">"683dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">"Button"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintBottom_toBottomOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">"parent"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Left_fragment"&gt;
+
+    &lt;Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="683dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" /&gt;
+&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
+</code></pre>
 <p>右布局如下：</p>
 <p><code>right_fragment.xml</code></p>
-<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:background</span>=<span class="string">"#00ff00"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:context</span>=<span class="string">".Right_fragment"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- <span class="doctag">TODO:</span> Update blank fragment layout --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_gravity</span>=<span class="string">"center_horizontal"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:textSize</span>=<span class="string">"24sp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">"This is right Fragment"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#00ff00"
+    tools:context=".Right_fragment"&gt;
+
+    &lt;!-- TODO: Update blank fragment layout --&gt;
+    &lt;TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="24sp"
+        android:text="This is right Fragment" /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
 <p>为了直观一点我把左右布局的放上来看一看：</p>
 <p>左布局情况：</p>
 <p>实际上左布局就是通过约束布局在上边放置了一个水平中间对齐的按钮。</p>
@@ -84,19 +123,91 @@ ACT的布局是如何和ACT的显示内容关联起来的？
 <p>通过UI创建：</p>
 <p><img src="https://s2.loli.net/2024/09/29/PgXhOlYuW3kGfaV.png" alt="image-20220621105240034"></p>
 <p>左LeftFragment代码如下，如果你是通过UI创建的会帮写好很多重写的方法，目前还用不到，可以直接删除重写，具体代码如下：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Left_fragment</span> : <span class="type">Fragment</span>() {</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> {</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreateView</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">        inflater: <span class="type">LayoutInflater</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">        container: <span class="type">ViewGroup</span>?,</span></span></span><br><span class="line"><span class="params"><span class="function">        savedInstanceState: <span class="type">Bundle</span>?</span></span></span><br><span class="line"><span class="params"><span class="function">    )</span></span>: View? {</span><br><span class="line">         <span class="keyword">return</span> layoutInflater.inflate(R.layout.left_fragment,container,<span class="literal">false</span>)</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">class Left_fragment : Fragment() {
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+         return layoutInflater.inflate(R.layout.left_fragment,container,false)
+    }
+
+}
+</code></pre>
 <p>通过上边针对layoutInflater的学习，我相信你能很快的理解这里onCreateView是如何工作的，在调用这个方法之前肯定是通过context对象来获取了一个LayoutInflater，我们只要正常使用这个LayoutInflater的inflate方法就可以将对应的布局加载进来，这里有个小细节是<strong>这里inflate()方法的最后一个参数一定要传入false</strong>。</p>
 <p>在Fragment的相关源码，你会发现它会自动将我们在onCreateView()方法中返回的View添加到一个Container当中：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void addViewToContainer() {</span><br><span class="line">    <span class="comment">// Ensure that our new Fragment is placed in the right index</span></span><br><span class="line">    <span class="comment">// based on its relative position to Fragments already in the</span></span><br><span class="line">    <span class="comment">// same container</span></span><br><span class="line">    int index = mFragmentStore.findFragmentIndexInContainer(mFragment);</span><br><span class="line">    mFragment.mContainer.addView(mFragment.mView, index);</span><br><span class="line">}</span><br><span class="line"><span class="comment">//版权声明：本文为CSDN博主「guolin」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。原文链接：https://blog.csdn.net/guolin_blog/article/details/121889703</span></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">void addViewToContainer() {
+    // Ensure that our new Fragment is placed in the right index
+    // based on its relative position to Fragments already in the
+    // same container
+    int index = mFragmentStore.findFragmentIndexInContainer(mFragment);
+    mFragment.mContainer.addView(mFragment.mView, index);
+}
+//版权声明：本文为CSDN博主「guolin」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。原文链接：https://blog.csdn.net/guolin_blog/article/details/121889703
+</code></pre>
 <p>也就是说，后续Fragment自己会有一个addView的操作，如果我们将inflate()方法的第三个参数传入true，那么就会直接将inflate出来的布局添加到父布局当中。这样后面再次addView的时候就会发现它已经有一个父布局了，从而抛出崩溃信息。</p>
 <p><strong>总的来说就是使用 layoutInflater来向Fragment加载了布局。</strong></p>
 <p>同样的右Fragment的代码如下：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Right_fragment</span> : <span class="type">Fragment</span>() {</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> {</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreateView</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">        inflater: <span class="type">LayoutInflater</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">        container: <span class="type">ViewGroup</span>?,</span></span></span><br><span class="line"><span class="params"><span class="function">        savedInstanceState: <span class="type">Bundle</span>?</span></span></span><br><span class="line"><span class="params"><span class="function">    )</span></span>: View? {</span><br><span class="line">        <span class="keyword">return</span> layoutInflater.inflate(R.layout.right_fragment,container,<span class="literal">false</span>)</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">class Right_fragment : Fragment() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return layoutInflater.inflate(R.layout.right_fragment,container,false)
+    }
+}
+</code></pre>
 <p>代码基本一摸一样没什么好说的。</p>
 <p>接下来就是在ACT的布局中引入两个Fragment，这个更简单：</p>
 <p>我们直接在ACT的布局中引入两个Fragment即可然后通过ID指定是布局文件中哪个Fragment，</p>
 <p><code>android:id="@+id/rightFragment"</code>。</p>
-<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:context</span>=<span class="string">".MainActivity"</span> &gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">fragment</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/rightFragment"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">"com.example.fragmenttest.Right_fragment"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintBottom_toBottomOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintEnd_toStartOf</span>=<span class="string">"@+id/leftFragment"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintHorizontal_weight</span>=<span class="string">"1"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintVertical_bias</span>=<span class="string">"0.0"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">fragment</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/leftFragment"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">"com.example.fragmenttest.Left_fragment"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintBottom_toBottomOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintHorizontal_weight</span>=<span class="string">"1"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintStart_toEndOf</span>=<span class="string">"@+id/rightFragment"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">"parent"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" &gt;
+
+    &lt;fragment
+        android:id="@+id/rightFragment"
+        android:name="com.example.fragmenttest.Right_fragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/leftFragment"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" /&gt;
+
+    &lt;fragment
+        android:id="@+id/leftFragment"
+        android:name="com.example.fragmenttest.Left_fragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/rightFragment"
+        app:layout_constraintTop_toTopOf="parent" /&gt;
+
+&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
+</code></pre>
 <p>我们通过        <code>app:layout_constraintHorizontal_weight="1"</code>属性来将约束布局的占比调整成1：1，最终实现效果如下：</p>
 <p><img src="https://s2.loli.net/2024/09/29/QpG38ikaRU5XJ46.png" alt="image-20220621105739852"></p>
 <p>当然只是使用Fragment不能算是放肆，我们来结合一点新的东西：</p>
@@ -106,7 +217,20 @@ ACT的布局是如何和ACT的显示内容关联起来的？
 <p>我并不推荐这样，因为对于一个项目来说如果其中包含了大量的控件的话，<code>findViewById()</code>是通过遍历他的组件树来查找某个组件的，这会造成性能问题，虽然现在性能很强了，但是小细节还是要注意。</p>
 <p>我们如果使用Viewbinding的话，这些问题都可以迎刃而解了，首先你如果还不太懂如何使用viewbinding的话请参考我的前一篇文章，先学习一下如何在Activity中使用viewbinding。</p>
 <p>我们首先在Activity中创建两个绑定类，首先是Activity的绑定类，其次是左Fragment的绑定类，我们在这里先把左Fragemnt加载进来，右边的就先不要考虑。</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MainActivity</span> : <span class="type">AppCompatActivity</span>() {</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> binding :ActivityMainBinding</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> leftbinding  : LeftFragmentBinding</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> {</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        <span class="comment">//使用viewbinding填充Activity视图</span></span><br><span class="line">        binding = ActivityMainBinding.inflate(layoutInflater)</span><br><span class="line">        <span class="keyword">val</span> left_fragment: View = binding.????????</span><br><span class="line">        setContentView(binding.root)</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding :ActivityMainBinding
+    private lateinit var leftbinding  : LeftFragmentBinding
+    
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //使用viewbinding填充Activity视图
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val left_fragment: View = binding.????????
+        setContentView(binding.root)
+    }
+}
+</code></pre>
 <p>在绑定类创建完成的时候，我们不能直接对他初始化，如果你仔细看了Viewbinding的关于Context类的介绍就知道，这时候Activity的Context还没完成，直接调用的话就会造成空指针问题。</p>
 <p>接下来和Act中一样使用layoutInflater来将布局加载进来，加载的时候同时也将布局中的Fragment一并加载进来，这时候你就会有疑问了，那么我的Fragment在哪里呢？为什么绑定类无法获取到我的Fragment？</p>
 <p><img src="https://s2.loli.net/2024/09/29/OQgDSIPWT8vBise.png" alt="image-20220621113055061"></p>
@@ -119,17 +243,36 @@ ACT的布局是如何和ACT的显示内容关联起来的？
 <p>普通的Lauout都是直接继承于ViewGroup，像是<code>LinearLayout</code>，<code>RelativeLayout</code>这些实际上是继承于ViewGroup的类，这些类的后缀之中都包含着<code>Lauout</code>。</p>
 <p>而<code>container</code>类型更像是view的桶，里面放着动态的内容他相对于Views他可以继承一个Layouts类同样也可以不继承，其中很多实际上没有直接继承<code>Viewgroup</code>像<code>Listview</code>，而有些直接就选择不继承，像<code>VideoView</code>就是这样虽然<code>container</code>标签被用于在AS中，但它不是任何一个类的名称。</p>
 <p>你可能会想这还不简单？我这样写就能创建一个<code>Fragement</code>的绑定类了：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">leftbinding =LeftFragmentBinding.inflate(layoutInflater,binding.root,<span class="literal">true</span>)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">leftbinding =LeftFragmentBinding.inflate(layoutInflater,binding.root,true)
+</code></pre>
 <p>错！仔细看上文中<code>layoutInflater</code>的介绍，<code>LayoutInflater</code>的inflate方法实际上是唯一加载布局的方法，加载布局就是把布局转化为view对象，我们在这里调用了一个<code>LeftFragmentBinding.inflate()</code>方法实际上是重新加载了一个布局，而不是使用Activity中的Fragement！</p>
 <p>效果如下：</p>
 <p><img src="https://s3.bmp.ovh/imgs/2022/06/21/fed6d742e3c3afcf.png" alt="image-20220621113929146"></p>
 <p>这当然不是我们想要的，那么到底如何访问到Fragment的button组件呢？</p>
 <p>其实很简单，我们只需要将绑定类绑定到Activity的中Fragment中即可</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">leftbinding = LeftFragmentBinding.bind(binding.root)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">leftbinding = LeftFragmentBinding.bind(binding.root)
+</code></pre>
 <p>这时候这个绑定类实际上就是Activity中的Fragment的绑定类！</p>
 <p>我们就可以通过这个绑定类来获取到button组件。</p>
 <p>完整代码如下：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MainActivity</span> : <span class="type">AppCompatActivity</span>() {</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> binding :ActivityMainBinding</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> leftbinding  : LeftFragmentBinding</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> {</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        binding = ActivityMainBinding.inflate(layoutInflater)</span><br><span class="line">        <span class="comment">//绑定对应的Fragment视图上</span></span><br><span class="line">        leftbinding =LeftFragmentBinding.bind(binding.root)</span><br><span class="line">        leftbinding.button.setOnClickListener { </span><br><span class="line">            <span class="comment">//button的点击操作</span></span><br><span class="line">        }</span><br><span class="line">        setContentView(binding.root)</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding :ActivityMainBinding
+    private lateinit var leftbinding  : LeftFragmentBinding
+    
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        //绑定对应的Fragment视图上
+        leftbinding =LeftFragmentBinding.bind(binding.root)
+        leftbinding.button.setOnClickListener { 
+            //button的点击操作
+        }
+        setContentView(binding.root)
+    }
+    
+}
+</code></pre>
 <p>你觉得这样就完成了吗！大错特错！能运行就说明你用的对吗？</p>
 <p>我们在这里打破砂锅问到底！</p>
 <p>这里需要注意的细节是并不是所有布局都可以随意绑定的，在Activity中的Fragment实际上是囊括在一个约束布局之中的,我们回忆一下，Fragment实际上并不是一个view而是一个存放view的容器。</p>
@@ -137,39 +280,121 @@ ACT的布局是如何和ACT的显示内容关联起来的？
 <p>我们再来回看一个例子，说为什么这里将Fragment绑定到binding.root上是不正确的。</p>
 <p>我们看一下我刚刚绑定的左边的Fragment，还有一个右边的Fragment我们没有尝试绑定：</p>
 <p>他的布局是什么呢？</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    xmlns:tools=<span class="string">"http://schemas.android.com/tools"</span></span><br><span class="line">    android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">    android:layout_height=<span class="string">"match_parent"</span></span><br><span class="line">    android:orientation=<span class="string">"vertical"</span></span><br><span class="line">    android:background=<span class="string">"#00ff00"</span></span><br><span class="line">    tools:context=<span class="string">".Right_fragment"</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:id=<span class="string">"@+id/text"</span></span><br><span class="line">        android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">        android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">        android:layout_gravity=<span class="string">"center_horizontal"</span></span><br><span class="line">        android:textSize=<span class="string">"24sp"</span></span><br><span class="line">        android:text=<span class="string">"This is right Fragment"</span> /&gt;</span><br><span class="line"></span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#00ff00"
+    tools:context=".Right_fragment"&gt;
+
+    &lt;TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="24sp"
+        android:text="This is right Fragment" /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
 <p>是一个由<code>LinearLayout</code>内部包含的<code>TextView</code>组成的布局，按道理来说绑定也很简单对吧：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rightbinding=RightFragmentBinding.bind(binding.root)    </span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">rightbinding=RightFragmentBinding.bind(binding.root)    
+</code></pre>
 <p>当我们尝试绑定的结果是什么呢？</p>
 <p>竟然报错啦！</p>
 <p><img src="https://s3.bmp.ovh/imgs/2022/06/21/f4faea41eb14ede6.png" alt="0"></p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">E/AndroidRuntime: FATAL EXCEPTION: main</span><br><span class="line">    Process: com.example.fragmenttest, PID: 27502</span><br><span class="line">    java.lang.RuntimeException: Unable to start activity ComponentInfo{com.example.fragmenttest/com.example.fragmenttest.MainActivity}: java.lang.ClassCastException: androidx.constraintlayout.widget.ConstraintLayout cannot be cast to android.widget.LinearLayout</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-shell">E/AndroidRuntime: FATAL EXCEPTION: main
+    Process: com.example.fragmenttest, PID: 27502
+    java.lang.RuntimeException: Unable to start activity ComponentInfo{com.example.fragmenttest/com.example.fragmenttest.MainActivity}: java.lang.ClassCastException: androidx.constraintlayout.widget.ConstraintLayout cannot be cast to android.widget.LinearLayout
+</code></pre>
 <p>怎么会报错呢？<code>java.lang.ClassCastException: androidx.constraintlayout.widget.ConstraintLayout cannot be cast to android.widget.LinearLayout</code></p>
 <p>为什么说是把<code>ConstraintLayout</code> 强转成<code>LinearLayout</code>失败呢？</p>
 <p>要了解这个问题我们就要去看看bind的代码是什么，可惜的是由于它是以插件辅助的形式存在，实际上你是无法直接访问到对应的绑定类的，这就基本告别了bind方法是如何实现的，不过好在我找到了Google的开发人员书写的Viewbinding的指南</p>
 <p><a target="_blank" rel="noopener" href="https://medium.com/androiddevelopers/use-view-binding-to-replace-findviewbyid-c83942471fc">原文链接</a>。</p>
 <p>对于bind方法他大致的样子是这样的：</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@NonNull</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> 某个bidning类 bind(<span class="meta">@NonNull</span> View rootView) </span><br><span class="line"> {</span><br><span class="line">   <span class="comment">/* Edit: Simplified code – the real generated code is an optimized version */</span></span><br><span class="line">   <span class="type">TextView</span> <span class="variable">textview</span> <span class="operator">=</span> rootView.findViewById(R.id.subtext);</span><br><span class="line">    </span><br><span class="line">   <span class="keyword">if</span> (textview != <span class="literal">null</span>) </span><br><span class="line">   {</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">new</span> 某个bidning类的构造方法 ((ConstraintLayout) rootView, textview);<span class="comment">//注意这里有一个强转操作</span></span><br><span class="line">   }</span><br><span class="line">   <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NullPointerException</span>(<span class="string">"Missing required view […]"</span>);</span><br><span class="line"> }</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-java"> @NonNull
+  public static 某个bidning类 bind(@NonNull View rootView) 
+  {
+    /* Edit: Simplified code – the real generated code is an optimized version */
+    TextView textview = rootView.findViewById(R.id.subtext);
+     
+    if (textview != null) 
+    {
+      return new 某个bidning类的构造方法 ((ConstraintLayout) rootView, textview);//注意这里有一个强转操作
+    }
+    throw new NullPointerException("Missing required view […]");
+  }
+</code></pre>
 <p>他的方法很简单，就是将这个布局里面的所有组件通过<code>findViewById</code>方法获取到<code>view</code>对象，然后通过构造方法构造一个绑定类进行返回。</p>
 <p>我们再来看一下绑定类的构造方法：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> 某个bidning类的构造方法 (<span class="meta">@NonNull</span> 根布局的类型 rootView, <span class="meta">@NonNull</span> TextView textview<span class="comment">/*此处应包含所有的子组件，这里只有一个textview所以只需要传入一下textview就可以*/</span>)</span><br><span class="line">{ … }</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">private 某个bidning类的构造方法 (@NonNull 根布局的类型 rootView, @NonNull TextView textview/*此处应包含所有的子组件，这里只有一个textview所以只需要传入一下textview就可以*/)
+{ … }
+</code></pre>
 <p>虽然没有详细写，但是我们知道根据视图生成的绑定类实际上的rootview是整个布局的根布局，对于<code>rightbinding</code>来说我们实际上的rootview应该是一个<code>LinearLayout</code>，我们调用bind方法的时候获取的<code>binding.root</code>实际上是Activity的根部局，是<code>constraintlayout</code>，所以产生了强转错误，也就是说我们绑定的对象根本不对！实际上应该怎么写呢？</p>
 <p>我们先来确认一下对于Activity加载进来的view对象构成是什么样，rightFragment的父组件是什么？rightFragment是什么布局？我们通过Log来输出以下结果：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MainActivity</span> : <span class="type">AppCompatActivity</span>() {                     </span><br><span class="line">                                                               </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> binding :ActivityMainBinding          </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> leftbinding  : LeftFragmentBinding    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> rightbinding  : RightFragmentBinding  </span><br><span class="line">                                                               </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span>         </span><br><span class="line">    {                                                          </span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)                     </span><br><span class="line">        binding = ActivityMainBinding.inflate(layoutInflater)  </span><br><span class="line">        setContentView(binding.root)       </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">val</span> rightfragment: View =findViewById(R.id.rightFragmen)</span><br><span class="line">        <span class="keyword">val</span> Textview :View = findViewById(R.id.text)                                    </span><br><span class="line">        Log.e(<span class="string">"tester"</span>,Textview.parent.toString())             </span><br><span class="line">        Log.e(<span class="string">"tester"</span>,Textview.parent.parent.toString())  </span><br><span class="line">        </span><br><span class="line">        Log.e(<span class="string">"tester"</span>,rightfragment.toString())               </span><br><span class="line">        Log.e(<span class="string">"tester"</span>,rightfragment.parent.toString())        </span><br><span class="line">        </span><br><span class="line">        Log.e(<span class="string">"tester"</span>,binding.root.toString())                </span><br><span class="line">        Log.e(<span class="string">"tester"</span>,binding.root.rootView.toString())       </span><br><span class="line">   }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">class MainActivity : AppCompatActivity() {                     
+                                                               
+    private lateinit var binding :ActivityMainBinding          
+    private lateinit var leftbinding  : LeftFragmentBinding    
+    private lateinit var rightbinding  : RightFragmentBinding  
+                                                               
+    override fun onCreate(savedInstanceState: Bundle?)         
+    {                                                          
+        super.onCreate(savedInstanceState)                     
+        binding = ActivityMainBinding.inflate(layoutInflater)  
+        setContentView(binding.root)       
+        
+        val rightfragment: View =findViewById(R.id.rightFragmen)
+        val Textview :View = findViewById(R.id.text)                                    
+        Log.e("tester",Textview.parent.toString())             
+        Log.e("tester",Textview.parent.parent.toString())  
+        
+        Log.e("tester",rightfragment.toString())               
+        Log.e("tester",rightfragment.parent.toString())        
+        
+        Log.e("tester",binding.root.toString())                
+        Log.e("tester",binding.root.rootView.toString())       
+   }
+}
+</code></pre>
 <p>这里通过万能的<code>findViewById</code>来获取Activity中Fragment的组件，将其中的textview和fragment本身提取出来，输出看一下其对应的类型和父类对应的类型。</p>
 <p><img src="https://s3.bmp.ovh/imgs/2022/06/21/d754d43aa68a0b02.png" alt="15"></p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">2022-05-18 23:29:47.132 12020-12020/com.example.fragmenttest E/tester: android.widget.LinearLayout{aa4256a V.E...... ......ID 0,0-0,0 #7f08012b app:id/rightFragment}</span><br><span class="line">2022-05-18 23:29:47.132 12020-12020/com.example.fragmenttest E/tester: androidx.constraintlayout.widget.ConstraintLayout{5466a5b V.E...... ......I. 0,0-0,0}</span><br><span class="line"></span><br><span class="line">2022-05-18 23:29:47.132 12020-12020/com.example.fragmenttest E/tester: android.widget.LinearLayout{aa4256a V.E...... ......ID 0,0-0,0 #7f08012b app:id/rightFragment}</span><br><span class="line">2022-05-18 23:29:47.132 12020-12020/com.example.fragmenttest E/tester: androidx.constraintlayout.widget.ConstraintLayout{5466a5b V.E...... ......I. 0,0-0,0}</span><br><span class="line"></span><br><span class="line">2022-05-18 23:29:47.132 12020-12020/com.example.fragmenttest E/tester: androidx.constraintlayout.widget.ConstraintLayout{5466a5b V.E...... ......I. 0,0-0,0}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-shell">2022-05-18 23:29:47.132 12020-12020/com.example.fragmenttest E/tester: android.widget.LinearLayout{aa4256a V.E...... ......ID 0,0-0,0 #7f08012b app:id/rightFragment}
+2022-05-18 23:29:47.132 12020-12020/com.example.fragmenttest E/tester: androidx.constraintlayout.widget.ConstraintLayout{5466a5b V.E...... ......I. 0,0-0,0}
+
+2022-05-18 23:29:47.132 12020-12020/com.example.fragmenttest E/tester: android.widget.LinearLayout{aa4256a V.E...... ......ID 0,0-0,0 #7f08012b app:id/rightFragment}
+2022-05-18 23:29:47.132 12020-12020/com.example.fragmenttest E/tester: androidx.constraintlayout.widget.ConstraintLayout{5466a5b V.E...... ......I. 0,0-0,0}
+
+2022-05-18 23:29:47.132 12020-12020/com.example.fragmenttest E/tester: androidx.constraintlayout.widget.ConstraintLayout{5466a5b V.E...... ......I. 0,0-0,0}
+</code></pre>
 <p>可以看到textview的父类其实是一个<code>Linearlayout</code>，而<code>Linearlayout</code>的父类其实是一个<code>ConstraintLayout</code>也就是Activity布局文件的最外层的<code>ConstraintLayout</code>。</p>
 <p>而bind方法你也能看到,实际上它是将现有view绑定到这个类之中，所以我们应该绑定的是其对应的Fragment，而不是对应的<code>ConstraintLayout</code>。获取到对应的Fragment的外层布局也很简单，我们只要通过</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> rightfragment: View =findViewById(R.id.rightFragment)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">val rightfragment: View =findViewById(R.id.rightFragment)
+</code></pre>
 <p>获取即可，有人说我用viewbinding不就是为了避免用<code>findViewById</code>吗？这个问题需要得到正视，因为在</p>
 <p>bind方法中实际上也是使用<code>findViewById</code>来获取的，view binding的核心在于类型安全和快捷，减少多余的代码量，实际上是一种<code>findViewById</code>的封装。</p>
 <p>最后在针对上文的错误结果查看一下：</p>
 <p>对于绑定的布局我们再次输出他的根部局类型和他本身的布局类型：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Log.e(<span class="string">"tester"</span>,leftbinding.root.toString())</span><br><span class="line">Log.e(<span class="string">"tester"</span>,leftbinding.button.parent.toString())</span><br><span class="line"></span><br><span class="line"><span class="comment">//修正绑定对象</span></span><br><span class="line"><span class="keyword">val</span> left_fragment: View =findViewById(R.id.leftFragment)</span><br><span class="line">leftbinding =LeftFragmentBinding.bind(left_fragment)</span><br><span class="line"></span><br><span class="line">Log.e(<span class="string">"tester"</span>,leftbinding.root.toString())  </span><br><span class="line">Log.e(<span class="string">"tester"</span>,leftbinding.button.parent.toString())</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">Log.e("tester",leftbinding.root.toString())
+Log.e("tester",leftbinding.button.parent.toString())
+
+//修正绑定对象
+val left_fragment: View =findViewById(R.id.leftFragment)
+leftbinding =LeftFragmentBinding.bind(left_fragment)
+
+Log.e("tester",leftbinding.root.toString())  
+Log.e("tester",leftbinding.button.parent.toString())
+</code></pre>
 <p>结果如下：</p>
 <p><img src="https://s3.bmp.ovh/imgs/2022/06/21/7f0507d081ce62b9.png" alt="16"></p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">2022-05-19 08:18:31.215 10392-10392/com.example.fragmenttest E/tester: androidx.constraintlayout.widget.ConstraintLayout{aa4256a V.E...... ......I. 0,0-0,0}</span><br><span class="line">2022-05-19 08:18:31.215 10392-10392/com.example.fragmenttest E/tester: androidx.constraintlayout.widget.ConstraintLayout{5466a5b V.E...... ......I. 0,0-0,0 #7f0800c9 app:id/leftFragment}</span><br><span class="line"></span><br><span class="line">2022-05-19 08:18:31.216 10392-10392/com.example.fragmenttest E/tester: androidx.constraintlayout.widget.ConstraintLayout{5466a5b V.E...... ......I. 0,0-0,0 #7f0800c9 app:id/leftFragment}</span><br><span class="line">2022-05-19 08:18:31.216 10392-10392/com.example.fragmenttest E/tester: androidx.constraintlayout.widget.ConstraintLayout{5466a5b V.E...... ......I. 0,0-0,0 #7f0800c9 app:id/leftFragment}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-shell">2022-05-19 08:18:31.215 10392-10392/com.example.fragmenttest E/tester: androidx.constraintlayout.widget.ConstraintLayout{aa4256a V.E...... ......I. 0,0-0,0}
+2022-05-19 08:18:31.215 10392-10392/com.example.fragmenttest E/tester: androidx.constraintlayout.widget.ConstraintLayout{5466a5b V.E...... ......I. 0,0-0,0 #7f0800c9 app:id/leftFragment}
+
+2022-05-19 08:18:31.216 10392-10392/com.example.fragmenttest E/tester: androidx.constraintlayout.widget.ConstraintLayout{5466a5b V.E...... ......I. 0,0-0,0 #7f0800c9 app:id/leftFragment}
+2022-05-19 08:18:31.216 10392-10392/com.example.fragmenttest E/tester: androidx.constraintlayout.widget.ConstraintLayout{5466a5b V.E...... ......I. 0,0-0,0 #7f0800c9 app:id/leftFragment}
+</code></pre>
 <p>可以看到当使用binding.root直接作为绑定对象的时候，leftbinding的根部局是错误的不应该为Act的外层布局，修正以后变为Fragment的根部局。有时候代码能运行完全就是运气！</p>
 </article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/09/29/Android%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%20(Kotlin%E4%B8%8E%20lamda)/" title="Android开发笔记——快速入门（Kotlin与lambda）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Android开发笔记——快速入门（Kotlin与lambda）</span></a><a class="button is-default" href="/2024/09/29/Android%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%EF%BC%88Activity2%EF%BC%89%20/" title="Android开发笔记——快速入门（优雅的开发Activity）"><span class="has-text-weight-semibold">Next: Android开发笔记——快速入门（优雅的开发Activity）</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" onload="initMermaid()"></script><script>function initMermaid() {
  console.log("fuck you");

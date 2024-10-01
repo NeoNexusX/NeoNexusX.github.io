@@ -106,7 +106,14 @@ Kotlin的发展历史
 <h3><span id="kotlin的变量与函数">Kotlin的变量与函数</span></h3>
 <p>创建完成以后就可以愉快的，使用AS来进行kotlin的编写：</p>
 <p>首先创建一个主函数：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.codewithkotlin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line">{</span><br><span class="line">    println(<span class="string">"Hello Kotlin!"</span>)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-Kotlin">package com.example.codewithkotlin
+
+
+fun main()
+{
+    println("Hello Kotlin!")
+}
+</code></pre>
 <p>你可以点击左边的小箭头运行一下</p>
 <p><img src="https://s3.bmp.ovh/imgs/2022/06/20/d8f09d31972d0ae5.png" alt="3"></p>
 <h4><span id="kotlin的变量">kotlin的变量</span></h4>
@@ -117,58 +124,152 @@ Kotlin的发展历史
 </ul>
 <p>举例：</p>
 <p>不需要指定变量类型，其会自动推导：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">val</span> a=<span class="number">10</span></span><br><span class="line">    println(<span class="string">"a is "</span> + a)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">fun main()
+{
+    val a=10
+    println("a is " + a)
+}
+</code></pre>
 <p>指定数据类型时不会再自动推导：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">val</span> a : <span class="built_in">Int</span>=<span class="number">10</span></span><br><span class="line">    println(<span class="string">"a is "</span> + a)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">fun main()
+{
+    val a : Int=10
+    println("a is " + a)
+}
+</code></pre>
 <p>输出结果：</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a is 10</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-shell">a is 10
+</code></pre>
 <p>val与var是用来指定是否为变量的关键字，val类似于java的final，var就是常规的变量，为什么要这样设计你如果有编程基础你就知道变量是不安全的，val，var就是为了指定这个变量是否可变（强制要求显式定义），这有一个小技巧，定义变量时应该是都定义为val，只有你需要var的时候再回来将这个变量改定义为var，这样就保证了基本所有变量的安全。</p>
 <h4><span id="kotlin的函数">Kotlin的函数</span></h4>
 <p>kotlin的函数与Java中的方法其实很像，但是更自由，书写更方便。</p>
 <p>fun（function的简写）是定义函数的关键字，无论你定义什么函数，都一定要使用fun来声明。当然这不包含函数表达式。</p>
 <p>其基本定义格式如下：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">funName</span><span class="params">(param1 : <span class="type">Int</span>,param2 :<span class="type">Int</span>)</span></span> ：returnvaluetype </span><br><span class="line">{</span><br><span class="line">	<span class="keyword">return</span> value</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">fun funName(param1 : Int,param2 :Int) ：returnvaluetype 
+{
+	return value
+}
+</code></pre>
 <p>如果没有返回参数就可以省略<code>：returnvaluetype</code> 部分，从这里看出Kotlin的设计思想：</p>
 <p><strong>能省就省</strong></p>
 <p>简化以后就可以表现为：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">funName</span><span class="params">(param1 : <span class="type">Int</span>,param2 :<span class="type">Int</span>)</span></span></span><br><span class="line">{</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">fun funName(param1 : Int,param2 :Int)
+{
+}
+</code></pre>
 <p>为了保持设计思想，Kotlin做出了更多的省略,当你的函数体只有一块作为返回值的代码时，可以直接省略大括号，用等号来连接,这里用一个返回最大值的函数来表示：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">maxNumber</span><span class="params">(num1 :<span class="type">Int</span> ,num2 :<span class="type">Int</span>)</span></span>:<span class="built_in">Int</span> = max(num1,num2)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">fun maxNumber(num1 :Int ,num2 :Int):Int = max(num1,num2)
+</code></pre>
 <p>但是我们说过Kotlin具有出色的推导机制，那么他能不能推断出这里一定返回的是和max函数返回相同的内容呢？当然可以。所谓我们进一步简化省略去返回值：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">maxNumber</span><span class="params">(num1 :<span class="type">Int</span> ,num2 :<span class="type">Int</span>)</span></span>= max(num1,num2)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">fun maxNumber(num1 :Int ,num2 :Int)= max(num1,num2)
+</code></pre>
 <p>使用Kotlin以后你就会发现能在一行就实现一个完整的函数，但这并不是我们想要的，因为这里我们只是对MAX函数进行了一个包装，里面并没有任何逻辑部分。下面我们来写一下如何写逻辑部分的内容，并对其进行简化，进一步体验其强大性。</p>
 <h3><span id="kotlin的逻辑控制">Kotlin的逻辑控制</span></h3>
 <h4><span id="kotlin的if">Kotlin的if</span></h4>
 <p>if在使用的时候与传统的if并没有太大区别，但是他还有一个额外的功能，可以有返回值。为什么要给if来整一个返回值呢？返回值常常与函数相关，对于现在流行的函数式编程，Kotlin也对其做出了支持，if的返回值就是如此，<strong>if语句会自动返回其最后一条语句的返回值</strong>：</p>
 <p>常规IF的写法如下：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">maxNumber</span><span class="params">(num1 :<span class="type">Int</span> ,num2 :<span class="type">Int</span>)</span></span> ：<span class="built_in">Int</span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">var</span> maxnumber =<span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span>(num1 &gt;= num2)</span><br><span class="line">        maxnumber = num1</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        maxnumber = num2</span><br><span class="line">    <span class="keyword">return</span> maxnumber</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">fun maxNumber(num1 :Int ,num2 :Int) ：Int
+{
+    var maxnumber =0
+    if(num1 &gt;= num2)
+        maxnumber = num1
+    else
+        maxnumber = num2
+    return maxnumber
+}
+</code></pre>
 <p>使用其返回值如下，是不是看起来更简略一点了呢：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">maxNumber</span><span class="params">(num1 :<span class="type">Int</span> ,num2 :<span class="type">Int</span>)</span></span>:<span class="built_in">Int</span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">val</span> maxnumber = <span class="keyword">if</span>(num1 &gt;= num2)</span><br><span class="line">                        num1</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                        num2</span><br><span class="line">    <span class="keyword">return</span> maxnumber</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">fun maxNumber(num1 :Int ,num2 :Int):Int
+{
+    val maxnumber = if(num1 &gt;= num2)
+                        num1
+                    else
+                        num2
+    return maxnumber
+}
+</code></pre>
 <p>其实还可以再简略一下我们可以把if和else看成一个语句，这样他就可以直接给函数返回内容，我们就可以省略函数体的括号和返回值类型：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">maxNumber</span><span class="params">(num1 :<span class="type">Int</span> ,num2 :<span class="type">Int</span>)</span></span>=<span class="keyword">if</span>(num1 &gt;= num2)num1 <span class="keyword">else</span> num2</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">fun maxNumber(num1 :Int ,num2 :Int)=if(num1 &gt;= num2)num1 else num2
+</code></pre>
 <p>这样就实现了最简洁的写法。</p>
 <h4><span id="kotlin的when">Kotlin的when</span></h4>
 <p>Kotlin的when就是Java，C中的Switch case，负责的是样例匹配的工作，当你需要匹配内容很多的时候用if，是很不优雅的，但是Kotlin的when提供了一种简介方便的方式。</p>
 <p>我先提供一个写法：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">getGender</span><span class="params">(name : <span class="type">String</span>)</span></span> =</span><br><span class="line">    <span class="keyword">when</span> (name)</span><br><span class="line">    {</span><br><span class="line">        <span class="string">"zzy"</span>-&gt; println(<span class="string">"boy"</span>)</span><br><span class="line">        <span class="string">"lxl"</span>-&gt; println(<span class="string">"girl"</span>)</span><br><span class="line">        <span class="string">"hrq"</span>-&gt; println(<span class="string">"boy"</span>)</span><br><span class="line">        <span class="keyword">else</span> -&gt;  println(<span class="string">"not a boy or girl"</span>)</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">fun getGender(name : String) =
+    when (name)
+    {
+        "zzy"-&gt; println("boy")
+        "lxl"-&gt; println("girl")
+        "hrq"-&gt; println("boy")
+        else -&gt;  println("not a boy or girl")
+    }
+</code></pre>
 <p>这段代码给我们提供了一个样例，我们通过传入任意一个类型的变量来使用when来进行匹配，when后面的括号就是要匹配的对象，下边的函数体就是要匹配的内容，你可以发现他取消了case等关键字而是使用**“-&gt;”<strong>来作为关键字，意义表达明确，而且你不用担心执行完成后没有</strong>break**会自动向下运行，每一个匹配后会执行完自己的逻辑代码然后退出。值得提醒的是你的逻辑代码只有一行的时候可以省略“{}”。</p>
 <p>除了数据匹配之外，when语句还可以进行类型匹配，没错就是你想的那个数据类型，如果你想起来Kotlin中没有基本的数据类型，而是全部都是类数据，你就会意识到为什么要这样设计数据类型，为了类型匹配只是一小部分优点。</p>
 <p>下面举一个例子：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">getType</span><span class="params">(number : <span class="type">Number</span>)</span></span> =</span><br><span class="line">    <span class="keyword">when</span> (number)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">is</span> <span class="built_in">Int</span> -&gt; println(<span class="string">"Int type"</span>)</span><br><span class="line">        <span class="keyword">is</span> <span class="built_in">Float</span>-&gt; println(<span class="string">"Float type"</span>)</span><br><span class="line">        <span class="keyword">is</span> <span class="built_in">Long</span>-&gt; println(<span class="string">"Long type"</span>)</span><br><span class="line">        <span class="keyword">else</span> -&gt;  println(<span class="string">"not my type"</span>)</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">fun getType(number : Number) =
+    when (number)
+    {
+        is Int -&gt; println("Int type")
+        is Float-&gt; println("Float type")
+        is Long-&gt; println("Long type")
+        else -&gt;  println("not my type")
+    }
+</code></pre>
 <p>通过设置输入的number为所有数字类型的父类Number，你可以输入任意类型的数据，然后使用<strong>is</strong>关键字来检测是不是对应的类型。</p>
 <p>你可以看到When里边都是同一种类型的匹配模式，但是如果要使用不同的匹配模式呢，打个比方我一个想要分离出名字里面有是zzy的，另一个想要分离出名字是lxl怎么办？很简单这里去掉when后边的括号就好了，将匹配表达式写入大括号里面。</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">getGender2</span><span class="params">(name : <span class="type">String</span>)</span></span> =</span><br><span class="line">    <span class="keyword">when</span></span><br><span class="line">    {</span><br><span class="line">        name.contentEquals(<span class="string">"zzy"</span>)-&gt; println(<span class="string">"a part of zzy"</span>)</span><br><span class="line">        name === <span class="string">"lxl"</span>-&gt; println(<span class="string">"girl"</span>)</span><br><span class="line">        <span class="keyword">else</span> -&gt;  println(<span class="string">"not Anyone"</span>)</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">fun getGender2(name : String) =
+    when
+    {
+        name.contentEquals("zzy")-&gt; println("a part of zzy")
+        name === "lxl"-&gt; println("girl")
+        else -&gt;  println("not Anyone")
+    }
+</code></pre>
 <h3><span id="kotlin的循环">Kotlin的循环</span></h3>
 <p>在介绍循环之前先介绍一个新的东西，区间</p>
 <p>区间这个东西很简单，它的作用就是按照规律生成一组数列，我们举个例子试一试：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">rangeTest</span><span class="params">()</span></span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">val</span> range = <span class="number">1.</span><span class="number">.10</span></span><br><span class="line">    <span class="keyword">val</span> untils = <span class="number">0</span> until <span class="number">10</span></span><br><span class="line">    <span class="keyword">val</span> downtos = <span class="number">10</span> downTo <span class="number">1</span></span><br><span class="line">    println(range)</span><br><span class="line">    println(untils)</span><br><span class="line">    println(downtos)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">fun rangeTest()
+{
+    val range = 1..10
+    val untils = 0 until 10
+    val downtos = 10 downTo 1
+    println(range)
+    println(untils)
+    println(downtos)
+}
+</code></pre>
 <p>输出结果：</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1..10</span><br><span class="line">0..9</span><br><span class="line">10..1</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-shell">1..10
+0..9
+10..1
+</code></pre>
 <p>你可以看见这两个区间生成的数列区别，一个是包含左右边界，一格式只有左边界没有右边界。</p>
 <p>有了区间以后就可以使用for来迭代，for循环在Kotlin中有了巨大的变化，我先来展示一下：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">rangeTest</span><span class="params">()</span></span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">val</span> range = <span class="number">1.</span><span class="number">.10</span></span><br><span class="line">    <span class="keyword">val</span> untils = <span class="number">0</span> until <span class="number">10</span></span><br><span class="line">    println(range)</span><br><span class="line">    println(untils)</span><br><span class="line">    <span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">10</span> downTo <span class="number">1</span>)</span><br><span class="line">        println(i)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">fun rangeTest()
+{
+    val range = 1..10
+    val untils = 0 until 10
+    println(range)
+    println(untils)
+    for (i in 10 downTo 1)
+        println(i)
+}
+</code></pre>
 <p>输出：</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1..10</span><br><span class="line">0..9</span><br><span class="line">10</span><br><span class="line">9</span><br><span class="line">8</span><br><span class="line">7</span><br><span class="line">6</span><br><span class="line">5</span><br><span class="line">4</span><br><span class="line">3</span><br><span class="line">2</span><br><span class="line">1</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-shell">1..10
+0..9
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+</code></pre>
 <p>你可以看到了一个和java c都不太像的for 更想java里面的增强for循环，你就意识到这里for转化为了一个迭代器的作用。在后边我再继续讲解for的强大之处。</p>
 </article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/09/29/Android%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%20(Kotlin%E7%9A%84NULL)%20/" title="Android开发笔记——快速入门（Kotlin的NULL）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Android开发笔记——快速入门（Kotlin的NULL）</span></a><a class="button is-default" href="/2024/09/29/Android%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%20(Kotlin%E4%B8%8E%20lamda)/" title="Android开发笔记——快速入门（Kotlin与lambda）"><span class="has-text-weight-semibold">Next: Android开发笔记——快速入门（Kotlin与lambda）</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" onload="initMermaid()"></script><script>function initMermaid() {
  console.log("fuck you");

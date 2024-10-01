@@ -88,31 +88,71 @@ Kotlin的对象扩展语法
 <p>通常来说我们在使用接口作为参数的的时候使用对象表达式的情况比较多，举个例子，如果我们使用Thread来创建一个线程的时候，Thread类的参数实际上就是一个Ruunable接口，这个Runnable接口就是Java中所说的函数式接口，如果我们不使用lambda来传递的话，就要使用一个实现了<strong>Ruunable接口类的对象</strong>作为参数传递进去。或者使用匿名类的实现（实际上匿名类的实现也是对象）来替代需要实现的类的对象。</p>
 <p>对于对象表达式就类似于的java的匿名类，只不过他的功能更多，在这里你可以先理解为Java中匿名内部类。</p>
 <p>举个例子：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Thread(</span><br><span class="line">    <span class="keyword">object</span> : Runnable {</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">run</span><span class="params">()</span></span> {</span><br><span class="line">            println(<span class="string">"Kotlin is ok with Anonymous"</span>)</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">).run()</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">Thread(
+    object : Runnable {
+        override fun run() {
+            println("Kotlin is ok with Anonymous")
+        }
+    }
+).run()
+</code></pre>
 <p>这里我们创建了一个对象表达式然后继承了Runnable接口，并实现了其中的run方法，最终对象表达式会自动创建一个这个类的对象并返回给Thread类。</p>
 <p>代码运行结果如下：</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Kotlin is ok with Anonymous</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-shell">Kotlin is ok with Anonymous
+
+Process finished with exit code 0
+</code></pre>
 <p>当然对象表达式的作用不仅仅局限于函数式接口，它可以用于任何可继承的类，下面再来讨论几种特殊情况。</p>
 <h5><span id="父类的构造函数存在参数">父类的构造函数存在参数</span></h5>
 <p>我们有一个父类如下：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.codewithkotlin</span><br><span class="line"></span><br><span class="line"><span class="keyword">open</span> <span class="keyword">class</span> <span class="title class_">Person</span>(<span class="keyword">var</span> age :<span class="built_in">Int</span>, <span class="keyword">val</span> name:String)</span><br><span class="line">{</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">study</span><span class="params">()</span></span> = name + <span class="string">"love study"</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">package com.example.codewithkotlin
+
+open class Person(var age :Int, val name:String)
+{
+    fun study() = name + "love study"
+}
+</code></pre>
 <p>父类的形式很简单，就是只有一个方法，两个成员变量。</p>
 <p>我们存在一个函数，需要传入一个父类的对象，就可以使用对象表达式来构造。</p>
 <p>函数如下：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">fatherargs_tester</span><span class="params">(person: <span class="type">Person</span>)</span></span></span><br><span class="line">{</span><br><span class="line">    println(person.name)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">fun fatherargs_tester(person: Person)
+{
+    println(person.name)
+}
+</code></pre>
 <p>解决办法如下：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*父类的构造函数存在参数*/</span></span><br><span class="line">fatherargs_tester(</span><br><span class="line">    <span class="keyword">object</span> :Person(<span class="number">18</span>,<span class="string">"Jszszzy"</span>) {</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">study</span><span class="params">()</span></span> = <span class="string">"<span class="variable">$name</span> love studing kotlin"</span></span><br><span class="line">    }</span><br><span class="line">)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">/*父类的构造函数存在参数*/
+fatherargs_tester(
+    object :Person(18,"Jszszzy") {
+    override fun study() = "$name love studing kotlin"
+    }
+)
+</code></pre>
 <p>可以看到我们使用对象表达式创建了一个新的对象，并且将类里面的方法进行了重写，输出是结果如下：</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Jszszzy love studing kotlin</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-shell">Jszszzy love studing kotlin
+</code></pre>
 <p>同时表达式可以访问其所在作用域的变量：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*父类的构造函数存在参数*/</span></span><br><span class="line"><span class="keyword">val</span> name = <span class="string">"Jszszzy"</span></span><br><span class="line"></span><br><span class="line">fatherargs_tester(</span><br><span class="line">    <span class="keyword">object</span> :Person(<span class="number">18</span>,name) {</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">study</span><span class="params">()</span></span> = <span class="string">"<span class="variable">$name</span> love studing kotlin"</span></span><br><span class="line">    }</span><br><span class="line">)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">/*父类的构造函数存在参数*/
+val name = "Jszszzy"
+
+fatherargs_tester(
+    object :Person(18,name) {
+    override fun study() = "$name love studing kotlin"
+    }
+)
+</code></pre>
 <h5><span id="匿名对象">匿名对象</span></h5>
 <p>对象表达式同时也可以构造<strong>匿名对象</strong>，即不继承任何类的匿名表达式。</p>
 <p>举个例子：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> anonymous_object = <span class="keyword">object</span> {</span><br><span class="line">    <span class="keyword">val</span> x = <span class="string">"test"</span>;</span><br><span class="line">}</span><br><span class="line">println(anonymous_object::<span class="keyword">class</span>.java.toString())</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">val anonymous_object = object {
+    val x = "test";
+}
+println(anonymous_object::class.java.toString())
+</code></pre>
 <p>我们使用：：class方法来获取到对应的类是什么。</p>
 <p>结果如下:</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">com</span>.<span class="title">example</span>.<span class="title">codewithkotlin</span>.<span class="title">TestKt</span>$<span class="title">main</span>$<span class="title">anonymous_object</span>$1</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">class com.example.codewithkotlin.TestKt$main$anonymous_object$1
+</code></pre>
 <p>看以看到是一个特殊的类，类的名称和创建的变量名有一定关系。</p>
 <h5><span id="匿名对象作为返回值">匿名对象作为返回值</span></h5>
 <p>这个是用的比较少，简单来说一下。</p>
@@ -123,68 +163,132 @@ Kotlin的对象扩展语法
 <h2><span id="kotlin的类扩展">Kotlin的类扩展</span></h2>
 <p>在某些情况下，我们希望在不修改某些类的源码的情况下（实际上你根本修改不了，大多数库代码都只是可读的）仍然可以为这个类添加新的功能，添加新的方法。就要使用到类的扩展了。</p>
 <p>其基本使用结构如下：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> Classname.<span class="title">methodName</span><span class="params">(param1:<span class="type">type</span>,param2:<span class="type">type</span>)</span></span>:<span class="built_in">Int</span>{</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">fun Classname.methodName(param1:type,param2:type):Int{
+	return 0
+}
+</code></pre>
 <p>可以看到实际上就是定义了一个函数，在前面加上想要添加的具体类名就可以了。注意的是你在在哪里声明的添加方法就会收到其作用域的影响，所以往往把添加的方法直接放到文件中，拥有顶层作用域来使用。</p>
 <h2><span id="kotlin的高阶函数">Kotlin的高阶函数</span></h2>
 <p>高阶函数和Lambda的关系密不可分，可以说高阶函数就是lambda应用的扩展。</p>
 <p>高阶函数的定义是如果某个函数接收另一个函数作为参数或者返回值是一个函数就可以称之为高阶函数。你可能很难理解什么是函数类型？</p>
 <p>实际上新一代语言中不止包含有我们常说的数据类型，大部分语言为了支持函数式编程，都添加了函数类型作为一种基础类型，他和其他基本类型一样，只不过其他基本类型传递的是一段二进制数据，函数类型传递的是一段可执行的代码。</p>
 <p>对于一个lambda表达式来说，我们定义它其实很方便，举个例子，我们这里定义一个函数型变量（其实就是lambda表达式），并调用它输出它运行的结果：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Kotlin的类扩展*/</span></span><br><span class="line"><span class="keyword">val</span> lambda = { x:<span class="built_in">Int</span> -&gt; x*x }</span><br><span class="line">println(lambda(<span class="number">3</span>))</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">/*Kotlin的类扩展*/
+val lambda = { x:Int -&gt; x*x }
+println(lambda(3))
+</code></pre>
 <p>我们其实也知道kotlin有优秀的推导机制，其实上一个Lambda在声明的时候并没有指明具体返回类型，返回类型是在编译的时候推理出来的。</p>
 <p>但是有些时候，Kotlin无法推断具体类型的情况下，就要手动来声明具体类型来指定了，声明类型也很简单，具体方法如下：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Kotlin的lambda使用*/</span></span><br><span class="line"><span class="keyword">val</span> lambda : (<span class="built_in">Int</span>) -&gt; <span class="built_in">Int</span> =  {x -&gt; x*x }</span><br><span class="line">	println(lambda(<span class="number">3</span>))</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">/*Kotlin的lambda使用*/
+val lambda : (Int) -&gt; Int =  {x -&gt; x*x }
+	println(lambda(3))
+</code></pre>
 <p>此处指明了lambda表达式的参数类型是Int、并且返回值类型依然是Int，最终输出的结果和上文一样。</p>
 <p>说了这么多，这些又和高阶函数什么关系呢？</p>
 <p>高阶函数的定义指明了要传递函数作为参数，那么如何定义函数参数呢？</p>
 <p>没错就是lambda表达式来作为参数。</p>
 <p>下面举一个例子，以下定义了一个高阶函数。</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">advanced_function</span><span class="params">( func :(<span class="type">Int</span>) -&gt; <span class="type">Int</span>)</span></span></span><br><span class="line">{</span><br><span class="line">    println(func(<span class="number">9</span>))</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">fun advanced_function( func :(Int) -&gt; Int)
+{
+    println(func(9))
+}
+</code></pre>
 <p>此高阶函数中参数为func，传入的lambda表达式类型为<code>(Int) -&gt; Int</code>也就是说，接收一个输入参数为Int返回值Int的函数。</p>
 <p>但是为什么要传入一个函数作为参数呢？发挥一下你的想象力，我们可以定义符合上述参数类型的lambda表达式，但是函数的逻辑内容可以完全不一样。举个例子：</p>
 <p>我们仍然使用上述高阶函数，但是创建一个新的lambda表达式：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Kotlin的高阶函数*/</span></span><br><span class="line"><span class="keyword">val</span> lambda1 :(<span class="built_in">Int</span>) -&gt;<span class="built_in">Int</span>  = {x -&gt; x+x}</span><br><span class="line">advanced_function(lambda1)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">/*Kotlin的高阶函数*/
+val lambda1 :(Int) -&gt;Int  = {x -&gt; x+x}
+advanced_function(lambda1)
+</code></pre>
 <p>此时运算结果就变为了相加。</p>
 <p>与此相对的，Kotlin也支持直接将lambda表达式传递进去，当高阶函数只有一个lambda参数的时候，我们可以直接省略小括号，最终效果和前边完全相同：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*高阶函数常规用法*/</span></span><br><span class="line">advanced_function{x -&gt; x+x}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">/*高阶函数常规用法*/
+advanced_function{x -&gt; x+x}
+</code></pre>
 <h2><span id="类扩展函数和高阶函数结合">类扩展函数和高阶函数结合</span></h2>
 <p>当我们在前边使用apply函数的时候很方便就能获得一个上下文，这样调用对象的时候就可以避免重复书写对象，Kotlin同时也为高阶函数提供了类似的功能，我们先来尝试使用扩展函数和高阶函数结合一下：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> StringBuilder.<span class="title">build</span><span class="params">(block : () -&gt; <span class="type">Unit</span>)</span></span>:StringBuilder</span><br><span class="line">{</span><br><span class="line">    block()</span><br><span class="line">    <span class="keyword">return</span>  <span class="keyword">this</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">fun StringBuilder.build(block : () -&gt; Unit):StringBuilder
+{
+    block()
+    return  this
+}
+</code></pre>
 <p>这一段函数所代表的意义就是为StringBuilder类扩展一个高阶函数build，其参数为:<code>（）-&gt;Unit</code>的函数。</p>
 <p>在函数内调用传入的函数，并将处理后的对象返回。</p>
 <p>但是这里就会遇到一个问题，我如果想在传入的函数中使用StringBuilder的方法怎么办？也就说这部分函数还是要调用扩展类的方法的，Kotlin为此设计了一个能提供上下文的办法，使用起来很简单效果如下：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> StringBuilder.<span class="title">build</span><span class="params">(block :  <span class="type">StringBuilder</span>. () -&gt; <span class="type">Unit</span>)</span></span>:StringBuilder</span><br><span class="line">{</span><br><span class="line">    block()</span><br><span class="line">    <span class="keyword">return</span>  <span class="keyword">this</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">fun StringBuilder.build(block :  StringBuilder. () -&gt; Unit):StringBuilder
+{
+    block()
+    return  this
+}
+</code></pre>
 <p>可以看到实际上就是在参数类型前边加上了ClassName.的前缀，这样就将要传入的函数参数定义在了在StringBuilder的里面，保证了函数可以自动获取StringBuilder的上下文。</p>
 <p>举个实际例子：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> result = StringBuilder().build {</span><br><span class="line">    append(<span class="string">"jszszzy"</span>)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">val result = StringBuilder().build {
+    append("jszszzy")
+}
+</code></pre>
 <p>我们在传入的参数中加入了StringBuilder的上下文这样，就相当于获得了调用方法的时候创建的上下文，完整写法如下：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> result = StringBuilder().build {</span><br><span class="line">    <span class="keyword">this</span>.append(<span class="string">"jszszzy"</span>)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">val result = StringBuilder().build {
+    this.append("jszszzy")
+}
+</code></pre>
 <p>最终结果也很简单，输出了添加的字符串：</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jszszzy</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-shell">jszszzy
+</code></pre>
 <h2><span id="深入理解高阶函数">深入理解高阶函数</span></h2>
 <h3><span id="内联函数">内联函数</span></h3>
 <p>我们始终要意识到一个问题，kotlin的代码最终都要被编译为java的字节码文件的，但是在java中我们并没有高阶函数的概念，那么Kotlin是如何实现的高阶函数呢？</p>
 <p>这就要归功于Koltin的强大编译器了，在这里我还是要狠狠吹一波Kotlin！Kotlin可不仅仅适用于JVM运行，他甚至还有专门的编译器去编译成类似c语言的字节码直接运行，不依赖于JVM,详细请了解：<a target="_blank" rel="noopener" href="https://book.kotlincn.net/text/multiplatform.html">Kotlin多平台</a>。</p>
 <p>那么现在需要编译成JVM的字节码，他会怎么编译呢？我们还是拿上边的函数举个例子：</p>
 <p>我们打开他的反编译java代码：</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">advanced_function</span><span class="params">(<span class="meta">@NotNull</span> Function1 func)</span> {</span><br><span class="line">   Intrinsics.checkNotNullParameter(func, <span class="string">"func"</span>);</span><br><span class="line">   <span class="type">int</span> <span class="variable">var1</span> <span class="operator">=</span> ((Number)func.invoke(<span class="number">9</span>)).intValue();</span><br><span class="line">   System.out.println(var1);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-java">public static final void advanced_function(@NotNull Function1 func) {
+   Intrinsics.checkNotNullParameter(func, "func");
+   int var1 = ((Number)func.invoke(9)).intValue();
+   System.out.println(var1);
+}
+</code></pre>
 <p>可以看到我们的函数类型参数转变为了一个Function1接口，这是神马？</p>
 <p>我们打开看一看：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** A function that takes 1 argument. */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Function1</span>&lt;<span class="type">in P1, out R</span>&gt; : <span class="type">Function</span>&lt;<span class="type">R</span>&gt; {</span><br><span class="line">    <span class="comment">/** Invokes the function with the specified argument. */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">operator</span> <span class="function"><span class="keyword">fun</span> <span class="title">invoke</span><span class="params">(p1: <span class="type">P1</span>)</span></span>: R</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">/** A function that takes 1 argument. */
+public interface Function1&lt;in P1, out R&gt; : Function&lt;R&gt; {
+    /** Invokes the function with the specified argument. */
+    public operator fun invoke(p1: P1): R
+}
+</code></pre>
 <p>里面有一个函数叫invoke，继承这个接口的话，那必须就要把这个函数给实现了。</p>
 <p>可以看到原来我们执行传入的函数参数的位置被替换成了一行代码：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int var1 = ((Number)func.invoke(<span class="number">9</span>)).intValue();</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin"> int var1 = ((Number)func.invoke(9)).intValue();
+</code></pre>
 <p>原来的函数的调用被替换为了一个invoke()函数的调用。</p>
 <p>实际上在调用高阶函数的时候，对应的代码被转换为了如下的样子：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*替换前源代码*/</span></span><br><span class="line">advanced_function{x -&gt; x+x}</span><br><span class="line"></span><br><span class="line"><span class="comment">/*替换后*/</span></span><br><span class="line">advanced_function(</span><br><span class="line">    new Function(){</span><br><span class="line">        <span class="meta">@Overrride</span></span><br><span class="line">        <span class="keyword">public</span> Integer invoke(Integer x){</span><br><span class="line">            retaurn x+x;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">/*替换前源代码*/
+advanced_function{x -&gt; x+x}
+
+/*替换后*/
+advanced_function(
+    new Function(){
+        @Overrride
+        public Integer invoke(Integer x){
+            retaurn x+x;
+        }
+    }
+)
+</code></pre>
 <p>也就是说对应的lambda表达式位置被替换成了一个匿名类的实现，通过这个接口将对应的lambda表达式封装到了invoke函数里面，调用invoke函数就相当于使用了对应的lambda表达式！</p>
 <p>但是这就产生了一个问题！我的每一个lambda不会都是这样实现的吧，这样就会造成很大的性能浪费，当你在上边愉快的书写lambda表达式，下边kotlin跑的匿名类累死。</p>
 <p>kotlin为了消除这个问题，又创建了一个方法，这就是内联函数，内联函数是干什么的呢？</p>
 <p>他会使Kotlin编译器将内联函数中的代码在编译的时候替换到对应的地方。实现真正的代码传递。这样在运行的时候就不存在任何运行开销了。说起来可能不太容易，我们做个演示，替换后调用的位置是什么样的:</p>
 <p>使用inline来修饰：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="title">advanced_function</span><span class="params">( func :(<span class="type">Int</span>) -&gt; <span class="type">Int</span>)</span></span></span><br><span class="line">{</span><br><span class="line">    println(func(<span class="number">9</span>))</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">inline fun advanced_function( func :(Int) -&gt; Int)
+{
+    println(func(9))
+}
+</code></pre>
 <p>对应调用位置的代码：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*使用内联函数替代后*/</span></span><br><span class="line">println(x+x)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">/*使用内联函数替代后*/
+println(x+x)
+</code></pre>
 <p>你会发现他把原来你调用的函数给替掉了，实际上就是把lambda表达式融合进函数里面最终在再把函数内所有的代码都拿出来替换掉调用的地方。</p>
 <p>当然他的替换过程可能没有那么简单，因为在内联函数的内部可能存在return等语句所以我们在这里不再详细介绍具体的实现过程，我们不妨来说一说一个便捷的理解方法。</p>
 <ul>
@@ -196,7 +300,13 @@ Kotlin的对象扩展语法
 <p>接下来我们再来讨论一下，使用inline关键字的内联函数特殊情况。</p>
 <p>在某些情况下你需要打断lambda表达式的运行，就是需要在lambda表达式中使用return，这时候就麻烦了lambda表达式中一般是不允许使用return的，你当然也可以使用特殊的关键字<code>return@内联函数名称</code>，使用以后lambda表达式剩余的内容就不会执行。</p>
 <p>举个例子：</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Kotlin 内联函数*/</span></span><br><span class="line">advanced_function{</span><br><span class="line">        x -&gt;</span><br><span class="line">    <span class="keyword">return</span><span class="symbol">@advanced_function</span> x*x</span><br><span class="line">    x+x</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">/*Kotlin 内联函数*/
+advanced_function{
+        x -&gt;
+    return@advanced_function x*x
+    x+x
+}
+</code></pre>
 <p>这里运行的结果就是返回一个x*x.而不是下面的x+x。</p>
 <p>那我如果使用inline关键字呢？</p>
 <p>回想上文所说的，inline关键字实际上是代码替代，所以可以直接使用return来返回，不过注意的是这里return会导致调用函数直接return！</p>
@@ -208,7 +318,13 @@ Kotlin的对象扩展语法
 <p>因为使用了inline，所以可能会导致Runnable接口的lambda中包含了全局返回使用的return。</p>
 <p>但是我们如果lambda中其实并没有包含return呢？有什么办法绕开这个错误呢？</p>
 <p>当然！</p>
-<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="title">advanced_function_withlambda</span><span class="params">( <span class="keyword">crossinline</span> func :(<span class="type">Int</span>) -&gt; <span class="type">Int</span>)</span></span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">val</span> runnable = Runnable {</span><br><span class="line">        func(<span class="number">9</span>)</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-kotlin">inline fun advanced_function_withlambda( crossinline func :(Int) -&gt; Int)
+{
+    val runnable = Runnable {
+        func(9)
+    }
+}
+</code></pre>
 <p>crossinline本质上解决的问题是在声明了inline关键字的高阶函数内部的lambda表达式需要使用函数型参数作为lambda表达式的内容而产生的冲突。再本质一点的问题是，lambda表达式和匿名类一样只允许函数局部返回，而对于内联操作使用的确实为全局返回。</p>
 <p>总的来说如果你的高阶函数的lambda表达式使用了return关键字，那么你就应该考虑到以上的关键字和return带来的具体影响。</p>
 </article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/09/29/Android%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%20(Kotlin%E7%9A%84%E5%BB%B6%E8%BF%9F%E5%88%9D%E5%A7%8B%E4%B8%8E%E5%AF%86%E5%B0%81%E7%B1%BB)%20/" title="Android开发笔记——快速入门 (Kotlin的延迟初始化与Viewbinding、密封类)"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Android开发笔记——快速入门 (Kotlin的延迟初始化与Viewbinding、密封类)</span></a><a class="button is-default" href="/2024/09/29/Android%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%20(Kotlin%E7%9A%84NULL)%20/" title="Android开发笔记——快速入门（Kotlin的NULL）"><span class="has-text-weight-semibold">Next: Android开发笔记——快速入门（Kotlin的NULL）</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" onload="initMermaid()"></script><script>function initMermaid() {

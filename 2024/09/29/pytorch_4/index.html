@@ -101,19 +101,26 @@ model的参数.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><
 <h2><span id="基础知识">基础知识：</span></h2>
 <h3><span id="一点python">一点Python</span></h3>
 <h4><span id="python的面向对象">Python的面向对象</span></h4>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ClassName</span>:</span><br><span class="line">   <span class="string">'类的帮助信息'</span><span class="comment">#类文档字符串</span></span><br><span class="line">   class_suite <span class="comment">#类体</span></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-python">class ClassName:
+   '类的帮助信息'#类文档字符串
+   class_suite #类体
+</code></pre>
 <p>类的帮助信息可以通过ClassName.__ doc __查看。</p>
 <p><strong>class_suite</strong> 由类成员，方法，数据属性组成。</p>
 <h4><span id="python的self关键字">Python的self关键字</span></h4>
 <p><strong>self</strong>代表类的实例，而非类。常用于在类的定义中指代对象。</p>
 <h4><span id="python创建实例对象">Python创建实例对象</span></h4>
 <p>实例化类其他编程语言中一般用关键字 <strong>new</strong>，但是在 <strong>Python</strong> 中并没有这个关键字，类的实例化类似函数调用方式。以下使用类的名称 <strong>Employee</strong> 来实例化，并通过 <strong>init</strong> 方法接收参数。</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象变量 = 类名()</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-python">对象变量 = 类名()
+</code></pre>
 <h4><span id="python类的方法">Python类的方法</span></h4>
 <p>在类的内部，使用 <strong>def</strong> 关键字可以为类定义一个方法，与一般函数定义不同，类方法必须包含参数 self,且为第一个参数。</p>
 <h4><span id="python访问类的属性和方法">Python访问类的属性和方法</span></h4>
 <p>可以使用点号 <strong>.</strong> 来访问对象的属性。使用如下类的名称访问类变量:</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">emp1.displayEmployee()</span><br><span class="line">emp2.displayEmployee()</span><br><span class="line"><span class="built_in">print</span> <span class="string">"Total Employee %d"</span> % Employee.empCount</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-python">emp1.displayEmployee()
+emp2.displayEmployee()
+print "Total Employee %d" % Employee.empCount
+</code></pre>
 <h4><span id="python内置类和属性">Python内置类和属性</span></h4>
 <ul>
 <li><strong>dict</strong> : 类的属性（包含一个字典，由类的数据属性组成）</li>
@@ -190,18 +197,42 @@ model的参数.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><
 </ul>
 <h4><span id="pyhton的继承">Pyhton的继承</span></h4>
 <p>继承的语法：</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">派生类名</span>（基类名）</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-python">class 派生类名（基类名）
+</code></pre>
 <p>子类不重写 <strong>__ init__</strong>，实例化子类时，会自动调用父类定义的 <strong>__ init__</strong>。</p>
 <p>重写了**__ init__** 时，实例化子类，就不会调用父类已经定义的 <strong>__ init__</strong>，如果重写了要继承父类的方法时可以使用<strong>super</strong>关键字来继承：</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">super</span>(子类，<span class="variable language_">self</span>).__init__(参数<span class="number">1</span>，参数<span class="number">2</span>，....)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-python">super(子类，self).__init__(参数1，参数2，....)
+</code></pre>
 <p>super并不是一个函数，是一个类名，形如super(B, self)事实上调用了super类的初始化函数，产生了一个super对象；</p>
 <p>super类的初始化函数并没有做什么特殊的操作，只是简单记录了类类型和具体实例；</p>
 <p>也可以这样：</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">父类名称.__init__(<span class="variable language_">self</span>,参数<span class="number">1</span>，参数<span class="number">2</span>，...)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-python">父类名称.__init__(self,参数1，参数2，...)
+</code></pre>
 <p>举个例子：</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Father</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name</span>):</span><br><span class="line">        <span class="variable language_">self</span>.name=name</span><br><span class="line">        <span class="built_in">print</span> ( <span class="string">"name: %s"</span> %( <span class="variable language_">self</span>.name))</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getName</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Father '</span> + <span class="variable language_">self</span>.name</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Son</span>(<span class="title class_ inherited__">Father</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name</span>):</span><br><span class="line">        <span class="built_in">super</span>(Son, <span class="variable language_">self</span>).__init__(name)</span><br><span class="line">        <span class="built_in">print</span> (<span class="string">"hi"</span>)</span><br><span class="line">        <span class="variable language_">self</span>.name =  name</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getName</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Son '</span>+<span class="variable language_">self</span>.name</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:</span><br><span class="line">    son=Son(<span class="string">'runoob'</span>)</span><br><span class="line">    <span class="built_in">print</span> ( son.getName() )</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-python">class Father(object):
+    def __init__(self, name):
+        self.name=name
+        print ( "name: %s" %( self.name))
+    def getName(self):
+        return 'Father ' + self.name
+ 
+class Son(Father):
+    def __init__(self, name):
+        super(Son, self).__init__(name)
+        print ("hi")
+        self.name =  name
+    def getName(self):
+        return 'Son '+self.name
+ 
+if __name__=='__main__':
+    son=Son('runoob')
+    print ( son.getName() )
+</code></pre>
 <p>输出结果：</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name: runoob</span><br><span class="line">hi</span><br><span class="line">Son runoob</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-python">name: runoob
+hi
+Son runoob
+</code></pre>
 <h4><span id="pthony的__-call__方法">Pthony的__ call__方法</span></h4>
 <p><a target="_blank" rel="noopener" href="http://c.biancheng.net/python/">Python</a> 类中一个非常特殊的实例方法，即 <strong>call</strong>()。该方法的功能类似于在类中重载 () 运算符，使得类实例对象可以像调用普通函数那样，以“对象名()”的形式使用。</p>
 <h4><span id="单下划线-双下划线-头尾双下划线的说明">单下划线、双下划线、头尾双下划线的说明</span></h4>
@@ -215,9 +246,17 @@ model的参数.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><
 <p><code>nn.Module</code> 是<code>troch.nn</code>提供的一个类，是pytorch中我们自己定义网络的一个基类。通过整个基类来实现网络可以调用预先实现好的算法,不需要我们考虑太多就可以快速构建和训练。</p>
 <h5><span id="nnmodule的使用">nn.Module的使用</span></h5>
 <p>1、首先要继承，继承后需要调用super的init方法（重写父类初始化方法），通过调用super的init方法来继承父类中的init的参数</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Lr</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(Lr, <span class="variable language_">self</span>).__init__()  <span class="comment">#继承父类init的参数</span></span><br><span class="line">        <span class="variable language_">self</span>.linear = nn.Linear(<span class="number">1</span>, <span class="number">1</span>) </span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-python">from torch import nn
+class Lr(nn.Module):
+    def __init__(self):
+        super(Lr, self).__init__()  #继承父类init的参数
+        self.linear = nn.Linear(1, 1) 
+</code></pre>
 <p>2、<code>farward</code>方法必须实现，用来定义我们的网络的向前计算的过程。</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">       out = <span class="variable language_">self</span>.linear(x)</span><br><span class="line">       <span class="keyword">return</span> out</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-python">	def forward(self, x):
+        out = self.linear(x)
+        return out
+</code></pre>
 <p>在讨论这一段代码前我们可以先考虑一个问题：</p>
 <h5><span id="什么是batch_size什么是features">什么是batch_size，什么是features？</span></h5>
 <ul>
@@ -233,29 +272,89 @@ model的参数.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><
 <p><strong>optimizer</strong>类的设计是为了针对<strong>nn.Module</strong>类来实现参数的更新而设计的，可以简单地理解为自动梯度下降器，自动对<strong>nn.Module</strong>中的参数来实现梯度下降等算法来进行更新。</p>
 <h5><span id="如何构造和使用optimizer">如何构造和使用optimizer？</span></h5>
 <p>要构造一个optimizer需要的参数（先拿常规的SGD来说）有两个分别是：</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sgd = opt.SGD(params , lr)<span class="comment">#params 是需要更新的参数，lr是学习率</span></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-python">sgd = opt.SGD(params , lr)#params 是需要更新的参数，lr是学习率
+</code></pre>
 <p>这样就完成了一个针对params的梯度下降优化器。那么如何使用这个梯度下降优化器呢？</p>
 <p><strong>sgd</strong>的<strong>step</strong>方法就是起到参数更新的作用，当然在参数更新之前需要先将上一次的梯度置零，其同样也帮我们内置好了<strong>zero_grad</strong>方法，实现一键清零。具体的例子会在下边说明，读到这里你会有一个疑问model的参数怎么获取？</p>
 <h5><span id="model的参数"><strong>model</strong>的参数：</span></h5>
 <p>获取<strong>model</strong>的参数：</p>
 <p>本文中所创建的<strong>model</strong>类型是基于其现有的线性模型所产生的，要获取模型的参数（这里就是<strong>w</strong>和<strong>b</strong>），直接调用<strong>model</strong>的<strong>parameters</strong>方法即可获取所需的参数。</p>
 <h5><span id="optimizer的使用">optimizer的使用：</span></h5>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">myModel = MyLinear()</span><br><span class="line"><span class="comment">#首先创建一个基于SGD的优化器，然后将上面的model的参数传入，完成初始化构造：</span></span><br><span class="line">optimizer = opt.SGD(myModel.parameters(), learningrate)</span><br><span class="line"><span class="comment"># 参数更新前清零梯度</span></span><br><span class="line">optimizer.zero_grad()</span><br><span class="line"><span class="comment">#参数更新</span></span><br><span class="line">optimizer.step()</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-python">myModel = MyLinear()
+#首先创建一个基于SGD的优化器，然后将上面的model的参数传入，完成初始化构造：
+optimizer = opt.SGD(myModel.parameters(), learningrate)
+# 参数更新前清零梯度
+optimizer.zero_grad()
+#参数更新
+optimizer.step()
+</code></pre>
 <p>但你会发现其实缺少了一个步骤，在上一节中我们知道如果神经网络的结尾是一个loss函数就需要从loss开始反向转播来求取梯度，求出梯度以后再进行梯度下降，这里缺少了梯度下降的过程，那么如何计算出loss并进行梯度计算呢？这里就要介绍另一个类：loss。</p>
 <h5><span id="损失函数类的使用">损失函数类的使用</span></h5>
 <p>在torch中预置了许多loss的计算函数比如：</p>
 <p>求取均方误差的：</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nn.MSELoss()<span class="comment">#常用于回归问题</span></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-python">nn.MSELoss()#常用于回归问题
+</code></pre>
 <p>求取交叉熵损失的：</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nn.CrossEntropyLoss()<span class="comment">#常用于分类问题</span></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-python">nn.CrossEntropyLoss()#常用于分类问题
+</code></pre>
 <h5><span id="如何使用内置的loss函数的类来进行计算">如何使用内置的loss函数的类来进行计算？</span></h5>
 <p>对于一个<strong>loss 函数</strong>类来说，需要知道的参数就是<strong>预测值</strong>和<strong>真实值</strong>，对于回归问题我们只需要传入这两个参数就可通过loss函数对象计算出loss函数的结果，其实本质上<strong>loss 函数类</strong>和前边的<strong>nn.Module</strong>一样都是一个类的实例化对象，<strong>nn.Moudule</strong>需要运行的时候（前向传播）调用的是其<code>__call__</code>方法， 通过<strong>call</strong>方法来调用<strong>forward</strong>方法实现前向传播，同理那么<strong>loss 函数类</strong>也是不是可以通过相同的办法实现呢？当然可以我们直接调用其对象传入参数就可以完成计算。当计算出<strong>loss</strong>以后如何进行反向传播呢？<strong>loss</strong>函数类返回的也是一个<strong>torch</strong>我们直接调用<strong>backward</strong>方法即可。</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lossFun = nn.MSELoss() <span class="comment">#构造一个loss类</span></span><br><span class="line">loss = lossFun(y, y_predicet) <span class="comment">#计算loss</span></span><br><span class="line">loss.backward() <span class="comment">#反向传播计算梯度</span></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-python">lossFun = nn.MSELoss() #构造一个loss类
+loss = lossFun(y, y_predicet) #计算loss
+loss.backward() #反向传播计算梯度
+</code></pre>
 <p>通过这样完成了一次训练，根据训练次数和步长进行迭代训练，代码如下：</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> opt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 0、准备数据</span></span><br><span class="line">sample_number = <span class="number">500</span></span><br><span class="line">learninGrate = <span class="number">0.001</span></span><br><span class="line">trainTimes = <span class="number">20000</span></span><br><span class="line">x = torch.rand([sample_number, <span class="number">1</span>])</span><br><span class="line">y = x * <span class="number">3</span> + <span class="number">0.8</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1、定义模型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyLinear</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># 继承父类的init</span></span><br><span class="line">        <span class="built_in">super</span>(MyLinear, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="variable language_">self</span>.linear = nn.Linear(<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        out = <span class="variable language_">self</span>.linear(x)</span><br><span class="line">        <span class="keyword">return</span> out</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2、实例模型，优化器类的实例</span></span><br><span class="line">myModel = MyLinear()</span><br><span class="line">optimizer = opt.SGD(myModel.parameters(), lr=learninGrate)</span><br><span class="line">lossFun = nn.MSELoss()</span><br><span class="line"><span class="comment"># 3、训练</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(trainTimes):</span><br><span class="line">    y_predicet = myModel(x)</span><br><span class="line">    optimizer.zero_grad()</span><br><span class="line">    loss = lossFun(y, y_predicet)</span><br><span class="line">    loss.backward()</span><br><span class="line">    optimizer.step()</span><br><span class="line">    <span class="keyword">if</span> (i % <span class="number">100</span> == <span class="number">0</span>):</span><br><span class="line">        <span class="built_in">print</span>(loss)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"W :"</span>, <span class="built_in">list</span>(myModel.parameters())[<span class="number">0</span>])</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"B :"</span>, <span class="built_in">list</span>(myModel.parameters())[<span class="number">1</span>])</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-python">import torch
+import torch.nn as nn
+import torch.optim as opt
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 0、准备数据
+sample_number = 500
+learninGrate = 0.001
+trainTimes = 20000
+x = torch.rand([sample_number, 1])
+y = x * 3 + 0.8
+
+
+# 1、定义模型
+class MyLinear(nn.Module):
+    def __init__(self):
+        # 继承父类的init
+        super(MyLinear, self).__init__()
+        self.linear = nn.Linear(1, 1)
+
+    def forward(self, x):
+        out = self.linear(x)
+        return out
+
+
+# 2、实例模型，优化器类的实例
+myModel = MyLinear()
+optimizer = opt.SGD(myModel.parameters(), lr=learninGrate)
+lossFun = nn.MSELoss()
+# 3、训练
+for i in range(trainTimes):
+    y_predicet = myModel(x)
+    optimizer.zero_grad()
+    loss = lossFun(y, y_predicet)
+    loss.backward()
+    optimizer.step()
+    if (i % 100 == 0):
+        print(loss)
+        print("W :", list(myModel.parameters())[0])
+        print("B :", list(myModel.parameters())[1])
+
+</code></pre>
 <p>有意思的W和B是generator类的，这样就无法直接获得，需要通过list强制转化，关于generator类会放在下节再将。</p>
 <p>输出：</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">loss：tensor(5.5467e-08, grad_fn=&lt;MseLossBackward0&gt;)</span><br><span class="line">W : Parameter containing:</span><br><span class="line">tensor([[2.9992]], requires_grad=True)</span><br><span class="line">B : Parameter containing:</span><br><span class="line">tensor([0.8004], requires_grad=True)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-shell">loss：tensor(5.5467e-08, grad_fn=&lt;MseLossBackward0&gt;)
+W : Parameter containing:
+tensor([[2.9992]], requires_grad=True)
+B : Parameter containing:
+tensor([0.8004], requires_grad=True)
+</code></pre>
 </article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/09/29/pytorch_3/" title="Pytorch--基础指北_叁"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Pytorch--基础指北_叁</span></a><a class="button is-default" href="/2024/09/29/pytorch_5/" title="Pytorch--基础指北_伍"><span class="has-text-weight-semibold">Next: Pytorch--基础指北_伍</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" onload="initMermaid()"></script><script>function initMermaid() {
  console.log("fuck you");
   if (window.mermaid) {

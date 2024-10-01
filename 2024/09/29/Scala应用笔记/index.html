@@ -143,16 +143,33 @@ Scala于2001年由洛桑联邦理工学院（EPFL） 的编程方法实验室研
 <p>提示：如果报错JAVA version 0 请安装JDK，教程地址：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xch-yang/p/7629351.html">JDK 安装</a>。</p>
 <p>JDK，SBT ，安装完成后可以看到：</p>
 <p>执行：</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sbt test</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-shell">sbt test
+</code></pre>
 <p>有一个警告：</p>
 <p><strong>No sbt.version set in project/build.properties, base directory: D:\Scalar\SBT\test</strong></p>
 <p><img src="https://s2.loli.net/2024/09/29/XEPScdRgH64ezVB.png" alt="baocuo"></p>
 <p>找到解决办法：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sbt sbtVersion</span><br></pre></td></tr></tbody></table></figure>
+<pre><code>sbt sbtVersion
+</code></pre>
 <img src="https://s2.loli.net/2024/09/29/n7QJw8bpGAquY9U.png" alt="image-20240929192333080" style="zoom: 50%;">
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">D:\Scalar\SBT\test&gt;sbt sbtVersion</span><br><span class="line">[info] Updated file D:\Scalar\SBT\test\project\build.properties: set sbt.version to 1.6.2</span><br><span class="line">[info] welcome to sbt 1.6.2 (Oracle Corporation Java 17.0.2)</span><br><span class="line">[info] loading project definition from D:\Scalar\SBT\test\project</span><br><span class="line">[info] set current project to test (in build file:/D:/Scalar/SBT/test/)</span><br><span class="line">[info] 1.6.2</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-shell">D:\Scalar\SBT\test&gt;sbt sbtVersion
+[info] Updated file D:\Scalar\SBT\test\project\build.properties: set sbt.version to 1.6.2
+[info] welcome to sbt 1.6.2 (Oracle Corporation Java 17.0.2)
+[info] loading project definition from D:\Scalar\SBT\test\project
+[info] set current project to test (in build file:/D:/Scalar/SBT/test/)
+[info] 1.6.2
+</code></pre>
 <p>最后通过<strong>console</strong>进入<strong>REPL</strong></p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">sbt console</span></span><br><span class="line">[info] welcome to sbt 1.6.2 (Oracle Corporation Java 17.0.2)</span><br><span class="line">[info] loading project definition from D:\Scalar\SBT\test\project</span><br><span class="line">[info] set current project to test (in build file:/D:/Scalar/SBT/test/)</span><br><span class="line">[info] Non-compiled module 'compiler-bridge_2.12' for Scala 2.12.15. Compiling...</span><br><span class="line">[info]   Compilation completed in 8.133s.</span><br><span class="line">[info] Starting scala interpreter...</span><br><span class="line">Welcome to Scala 2.12.15 (OpenJDK 64-Bit Server VM, Java 17.0.2).</span><br><span class="line">Type in expressions for evaluation. Or try :help.</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-shell">&gt;sbt console
+[info] welcome to sbt 1.6.2 (Oracle Corporation Java 17.0.2)
+[info] loading project definition from D:\Scalar\SBT\test\project
+[info] set current project to test (in build file:/D:/Scalar/SBT/test/)
+[info] Non-compiled module 'compiler-bridge_2.12' for Scala 2.12.15. Compiling...
+[info]   Compilation completed in 8.133s.
+[info] Starting scala interpreter...
+Welcome to Scala 2.12.15 (OpenJDK 64-Bit Server VM, Java 17.0.2).
+Type in expressions for evaluation. Or try :help.
+</code></pre>
 <p>执行 <strong>scala</strong> 命令时，如果未指定主程序或脚本文件，那么 **scala **将进入 <strong>REPL</strong> 模式，这与在 <strong>sbt</strong> 中运行 <strong>console</strong> 命令类似。（不过，运行 <strong>scala</strong> 时的 <strong>classpath</strong> 与执 行 <strong>console</strong> 任务的 <strong>classpath</strong> 不同。）（如 果你未独立安装 Scala，在 sbt 中执行 console 任务也能进入 Scala REPL 环境）。此时， <strong>REPL</strong> 提示符是 <strong>scala&gt;</strong>。REPL 支持 tab 补全。</p>
 <h3><span id="2-使用ide">2、使用IDE：</span></h3>
 <p><strong>强烈建议使用IDEA，来进行scala开发，省去很多麻烦！</strong></p>
@@ -172,8 +189,10 @@ Scala于2001年由洛桑联邦理工学院（EPFL） 的编程方法实验室研
 <p>关于匿名类将会在后边有机会再讨论。</p>
 <h3><span id="声明值和变量">声明值和变量</span></h3>
 <p>Scala 有两种类型的变量，一种是使用关键字 <strong>var</strong> 声明的变量，值是可变的，另一种是关键字 <strong>val</strong> 声明的变量，也叫常量值在初始化后不可变。</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myVar : <span class="type">String</span> =<span class="string">"Hello"</span></span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> myVal : <span class="type">String</span> = <span class="string">"World"</span></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">var myVar : String ="Hello"
+</code></pre>
+<pre><code class="language-scala">val myVal : String = "World"
+</code></pre>
 <p>提示 ：Scala 遵循 Java、C#、C 等语言的注释规则，// comment 只能作用到本行行尾， 而 /* comment */ 则可以跨行。</p>
 <p>Scala 的标识符，如方法名和变量名，中允许出现尖括号，例如定义“小于” 方法时，该方法常被命名为 &lt;，这在 Scala 语言中是允许的，而 Java 则不允 许标识符中出现这样的字符。因此，为了避免出现歧义，Scala 使用方括号 而不是尖括号表示参数化类型，并且不允许在标识符中使用方括号，这一点等我们到了泛型的时候再来讨论。</p>
 <h3><span id="数据类型">数据类型：</span></h3>
@@ -248,76 +267,239 @@ Scala于2001年由洛桑联邦理工学院（EPFL） 的编程方法实验室研
 <h4><span id="range">Range:</span></h4>
 <p>有时我们需要一个数字序列，从某个起点到某个终点。而 Range 能满足这个需要。以下 实例将展示如何创建 Range，支持 Range 的类型包括 Int、Long、Float、Double、Char、 BigInt、和 BigDecimal</p>
 <p>你创建的 Range 可以包含区间上限，也可以不包含区间上限；步长默认为 1，也可以指定 一个非 1 的步长：</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scala.math.<span class="type">BigDecimal</span>.double2bigDecimal</span><br><span class="line"><span class="comment">//range 演示</span></span><br><span class="line"><span class="keyword">for</span> (i&lt;- <span class="number">1</span> to <span class="number">10</span>)</span><br><span class="line">{</span><br><span class="line">  println(i)</span><br><span class="line">}</span><br><span class="line">output:</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="number">10</span></span><br><span class="line"><span class="comment">//不含右边界</span></span><br><span class="line"><span class="keyword">for</span> (i &lt;- <span class="number">1</span> until  <span class="number">10</span>)</span><br><span class="line">{</span><br><span class="line">  println(i)</span><br><span class="line">}</span><br><span class="line">output:</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="comment">//步长为3</span></span><br><span class="line"><span class="keyword">for</span> (i &lt;- <span class="number">1</span> to  <span class="number">10</span> by <span class="number">3</span>)</span><br><span class="line">{</span><br><span class="line">  println(i)</span><br><span class="line">}</span><br><span class="line">output:</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">10</span></span><br><span class="line"><span class="comment">//非整数步长</span></span><br><span class="line"><span class="keyword">for</span> (j &lt;- <span class="number">1.1</span> to <span class="number">10.3</span> by <span class="number">3.1</span> )<span class="comment">//需要头文件支持</span></span><br><span class="line">{</span><br><span class="line">  println(j)</span><br><span class="line">}</span><br><span class="line">output:</span><br><span class="line"><span class="number">1.1</span></span><br><span class="line"><span class="number">4.2</span></span><br><span class="line"><span class="number">7.3</span></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">import scala.math.BigDecimal.double2bigDecimal
+//range 演示
+for (i&lt;- 1 to 10)
+{
+  println(i)
+}
+output:
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+//不含右边界
+for (i &lt;- 1 until  10)
+{
+  println(i)
+}
+output:
+1
+2
+3
+4
+5
+6
+7
+8
+9
+//步长为3
+for (i &lt;- 1 to  10 by 3)
+{
+  println(i)
+}
+output:
+1
+4
+7
+10
+//非整数步长
+for (j &lt;- 1.1 to 10.3 by 3.1 )//需要头文件支持
+{
+  println(j)
+}
+output:
+1.1
+4.2
+7.3
+</code></pre>
 <h4><span id="for循环">for循环</span></h4>
 <p>基础结构如下：</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(变量&lt;-表达式/数组/集合)</span><br><span class="line">{</span><br><span class="line">    循环语句; </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">for(变量&lt;-表达式/数组/集合)
+{
+    循环语句; 
+}
+</code></pre>
 <p>像 <strong>变量&lt;-表达式</strong> 这样的表达式也被称为<strong>生成器表达式（generator expression）</strong>，生成器表达式之所以叫这个名字，是因为该表达式会基于集合生成单独的数值。左箭头操作符 (&lt;-) 用于对像列表这样的集合进行遍历。</p>
 <p>当然可以用生成器表达式对数字区间进行访问,以这种方式编写的for更加自然。</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i &lt;- <span class="number">1</span> to <span class="number">10</span>)</span><br><span class="line">  println(i)</span><br><span class="line"></span><br><span class="line">output：</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="number">10</span></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">for (i &lt;- 1 to 10)
+  println(i)
+
+output：
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</code></pre>
 <h3><span id="scala的数据结构">Scala的数据结构</span></h3>
 <p>Scala中包含两种数组，定长数组和变长数组，定义定长数组，需要使用new关键字，而 定义变长数组时，则需要导包import scala.collection.mutable.ArrayBuffer。</p>
 <p>这里的定长数组指的是，数组的长度不会随着变化。。</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">举个例子：</span><br><span class="line">&gt;&gt;&gt;&gt; <span class="keyword">var</span> ab= <span class="keyword">new</span> <span class="type">Array</span>[<span class="type">Int</span>](<span class="number">3</span>)</span><br><span class="line">ab: <span class="type">Array</span>[<span class="type">Int</span>] = <span class="type">Array</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">举个例子：
+&gt;&gt;&gt;&gt; var ab= new Array[Int](3)
+ab: Array[Int] = Array(0, 0, 0)
+</code></pre>
 <p>这个数组的长度就是3，但是存在一个问题就是如果我们使用追加函数。</p>
 <p>如下所示：</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; ab ++= <span class="type">Array</span>(<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line">scala&gt; ab</span><br><span class="line">res1: <span class="type">Array</span>[<span class="type">Int</span>] = <span class="type">Array</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">scala&gt; ab ++= Array(1,3,4,5)
+scala&gt; ab
+res1: Array[Int] = Array(0, 0, 0, 1, 3, 4, 5)
+</code></pre>
 <p>就离谱！它的长度还是变了。将我们追加的元素放了进去。不知道是怎么想的。</p>
 <p>你还会好奇是不是因为var或者val的问题？</p>
 <p>我们再来试一下：</p>
 <p>使用上文定义的数组，我来实现一个操作：</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; ab(<span class="number">1</span>)=<span class="number">1</span></span><br><span class="line">scala&gt; ab</span><br><span class="line">res3: <span class="type">Array</span>[<span class="type">Int</span>] = <span class="type">Array</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">scala&gt; ab(1)=1
+scala&gt; ab
+res3: Array[Int] = Array(0, 1, 0, 1, 3, 4, 5)
+</code></pre>
 <p>果然内容被修改了。</p>
 <p>我们再来定义一个val的数组来试一试。</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> ab2= <span class="keyword">new</span> <span class="type">Array</span>[<span class="type">Int</span>](<span class="number">3</span>)</span><br><span class="line">ab2: <span class="type">Array</span>[<span class="type">Int</span>] = <span class="type">Array</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">scala&gt; val ab2= new Array[Int](3)
+ab2: Array[Int] = Array(0, 0, 0)
+</code></pre>
 <p>里面的内容能不能修改呢？</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; ab2(<span class="number">2</span>)=<span class="number">1</span></span><br><span class="line">scala&gt; ab2</span><br><span class="line">res10: <span class="type">Array</span>[<span class="type">Int</span>] = <span class="type">Array</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">scala&gt; ab2(2)=1
+scala&gt; ab2
+res10: Array[Int] = Array(0, 0, 1)
+</code></pre>
 <p>也是可以的！那么val到底是什么呢？</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; ab2++=<span class="type">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">&lt;console&gt;:<span class="number">13</span>: error: value ++= is not a member of <span class="type">Array</span>[<span class="type">Int</span>]</span><br><span class="line">  <span class="type">Expression</span> does not convert to assignment because receiver is not assignable. ab2++=<span class="type">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">scala&gt; ab2++=Array(1,2,3,4)
+&lt;console&gt;:13: error: value ++= is not a member of Array[Int]
+  Expression does not convert to assignment because receiver is not assignable. ab2++=Array(1,2,3,4)
+</code></pre>
 <p>竟然报错啦！不过你可以意识到一个事情，实际上对于引用类型来说，val，var的实际区别在于其引用对象是否发生了修改，引用的对象的内容发生修改也是完全没有问题的！所以上文实际上是新的一个Array对象，并不是原来的长度发生了变化。</p>
 <h3><span id="元组和zip操作">元组和zip操作</span></h3>
 <p>元组的定义很简单，Scala的元组是对多个不同类型对象的一种简单封装，它将不同 的值用小括号括起来，并用逗号作分隔，即表示元组。</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> tuple=(元素,元素...)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">val tuple=(元素,元素...)
+</code></pre>
 <p>举个例子：</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> tuple_names=(<span class="string">"jszszzy"</span>,<span class="string">"jszslxl"</span>)</span><br><span class="line">tuple_names: (<span class="type">String</span>, <span class="type">String</span>) = (jszszzy,jszslxl)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">scala&gt; val tuple_names=("jszszzy","jszslxl")
+tuple_names: (String, String) = (jszszzy,jszslxl)
+</code></pre>
 <p>需要注意的是访问成员的时候需要如下表达式：</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; tuple_names._1</span><br><span class="line">res15: <span class="type">String</span> = jszszzy</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">scala&gt; tuple_names._1
+res15: String = jszszzy
+</code></pre>
 <h4><span id="zip操作">Zip操作</span></h4>
 <p>zip操作实际上是把多个集合中的元素关联起来，将其合并成一个个元组，再放到集合中。</p>
 <p>举个例子：</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> names=<span class="type">Array</span>(<span class="string">"jszszzy"</span>,<span class="string">"jszslxl"</span>)</span><br><span class="line">names: <span class="type">Array</span>[<span class="type">String</span>] = <span class="type">Array</span>(jszszzy, jszslxl)</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> scores=<span class="type">Array</span>(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">scores: <span class="type">Array</span>[<span class="type">Int</span>] = <span class="type">Array</span>(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">scala&gt; names.zip(scores)</span><br><span class="line">res12: <span class="type">Array</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = <span class="type">Array</span>((jszszzy,<span class="number">1</span>), (jszslxl,<span class="number">2</span>))</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">scala&gt; val names=Array("jszszzy","jszslxl")
+names: Array[String] = Array(jszszzy, jszslxl)
+
+scala&gt; val scores=Array(1,2)
+scores: Array[Int] = Array(1, 2)
+
+scala&gt; names.zip(scores)
+res12: Array[(String, Int)] = Array((jszszzy,1), (jszslxl,2))
+</code></pre>
 <p>实际上每个Array中的元素变成了一个元组。</p>
 <p>当然这个方法不能对两个元组使用，否则会报错。</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; tuple_scores.zip(tuple_names)</span><br><span class="line">&lt;console&gt;:<span class="number">14</span>: error: value zip is not a member of (<span class="type">Int</span>, <span class="type">Int</span>)</span><br><span class="line">       tuple_scores.zip(tuple_names)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">scala&gt; tuple_scores.zip(tuple_names)
+&lt;console&gt;:14: error: value zip is not a member of (Int, Int)
+       tuple_scores.zip(tuple_names)
+</code></pre>
 <h3><span id="集合">集合</span></h3>
 <p>在Scala中，集合有三大类： List、Set以及Map，所有的集合都扩展自Iterable特质 。 Scala 集合分为可变的（mutable）和不可变（immutable）的 集合：</p>
 <p>➢ 可变集合可以在适当的地方被更新或扩展，意味着可以对 集合进行修改、添加、移除元素</p>
 <p>➢ 不可变集合类，初始化后就永远不会改变。</p>
 <p>举个例子：</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字符串</span></span><br><span class="line"><span class="keyword">val</span> fruit: <span class="type">List</span>[<span class="type">String</span>] =<span class="type">List</span>(<span class="string">"apples"</span>,<span class="string">"oranges"</span>,<span class="string">"pears"</span>)</span><br><span class="line"><span class="comment">// 整型</span></span><br><span class="line"><span class="keyword">val</span> nums: <span class="type">List</span>[<span class="type">Int</span>] = <span class="type">List</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line"><span class="comment">// 空</span></span><br><span class="line"><span class="keyword">val</span> empty: <span class="type">List</span>[<span class="type">Nothing</span>] = <span class="type">List</span>()</span><br><span class="line"><span class="comment">// 二维列表</span></span><br><span class="line"><span class="keyword">val</span> dim: <span class="type">List</span>[<span class="type">List</span>[<span class="type">Int</span>]] =</span><br><span class="line"><span class="type">List</span>(</span><br><span class="line"><span class="type">List</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>),</span><br><span class="line"><span class="type">List</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>),</span><br><span class="line"><span class="type">List</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-Scala">// 字符串
+val fruit: List[String] =List("apples","oranges","pears")
+// 整型
+val nums: List[Int] = List(1, 2, 3, 4)
+// 空
+val empty: List[Nothing] = List()
+// 二维列表
+val dim: List[List[Int]] =
+List(
+List(1, 0, 0),
+List(0, 1, 0),
+List(0, 0, 1)
+)
+
+</code></pre>
 <p>在Scala中，Set是没有重复对象的集合，所有元素都是唯一 的。默认情况下，Scala 使用不可变Set集合，若想使用可变的 Set集合，则需要引入 scala.collection.mutable.Set 包。</p>
 <p>举个例子：</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> set: <span class="type">Set</span>[<span class="type">Int</span>] = <span class="type">Set</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">val set: Set[Int] = Set(1,2,3,4,5)
+</code></pre>
 <p>map</p>
 <p>在Scala中，Map是一种可迭代的键值对（key/value）结构， 并且键是唯一的，值不一定是唯一的，所有的值都是通过键来获取 的。Map中所有元素的键与值都存在一种对应关系，这种关系即为 映射。Map有两种类型，可变集合与不可变集合，默认是不可变 Map 。 若 需 要 使 用 可 变 的 Map 集 合 ， 则 需 要 引 入 import scala.collection.mutable.Map 类。</p>
 <p>举个例子：</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="type">A</span>:<span class="type">Map</span>[<span class="type">Char</span>,<span class="type">Int</span>] = <span class="type">Map</span>(键 -&gt; 值,键 -&gt; 值...)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">var A:Map[Char,Int] = Map(键 -&gt; 值,键 -&gt; 值...)
+</code></pre>
 <h3><span id="类的定义">类的定义</span></h3>
 <p>无论是在Scala中还是Java中，类都是对象的抽象，而对象都是类的具体实例；类不占用内存，而对象占用存储空间。由于面向对象的核心是对 象，若想要在应用程序中使用对象，就必须得先创建一个类。类是用于描 述一组对象的共同特征和行为。</p>
 <p>在 Scala 中定义类时需要输入 class 关键字，整个类定义体包含在最外层的一对大括号中 （{…}）。事实上，这个类定义体同样也是这个类的主构造函数。假如需要将参数传递给这个构造函数，就要在类名之后输入参数列表。</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">类名</span> (<span class="params">参数列表</span>)</span></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">class 类名 (参数列表)
+</code></pre>
 <p>Scala类的定义主体就是类的构造器，称为主构造器，在类名之后用圆括号列出主构造 器的参数列表 . 主构造器的参数前可以使用val或var关键字，Scala内部将自动为这些参数创建私有字段， 并提供对应的访问方法:</p>
 <p>举个例子：</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="class"><span class="keyword">class</span> <span class="title">Person</span>(<span class="params">val name:<span class="type">String</span></span>)</span></span><br><span class="line">defined <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span></span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> jszszzy = <span class="keyword">new</span> <span class="type">Person</span>(<span class="string">"Jszszzy"</span>)</span><br><span class="line">jszszzy: <span class="type">Person</span> = <span class="type">Person</span>@<span class="number">55</span>f4f59a</span><br><span class="line"></span><br><span class="line"><span class="comment">//访问对应的成员属性，虽然是私有的但是默认提供了对应的访问方法。</span></span><br><span class="line">scala&gt; jszszzy.name</span><br><span class="line">res14: <span class="type">String</span> = <span class="type">Jszszzy</span></span><br><span class="line"></span><br><span class="line">scala&gt; jszszzy.name=<span class="string">"Jszslxl"</span></span><br><span class="line">&lt;console&gt;:<span class="number">12</span>: error: reassignment to <span class="keyword">val</span></span><br><span class="line">       jszszzy.name=<span class="string">"Jszslxl"</span></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">scala&gt; class Person(val name:String)
+defined class Person
+
+scala&gt; val jszszzy = new Person("Jszszzy")
+jszszzy: Person = Person@55f4f59a
+
+//访问对应的成员属性，虽然是私有的但是默认提供了对应的访问方法。
+scala&gt; jszszzy.name
+res14: String = Jszszzy
+
+scala&gt; jszszzy.name="Jszslxl"
+&lt;console&gt;:12: error: reassignment to val
+       jszszzy.name="Jszslxl"
+</code></pre>
 <h4><span id="辅助构造方法">辅助构造方法</span></h4>
 <p>辅助构造方法使用this来作为方法名，this的返回类型为Unit，其定义格式如下：</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">类名</span></span>{</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">this</span></span>(参数){</span><br><span class="line">		<span class="keyword">this</span>(主构造器参数)</span><br><span class="line">		<span class="keyword">this</span>.属性 = 参数;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">class 类名{
+	def this(参数){
+		this(主构造器参数)
+		this.属性 = 参数;
+	}
+
+}
+</code></pre>
 <p>每个辅助构造器的第一个表达式必须是调用一个此前已经定义的辅助构造器或主构造器， 调用的形式为“this(参数列表)”</p>
 <h4><span id="单例对象与main">单例对象与main</span></h4>
 <p>与Java不同的是，Scala中提供了object这个关键字用来实现单例模式，使用关键字object创 建的对象为单例对象。你如果在类的文件中直接定义一个mian方法是不能直接运行的，在IDEA中会报错：</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> priv.jszszzy.test</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span></span><br><span class="line">{</span><br><span class="line">  <span class="keyword">var</span> myVar : <span class="type">String</span> =<span class="string">"Hello"</span></span><br><span class="line">  <span class="keyword">val</span> myVal : <span class="type">String</span> = <span class="string">"World"</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(strings: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> =</span><br><span class="line">  {</span><br><span class="line">    println(myVar + myVal)</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">ERROR</span>: main 方法不是类 priv.jszszzy.test.<span class="type">HelloWorld</span> 中的static, 请将 main 方法定义为: public static void main(<span class="type">String</span>[] args)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">package priv.jszszzy.test
+
+class HelloWorld
+{
+  var myVar : String ="Hello"
+  val myVal : String = "World"
+  def main(strings: Array[String]): Unit =
+  {
+    println(myVar + myVal)
+  }
+}
+
+ERROR: main 方法不是类 priv.jszszzy.test.HelloWorld 中的static, 请将 main 方法定义为: public static void main(String[] args)
+</code></pre>
 <p>但是scala没有static，这个其使用java虚拟机运行有很大关系，你需要这样定义：</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> priv.jszszzy.test</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">HelloWorld</span></span></span><br><span class="line">{</span><br><span class="line">  <span class="keyword">var</span> myVar : <span class="type">String</span> =<span class="string">"Hello"</span></span><br><span class="line">  <span class="keyword">val</span> myVal : <span class="type">String</span> = <span class="string">"World"</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(strings: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> =</span><br><span class="line">  {</span><br><span class="line">    println(myVar + myVal)</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">package priv.jszszzy.test
+
+object HelloWorld
+{
+  var myVar : String ="Hello"
+  val myVal : String = "World"
+  def main(strings: Array[String]): Unit =
+  {
+    println(myVar + myVal)
+  }
+}
+</code></pre>
 <p>由此可以看出，其想要main的入口方法需要一个object的单例类，scala 将单例模式视为本语言的第一等级成员。尽管我们声明了一个类，不过 Scala 运行时只会创建 HelloWorld的一个实例。也就是说，你无法 通过 new 创建 HelloWorld 对象。就好像 Java 使用静态类型一样，其他语言使用类成员（class-level member），Scala 则使用对象进行处理。由于 HelloWorld 中并不包含状态信息，所以我们此 处的确不需要多个实例，使用单例便能满足需求。</p>
 <h4><span id="伴生对象">伴生对象</span></h4>
 <p>在一个源文件中有一个类和一个单例对象，若单例对象名与类名相同，则把 这个单例对象称作伴生对象（companion object），这个类则被称为是单例对象的伴生类（companion class）。类和伴生对象之间可以相互访问私有的方法和字段。</p>
@@ -325,18 +507,91 @@ Scala于2001年由洛桑联邦理工学院（EPFL） 的编程方法实验室研
 <li><strong>class 中要访问 object 中的私有属性，直接以 object 名来 “点” 相应的变量或方法即可，可以参考下面例子</strong>；</li>
 <li><strong>object 中要访问 class 中的私有属性，必须要通过 class 的对象引用来 “点” 相应变量或方法，可以参考下面例子</strong>。</li>
 </ul>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> priv.jszszzy.test</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span></span><br><span class="line">{</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">var</span> myName : <span class="type">String</span> =<span class="string">"companion class"</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">test</span></span>():<span class="type">Unit</span> =</span><br><span class="line">  {</span><br><span class="line">    println(<span class="type">HelloWorld</span>.myVal)</span><br><span class="line">    <span class="comment">//调用伴生对象的成员</span></span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">HelloWorld</span></span></span><br><span class="line">{</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">var</span> myVar : <span class="type">String</span> =<span class="string">"Hello"</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">val</span> myVal : <span class="type">String</span> = <span class="string">"World"</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">var</span> c_ClassName : <span class="type">HelloWorld</span> =<span class="keyword">new</span> <span class="type">HelloWorld</span>();</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">test</span></span>():<span class="type">Unit</span> =</span><br><span class="line">  {</span><br><span class="line">    println(<span class="type">HelloWorld</span>.myVar)</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(strings: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> =</span><br><span class="line">  {</span><br><span class="line">    println(myVar + myVal)</span><br><span class="line">    <span class="comment">//伴生对象的成员</span></span><br><span class="line">    println(c_ClassName.myName)</span><br><span class="line">    <span class="comment">//伴生对象的方法</span></span><br><span class="line">    <span class="type">HelloWorld</span>.test()</span><br><span class="line">    <span class="comment">// 伴生类的方法</span></span><br><span class="line">    c_ClassName.test()</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">output:</span><br><span class="line"><span class="type">HelloWorld</span></span><br><span class="line">companion <span class="class"><span class="keyword">class</span></span></span><br><span class="line"><span class="type">Hello</span></span><br><span class="line"><span class="type">World</span></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">package priv.jszszzy.test
+
+
+class HelloWorld
+{
+  private var myName : String ="companion class"
+  def test():Unit =
+  {
+    println(HelloWorld.myVal)
+    //调用伴生对象的成员
+  }
+}
+
+object HelloWorld
+{
+  private var myVar : String ="Hello"
+  private val myVal : String = "World"
+  private var c_ClassName : HelloWorld =new HelloWorld();
+
+  def test():Unit =
+  {
+    println(HelloWorld.myVar)
+  }
+
+  def main(strings: Array[String]): Unit =
+  {
+    println(myVar + myVal)
+    //伴生对象的成员
+    println(c_ClassName.myName)
+    //伴生对象的方法
+    HelloWorld.test()
+    // 伴生类的方法
+    c_ClassName.test()
+  }
+}
+
+output:
+HelloWorld
+companion class
+Hello
+World
+</code></pre>
 <h3><span id="方法与函数">方法与函数</span></h3>
 <p>对于大多数的面向对象编程语言而言，方法指的是类或对象中定义的函数。当调用方 法时，方法中的 this 引用会隐性地指向某一对象。当然，在大多数的 OOP 语言中， 方法调用的语法通常是 :</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.method_name(other_args)</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">this.method_name(other_args)
+</code></pre>
 <p>本文中的“方法”也满足这一 常用规范。我们提到的“函数”尽管不是方法，但在某些时候通常会将方法也归入函 数。当前上下文能够认清它们的区别。</p>
 <h4><span id="方法的定义">方法的定义</span></h4>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">functionName</span> </span>([参数列表]):[<span class="keyword">return</span> <span class="class"><span class="keyword">type</span>]</span>=</span><br><span class="line">{</span><br><span class="line">    function body</span><br><span class="line">    <span class="keyword">return</span> [expr]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">def functionName ([参数列表]):[return type]=
+{
+    function body
+    return [expr]
+}
+</code></pre>
 <p>函数定义：</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> functionName ([参数列表]):[<span class="keyword">return</span> <span class="class"><span class="keyword">type</span>]</span>=</span><br><span class="line">{</span><br><span class="line">    function body</span><br><span class="line">    <span class="keyword">return</span> [expr]</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">val functionName ([参数列表]):[return type]=
+{
+    function body
+    return [expr]
+}
+
+</code></pre>
 <h4><span id="方法的多参数列表">方法的多参数列表</span></h4>
 <p>这里的 draw 方法有两个参数列表，每个参数列表都有一个参数，而不是拥有一个 具有两个参数的参数列表。</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> priv.jszszzy.test</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">HelloWorld</span></span></span><br><span class="line">{</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">var</span> myVar : <span class="type">String</span> =<span class="string">"Hello"</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">val</span> myVal : <span class="type">String</span> = <span class="string">"World"</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">MultiArgs</span></span>(a : <span class="type">Int</span>)(b :<span class="type">Int</span>):<span class="type">Unit</span> =</span><br><span class="line">  {</span><br><span class="line">    println(a)</span><br><span class="line">    println(b)</span><br><span class="line">  }</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(strings: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> =</span><br><span class="line">  {</span><br><span class="line">      <span class="comment">/*那么，为什么要允许多个参数列表呢?</span></span><br><span class="line"><span class="comment">      当最后一个参数列表只包含一个表示函数的参数时，多个参数列表的形式拥有整齐的块结构语法。</span></span><br><span class="line"><span class="comment">      以下是我们调用新的 draw 方法的表达 方式：*/</span></span><br><span class="line">    <span class="type">MultiArgs</span>(<span class="number">1</span>){<span class="number">2</span>}</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">package priv.jszszzy.test
+
+object HelloWorld
+{
+  private var myVar : String ="Hello"
+  private val myVal : String = "World"
+
+  def MultiArgs(a : Int)(b :Int):Unit =
+  {
+    println(a)
+    println(b)
+  }
+  def main(strings: Array[String]): Unit =
+  {
+      /*那么，为什么要允许多个参数列表呢?
+      当最后一个参数列表只包含一个表示函数的参数时，多个参数列表的形式拥有整齐的块结构语法。
+      以下是我们调用新的 draw 方法的表达 方式：*/
+    MultiArgs(1){2}
+  }
+}
+</code></pre>
 <h4><span id="函数简写规则">函数简写规则</span></h4>
 <ul>
 <li>（1）return可以省略，Scala会使用方法体的最后一行代码作为返回值</li>
@@ -354,18 +609,123 @@ Scala于2001年由洛桑联邦理工学院（EPFL） 的编程方法实验室研
 </li>
 <li>
 <p>Java只能继承父类中非私有的属性和方法，而Scala可以继承父类中 的所有属性和方法。</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//父类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span></span><br><span class="line">{</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">var</span> myName : <span class="type">String</span> =<span class="string">"companion class"</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">test</span></span>():<span class="type">Unit</span> =</span><br><span class="line">  {</span><br><span class="line">    println(<span class="type">HelloWorld</span>.myVal)</span><br><span class="line">    <span class="comment">//调用伴生对象的成员</span></span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//子类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloWorld_son</span> <span class="keyword">extends</span> <span class="title">HelloWorld</span></span></span><br><span class="line">{</span><br><span class="line">  <span class="keyword">var</span> myName :<span class="type">String</span> = <span class="string">"HelloWorld_Son"</span></span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">test</span></span>(): <span class="type">Unit</span> =<span class="comment">//需要加入override关键字，来重写非抽象方法</span></span><br><span class="line">  {</span><br><span class="line">    println(myName);</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//主类用来运行函数</span></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">HelloWorld</span></span></span><br><span class="line">{</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">var</span> myVar : <span class="type">String</span> =<span class="string">"Hello"</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">val</span> myVal : <span class="type">String</span> = <span class="string">"World"</span></span><br><span class="line">    </span><br><span class="line">  <span class="comment">//类的继承演示代码</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">extendsTest</span></span>(): <span class="type">Unit</span> =</span><br><span class="line">  {</span><br><span class="line">    <span class="keyword">var</span> son :<span class="type">HelloWorld_son</span>= <span class="keyword">new</span> <span class="type">HelloWorld_son</span>()</span><br><span class="line">    son.test();</span><br><span class="line">  }</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(strings: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> =</span><br><span class="line">  {</span><br><span class="line">     <span class="comment">//调用继承的方法</span></span><br><span class="line">    extendsTest()</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">output：</span><br><span class="line"><span class="type">HelloWorld_Son</span></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala"> //父类
+class HelloWorld
+{
+  private var myName : String ="companion class"
+  def test():Unit =
+  {
+    println(HelloWorld.myVal)
+    //调用伴生对象的成员
+  }
+}
+
+//子类
+class HelloWorld_son extends HelloWorld
+{
+  var myName :String = "HelloWorld_Son"
+  override def test(): Unit =//需要加入override关键字，来重写非抽象方法
+  {
+    println(myName);
+  }
+}
+
+//主类用来运行函数
+object HelloWorld
+{
+  private var myVar : String ="Hello"
+  private val myVal : String = "World"
+    
+  //类的继承演示代码
+  def extendsTest(): Unit =
+  {
+    var son :HelloWorld_son= new HelloWorld_son()
+    son.test();
+  }
+  def main(strings: Array[String]): Unit =
+  {
+     //调用继承的方法
+    extendsTest()
+  }
+}
+
+output：
+HelloWorld_Son
+</code></pre>
 <h4><span id="scala-trait特征">Scala Trait(特征)</span></h4>
 <p>​	在Scala中，Trait（特质）的功能类似于Java中的接口，但Trait的 功能却比Java中的接口强大。例如，Trait可以对定义的字段和方法进行实现，而接口却不能。Scala中的Trait可以被类和对象使用关键字extends来继承。</p>
 <p>定义方法：</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//特质演示</span></span><br><span class="line"><span class="class"><span class="keyword">trait</span> <span class="title">HelloWorld_trait</span></span></span><br><span class="line">{</span><br><span class="line">  <span class="keyword">val</span> trait_member = <span class="string">"trait"</span><span class="comment">//特质成员</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">traitTest</span> </span>()= println(trait_member)<span class="comment">//特质方法</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">traitAbstratTest</span></span>() :<span class="type">Unit</span><span class="comment">//特质抽象方法</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">//特质演示
+trait HelloWorld_trait
+{
+  val trait_member = "trait"//特质成员
+  def traitTest ()= println(trait_member)//特质方法
+  def traitAbstratTest() :Unit//特质抽象方法
+}
+</code></pre>
 <p>部分代码演示：</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> priv.jszszzy.test</span><br><span class="line"><span class="comment">//父类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span></span><br><span class="line">{</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">var</span> myName : <span class="type">String</span> =<span class="string">"companion class"</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">test</span></span>():<span class="type">Unit</span> =</span><br><span class="line">  {</span><br><span class="line">    println(<span class="type">HelloWorld</span>.myVal)</span><br><span class="line">    <span class="comment">//调用伴生对象的成员</span></span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">HelloWorld</span> <span class="keyword">extends</span> <span class="title">HelloWorld_trait</span></span></span><br><span class="line">{</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">var</span> myVar : <span class="type">String</span> =<span class="string">"Hello"</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">val</span> myVal : <span class="type">String</span> = <span class="string">"World"</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(strings: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> =</span><br><span class="line">  {</span><br><span class="line">     <span class="comment">//调用重写后的抽象方法</span></span><br><span class="line">    <span class="type">HelloWorld</span>.traitAbstratTest()</span><br><span class="line">  }</span><br><span class="line">  <span class="comment">//重写特质的抽象方法</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">traitAbstratTest</span></span>(): <span class="type">Unit</span> =</span><br><span class="line">  {</span><br><span class="line">    <span class="type">HelloWorld</span>.traitTest()</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//特质演示</span></span><br><span class="line"><span class="class"><span class="keyword">trait</span> <span class="title">HelloWorld_trait</span></span></span><br><span class="line">{</span><br><span class="line">  <span class="keyword">val</span> trait_member = <span class="string">"trait"</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">traitTest</span> </span>()= println(trait_member)</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">traitAbstratTest</span></span>() :<span class="type">Unit</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">package priv.jszszzy.test
+//父类
+class HelloWorld
+{
+  private var myName : String ="companion class"
+  def test():Unit =
+  {
+    println(HelloWorld.myVal)
+    //调用伴生对象的成员
+  }
+}
+
+object HelloWorld extends HelloWorld_trait
+{
+  private var myVar : String ="Hello"
+  private val myVal : String = "World"
+
+  def main(strings: Array[String]): Unit =
+  {
+     //调用重写后的抽象方法
+    HelloWorld.traitAbstratTest()
+  }
+  //重写特质的抽象方法
+  def traitAbstratTest(): Unit =
+  {
+    HelloWorld.traitTest()
+  }
+}
+
+//特质演示
+trait HelloWorld_trait
+{
+  val trait_member = "trait"
+  def traitTest ()= println(trait_member)
+  def traitAbstratTest() :Unit
+}
+</code></pre>
 </li>
 </ul>
 <h3><span id="模式匹配">模式匹配</span></h3>
 <p>每一个模式匹配都包含了一系列选项，每个都开始于<strong>case</strong>关键字，每个模式和表达式通过**=&gt;**来分开。值得一说的是，case在执行完语句后就不会再去执行其他case。</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">Test</span> </span>{</span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) {</span><br><span class="line">      println(matchTest(<span class="string">"two"</span>))</span><br><span class="line">      println(matchTest(<span class="string">"test"</span>))</span><br><span class="line">      println(matchTest(<span class="number">1</span>))</span><br><span class="line">      println(matchTest(<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line">   }</span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">matchTest</span></span>(x: <span class="type">Any</span>): <span class="type">Any</span> = x <span class="keyword">match</span></span><br><span class="line">    {</span><br><span class="line">        <span class="comment">//对应整型数值 1</span></span><br><span class="line">      <span class="keyword">case</span> <span class="number">1</span> =&gt; <span class="string">"one"</span></span><br><span class="line">        <span class="comment">//对应字符串值 two</span></span><br><span class="line">      <span class="keyword">case</span> <span class="string">"two"</span> =&gt; <span class="number">2</span></span><br><span class="line">        <span class="comment">//case 对应类型模式，用于判断传入的值是否为整型</span></span><br><span class="line">      <span class="keyword">case</span> y: <span class="type">Int</span> =&gt; <span class="string">"scala.Int"</span></span><br><span class="line">        <span class="comment">//表示默认的全匹配备选项</span></span><br><span class="line">      <span class="keyword">case</span> _ =&gt; <span class="string">"many"</span></span><br><span class="line">   }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">object Test {
+   def main(args: Array[String]) {
+      println(matchTest("two"))
+      println(matchTest("test"))
+      println(matchTest(1))
+      println(matchTest(6))
+
+   }
+   def matchTest(x: Any): Any = x match
+    {
+        //对应整型数值 1
+      case 1 =&gt; "one"
+        //对应字符串值 two
+      case "two" =&gt; 2
+        //case 对应类型模式，用于判断传入的值是否为整型
+      case y: Int =&gt; "scala.Int"
+        //表示默认的全匹配备选项
+      case _ =&gt; "many"
+   }
+}
+</code></pre>
 <h4><span id="样例类">样例类</span></h4>
 <p>使用了case关键字的类定义就是样例类(case classes)，样例类是种特殊的类，经过优化以用于模式匹配。</p>
 <p>使用后会有如下自动生成。</p>
@@ -375,7 +735,27 @@ Scala于2001年由洛桑联邦理工学院（EPFL） 的编程方法实验室研
 <li>提供unapply方法使模式匹配可以工作；</li>
 <li>生成toString、equals、hashCode和copy方法，除非显示给出这些方法的定义。</li>
 </ul>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">HelloWorld</span> <span class="keyword">extends</span> <span class="title">HelloWorld_trait</span></span></span><br><span class="line">{</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">case_test</span></span>(test : case_test): <span class="type">Unit</span> =</span><br><span class="line">  {</span><br><span class="line">    test <span class="keyword">match</span></span><br><span class="line">    {</span><br><span class="line">      <span class="keyword">case</span> x:case_test =&gt;println(<span class="string">"This is case"</span>)</span><br><span class="line">      <span class="keyword">case</span> case_test(<span class="string">"jszszzy"</span>) =&gt; println(<span class="string">"This is zzy"</span>)</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(strings: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> =</span><br><span class="line">  {</span><br><span class="line">    <span class="comment">//调用模板类测试方法</span></span><br><span class="line">    case_test(<span class="keyword">new</span> case_test(<span class="string">"jszszzy"</span>));</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">}</span><br><span class="line"><span class="comment">//模式匹配演示</span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">case_test</span>(<span class="params"> name :<span class="type">String</span></span>)</span></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="language-scala">object HelloWorld extends HelloWorld_trait
+{
+  def case_test(test : case_test): Unit =
+  {
+    test match
+    {
+      case x:case_test =&gt;println("This is case")
+      case case_test("jszszzy") =&gt; println("This is zzy")
+    }
+  }
+    
+  def main(strings: Array[String]): Unit =
+  {
+    //调用模板类测试方法
+    case_test(new case_test("jszszzy"));
+  }
+
+}
+//模式匹配演示
+case class case_test( name :String)
+</code></pre>
 </article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/09/29/%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%20%20%E2%80%94%E2%80%94%20%20%E5%BF%AB%E9%80%9F%E5%A4%8D%E8%8B%8F%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8F%82%E6%95%B0%E7%AF%87%EF%BC%89/" title="运算放大器  ——  快速复苏笔记（参数篇）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: 运算放大器  ——  快速复苏笔记（参数篇）</span></a><a class="button is-default" href="/2024/09/29/Spark(1)/" title="Spark快速大数据分析——Spark的安装与介绍（壹）"><span class="has-text-weight-semibold">Next: Spark快速大数据分析——Spark的安装与介绍（壹）</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" onload="initMermaid()"></script><script>function initMermaid() {
  console.log("fuck you");
   if (window.mermaid) {
