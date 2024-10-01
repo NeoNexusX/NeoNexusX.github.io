@@ -155,6 +155,10 @@ avg_df.show()#展示执行的最终结果
   options: {
     skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
     enableMenu: true,
+            renderActions: {
+                   findScript: [10, function (doc) {
+                   return doc.findMath({ script: document.querySelectorAll('script[type^="math/tex"]') });
+            }]
   },
   startup: {
     ready: () => {

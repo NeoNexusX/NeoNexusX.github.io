@@ -772,6 +772,10 @@ case class case_test( name :String)
   options: {
     skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
     enableMenu: true,
+            renderActions: {
+                   findScript: [10, function (doc) {
+                   return doc.findMath({ script: document.querySelectorAll('script[type^="math/tex"]') });
+            }]
   },
   startup: {
     ready: () => {
