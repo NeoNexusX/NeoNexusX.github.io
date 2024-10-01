@@ -50,7 +50,7 @@ Activity的生命周期
 贪婪匹配与惰.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Android开发笔记——快速入门（优雅的开发Activity）</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Android开发笔记——快速入门（优雅的开发Activity）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">软件环境：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">使用Android手机在AS直接进行开发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Activity的启动模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">standard</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">sigleTop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">sigleTask</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">singleInstance</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">充分管理和了解你的ACT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">如何知晓当前ACT的名字？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">随时退出程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">启动ACT的最佳写法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Activity的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">基本匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">限定符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">针对多个字符的运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">逻辑运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">字符集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">转码特殊字符</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">锚点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">^号</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">$ 号</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">简写字符集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">贪婪匹配与惰性匹配 (Greedy vs lazy matching)</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Android"><i class="tag post-item-tag">Android</i></a><a href="/tags/Activity"><i class="tag post-item-tag">Activity</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Android开发笔记——快速入门（优雅的开发Activity）</h1><time class="has-text-grey" datetime="2024-09-29T14:13:28.501Z">2024-09-29</time><article class="mt-2 post-content"><h1><span id="android开发笔记快速入门优雅的开发activity">Android开发笔记——快速入门（优雅的开发Activity）</span></h1>
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Android开发笔记——快速入门（优雅的开发Activity）</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Android开发笔记——快速入门（优雅的开发Activity）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">软件环境：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">使用Android手机在AS直接进行开发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Activity的启动模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">standard</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">sigleTop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">sigleTask</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">singleInstance</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">充分管理和了解你的ACT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">如何知晓当前ACT的名字？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">随时退出程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">启动ACT的最佳写法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Activity的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">基本匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">限定符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">针对多个字符的运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">逻辑运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">字符集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">转码特殊字符</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">锚点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">^号</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">$ 号</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">简写字符集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">贪婪匹配与惰性匹配 (Greedy vs lazy matching)</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Android"><i class="tag post-item-tag">Android</i></a><a href="/tags/Activity"><i class="tag post-item-tag">Activity</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Android开发笔记——快速入门（优雅的开发Activity）</h1><time class="has-text-grey" datetime="2024-09-29T14:13:28.501Z">2024-09-29</time><article class="mt-2 post-content"><h1><span id="android开发笔记快速入门优雅的开发activity">Android开发笔记——快速入门（优雅的开发Activity）</span></h1>
 <img src="https://s2.loli.net/2024/09/29/fDGVwPp6OMtaZ5E.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1727616671844" style="zoom:50%;">
 <img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom: 50%;">
 <h2><span id="软件环境">软件环境：</span></h2>
@@ -141,19 +141,7 @@ Activity的生命周期
 <h3><span id="standard">standard</span></h3>
 <p>standard模式是Activity的默认启动模式，在不显式指定的情况下，所有Activity都会使用这种模式。</p>
 <p>举个例子：</p>
-<pre><code class="language-kotlin">override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    //此处注意
-    Log.d("FirstActivity","Task id is $taskId")
-   val  binding = ActivityFirstBinding.inflate(layoutInflater)
-    setContentView(binding.root)
-    binding.button1.setOnClickListener()
-    {
-        val intent = Intent(this,FirstActivity::class.java)
-        startActivity(intent)
-    }
-}
-</code></pre>
+<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> {</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">    <span class="comment">//此处注意</span></span><br><span class="line">    Log.d(<span class="string">"FirstActivity"</span>,<span class="string">"Task id is <span class="variable">$taskId</span>"</span>)</span><br><span class="line">   <span class="keyword">val</span>  binding = ActivityFirstBinding.inflate(layoutInflater)</span><br><span class="line">    setContentView(binding.root)</span><br><span class="line">    binding.button1.setOnClickListener()</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">val</span> intent = Intent(<span class="keyword">this</span>,FirstActivity::<span class="keyword">class</span>.java)</span><br><span class="line">        startActivity(intent)</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>我们给一个Act设定一个操作当点击按钮的时候再次创建一个一摸一样的Act出来。</p>
 <p><img src="https://s2.loli.net/2024/09/29/4KpASe7gfj5a89t.png" alt="4"></p>
 <p>实际上两个ACT的实例句柄并不相同，也就是说ACT中有两个相同的ACT实例。</p>
@@ -192,11 +180,7 @@ Activity的生命周期
 <p>在阅读之一部分前请先阅读：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/24304289/answer/38218810">关于JAVA的反射与Class</a>。</p>
 <h3><span id="如何知晓当前act的名字">如何知晓当前ACT的名字？</span></h3>
 <p>创建一个<code>BaseActivity类</code>，注意是Kotlin的类，并不是创建一个ACT，让他继承<code>AppCompatActivity类</code>，并重写<code>onCreate方法</code>：</p>
-<pre><code class="language-kotlin">override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    Log.d("BaseActivity",javaClass.simpleName)
-}
-</code></pre>
+<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> {</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">    Log.d(<span class="string">"BaseActivity"</span>,javaClass.simpleName)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>使用Log来输出当前的类名，值得注意的是，这里使用的是类似于java的反射机制，你可以注意到当前的类就是<code>BaseActivity</code>为什么还要通过<code>javaClass.simpleName</code>来输出类名呢？</p>
 <p>实际上并不是这样的，我们先看一个结果：</p>
 <p>运行一个FirstActivity以后：</p>
@@ -206,41 +190,14 @@ Activity的生命周期
 <p>我们在重写父类的onCreate方法同时调用了父类的<code>super.onCreate(savedInstanceState)</code>方法，这样就相当于在本类中使用了<code>Log.d("BaseActivity",javaClass.simpleName)</code>方法，通过class来获取当前的实例名。</p>
 <p>只要我们让<code>BaseActivity</code>成为所有ACT的父类就能输出类的信息。</p>
 <p>当然你也可以这样写：</p>
-<pre><code class="language-kotlin">override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    Log.d("BaseActivity",this.toString())
-}
-</code></pre>
+<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> {</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">    Log.d(<span class="string">"BaseActivity"</span>,<span class="keyword">this</span>.toString())</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>这样输出内容在创建相同实例的时候更准确：</p>
 <p><img src="https://s2.loli.net/2024/09/29/VUTAtxGlkSifBPw.png" alt="10"></p>
 <h3><span id="随时退出程序">随时退出程序</span></h3>
 <p>如果你目前栈内已经有了三个ACT，而现在你想检测退出程序对应ACT阶段回调函数的运行效果怎么样，总不能连续按下三次返回按键吧，那如果有很多的ACT，就连续按下多次？当然不现实了。</p>
 <p>解决思路很简单，这里创建一个专门的类针对所有类进行管理。</p>
 <p>先看个例子，创建了一个<code>ActitvityCollector</code>类：</p>
-<pre><code class="language-kotlin">object ActitvityCollector
-{
-    private val activities = ArrayList&lt;Activity&gt;()
-    fun addActivity(activity: Activity)
-    {
-        activities.add(activity)
-    }
-    fun removeActivity(activity: Activity)
-    {
-        activities.remove(activity)
-    }
-    fun finishALL()
-    {
-        for (activity in activities)
-        {
-            if(!activity.isFinishing)
-            {
-                activity.finish()
-            }
-        }
-        activities.clear()
-    }
-}
-</code></pre>
+<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">object</span> ActitvityCollector</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> activities = ArrayList&lt;Activity&gt;()</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">addActivity</span><span class="params">(activity: <span class="type">Activity</span>)</span></span></span><br><span class="line">    {</span><br><span class="line">        activities.add(activity)</span><br><span class="line">    }</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">removeActivity</span><span class="params">(activity: <span class="type">Activity</span>)</span></span></span><br><span class="line">    {</span><br><span class="line">        activities.remove(activity)</span><br><span class="line">    }</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">finishALL</span><span class="params">()</span></span></span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">for</span> (activity <span class="keyword">in</span> activities)</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">if</span>(!activity.isFinishing)</span><br><span class="line">            {</span><br><span class="line">                activity.finish()</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        activities.clear()</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>这里ActitvityCollector是一个单例类，因为全局实际上只需要一个ActitvityCollector来管理所有ACT就可以了。</p>
 <p>我们创建了一个ArrayList来存放当前所有Activity，又声明了三个方法：</p>
 <ul>
@@ -250,83 +207,24 @@ Activity的生命周期
 </ul>
 <p>接下来我们使用这个三个方法来管理自己的ACT</p>
 <p>首先我们要配合<code>BaseActivity</code>来管理，首先是<code>addActivity</code>我们不需要自己手动每次调用的时候都添加这到集合中，我们配合BaseActivity的<code>onCreate</code>就可以在创建的时候自动调用了，修改后的<code>onCreate</code>如下：</p>
-<pre><code class="language-kotlin">override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    Log.d("BaseActivity",javaClass.simpleName)
-    ActitvityCollector.addActivity(this)
-}
-</code></pre>
+<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> {</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">    Log.d(<span class="string">"BaseActivity"</span>,javaClass.simpleName)</span><br><span class="line">    ActitvityCollector.addActivity(<span class="keyword">this</span>)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>接下来修改BaseActivity的<code>onDestroy</code>方法，让他在退出或者销毁的的时候直接把自己从队列里面移除。</p>
-<pre><code class="language-kotlin">override fun onDestroy() {
-    super.onDestroy()
-    ActitvityCollector.removeActivity(this)
-}
-</code></pre>
+<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onDestroy</span><span class="params">()</span></span> {</span><br><span class="line">    <span class="keyword">super</span>.onDestroy()</span><br><span class="line">    ActitvityCollector.removeActivity(<span class="keyword">this</span>)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>实现一键退出也很简单，我们在任何需要退出的地方调用：</p>
-<pre><code class="language-kotlin">ActitvityCollector.finishALL()
-</code></pre>
+<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ActitvityCollector.finishALL()</span><br></pre></td></tr></tbody></table></figure>
 <h3><span id="启动act的最佳写法">启动ACT的最佳写法</span></h3>
 <p>在一个ACT中启动到另一个ACT的方法很简单，首先通过intent来构造<strong>意图</strong>，指明需要启动的ACT：</p>
-<pre><code class="language-kotlin">val intent = Intent(this,SecondActivity::class.java)
-</code></pre>
+<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> intent = Intent(<span class="keyword">this</span>,SecondActivity::<span class="keyword">class</span>.java)</span><br></pre></td></tr></tbody></table></figure>
 <p>其中this为上下文对象，<code>SecondActivity::class.java</code>也是获取对应类的Class对象，为启动传输class参数。</p>
 <p>然后通过<code>startActivity(intent)</code>或者<code>startActivityForResult()</code>将ACT启动起来，如果有数据可以使用Intent来传输，这里就不再赘述。</p>
 <p>但是如果在另一个ACT需要启动这个ACT我们该如何传输参数呢？这时候就得跑去阅读代码了或者去问写这个ACT的人，但实际上我们应该把每一个ACT的启动都规整化把它封装一下，这样和别人一起协作的时候你写完的ACT很容易就能让别人利用起来。</p>
 <p>在这里我们利用了companion object来实现因为这样方便在调用的时候不需要自己创建一个对象再去调用它的方法，我们本着高内聚低耦合的想法，就把启动方法声明在伴生对象里面。</p>
-<pre><code class="language-kotlin">companion object {
-    fun actionStart(context: Context, data1: String, data2: String) {
-        val intent = Intent(context, SecondActivity::class.java).apply {
-            putExtra("param1", data1)
-            putExtra("param2", data2)
-        }
-        context.startActivity(intent)
-    }
-}
-</code></pre>
+<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">companion</span> <span class="keyword">object</span> {</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">actionStart</span><span class="params">(context: <span class="type">Context</span>, data1: <span class="type">String</span>, data2: <span class="type">String</span>)</span></span> {</span><br><span class="line">        <span class="keyword">val</span> intent = Intent(context, SecondActivity::<span class="keyword">class</span>.java).apply {</span><br><span class="line">            putExtra(<span class="string">"param1"</span>, data1)</span><br><span class="line">            putExtra(<span class="string">"param2"</span>, data2)</span><br><span class="line">        }</span><br><span class="line">        context.startActivity(intent)</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>我们通过这个方法把上下文传递进来然后传入要传递的参数最后构造intent实现数据传递和ACT启动。</p>
 <h2><span id="activity的生命周期">Activity的生命周期</span></h2>
 <p>《第一行代码》虽然是新的但其中关于Act的生命周期的部分已经发生了很大的改变，我推荐还是具体实验来真正手动去实践一下，实践才是检验真理的唯一标准。</p>
 <p>我们在原来BasicActivity的基础上来进行修改，在每个回调之中输出对应的回调函数：</p>
-<pre><code class="language-kotlin">open class BaseActivity : AppCompatActivity() {
-
-    val tag :String = javaClass.simpleName
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d(tag,"onCreate")
-        ActitvityCollector.addActivity(this)
-    }
-
-    override fun onDestroy() {
-        Log.d(tag,"onDestroy")
-        super.onDestroy()
-        ActitvityCollector.removeActivity(this)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d(tag, "onStart")
-    }
-    override fun onResume() {
-        super.onResume()
-        Log.d(tag, "onResume")
-    }
-    override fun onPause() {
-        super.onPause()
-        Log.d(tag, "onPause")
-    }
-    override fun onStop() {
-        super.onStop()
-        Log.d(tag, "onStop")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.d(tag, "onRestart")
-    }
-
-}
-</code></pre>
+<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="keyword">class</span> <span class="title class_">BaseActivity</span> : <span class="type">AppCompatActivity</span>() {</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> tag :String = javaClass.simpleName</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> {</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        Log.d(tag,<span class="string">"onCreate"</span>)</span><br><span class="line">        ActitvityCollector.addActivity(<span class="keyword">this</span>)</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onDestroy</span><span class="params">()</span></span> {</span><br><span class="line">        Log.d(tag,<span class="string">"onDestroy"</span>)</span><br><span class="line">        <span class="keyword">super</span>.onDestroy()</span><br><span class="line">        ActitvityCollector.removeActivity(<span class="keyword">this</span>)</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onStart</span><span class="params">()</span></span> {</span><br><span class="line">        <span class="keyword">super</span>.onStart()</span><br><span class="line">        Log.d(tag, <span class="string">"onStart"</span>)</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onResume</span><span class="params">()</span></span> {</span><br><span class="line">        <span class="keyword">super</span>.onResume()</span><br><span class="line">        Log.d(tag, <span class="string">"onResume"</span>)</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onPause</span><span class="params">()</span></span> {</span><br><span class="line">        <span class="keyword">super</span>.onPause()</span><br><span class="line">        Log.d(tag, <span class="string">"onPause"</span>)</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onStop</span><span class="params">()</span></span> {</span><br><span class="line">        <span class="keyword">super</span>.onStop()</span><br><span class="line">        Log.d(tag, <span class="string">"onStop"</span>)</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onRestart</span><span class="params">()</span></span> {</span><br><span class="line">        <span class="keyword">super</span>.onRestart()</span><br><span class="line">        Log.d(tag, <span class="string">"onRestart"</span>)</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>输出的方式很简答，我们通过Log来输出tag是一个成员获取当前类的实例名称，为了让获取Log的结果更加准确，我们要使用正则表达式来过滤掉不必要的信息。所以插入学习一下正则表达式来看看具体结果。</p>
 <h3><span id="正则表达式">正则表达式</span></h3>
 <p>在开始之前我们先来学习一下什么是正则表达式，这个在以后调试的时候非常有用。</p>
@@ -477,7 +375,7 @@ Activity的生命周期
 <li><strong>可见生命周期：指的是onStrart到onStop方法之间的过程，在onStop之前都是可见的，在不可见之后会执行onStop()。</strong></li>
 <li><strong>OnDestory方法：他的情况在新版之后有些特殊，只有在返回栈退栈的时候才会调用方法，退出程序也不会执行。</strong></li>
 </ul>
-</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/09/29/Android%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%EF%BC%88Fragment%E4%B8%AD%E4%BD%BF%E7%94%A8Viewbinding%EF%BC%89/" title="Android开发笔记——快速入门（从入门ACT到Fragment放肆）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: Android开发笔记——快速入门（从入门ACT到Fragment放肆）</span></a><a class="button is-default" href="/2024/09/29/Android/" title="Android开发笔记——快速入门（第一个Android项目）"><span class="has-text-weight-semibold">下一页: Android开发笔记——快速入门（第一个Android项目）</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" onload="initMermaid()"></script><script>function initMermaid() {
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/09/29/Android%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%EF%BC%88Fragment%E4%B8%AD%E4%BD%BF%E7%94%A8Viewbinding%EF%BC%89/" title="Android开发笔记——快速入门（从入门ACT到Fragment放肆）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Android开发笔记——快速入门（从入门ACT到Fragment放肆）</span></a><a class="button is-default" href="/2024/09/29/Android/" title="Android开发笔记——快速入门（第一个Android项目）"><span class="has-text-weight-semibold">Next: Android开发笔记——快速入门（第一个Android项目）</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" onload="initMermaid()"></script><script>function initMermaid() {
  console.log("fuck you");
   if (window.mermaid) {
     console.log("fuck you");

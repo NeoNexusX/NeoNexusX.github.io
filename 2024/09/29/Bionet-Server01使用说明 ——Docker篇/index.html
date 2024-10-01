@@ -38,7 +38,7 @@ Tensorflow使用Jupyter登录
 .."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">BionetServer-No1使用说明-进阶（Docker方式）</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">BionetServer-No1使用说明-进阶（Docker方式）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">开发的最佳实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Docker的使用与创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">image（镜像）和container（容器）的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Docker本身的安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">通过portainer构建自己的容器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">Images（镜像）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">container（容器）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">容器可见设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">容器的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">存储配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">lable配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">重启策略配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">运行时配置</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">Tensorflow使用Jupyter登录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">使用VSCode连接容器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">开启免密码登录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">开启代码补全</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">容器的维护</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">R语言连接办法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">R的路径共享</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">修改当前的工作目录</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Q&amp;A：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">问题零 通过容器写入的文件无法运行？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">问题一 容器重启之后无法连接？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">问题二 我创建一个docker失败之后再次连接相同端口为什么不行？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">问题三 我关闭了VSCode代码就停止运行了？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">问题四 Bad owner or permissions on</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Bionet"><i class="tag post-item-tag">Bionet</i></a><a href="/tags/ops"><i class="tag post-item-tag">ops</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">BionetServer-No1使用说明-进阶（Docker方式）</h1><time class="has-text-grey" datetime="2024-09-29T14:22:00.000Z">2024-09-29</time><article class="mt-2 post-content"><h1><span id="bionetserver-no1使用说明-进阶docker方式">BionetServer-No1使用说明-进阶（Docker方式）</span></h1>
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">BionetServer-No1使用说明-进阶（Docker方式）</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">BionetServer-No1使用说明-进阶（Docker方式）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">开发的最佳实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Docker的使用与创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">image（镜像）和container（容器）的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Docker本身的安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">通过portainer构建自己的容器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">Images（镜像）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">container（容器）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">容器可见设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">容器的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">存储配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">lable配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">重启策略配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">运行时配置</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">Tensorflow使用Jupyter登录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">使用VSCode连接容器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">开启免密码登录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">开启代码补全</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">容器的维护</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">R语言连接办法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">R的路径共享</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">修改当前的工作目录</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Q&amp;A：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">问题零 通过容器写入的文件无法运行？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">问题一 容器重启之后无法连接？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">问题二 我创建一个docker失败之后再次连接相同端口为什么不行？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">问题三 我关闭了VSCode代码就停止运行了？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">问题四 Bad owner or permissions on</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Bionet"><i class="tag post-item-tag">Bionet</i></a><a href="/tags/ops"><i class="tag post-item-tag">ops</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">BionetServer-No1使用说明-进阶（Docker方式）</h1><time class="has-text-grey" datetime="2024-09-29T14:22:00.000Z">2024-09-29</time><article class="mt-2 post-content"><h1><span id="bionetserver-no1使用说明-进阶docker方式">BionetServer-No1使用说明-进阶（Docker方式）</span></h1>
 <img src="https://s2.loli.net/2024/09/29/qWjluktz8hxAV4E.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1727547630579" style="zoom:50%;">
 <img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom: 50%;">
 <p>Version:1.0</p>
@@ -187,12 +187,7 @@ Tensorflow使用Jupyter登录
 <p>就没有只读权限这样的担忧，因为这个主机端的文件夹只有你能访问，这个文件需要你修改<code>修改这里</code>这四个字改成你的个人home目录：'/home/Neo/Share_Space '举个例子：</p>
 <img src="https://s2.loli.net/2024/04/01/4yWVJQOmj82FDXL.png" alt="image-20240401120000975" style="zoom:80%;">
 <p>当你明白上述目录之后我们来填写上图中的内容，我已经简单写了一份出来，你只要复制其中的路径即可，不要搞错了主机和容器的区别。</p>
-<pre><code class="language-dockerfile">host=/home/SoftWares/P_Share		container= /home/P_Share,	readonly 
-host=/home/SoftWares/R_Share		container= /home/R_Share,	readonly 
-host=/home/Datasets			container= /home/Datasets,	readonly 
-host=/home/NCZone				container= /home/NCZone		Writable
-host=/home/Neo/Share_Space		container= /home/Share_Space 	Writable
-</code></pre>
+<figure class="highlight dockerfile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">host=/home/SoftWares/P_Share		container= /home/P_Share,	readonly </span><br><span class="line">host=/home/SoftWares/R_Share		container= /home/R_Share,	readonly </span><br><span class="line">host=/home/Datasets			container= /home/Datasets,	readonly </span><br><span class="line">host=/home/NCZone				container= /home/NCZone		Writable</span><br><span class="line">host=/home/Neo/Share_Space		container= /home/Share_Space 	Writable</span><br></pre></td></tr></tbody></table></figure>
 <p><strong>注意这里的host指的是你的服务器本机端、container指的是容器端</strong>，其他的内容按照图片选择即可。</p>
 <p><img src="https://s2.loli.net/2024/04/03/z2ncGWk435IULyq.png" alt="image-20240403152905264"></p>
 <p>使用Tensorflow的同学注意需要将上图container的home替换为tf，如下图所示：</p>
@@ -238,8 +233,7 @@ host=/home/Neo/Share_Space		container= /home/Share_Space 	Writable
 <p>我们使用Portainer自带的命令行：</p>
 <p><img src="https://s2.loli.net/2024/04/02/XIogMAGRr7T68NC.png" alt="image-20240402202202138"></p>
 <p>点击这里打开容器的命令行。输入以下命令：</p>
-<pre><code class="language-bash">service ssh restart &amp;&amp; conda init &amp;&amp; passwd &amp;&amp; mkdir ~/.ssh &amp;&amp; touch ~/.ssh/authorized_keys &amp;&amp; chmod 700 ~/.ssh &amp;&amp; chmod 600 ~/.ssh/authorized_keys
-</code></pre>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service ssh restart &amp;&amp; conda init &amp;&amp; passwd &amp;&amp; <span class="built_in">mkdir</span> ~/.ssh &amp;&amp; <span class="built_in">touch</span> ~/.ssh/authorized_keys &amp;&amp; <span class="built_in">chmod</span> 700 ~/.ssh &amp;&amp; <span class="built_in">chmod</span> 600 ~/.ssh/authorized_keys</span><br></pre></td></tr></tbody></table></figure>
 <p><strong>命令行中粘贴快捷键为ctrl+shift+v</strong>，这里减一直接复制以后粘贴。</p>
 <p>命令的效果是修改密码，并增加一些系统设置内容。</p>
 <p>效果如下所示：</p>
@@ -259,8 +253,7 @@ host=/home/Neo/Share_Space		container= /home/Share_Space 	Writable
 <p><img src="https://s2.loli.net/2024/04/01/H7pbtqXUFvjD9fC.png" alt="image-20240401132122934"></p>
 <p>点击之后会让你输入命令：</p>
 <p>端口号要更改~</p>
-<pre><code class="language-bash">ssh root@10.26.58.61 -p 10086
-</code></pre>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@10.26.58.61 -p 10086</span><br></pre></td></tr></tbody></table></figure>
 <p><strong>这里的-p指代的是端口号，也就是上文中所设置的端口号映射号，SSH服务默认使用22端口号我们将容器的22端口映射到服务器本机的10086端口，所以这里就要使用10086端口作为链接方式，这样我们只需要连接10086端口就可以连接到容器，注意这里的端口号要和你的容器设置保持一致。</strong></p>
 <p><strong>这里一定要修改成你的端口！！！！！！！！！！！！！！！！</strong></p>
 <p><strong>你可能会好奇为什么会是root，而不是其他用户，这里使用的root命令，是因为容器里面的root和主机的root并不一致，这里的root是容器中的管理权限用户，和外边并不相关。</strong></p>
@@ -284,77 +277,11 @@ host=/home/Neo/Share_Space		container= /home/Share_Space 	Writable
 <p>我们在这里新建一个python脚本来测试：</p>
 <img src="https://s2.loli.net/2024/04/01/vRESQnmKZ78dV6g.png" alt="image-20240401164016267" style="zoom: 80%;">
 <p>将以下内容插入：</p>
-<pre><code class="language-python">import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
-import torch.backends.cudnn as cudnn
-from torchvision import datasets, transforms
-
-
-class Net(nn.Module):
-    def __init__(self):
-        super(Net, self).__init__()
-        self.conv1 = nn.Conv2d(1, 10, kernel_size=5)
-        self.conv2 = nn.Conv2d(10, 20, kernel_size=5)
-        self.conv2_drop = nn.Dropout2d()
-        self.fc1 = nn.Linear(320, 50)
-        self.fc2 = nn.Linear(50, 10)
-
-
-    def forward(self, x):
-        x = F.relu(F.max_pool2d(self.conv1(x), 2))
-        x = F.relu(F.max_pool2d(self.conv2_drop(self.conv2(x)), 2))
-        x = x.view(-1, 320)
-        x = F.relu(self.fc1(x))
-        x = F.dropout(x, training=self.training)
-        x = self.fc2(x)
-        return F.log_softmax(x, dim=1)
-
-
-def train(model, device, train_loader, optimizer, epoch):
-    model.train()
-    for batch_idx, (data, target) in enumerate(train_loader):
-        data, target = data.to(device), target.to(device)
-        optimizer.zero_grad()
-        output = model(data)
-        loss = F.nll_loss(output, target)
-        loss.backward()
-        optimizer.step()
-        if batch_idx % 10 == 0:
-            print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
-                epoch, batch_idx * len(data), len(train_loader.dataset),
-                       100. * batch_idx / len(train_loader), loss.item()))
-
-
-def main():
-    cudnn.benchmark = True
-    torch.manual_seed(1)
-    device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
-    print("Using device: {}".format(device))
-    kwargs = {'num_workers': 1, 'pin_memory': True}
-    train_loader = torch.utils.data.DataLoader(
-        datasets.MNIST('./data', train=True, download=True,
-                       transform=transforms.Compose([
-                           transforms.ToTensor(),
-                           transforms.Normalize((0.1307,), (0.3081,))
-                       ])),
-        batch_size=64, shuffle=True, **kwargs)
-
-    model = Net().to(device)
-    optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.5)
-
-    for epoch in range(1, 11):
-        train(model, device, train_loader, optimizer, epoch)
-
-if __name__ == '__main__':
-    main()
-</code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</span><br><span class="line"><span class="keyword">import</span> torch.backends.cudnn <span class="keyword">as</span> cudnn</span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> datasets, transforms</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Net</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(Net, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="variable language_">self</span>.conv1 = nn.Conv2d(<span class="number">1</span>, <span class="number">10</span>, kernel_size=<span class="number">5</span>)</span><br><span class="line">        <span class="variable language_">self</span>.conv2 = nn.Conv2d(<span class="number">10</span>, <span class="number">20</span>, kernel_size=<span class="number">5</span>)</span><br><span class="line">        <span class="variable language_">self</span>.conv2_drop = nn.Dropout2d()</span><br><span class="line">        <span class="variable language_">self</span>.fc1 = nn.Linear(<span class="number">320</span>, <span class="number">50</span>)</span><br><span class="line">        <span class="variable language_">self</span>.fc2 = nn.Linear(<span class="number">50</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        x = F.relu(F.max_pool2d(<span class="variable language_">self</span>.conv1(x), <span class="number">2</span>))</span><br><span class="line">        x = F.relu(F.max_pool2d(<span class="variable language_">self</span>.conv2_drop(<span class="variable language_">self</span>.conv2(x)), <span class="number">2</span>))</span><br><span class="line">        x = x.view(-<span class="number">1</span>, <span class="number">320</span>)</span><br><span class="line">        x = F.relu(<span class="variable language_">self</span>.fc1(x))</span><br><span class="line">        x = F.dropout(x, training=<span class="variable language_">self</span>.training)</span><br><span class="line">        x = <span class="variable language_">self</span>.fc2(x)</span><br><span class="line">        <span class="keyword">return</span> F.log_softmax(x, dim=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">train</span>(<span class="params">model, device, train_loader, optimizer, epoch</span>):</span><br><span class="line">    model.train()</span><br><span class="line">    <span class="keyword">for</span> batch_idx, (data, target) <span class="keyword">in</span> <span class="built_in">enumerate</span>(train_loader):</span><br><span class="line">        data, target = data.to(device), target.to(device)</span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        output = model(data)</span><br><span class="line">        loss = F.nll_loss(output, target)</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line">        <span class="keyword">if</span> batch_idx % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">'Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'</span>.<span class="built_in">format</span>(</span><br><span class="line">                epoch, batch_idx * <span class="built_in">len</span>(data), <span class="built_in">len</span>(train_loader.dataset),</span><br><span class="line">                       <span class="number">100.</span> * batch_idx / <span class="built_in">len</span>(train_loader), loss.item()))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    cudnn.benchmark = <span class="literal">True</span></span><br><span class="line">    torch.manual_seed(<span class="number">1</span>)</span><br><span class="line">    device = torch.device(<span class="string">"cuda"</span>) <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> torch.device(<span class="string">"cpu"</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Using device: {}"</span>.<span class="built_in">format</span>(device))</span><br><span class="line">    kwargs = {<span class="string">'num_workers'</span>: <span class="number">1</span>, <span class="string">'pin_memory'</span>: <span class="literal">True</span>}</span><br><span class="line">    train_loader = torch.utils.data.DataLoader(</span><br><span class="line">        datasets.MNIST(<span class="string">'./data'</span>, train=<span class="literal">True</span>, download=<span class="literal">True</span>,</span><br><span class="line">                       transform=transforms.Compose([</span><br><span class="line">                           transforms.ToTensor(),</span><br><span class="line">                           transforms.Normalize((<span class="number">0.1307</span>,), (<span class="number">0.3081</span>,))</span><br><span class="line">                       ])),</span><br><span class="line">        batch_size=<span class="number">64</span>, shuffle=<span class="literal">True</span>, **kwargs)</span><br><span class="line"></span><br><span class="line">    model = Net().to(device)</span><br><span class="line">    optimizer = optim.SGD(model.parameters(), lr=<span class="number">0.01</span>, momentum=<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">11</span>):</span><br><span class="line">        train(model, device, train_loader, optimizer, epoch)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></tbody></table></figure>
 <p>新建之后会有右下角来提示安装对应的语言插件，没提示直接搜索也可以：</p>
 <img src="https://s2.loli.net/2024/04/01/vknM61ilJ5fAdRL.png" alt="image-20240401164200647" style="zoom:80%;">
 <p>在插件市场搜索：</p>
-<pre><code class="language-txt">@id:ms-python.python
-</code></pre>
+<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@id:ms-python.python</span><br></pre></td></tr></tbody></table></figure>
 <img src="https://s2.loli.net/2024/04/01/sbQwhgcJBERYHxm.png" alt="image-20240401164247045" style="zoom:80%;">
 <p>然后点击安装在远程即可。</p>
 <h4><span id="开启免密码登录">开启免密码登录</span></h4>
@@ -370,24 +297,21 @@ if __name__ == '__main__':
 <p>如果你没有，我们打开本地的系统命令行：</p>
 <img src="https://s2.loli.net/2024/04/03/KenW8bEy1gwz9UI.png" alt="image-20240403170517802" style="zoom:80%;">
 <p>输入以下内容：</p>
-<pre><code class="language-bash">ssh-keygen
-</code></pre>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></tbody></table></figure>
 <img src="https://s2.loli.net/2024/04/03/ivOr8YQgDAbcLq2.png" alt="image-20240403170800926" style="zoom:80%;">
 <p>这里会提示让你输入密钥文件保存在哪里，这里就要放在你刚才的那个路径的文件下面，就是在vscode设置中打开的路径。记住是文件夹，不是文件，文件夹通常名字为：“.ssh”。</p>
 <p>输入之后一路回车下去直到看到这个图形生成：</p>
 <img src="https://s2.loli.net/2024/04/03/WmeMaujYiO9Ix6G.png" alt="image-20240403171025319" style="zoom:67%;">
 <p>这里就结束了，然后我们回过头打开这个文件，使用vscode或者记事本都可以，同时我们也打开远程服务器的这个目录下的文件：</p>
 <p>这路径全名是：</p>
-<pre><code class="language-bash">/root/.ssh/authorized_keys
-</code></pre>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/.ssh/authorized_keys</span><br></pre></td></tr></tbody></table></figure>
 <img src="https://s2.loli.net/2024/04/03/fHrEOVRzybCqh3W.png" alt="image-20240403171155723" style="zoom:67%;">
 <p>打开之后我们将刚才打开的<code>id_rsa.pub</code>文件中的内容复制过来，通常如下图所示：</p>
 <img src="https://s2.loli.net/2024/04/03/xXeDynObsMYK9Ez.png" alt="image-20240403171427044" style="zoom:80%;">
 <p>然后我们回到最初打开的ssh配置文件，在你的电脑SSH配置路径上，如果没打开的话，我们还是点击这里打开：</p>
 <p><img src="https://s2.loli.net/2024/04/03/6TcAB2P7SVDQUuC.png" alt="image-20240403171545385"></p>
 <p>添加一行内容：</p>
-<pre><code class="language-bash">IdentityFile "C:\Users\NeoNexus\.ssh\id_rsa"  这里的路径要修改成你的配置路径，要记得这里的id_rsa文件并不带pub后缀因为这是私钥
-</code></pre>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IdentityFile <span class="string">"C:\Users\NeoNexus\.ssh\id_rsa"</span>  这里的路径要修改成你的配置路径，要记得这里的id_rsa文件并不带pub后缀因为这是私钥</span><br></pre></td></tr></tbody></table></figure>
 <p>添加后效果如下：</p>
 <p><img src="https://s2.loli.net/2024/04/03/sVCgWRw4FJBLZtj.png" alt="image-20240403171709698"></p>
 <p>记得Ctrl+S保存修改</p>
@@ -401,8 +325,7 @@ if __name__ == '__main__':
 <img src="https://s2.loli.net/2024/04/01/LdIuCHcFAz5Dxqo.png" alt="image-20240401164337512" style="zoom:67%;">
 <p>如图所示，四个显卡都能看见，则创建成功。</p>
 <p>使用conda来创建环境，初始化codna：</p>
-<pre><code class="language-bash">conda init
-</code></pre>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda init</span><br></pre></td></tr></tbody></table></figure>
 <p>重新开一个terminal：</p>
 <p><img src="https://s2.loli.net/2024/04/01/qDS9gACboVTuacl.png" alt="image-20240401164542313"></p>
 <p>可以看到cnoda已经成功启动了：</p>
@@ -412,34 +335,16 @@ if __name__ == '__main__':
 <p>新建一个：</p>
 <img src="https://s2.loli.net/2024/04/01/5oOPIieFVp7Xvm2.png" alt="image-20240401165149467" style="zoom: 67%;">
 <p>复制以下内容进去，记得ctrl+s保存：</p>
-<pre><code class="language-bash">channels:
-  - defaults
-show_channel_urls: true
-default_channels:
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
-custom_channels:
-  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  pytorch-lts: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  deepmodeling: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/
-</code></pre>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">channels:</span><br><span class="line">  - defaults</span><br><span class="line">show_channel_urls: <span class="literal">true</span></span><br><span class="line">default_channels:</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2</span><br><span class="line">custom_channels:</span><br><span class="line">  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  pytorch-lts: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  deepmodeling: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/</span><br></pre></td></tr></tbody></table></figure>
 <p><strong>最近清华源也不太稳定~</strong>，使用后无法下载删除文件恢复默认即可：</p>
 <p>使用如下命令清除缓存（想要恢复默认也需要使用这个）</p>
-<pre><code class="language-bash">conda clean -i
-</code></pre>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda clean -i</span><br></pre></td></tr></tbody></table></figure>
 <p>然后，打开一个新的terminal ，看一下conda是否有更新：</p>
 <p>使用命令：<code>conda info</code></p>
 <p>结果应是如下：</p>
 <p><img src="https://s2.loli.net/2024/04/01/L9oMIZgW6JEk1U5.png" alt="image-20240401165401775"></p>
 <p>我们安装一个pytorch来试一试：</p>
-<pre><code class="language-bash">conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
-</code></pre>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia</span><br></pre></td></tr></tbody></table></figure>
 <p><img src="https://s2.loli.net/2024/04/01/aqHx1r2QAL4CDFR.png" alt="image-20240401172245221"></p>
 <p>点击运行：</p>
 <p>这里注意，你的当前目录不一定是你的文件夹，在运行之前要搞明白下方的命令行当前的目录在哪里是不是你想要的位置，因为在python中有很多相对路径要去处理，关于这点我们继续看下一张图：</p>
@@ -459,14 +364,12 @@ custom_channels:
 <img src="https://s2.loli.net/2024/04/01/OjzRcpxnSM7F9v1.png" alt="image-20240401172940076" style="zoom:67%;">
 <h3><span id="容器的维护">容器的维护</span></h3>
 <p>维护自身的容器也非常重要，在运行的时候我们可能建立多个bash，这些bash在切换路径的时候被vscode所遗忘，就会造成内存虚高，这对我们来说是不利的，在运行代码之前，记住一定是运行代码之前，要维护好自己的容器，就少删除一些垃圾bash，使用命令：</p>
-<pre><code class="language-bash">ps -ef | grep shellIntegration-bash.sh
-</code></pre>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep shellIntegration-bash.sh</span><br></pre></td></tr></tbody></table></figure>
 <p>命令显示了多少个bash在运行：</p>
 <p><img src="https://s2.loli.net/2024/04/01/VTCxHhd95vN6iAB.png" alt="image-20240401193622108"></p>
 <p>我们保留最后一个数字最大的（因为是当前正在使用的这个，数字越大，创建的时候越靠后）</p>
 <p>使用命令杀掉前两个：</p>
-<pre><code>kill -9 10970 11173
-</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 10970 11173</span><br></pre></td></tr></tbody></table></figure>
 <p>瞬间清净了~</p>
 <h2><span id="r语言连接办法">R语言连接办法</span></h2>
 <p>注意事项：</p>
@@ -486,67 +389,27 @@ custom_channels:
 <img src="https://s2.loli.net/2024/05/26/s1bg6ZnlSGfKqXD.png" alt="image-20240526144045717" style="zoom:80%;">
 <h4><span id="修改当前的工作目录">修改当前的工作目录</span></h4>
 <p>R的默认工作目录看不到这四个文件夹，需要手动设置工作目录，使用命令：</p>
-<pre><code>setwd("/home/host/")
-</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setwd("/home/host/")</span><br></pre></td></tr></tbody></table></figure>
 <p>使用之后刷新页面即可。</p>
 <img src="https://s2.loli.net/2024/05/26/QljKIAxuLzprnVO.png" alt="image-20240526144946598" style="zoom:80%;">
 <h2><span id="qampa">Q&amp;A：</span></h2>
 <h3><span id="问题零-通过容器写入的文件无法运行">问题零 通过容器写入的文件无法运行？</span></h3>
 <p>容器的用户都是root身份，而UI登陆的是以用户的身份来登陆的，普通用户当然没有权限来操作root的内容，解决办法：</p>
 <p>将文件修改成主机所有者，在容器的终端中使用命令</p>
-<pre><code class="language-bash">sudo chown UID 文件/目录路径
-</code></pre>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> UID 文件/目录路径</span><br></pre></td></tr></tbody></table></figure>
 <p>如果要修改某个文件夹的全部文件，可以使用：</p>
-<pre><code class="language-bash">sudo chown -R UID 文件/目录路径
-</code></pre>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R UID 文件/目录路径</span><br></pre></td></tr></tbody></table></figure>
 <p>UID信息在UI界面使用命令获取，比如：</p>
 <p><img src="https://s2.loli.net/2024/06/07/dhEWOpuyINHF6SY.png" alt="image-20240607235021091"></p>
 <p>打个比方，修改我在主机上：/Datasets/bionet/Dataset/A/ 文件夹的可以使用：</p>
-<pre><code class="language-bash">sudo chown -R 1001 /Datasets/bionet/Dataset/A/
-</code></pre>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R 1001 /Datasets/bionet/Dataset/A/</span><br></pre></td></tr></tbody></table></figure>
 <p>这样这个文件夹下所有文件都可以正常使用。</p>
 <p>R语言已经实现了UID的同步，所以没有这个问题。</p>
 <p>这里放一个在Jupyter中修改权限的的例子：</p>
-<pre><code class="language-bash"># ls -alh
-total 8.0K
-drwxr-xr-x 2 root root 4.0K Apr 18  2022 .
-drwxr-xr-x 1 root root 4.0K Jun  7 15:51 ..
-# cd /tf 首先要到对应的文件夹下来操作文件
-# ls -alh
-total 6.9M
-drwxrwxrwx  1 root root 4.0K Jun  7 15:51 .
-drwxr-xr-x  1 root root 4.0K Jun  7 15:51 ..
-drwxrwxrwx 11 1001 1002   14 Jun  5 05:03 Datasets
-drwxrwxrwx  6 root root 6.8M May 26 06:23 NCZone
-drwxrwxr--  6 1001 1001 4.0K Jun  7 15:30 Share_Space
-drwxrwxrwx  1 root root 4.0K Sep  2  2023 tensorflow-tutorials
-# cd Share_Space
-# ls -alh
-total 28K
-drwxrwxr-- 6 1001 1001 4.0K Jun  7 15:30 .
-drwxrwxrwx 1 root root 4.0K Jun  7 15:51 ..
-drwx------ 4 root root 4.0K Jun  7 15:30 .Trash-0
-drwxr-xr-x 2 root root 4.0K Jun  7 15:30 .ipynb_checkpoints
-drwxrwxr-- 6 root root 4.0K May  4 11:07 PTM
-drwxrwxr-- 2 1000 1000 4.0K Jun  7 09:13 TEST
--rwxrwxr-- 1 root root 2.2K Apr 23 15:11 test.py
-# pwd
-/tf/Share_Space
-# sudo chown 1001 TEST
-# ls -alh
-total 28K
-drwxrwxr-- 6 1001 1001 4.0K Jun  7 15:30 .
-drwxrwxrwx 1 root root 4.0K Jun  7 15:51 ..
-drwx------ 4 root root 4.0K Jun  7 15:30 .Trash-0
-drwxr-xr-x 2 root root 4.0K Jun  7 15:30 .ipynb_checkpoints
-drwxrwxr-- 6 root root 4.0K May  4 11:07 PTM
-drwxrwxr-- 2 1001 1000 4.0K Jun  7 09:13 TEST
--rwxrwxr-- 1 root root 2.2K Apr 23 15:11 test.py
-</code></pre>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ls -alh</span></span><br><span class="line">total 8.0K</span><br><span class="line">drwxr-xr-x 2 root root 4.0K Apr 18  2022 .</span><br><span class="line">drwxr-xr-x 1 root root 4.0K Jun  7 15:51 ..</span><br><span class="line"><span class="comment"># cd /tf 首先要到对应的文件夹下来操作文件</span></span><br><span class="line"><span class="comment"># ls -alh</span></span><br><span class="line">total 6.9M</span><br><span class="line">drwxrwxrwx  1 root root 4.0K Jun  7 15:51 .</span><br><span class="line">drwxr-xr-x  1 root root 4.0K Jun  7 15:51 ..</span><br><span class="line">drwxrwxrwx 11 1001 1002   14 Jun  5 05:03 Datasets</span><br><span class="line">drwxrwxrwx  6 root root 6.8M May 26 06:23 NCZone</span><br><span class="line">drwxrwxr--  6 1001 1001 4.0K Jun  7 15:30 Share_Space</span><br><span class="line">drwxrwxrwx  1 root root 4.0K Sep  2  2023 tensorflow-tutorials</span><br><span class="line"><span class="comment"># cd Share_Space</span></span><br><span class="line"><span class="comment"># ls -alh</span></span><br><span class="line">total 28K</span><br><span class="line">drwxrwxr-- 6 1001 1001 4.0K Jun  7 15:30 .</span><br><span class="line">drwxrwxrwx 1 root root 4.0K Jun  7 15:51 ..</span><br><span class="line">drwx------ 4 root root 4.0K Jun  7 15:30 .Trash-0</span><br><span class="line">drwxr-xr-x 2 root root 4.0K Jun  7 15:30 .ipynb_checkpoints</span><br><span class="line">drwxrwxr-- 6 root root 4.0K May  4 11:07 PTM</span><br><span class="line">drwxrwxr-- 2 1000 1000 4.0K Jun  7 09:13 TEST</span><br><span class="line">-rwxrwxr-- 1 root root 2.2K Apr 23 15:11 test.py</span><br><span class="line"><span class="comment"># pwd</span></span><br><span class="line">/tf/Share_Space</span><br><span class="line"><span class="comment"># sudo chown 1001 TEST</span></span><br><span class="line"><span class="comment"># ls -alh</span></span><br><span class="line">total 28K</span><br><span class="line">drwxrwxr-- 6 1001 1001 4.0K Jun  7 15:30 .</span><br><span class="line">drwxrwxrwx 1 root root 4.0K Jun  7 15:51 ..</span><br><span class="line">drwx------ 4 root root 4.0K Jun  7 15:30 .Trash-0</span><br><span class="line">drwxr-xr-x 2 root root 4.0K Jun  7 15:30 .ipynb_checkpoints</span><br><span class="line">drwxrwxr-- 6 root root 4.0K May  4 11:07 PTM</span><br><span class="line">drwxrwxr-- 2 1001 1000 4.0K Jun  7 09:13 TEST</span><br><span class="line">-rwxrwxr-- 1 root root 2.2K Apr 23 15:11 test.py</span><br></pre></td></tr></tbody></table></figure>
 <h3><span id="问题一-容器重启之后无法连接">问题一 容器重启之后无法连接？</span></h3>
 <p>容器重启之后ssh服务被中断，需要手动重启，打开portainer输入以下命令：</p>
-<pre><code class="language-bash"> service ssh restart
-</code></pre>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service ssh restart</span><br></pre></td></tr></tbody></table></figure>
 <p>即可重新连接。</p>
 <p><img src="https://s2.loli.net/2024/04/26/uPmNqxek4pWlFCa.png" alt="image-20240426194356414"></p>
 <h3><span id="问题二-我创建一个docker失败之后再次连接相同端口为什么不行">问题二 我创建一个docker失败之后再次连接相同端口为什么不行？</span></h3>
@@ -558,17 +421,11 @@ drwxrwxr-- 2 1001 1000 4.0K Jun  7 09:13 TEST
 <p><img src="https://s2.loli.net/2024/04/01/fdlr9SjuFY2qiZx.png" alt="image-20240401192019401"></p>
 <p>我们需要将这个命令和nohup来结合实现运行不掉线：</p>
 <p>按方向键盘的上键可以找到上一次运行的命令，当然运行之前要确认当前目录在哪里，是不是你想要的目录？</p>
-<pre><code class="language-bash">(base) root@77d5769f235a:/# cd /home/Share_Space/                          
-(base) root@77d5769f235a:/home/Share_Space# ls
-data  test.py
-(base) root@77d5769f235a:/home/Share_Space# /opt/conda/bin/python /home/Share_Space/test.py
-</code></pre>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(base) root@77d5769f235a:/# <span class="built_in">cd</span> /home/Share_Space/                          </span><br><span class="line">(base) root@77d5769f235a:/home/Share_Space# <span class="built_in">ls</span></span><br><span class="line">data  test.py</span><br><span class="line">(base) root@77d5769f235a:/home/Share_Space# /opt/conda/bin/python /home/Share_Space/test.py</span><br></pre></td></tr></tbody></table></figure>
 <p>下面我们来使用nohup将任务保持在后台，格式如下：</p>
-<pre><code class="language-sh">nohup 你的运行命令 &gt; output.file 2&gt;&amp;1 &amp;
-</code></pre>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> 你的运行命令 &gt; output.file 2&gt;&amp;1 &amp;</span><br></pre></td></tr></tbody></table></figure>
 <p>结合上边的命令，效果如下：</p>
-<pre><code class="language-bash">nohup /opt/conda/bin/python /home/Share_Space/test.py &gt; output.file 2&gt;&amp;1 &amp;
-</code></pre>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> /opt/conda/bin/python /home/Share_Space/test.py &gt; output.file 2&gt;&amp;1 &amp;</span><br></pre></td></tr></tbody></table></figure>
 <p>我们来运行一下：</p>
 <p><img src="https://s2.loli.net/2024/04/01/5ui9UFh6DjNaqpd.png" alt="image-20240401195117010"></p>
 <p>同时可以看到，这里有了对应的输出文件，输出文件保存了所有输出：</p>
@@ -592,7 +449,7 @@ data  test.py
 <p><strong>第二种解决办法</strong></p>
 <p>在除了C盘以外的文件夹新建config文件（空的就可以），在romote-SSH插件的扩展设置中，修改config文件的路径。</p>
 <p><img src="https://s2.loli.net/2024/03/27/xgGATnRrw852BNW.png" alt="image-20240326115205575"></p>
-</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/10/01/Hexo+github+Markdown%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" title="Hexo+github+Markdown博客搭建"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: Hexo+github+Markdown博客搭建</span></a><a class="button is-default" href="/2024/09/29/Bionet-Server01%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" title="BionetServer-No1使用说明-基础篇"><span class="has-text-weight-semibold">下一页: BionetServer-No1使用说明-基础篇</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" onload="initMermaid()"></script><script>function initMermaid() {
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/10/01/Hexo+github+Markdown%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" title="Hexo+github+Markdown博客搭建"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Hexo+github+Markdown博客搭建</span></a><a class="button is-default" href="/2024/09/29/Bionet-Server01%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" title="BionetServer-No1使用说明-基础篇"><span class="has-text-weight-semibold">Next: BionetServer-No1使用说明-基础篇</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" onload="initMermaid()"></script><script>function initMermaid() {
  console.log("fuck you");
   if (window.mermaid) {
     console.log("fuck you");
