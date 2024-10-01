@@ -62,41 +62,7 @@ Spark 项目的中心思想是，借鉴 Hadoop MR 的思想并增强系统，加
 <p>新建一个系统变量：</p>
 <p><img src="https://s2.loli.net/2024/09/29/ZyAdfUJjQgvICPo.png" alt="5"></p>
 <p>到这里还没有完，如果你是win环境下开发可能会遇到报错：</p>
-<pre><code class="language-shell">C:\spark-3.2.0-bin-hadoop3.2\bin&gt;spark-shell
-Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
-Setting default log level to "WARN".
-To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
-21/11/11 00:14:24 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-21/11/11 00:14:26 ERROR SparkContext: Error initializing SparkContext.
-java.lang.reflect.InvocationTargetException
-        at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-        at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
-        at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
-        at java.lang.reflect.Constructor.newInstance(Unknown Source)
-        at org.apache.spark.executor.Executor.addReplClassLoaderIfNeeded(Executor.scala:909)
-        at org.apache.spark.executor.Executor.&lt;init&gt;(Executor.scala:160)
-        at org.apache.spark.scheduler.local.LocalEndpoint.&lt;init&gt;(LocalSchedulerBackend.scala:64)
-        at org.apache.spark.scheduler.local.LocalSchedulerBackend.start(LocalSchedulerBackend.scala:132)
-        at org.apache.spark.scheduler.TaskSchedulerImpl.start(TaskSchedulerImpl.scala:220)
-        at org.apache.spark.SparkContext.&lt;init&gt;(SparkContext.scala:581)
-        at org.apache.spark.SparkContext$.getOrCreate(SparkContext.scala:2690)
-        at org.apache.spark.sql.SparkSession$Builder.$anonfun$getOrCreate$2(SparkSession.scala:949)
-        at scala.Option.getOrElse(Option.scala:189)
-        at org.apache.spark.sql.SparkSession$Builder.getOrCreate(SparkSession.scala:943)
-        at org.apache.spark.repl.Main$.createSparkSession(Main.scala:106)
-        at $line3.$read$$iw$$iw.&lt;init&gt;(&lt;console&gt;:15)
-        at $line3.$read$$iw.&lt;init&gt;(&lt;console&gt;:42)
-        at $line3.$read.&lt;init&gt;(&lt;console&gt;:44)
-        at $line3.$read$.&lt;init&gt;(&lt;console&gt;:48)
-        at $line3.$read$.&lt;clinit&gt;(&lt;console&gt;)
-        at $line3.$eval$.$print$lzycompute(&lt;console&gt;:7)
-        at $line3.$eval$.$print(&lt;console&gt;:6)
-        at $line3.$eval.$print(&lt;console&gt;)
-        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-        at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-        at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-        at java.lang.reflect.Method.invoke(Unknown Source)
-</code></pre>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">C:\spark-3.2.0-bin-hadoop3.2\bin&gt;spark-shell</span><br><span class="line">Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties</span><br><span class="line">Setting default log level to "WARN".</span><br><span class="line">To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).</span><br><span class="line">21/11/11 00:14:24 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line">21/11/11 00:14:26 ERROR SparkContext: Error initializing SparkContext.</span><br><span class="line">java.lang.reflect.InvocationTargetException</span><br><span class="line">        at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)</span><br><span class="line">        at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)</span><br><span class="line">        at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)</span><br><span class="line">        at java.lang.reflect.Constructor.newInstance(Unknown Source)</span><br><span class="line">        at org.apache.spark.executor.Executor.addReplClassLoaderIfNeeded(Executor.scala:909)</span><br><span class="line">        at org.apache.spark.executor.Executor.&lt;init&gt;(Executor.scala:160)</span><br><span class="line">        at org.apache.spark.scheduler.local.LocalEndpoint.&lt;init&gt;(LocalSchedulerBackend.scala:64)</span><br><span class="line">        at org.apache.spark.scheduler.local.LocalSchedulerBackend.start(LocalSchedulerBackend.scala:132)</span><br><span class="line">        at org.apache.spark.scheduler.TaskSchedulerImpl.start(TaskSchedulerImpl.scala:220)</span><br><span class="line">        at org.apache.spark.SparkContext.&lt;init&gt;(SparkContext.scala:581)</span><br><span class="line">        at org.apache.spark.SparkContext$.getOrCreate(SparkContext.scala:2690)</span><br><span class="line">        at org.apache.spark.sql.SparkSession$Builder.$anonfun$getOrCreate$2(SparkSession.scala:949)</span><br><span class="line">        at scala.Option.getOrElse(Option.scala:189)</span><br><span class="line">        at org.apache.spark.sql.SparkSession$Builder.getOrCreate(SparkSession.scala:943)</span><br><span class="line">        at org.apache.spark.repl.Main$.createSparkSession(Main.scala:106)</span><br><span class="line">        at $line3.$read$$iw$$iw.&lt;init&gt;(&lt;console&gt;:15)</span><br><span class="line">        at $line3.$read$$iw.&lt;init&gt;(&lt;console&gt;:42)</span><br><span class="line">        at $line3.$read.&lt;init&gt;(&lt;console&gt;:44)</span><br><span class="line">        at $line3.$read$.&lt;init&gt;(&lt;console&gt;:48)</span><br><span class="line">        at $line3.$read$.&lt;clinit&gt;(&lt;console&gt;)</span><br><span class="line">        at $line3.$eval$.$print$lzycompute(&lt;console&gt;:7)</span><br><span class="line">        at $line3.$eval$.$print(&lt;console&gt;:6)</span><br><span class="line">        at $line3.$eval.$print(&lt;console&gt;)</span><br><span class="line">        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">        at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)</span><br><span class="line">        at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)</span><br><span class="line">        at java.lang.reflect.Method.invoke(Unknown Source)</span><br></pre></td></tr></tbody></table></figure>
 <p>但没关系，我帮你踩坑了~</p>
 <p>只需要按照对应版本进行下载然后替换bin目录下的内容即可：</p>
 <p><img src="https://s2.loli.net/2024/09/29/fjqKRNx1EAJolit.png" alt="6"></p>
@@ -112,62 +78,25 @@ java.lang.reflect.InvocationTargetException
 <p>系统会自动检测你的安装的SBT和SCALA</p>
 <p><img src="https://s2.loli.net/2024/09/29/9MeCT6stk41SoKu.png" alt="11"></p>
 <p>在创建完成后在<strong>build.sbt</strong>中添加如下代码：</p>
-<pre><code class="language-scala">libraryDependencies += "org.apache.spark" % "spark-core_2.12" % "3.1.3"
-</code></pre>
+<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">libraryDependencies += <span class="string">"org.apache.spark"</span> % <span class="string">"spark-core_2.12"</span> % <span class="string">"3.1.3"</span></span><br></pre></td></tr></tbody></table></figure>
 <p><img src="https://s2.loli.net/2024/09/29/FgXOuxQjInt8E6e.png" alt="12"></p>
 <p>如果你在MVN找到的sbt依赖添加代码是这样的：</p>
-<pre><code class="language-scala">libraryDependencies += "org.apache.spark" %% "spark-core" % "3.1.3"
-</code></pre>
+<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">libraryDependencies += <span class="string">"org.apache.spark"</span> %% <span class="string">"spark-core"</span> % <span class="string">"3.1.3"</span></span><br></pre></td></tr></tbody></table></figure>
 <p>或者是这样的：</p>
-<pre><code class="language-scala">libraryDependencies += "org.apache.spark" % "spark-core" % "3.1.3"
-//这个是错的 %% 才能自动指定scala版本
-</code></pre>
+<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">libraryDependencies += <span class="string">"org.apache.spark"</span> % <span class="string">"spark-core"</span> % <span class="string">"3.1.3"</span></span><br><span class="line"><span class="comment">//这个是错的 %% 才能自动指定scala版本</span></span><br></pre></td></tr></tbody></table></figure>
 <p>有可能会报错：</p>
 <p><img src="https://s2.loli.net/2024/09/29/uLREd4FMxb3mSKD.png" alt="14"></p>
 <p>没关系更改一下版本就可以：</p>
-<pre><code class="language-Scala">libraryDependencies += "org.apache.spark" %% "spark-core" % "3.2.1"
-</code></pre>
+<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">libraryDependencies += <span class="string">"org.apache.spark"</span> %% <span class="string">"spark-core"</span> % <span class="string">"3.2.1"</span></span><br></pre></td></tr></tbody></table></figure>
 <p><img src="https://s2.loli.net/2024/09/29/AytSj9mwcUZevbz.png" alt="16"></p>
 <p>如果更改版本还没办法的话可以指定一下版本：</p>
-<pre><code class="language-scala">libraryDependencies += "org.apache.spark" % "spark-core_2.12" % "3.1.3"
-</code></pre>
+<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">libraryDependencies += <span class="string">"org.apache.spark"</span> % <span class="string">"spark-core_2.12"</span> % <span class="string">"3.1.3"</span></span><br></pre></td></tr></tbody></table></figure>
 <p><img src="https://s2.loli.net/2024/09/29/GmFXyJCrU9clvsh.png" alt="17"></p>
 <p>但是你如过不太清楚构建spark的scala和你本地的scala是否匹配的话建议还是用“%%”来自动匹配版本：</p>
 <p>否则就会报错：</p>
-<pre><code class="language-shell">Exception in thread "main" java.lang.NoSuchMethodError: 'void scala.util.matching.Regex.&lt;init&gt;(java.lang.String, scala.collection.Seq)'
-	at scala.collection.immutable.StringLike.r(StringLike.scala:284)
-	at scala.collection.immutable.StringLike.r$(StringLike.scala:284)
-	at scala.collection.immutable.StringOps.r(StringOps.scala:33)
-	at scala.collection.immutable.StringLike.r(StringLike.scala:273)
-	at scala.collection.immutable.StringLike.r$(StringLike.scala:273)
-	at scala.collection.immutable.StringOps.r(StringOps.scala:33)
-	at org.apache.spark.util.Utils$.&lt;init&gt;(Utils.scala:105)
-	at org.apache.spark.util.Utils$.&lt;clinit&gt;(Utils.scala)
-	at org.apache.spark.SparkConf.loadFromSystemProperties(SparkConf.scala:75)
-	at org.apache.spark.SparkConf.&lt;init&gt;(SparkConf.scala:70)
-	at org.apache.spark.SparkConf.&lt;init&gt;(SparkConf.scala:59)
-	at com.demo.test$.main(test.scala:8)
-	at com.demo.test.main(test.scala)
-</code></pre>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread "main" java.lang.NoSuchMethodError: 'void scala.util.matching.Regex.&lt;init&gt;(java.lang.String, scala.collection.Seq)'</span><br><span class="line">	at scala.collection.immutable.StringLike.r(StringLike.scala:284)</span><br><span class="line">	at scala.collection.immutable.StringLike.r$(StringLike.scala:284)</span><br><span class="line">	at scala.collection.immutable.StringOps.r(StringOps.scala:33)</span><br><span class="line">	at scala.collection.immutable.StringLike.r(StringLike.scala:273)</span><br><span class="line">	at scala.collection.immutable.StringLike.r$(StringLike.scala:273)</span><br><span class="line">	at scala.collection.immutable.StringOps.r(StringOps.scala:33)</span><br><span class="line">	at org.apache.spark.util.Utils$.&lt;init&gt;(Utils.scala:105)</span><br><span class="line">	at org.apache.spark.util.Utils$.&lt;clinit&gt;(Utils.scala)</span><br><span class="line">	at org.apache.spark.SparkConf.loadFromSystemProperties(SparkConf.scala:75)</span><br><span class="line">	at org.apache.spark.SparkConf.&lt;init&gt;(SparkConf.scala:70)</span><br><span class="line">	at org.apache.spark.SparkConf.&lt;init&gt;(SparkConf.scala:59)</span><br><span class="line">	at com.demo.test$.main(test.scala:8)</span><br><span class="line">	at com.demo.test.main(test.scala)</span><br></pre></td></tr></tbody></table></figure>
 <p>这里给一段测试代码，如果报错了你就要更换spark版本：</p>
-<pre><code class="language-Scala">package com.demo
-import org.apache.spark.{SparkConf, SparkContext}
-
-object test
-{
-
-  def main(args: Array[String]): Unit = {
-    val conf = new SparkConf().setMaster("local").setAppName("HelloWorld")
-
-    val sc = new SparkContext(conf)
-
-    val helloWorld = sc.parallelize(List("Hello,World!","Hello,Spark!","Hello,BigData!"))
-
-    helloWorld.foreach(line =&gt; println(line))
-  }
-
-}
-</code></pre>
+<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.demo</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.{<span class="type">SparkConf</span>, <span class="type">SparkContext</span>}</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">test</span></span></span><br><span class="line">{</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = {</span><br><span class="line">    <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">"local"</span>).setAppName(<span class="string">"HelloWorld"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> helloWorld = sc.parallelize(<span class="type">List</span>(<span class="string">"Hello,World!"</span>,<span class="string">"Hello,Spark!"</span>,<span class="string">"Hello,BigData!"</span>))</span><br><span class="line"></span><br><span class="line">    helloWorld.foreach(line =&gt; println(line))</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p><strong>如果没问题,环境就搭建好了！</strong></p>
 <p>但是你会有个疑问：</p>
 <p>为什么我都本地下载了Spark，还需要下载托管的Spark？</p>
