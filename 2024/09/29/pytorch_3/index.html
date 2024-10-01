@@ -1,6 +1,8 @@
 <!DOCTYPE html><html class="appearance-light" lang="chinese"><head><meta charset="UTF-8"><title>Pytorch--基础指北_叁</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
 <!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="Pytorch——基础指北_叁
+
 软件环境：
+
 pytorch 1.10
 pycharm
 CUDA 10.2
@@ -8,9 +10,11 @@ CUDA 10.2
 
 
 神经元和激活函数
+
 感知机
 多层神经网络
 激活函数
+
 非线性二分类问题
 多层神经网络
 
@@ -20,29 +24,34 @@ CUDA 10.2
 
 
 [TOC]
-神经元和激活函数激活函数决定是否传递信号。在这种情况下，只需要带有一个参数（阈值）的简单阶梯函数。现在，当我们学习了一些新的东西（或未学习到什么）时，一些神经元的阈值和突触权值会发生改变。这使得神经元之间产生新的连接，大脑学会新的东西。
+神经元和激活函数
+激活函数决定是否传递信号。在这种情况下，只需要带有一个参数（阈值）的简单阶梯函数。现在，当我们学习了一些新的东西（或未学习到什么）时，一些神经元的阈值和突触权值会发生改变。这使得神经元之间产生新的连接，大脑学会新的东西。
 1943 年，McCulloch 和 Pitts 将上述情形抽象为上图所示的简单模型，这就是一直沿用至今的 M-P 神经元模型。把许多这样的神经元按一定的层次结构连接起来，就得到了神经网络。
 一个简单的神经元如下图所示：
 
 其中：
 
-$a_1,a_2\dots.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+$a_1,a_2.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Pytorch--基础指北_叁</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Pytorch——基础指北_叁</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">软件环境：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">神经元和激活函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">感知机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">多层神经网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">激活函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">非线性二分类问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">多层神经网络</span></a></li></ol></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Pytorch"><i class="tag post-item-tag">Pytorch</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Pytorch--基础指北_叁</h1><time class="has-text-grey" datetime="2024-09-29T11:19:09.470Z">2024-09-29</time><article class="mt-2 post-content"><h1><span id="pytorch基础指北_叁">Pytorch——基础指北_叁</span></h1><p><img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom:67%;"></p>
-<h2><span id="软件环境">软件环境：</span></h2><ul>
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Pytorch--基础指北_叁</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Pytorch——基础指北_叁</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">软件环境：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">神经元和激活函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">感知机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">多层神经网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">激活函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">非线性二分类问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">多层神经网络</span></a></li></ol></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Pytorch"><i class="tag post-item-tag">Pytorch</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Pytorch--基础指北_叁</h1><time class="has-text-grey" datetime="2024-09-29T11:19:09.470Z">2024-09-29</time><article class="mt-2 post-content"><h1><span id="pytorch基础指北_叁">Pytorch——基础指北_叁</span></h1>
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom:67%;">
+<h2><span id="软件环境">软件环境：</span></h2>
+<ul>
 <li><strong>pytorch 1.10</strong></li>
 <li><strong>pycharm</strong></li>
 <li><strong>CUDA 10.2</strong></li>
 </ul>
 <!-- toc -->
 <ul>
-<li><a href="#神经元和激活函数">神经元和激活函数</a><ul>
-<li><a href="#感知机">感知机</a></li>
-<li><a href="#多层神经网络">多层神经网络</a></li>
-<li><a href="#激活函数">激活函数</a><ul>
-<li><a href="#非线性二分类问题">非线性二分类问题</a></li>
-<li><a href="#多层神经网络-1">多层神经网络</a></li>
+<li><a href="#%E7%A5%9E%E7%BB%8F%E5%85%83%E5%92%8C%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0">神经元和激活函数</a>
+<ul>
+<li><a href="#%E6%84%9F%E7%9F%A5%E6%9C%BA">感知机</a></li>
+<li><a href="#%E5%A4%9A%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C">多层神经网络</a></li>
+<li><a href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0">激活函数</a>
+<ul>
+<li><a href="#%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BA%8C%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98">非线性二分类问题</a></li>
+<li><a href="#%E5%A4%9A%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-1">多层神经网络</a></li>
 </ul>
 </li>
 </ul>
@@ -50,7 +59,8 @@ $a_1,a_2\dots.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><m
 </ul>
 <!-- tocstop -->
 <p>[TOC]</p>
-<h2><span id="神经元和激活函数">神经元和激活函数</span></h2><p>激活函数决定是否传递信号。在这种情况下，只需要带有一个参数（阈值）的简单阶梯函数。现在，当我们学习了一些新的东西（或未学习到什么）时，一些神经元的阈值和突触权值会发生改变。这使得神经元之间产生新的连接，大脑学会新的东西。</p>
+<h2><span id="神经元和激活函数">神经元和激活函数</span></h2>
+<p>激活函数决定是否传递信号。在这种情况下，只需要带有一个参数（阈值）的简单阶梯函数。现在，当我们学习了一些新的东西（或未学习到什么）时，一些神经元的阈值和突触权值会发生改变。这使得神经元之间产生新的连接，大脑学会新的东西。</p>
 <p>1943 年，McCulloch 和 Pitts 将上述情形抽象为上图所示的简单模型，这就是一直沿用至今的 <strong>M-P 神经元模型</strong>。把许多这样的神经元按一定的层次结构连接起来，就得到了神经网络。</p>
 <p>一个简单的神经元如下图所示：</p>
 <p><img src="https://s2.loli.net/2024/09/29/Pda1OKYh6Lf8rcV.png" alt="神经元"></p>
@@ -62,20 +72,26 @@ $a_1,a_2\dots.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><m
 <li>$f$ 为<strong>激活函数</strong>，常见的激活函数有tanh，sigmoid，relu</li>
 <li>$t$ 为神经元的输出</li>
 </ol>
-<p>使用数学公式表示就是：</p>
-<script type="math/tex; mode=display">
-t = f(W^TA+b)</script><p>其中$W^T$是表示矩阵的转置，将矩阵的行列互换得到的新矩阵称为转置矩阵，转置矩阵的行列式不变。</p>
-<p>转置矩阵有四个性质：</p>
-<script type="math/tex; mode=display">
-(M^T)^T = M\\
-(M+N)^T = M^T + N^T\\
-(kM)^T = kM^T\\
-(MN)^T =N^TM^T</script><p>可见，<strong>一个神经元的功能是求得输入向量与权向量的内积后，经一个非线性传递函数得到一个标量结果</strong>。这里的转置是为了保持点积结果。</p>
-<h3><span id="感知机">感知机</span></h3><p>感知机由<strong>两层神经网</strong>络组成，<strong>输入层</strong>接收外界输入信号后传递给<strong>输出层（输出+1正例，-1反例）</strong>，输出层是 M-P 神经元。</p>
+<p>使用数学公式表示就是：<br>
+$$<br>
+t = f(W^TA+b)<br>
+$$<br>
+其中$W^T$是表示矩阵的转置，将矩阵的行列互换得到的新矩阵称为转置矩阵，转置矩阵的行列式不变。</p>
+<p>转置矩阵有四个性质：<br>
+$$<br>
+(M^T)^T = M\<br>
+(M+N)^T = M^T + N^T\<br>
+(kM)^T = kM^T\<br>
+(MN)^T =N^TM^T<br>
+$$<br>
+可见，<strong>一个神经元的功能是求得输入向量与权向量的内积后，经一个非线性传递函数得到一个标量结果</strong>。这里的转置是为了保持点积结果。</p>
+<h3><span id="感知机">感知机</span></h3>
+<p>感知机由<strong>两层神经网</strong>络组成，<strong>输入层</strong>接收外界输入信号后传递给<strong>输出层（输出+1正例，-1反例）</strong>，输出层是 M-P 神经元。</p>
 <p><img src="https://s2.loli.net/2024/09/29/xVQSYu7MWkFywem.png" alt="感知机"></p>
 <p><strong>感知机的作用：</strong></p>
 <p>把一个n维向量空间用一个超平面分割成两部分，给定一个输入向量，超平面可以判断出这个向量位于超平面的哪一边，得到输入时正类或者是反类，当输入只有$X1X2$的情况下（输入一个坐标点），<strong>其输出就是对应到2维空间就是通过一条直线把一个平面分为两个部分的判断结果（输出在哪一个部分）</strong>。这本质上就是一个二分类模型。</p>
-<h3><span id="多层神经网络">多层神经网络</span></h3><p>多层神经网络就是由单层神经网络进行叠加之后得到的，所以就形成了<strong>层</strong>的概念，常见的多层神经网络有如下结构：</p>
+<h3><span id="多层神经网络">多层神经网络</span></h3>
+<p>多层神经网络就是由单层神经网络进行叠加之后得到的，所以就形成了<strong>层</strong>的概念，常见的多层神经网络有如下结构：</p>
 <ul>
 <li>输入层（Input layer），众多神经元（Neuron）接受大量输入消息。输入的消息称为输入向量。</li>
 <li>输出层（Output layer），消息在神经元链接中传输、分析、权衡，形成输出结果。输出的消息称为输出向量。</li>
@@ -86,17 +102,22 @@ t = f(W^TA+b)</script><p>其中$W^T$是表示矩阵的转置，将矩阵的行�
 <p>思考：假设第N-1层有m个神经元，第N层有n个神经元，当第N层是全连接层的时候，则N-1和N层之间有1，这些参数可以如何表示？</p>
 <p><img src="https://s2.loli.net/2024/09/29/7JPy4DHw9TCIWez.png" alt="全连接层"></p>
 <p>从上图可以看出，<strong>全连接层实际上就是进行一次$Y=Wx+b$的变化，并将其从N维变换到M维</strong>，</p>
-<h3><span id="激活函数">激活函数</span></h3><h4><span id="非线性二分类问题">非线性二分类问题</span></h4><p>假设我们有这样一组数据，三角形和四边形，需要把他们分为两类</p>
+<h3><span id="激活函数">激活函数</span></h3>
+<h4><span id="非线性二分类问题">非线性二分类问题</span></h4>
+<p>假设我们有这样一组数据，三角形和四边形，需要把他们分为两类</p>
 <p><img src="https://s2.loli.net/2024/09/29/YpzwDkMPVKXSqH4.png" alt="激活函数1"></p>
 <p>通过不带激活函数的感知机模型我们可以划出一条线, 把平面分割开</p>
 <p><img src="https://s2.loli.net/2024/09/29/Cg3flkTIQ9MjYXt.png" alt="激活函数2"></p>
 <p>假设我们确定了参数w和b之后，那么带入需要预测的数据，如果<strong>y&gt;0</strong>,我们认为这个点在直线的右边，也就是<strong>正类（三角形）</strong>，<strong>否则是在左边（四边形）</strong>。但实际上这样解决并不是完美的，有个别蓝色方块会被识别成三角形。</p>
-<h4><span id="多层神经网络">多层神经网络</span></h4><p>如果一层网络没办法解决那么在前面的感知机模型中再增加一层会怎么样呢？</p>
+<h4><span id="多层神经网络">多层神经网络</span></h4>
+<p>如果一层网络没办法解决那么在前面的感知机模型中再增加一层会怎么样呢？</p>
 <p>如图添加一层隐藏层：</p>
 <p><img src="https://s2.loli.net/2024/09/29/thSqVGgwQB2CJuk.png" alt="激活函数3"></p>
-<p>对上图中的等式进行合并，我们可以得到：</p>
-<script type="math/tex; mode=display">
-y = (w_{1-11}w_{2-1}+\cdots)x_1+(w_{1-21}w_{2-1}+\cdots)x_2 + (w_{2-1}+\cdots)b_{1-1}</script><p>实际上可以发现其还是保持得着线性的模式，这里需要补充一下什么是线性什么是非线性，</p>
+<p>对上图中的等式进行合并，我们可以得到：<br>
+$$<br>
+y = (w_{1-11}w_{2-1}+\cdots)x_1+(w_{1-21}w_{2-1}+\cdots)x_2 + (w_{2-1}+\cdots)b_{1-1}<br>
+$$<br>
+实际上可以发现其还是保持得着线性的模式，这里需要补充一下什么是线性什么是非线性，</p>
 <p><strong>线性：</strong></p>
 <ol>
 <li>可加性：L(x+t)=L(x)+L(t)</li>
@@ -106,19 +127,21 @@ y = (w_{1-11}w_{2-1}+\cdots)x_1+(w_{1-21}w_{2-1}+\cdots)x_2 + (w_{2-1}+\cdots)b_
 <p><img src="https://s2.loli.net/2024/09/29/KS1mIZYQ3q98tru.png" alt="激活函数4"></p>
 <p>如上图，右边是sigmoid函数，对感知机的结果，通过sigmoid函数进行处理，如果给定合适的参数w和b，就可以得到合适的曲线，能够完成对最开始问题的非线性分割。所以激活函数很重要的一个<strong>作用</strong>就是<strong>增加模型的非线性分割能力</strong>。我们可以通过调整W和B的大小来实现目标曲线的样子，如果单一一层无法满足要求就需要增加多层来实现目标。</p>
 <p>常见的激活函数有：</p>
-<p><img src="https://s2.loli.net/2024/09/29/vOCSckqWXtLzrFB.jpg" alt="激活函数5"></p>
-<script type="math/tex; mode=display">
-常用的三种激活函数：\\
-Sigmod \in (0,1)\\
-tanh \in (-1,1)\\与Sigmod不同的是可以输出负数
-ReLu \in (0,x)\\</script><p>当然激活函数含有这些效果</p>
+<p><img src="https://s2.loli.net/2024/09/29/vOCSckqWXtLzrFB.jpg" alt="激活函数5"><br>
+$$<br>
+常用的三种激活函数：\<br>
+Sigmod \in (0,1)\<br>
+tanh \in (-1,1)\与Sigmod不同的是可以输出负数<br>
+ReLu \in (0,x)\<br>
+$$<br>
+当然激活函数含有这些效果</p>
 <p>这些以后再说：</p>
 <ul>
 <li><strong>提高模型鲁棒性</strong></li>
 <li><strong>缓解梯度消失问题</strong></li>
 <li><strong>加速模型收敛等</strong></li>
 </ul>
-</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/09/29/pytorch_1/" title="Pytorch——基础指北_壹"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Pytorch——基础指北_壹</span></a><a class="button is-default" href="/2024/09/29/pytorch_2/" title="Pytorch ——基础指北_贰"><span class="has-text-weight-semibold">Next: Pytorch ——基础指北_贰</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/09/29/pytorch_2/" title="Pytorch ——基础指北_贰"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Pytorch ——基础指北_贰</span></a><a class="button is-default" href="/2024/09/29/pytorch_4/" title="Pytorch--基础指北_肆"><span class="has-text-weight-semibold">Next: Pytorch--基础指北_肆</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
   if (window.mermaid) {
     mermaid.initialize({ theme: 'forest' });
   }
