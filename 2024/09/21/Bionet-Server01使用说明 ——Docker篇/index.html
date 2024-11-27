@@ -516,7 +516,9 @@ custom_channels:
 <li>10088 --&gt; 4.2.2</li>
 </ul>
 <h4><span id="r的文件共享">R的文件共享</span></h4>
+<p>R的工作目录默认下应该能看到如下内容：</p>
 <img src="https://s2.loli.net/2024/10/23/JtnciVDZ435kx8O.png" alt="image-20241023230045769" style="zoom:67%;">
+<p><strong>如果和上图不一致请转问题六</strong>。</p>
 <p>host文件夹连接了主<strong>机的你个人的home文件夹</strong>。</p>
 <img src="https://s2.loli.net/2024/10/23/QcDnkq6fMvNZJW1.png" alt="image-20241023233507171" style="zoom:67%;">
 <p>假设你主机上在你的</p>
@@ -662,7 +664,7 @@ data  test.py
 <p><strong>此问题由戴珏泓发现</strong></p>
 <p>实际上为Python的缓存机制带来的问题，log存在缓存区中没有及时更新：</p>
 <p>可以看到运行之后没有对应的输出;</p>
-<img src="https://s2.loli.net/2024/10/21/OfvYEPxVqanH67c.png" alt="image-20241021235853305" style="zoom:67%;">
+<img src="https://s2.loli.net/2024/10/21/OfvYEPxVqanH67c.png" alt="image-20241021235853305" style="zoom: 80%;">
 <p>解决方法：</p>
 <p>cd进入脚本所在目录执行nohup命令，在命令的python路径与脚本路径之间加-u，强制输出不通过缓存直接打印</p>
 <p>例如：</p>
@@ -672,18 +674,26 @@ data  test.py
 <pre><code class="language-shell">nohup /opt/conda/bin/python -u /home/Share_Space/metrics_ml/GA_xgboost.py 2&gt;&amp;1  &amp;
 </code></pre>
 <h3><span id="问题六-r_studio打开之后没有见对应这两个文件夹">问题六 R_studio打开之后没有见对应这两个文件夹</span></h3>
-<p>如打开之后没有见到这两个文件夹可以打开命令行使用如下命令：</p>
+<p>如打开之后没有见到这两个文件夹，可以先将默认目录设置到~</p>
+<p>使用命令：</p>
+<pre><code class="language-R">setwd("~")
+</code></pre>
+<p>效果如图：</p>
+<p><img src="https://s2.loli.net/2024/11/27/ZcEwh3GUDMXkOKj.png" alt="image-20241127114234957"></p>
+<p>然后刷新一下页面，一定要刷新一下。然后结果：应该是这样：</p>
+<p><img src="https://s2.loli.net/2024/11/27/MLvFi62cVBoDnwu.png" alt="image-20241127114538542"></p>
+<p>如果还不行，可以打开命令行使用如下命令：</p>
 <p><img src="https://s2.loli.net/2024/10/23/gHJXbLxNn9UBS4d.png" alt="image-20241023232258889"></p>
 <p>使用命令：</p>
-<p>user1需要替换的你的用户名，比如我的是Neo</p>
 <pre><code class="language-bash"># 创建从 /home/user1/host 到 /home/host/R_Share/user1 的软链接
 ln -s /home/host/R_Share/user1 /home/user1/host
 
 # 创建从 /home/user1/Datasets 到 /home/host/Datasets 的软链接
 ln -s /home/host/Datasets /home/user1/Datasets
 </code></pre>
+<p>user1需要替换的你的用户名，比如我的是Neo：</p>
 <img src="https://s2.loli.net/2024/10/23/JjGr1sMXhbpDVWQ.png" alt="image-20241023232512786" style="zoom:67%;">
-</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/09/28/%E4%BB%8EC%E8%BF%87%E6%B8%A1%E5%88%B0C++(1)--GNU&amp;Linux/" title="从C过渡到C++(1)——GNU/Linux"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: 从C过渡到C++(1)——GNU/Linux</span></a><a class="button is-default" href="/2024/09/21/Bionet-Server01%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" title="BionetServer-No1使用说明-基础篇"><span class="has-text-weight-semibold">Next: BionetServer-No1使用说明-基础篇</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/09/21/Bionet-Server01%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" title="BionetServer-No1使用说明-基础篇"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: BionetServer-No1使用说明-基础篇</span></a><a class="button is-default" href="/2024/09/21/Hexo+github+Markdown%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" title="Hexo+github+Markdown博客搭建"><span class="has-text-weight-semibold">Next: Hexo+github+Markdown博客搭建</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
   tex: {
     inlineMath: [['$', '$']],
     displayMath: [['$$', '$$']],
