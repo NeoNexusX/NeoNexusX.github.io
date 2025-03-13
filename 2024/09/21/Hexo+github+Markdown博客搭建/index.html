@@ -1,0 +1,506 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>Hexo+github+Markdown博客搭建</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="Hexo+github+Markdown博客搭建
+
+
+
+
+特性：
+工具：
+
+
+Hexo工具链配置
+mermaid添加支持
+部署在cortex-A7之上
+完成多平台同步推送
+添加Math公式支持
+
+
+[TOC]
+特性：
+
+build工具链支持跨平台使用：linux &amp;amp; windows
+部署支持多平台：linux(32&amp;amp;64)&amp;amp;windows&amp;amp;github&amp;amp;docker
+一次部署即可使用，支持markdown,mermaid,math公式，TOC目录等markdown特性。
+
+工具：
+markdown工具：Typora
+跨平台后端：Nginx
+部署平台：orangepi R1 cortex-A7架构 32位双核 &amp;amp; github.io
+Hexo工具链配置
+hexo.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Hexo+github+Markdown博客搭建</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Hexo+github+Markdown博客搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">特性：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">工具：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Hexo工具链配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">mermaid添加支持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">部署在cortex-A7之上</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">完成多平台同步推送</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">添加Math公式支持</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Bionet"><i class="tag post-item-tag">Bionet</i></a><a href="/tags/blog"><i class="tag post-item-tag">blog</i></a><a href="/tags/hexo"><i class="tag post-item-tag">hexo</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Hexo+github+Markdown博客搭建</h1><time class="has-text-grey" datetime="2024-09-21T12:46:25.000Z">2024-09-21</time><article class="mt-2 post-content"><h1><span id="hexogithubmarkdown博客搭建">Hexo+github+Markdown博客搭建</span></h1>
+<img src="https://s2.loli.net/2024/09/29/6Xo9VwZBhLIJ8Yk.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1727549184424" style="zoom:50%;">
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom: 50%;">
+<!-- toc -->
+<ul>
+<li><a href="#%E7%89%B9%E6%80%A7">特性：</a></li>
+<li><a href="#%E5%B7%A5%E5%85%B7">工具：</a></li>
+</ul>
+<ul>
+<li><a href="#hexo%E5%B7%A5%E5%85%B7%E9%93%BE%E9%85%8D%E7%BD%AE">Hexo工具链配置</a></li>
+<li><a href="#mermaid%E6%B7%BB%E5%8A%A0%E6%94%AF%E6%8C%81">mermaid添加支持</a></li>
+<li><a href="#%E9%83%A8%E7%BD%B2%E5%9C%A8cortex-a7%E4%B9%8B%E4%B8%8A">部署在cortex-A7之上</a></li>
+<li><a href="#%E5%AE%8C%E6%88%90%E5%A4%9A%E5%B9%B3%E5%8F%B0%E5%90%8C%E6%AD%A5%E6%8E%A8%E9%80%81">完成多平台同步推送</a></li>
+<li><a href="#%E6%B7%BB%E5%8A%A0math%E5%85%AC%E5%BC%8F%E6%94%AF%E6%8C%81">添加Math公式支持</a></li>
+</ul>
+<!-- tocstop -->
+<p>[TOC]</p>
+<h3><span id="特性">特性：</span></h3>
+<ul>
+<li>build工具链支持跨平台使用：linux &amp; windows</li>
+<li>部署支持多平台：linux(32&amp;64)&amp;windows&amp;github&amp;docker</li>
+<li>一次部署即可使用，支持markdown,mermaid,math公式，TOC目录等markdown特性。</li>
+</ul>
+<h3><span id="工具">工具：</span></h3>
+<p>markdown工具：Typora</p>
+<p>跨平台后端：Nginx</p>
+<p>部署平台：orangepi R1 cortex-A7架构 32位双核 &amp; <a target="_blank" rel="noopener" href="http://github.io">github.io</a></p>
+<h2><span id="hexo工具链配置">Hexo工具链配置</span></h2>
+<p>hexo工具包含npm，这里以linux系统为示例，其他系统操作类似：</p>
+<p><a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/download/package-manager">https://nodejs.org/zh-cn/download/package-manager</a></p>
+<pre><code># installs nvm (Node Version Manager)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+
+# download and install Node.js (you may need to restart the terminal)
+nvm install 20
+
+# verifies the right Node.js version is in the environment
+node -v # should print `v20.17.0`
+
+# verifies the right npm version is in the environment
+npm -v # should print `10.8.2`
+</code></pre>
+<p>在curl导出环境变量之后记得重新打开命令行，执行下面的命令，安装效果如下：</p>
+<img src="https://s2.loli.net/2024/09/28/nzrdGvXhjfElPOV.png" alt="image-20240928200056062" style="zoom:80%;">
+<p>安装hexo：</p>
+<pre><code class="language-bash">npm install hexo-cli -g
+</code></pre>
+<p>安装过程很慢，而且没有任何提示。安装完成之后效果如下：</p>
+<pre><code class="language-bash">(base) neo@NeoNeuxs:~$ npm install hexo-cli -g
+
+added 53 packages in 6s
+
+14 packages are looking for funding
+  run `npm fund` for details
+</code></pre>
+<p>安装对应主题的插件，这里使用的是claudia,根据其文档效果如下：</p>
+<p>hexo官方针对主题使用的文档：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/themes">https://hexo.io/zh-cn/docs/themes</a>  理解theme需要先看看，后边不会太详细介绍。</p>
+<p>我们需要将对应的主题clone到theme文件夹，然后再修改对应的<code>_config.yml</code>，包含项目的<code>_config.yml</code>和主题的<code>_config.yml</code>两者不一样，修改的时候要注意。</p>
+<p>这里使用的cluadia主题在：<a target="_blank" rel="noopener" href="https://github.com/Haojen/hexo-theme-Claudia">https://github.com/Haojen/hexo-theme-Claudia</a></p>
+<p>根据主题要求安装包，效果如下：</p>
+<pre><code class="language-bash">(base) neo@NeoNeuxs:~$ npm install hexo-renderer-pug 
+
+added 52 packages in 7s
+
+13 packages are looking for funding
+  run `npm fund` for details
+(base) neo@NeoNeuxs:~$ npm install hexo-renderer-dartsass
+
+added 6 packages, and audited 59 packages in 4s
+
+15 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+(base) neo@NeoNeuxs:~$ npm install hexo-generator-feed
+
+added 43 packages, and audited 102 packages in 5s
+
+25 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+(base) neo@NeoNeuxs:~$ npm install hexo-filter-flowchart     
+
+added 3 packages, and audited 105 packages in 3s
+
+25 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+(base) neo@NeoNeuxs:~$ npm install hexo-renderer-mathjax
+npm warn deprecated ejs@1.0.0: Critical security bugs fixed in 2.5.5
+
+added 2 packages, and audited 107 packages in 4s
+
+25 packages are looking for funding
+  run `npm fund` for details
+
+2 critical severity vulnerabilities
+
+Some issues need review, and may require choosing
+a different dependency.
+
+Run `npm audit` for details.
+
+</code></pre>
+<p>安装完成后，修改项目的配置文件，这里贴一下我自己的：</p>
+<pre><code class="language-bash"># Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: Hexo
+subtitle: ''
+description: ''
+keywords:
+author: NeoNexus
+language: chinese
+timezone: ''
+
+# URL
+## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
+url: http://neonexusx.github.io
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
+  trailing_html: true # Set to false to remove trailing '.html' from permalinks
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md # File name of new posts
+default_layout: post
+titlecase: false # Transform title into titlecase
+external_link:
+  enable: true # Open external links in new tab
+  field: site # Apply to the whole site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+syntax_highlighter: highlight.js
+highlight:
+  line_number: false
+  auto_detect: false
+  tab_replace: ''
+  wrap: false
+  hljs: false
+prismjs:
+  preprocess: false
+  line_number: false
+  tab_replace: ''
+
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
+
+# Category &amp; Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Metadata elements
+## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
+meta_generator: true
+
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+## updated_option supports 'mtime', 'date', 'empty'
+updated_option: 'mtime'
+
+# Pagination
+## Set per_page to 0 to disable pagination
+per_page: 10
+pagination_dir: page
+
+# Include / Exclude file(s)
+## include:/exclude: options only apply to the 'source/' folder
+include:
+exclude:
+ignore:
+
+# Extensions
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
+theme: claudia
+
+# Deployment
+## Docs: https://hexo.io/docs/one-command-deployment
+deploy:
+  type: git
+  repository: git@github.com:######/#########github.io.git
+  branch: main
+ # mermaid chart
+mermaid: ## mermaid url https://github.com/knsv/mermaid
+  enable: true  # default true
+  options:  # find more api options from https://github.com/knsv/mermaid/blob/master/src/mermaidAPI.js
+    #startOnload: true  // default true
+</code></pre>
+<p>主要关闭了代码高亮，添加了mermaid支持，修改主题为claudia，添加了一些信息，同时添加了部署的git信息，还有在对应的服务器上部署的文件信息，这样部署的时候只需要一条命令就能完成多平台的部署。</p>
+<pre><code class="language-bash"># main menu navigation
+menu:
+  Home: /
+  About: /about
+  Archive: /archives
+
+widgets:
+  - tag
+  - archive
+  - recent_posts
+  - category
+  - profile
+
+# social config
+social:
+  zhihu:
+  twitter: /
+  facebook: /
+  instagram: /
+  github: https://github.com/NeoNexusX
+
+user:
+  name: NeoNexus
+  avatar:
+  location: XiaMen
+  description: YOU CAN REDO
+  footnotes: # footnotes
+
+# documents: https://github.com/utterance/utterances
+# API config: https://utteranc.es/
+comment_utteranc:
+  enable: true
+  repo: Haojen/Claudia-theme-blog # your blog repo
+
+
+# documents: https://valine.js.org/quickstart.html
+comment_valine:
+  enable: true
+  appId: ############
+  appKey: #########
+
+comment_disqus:
+    enable: false
+    url:  # the url of your website main domain like this https://xxx.xxx/
+    name: # the short name in disqus
+
+# dark
+# light
+# user-can-set
+appearance: dark # Default value is auto
+
+# Miscellaneous
+favicon: images/favicon.ico
+
+friend_links:
+  - title: Google
+    link: https://www.google.com/
+  - title: Github
+    link: https://www.github.com/
+
+# Google Analytics
+ga_track_id:
+ga_domain:
+
+# Baidu Analytics
+ba_track_id:
+
+# picture of about page
+about_pic: about.png
+
+image_zoom:
+  enable: true
+ 
+</code></pre>
+<p>主题的设置文件隐藏了一些关键信息，所以没办法直接使用，主要修改在评论系统引入，一些关键信息修改。</p>
+<h2><span id="mermaid添加支持">mermaid添加支持</span></h2>
+<p>mermaid是常见的markdown流程图绘制语言，为了添加支持，我们的思路如下：</p>
+<p>首先添加对应的npm包支持，然后引入对应的mermaid渲染js代码，调用对应的mermiad初始化函数，引入mermaid支持。</p>
+<p>网上的教程思路都是大致如下，但是都是基于不同的主题来实现的，这里使用的claudia使用的模板语言和网上介绍的不一样，我们需要修改一下对应的的代码：</p>
+<p>在此路经下<code>/blog_dev/themes/claudia/layout</code>存放着如下关于布局的文件内容：</p>
+<p><img src="https://s2.loli.net/2024/09/28/cmNFy6QgAXV8jC9.png" alt="image-20240928213131729"></p>
+<p>pug后缀代表着对应的模板语言，我们需要在对应的地方插入对应的js代码，同时还需要满足pug的语法要求。考虑到需要在所有内容初始化完成之后使用CDN将mermaid引入，我们选择比较靠后的布局文件，防止影响到其他部分的初始化，这里挑选post部分，添加代码如下：</p>
+<pre><code class="language-pug">    script(src=`https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js` onload="initMermaid()")
+    script.
+      function initMermaid() {
+       console.log("fuck you");
+        if (window.mermaid) {
+          console.log("fuck you");
+          mermaid.initialize({ theme: 'forest' });
+        }
+      }
+</code></pre>
+<p>其中版本部分本应该使用confiog文件的对象来获取，但是本人不是专业前端，这里引用不到对应的theme对象，没办法只能写死到这里。</p>
+<p>添加之后，我们就可以使用了。</p>
+<p>使用命令：</p>
+<pre><code class="language-bash">(base) neo@Mark06-U:~/Desktop/blog_dev$ hexo generate
+INFO  Validating config
+INFO  Start processing
+INFO  Files loaded in 238 ms
+INFO  Generated: 2024/09/27/hello-world/index.html
+INFO  Generated: archives/2024/index.html
+INFO  Generated: atom.xml
+INFO  Generated: archives/2024/09/index.html
+INFO  Generated: 2024/09/28/Bionet-Server01使用说明/index.html
+INFO  Generated: archives/index.html
+INFO  Generated: index.html
+INFO  7 files generated in 14 ms
+</code></pre>
+<p>构建成功之后使用：</p>
+<pre><code class="language-bash">hexo s
+</code></pre>
+<p>开启测试服务器。</p>
+<pre><code class="language-bash">(base) neo@Mark06-U:~/Desktop/blog_dev$ hexo s
+INFO  Validating config
+INFO  Start processing
+INFO  Hexo is running at http://localhost:4000/ . Press Ctrl+C to stop.
+</code></pre>
+<h2><span id="部署在cortex-a7之上">部署在cortex-A7之上</span></h2>
+<p>cortex-A7是一个很老的arm架构了，32位的性能很差，但是我有一个orangepi_r1没有用处，所以拿来部署在内网，关于部署到github.io的文章很多，这里不再赘述，主要关键点在于如何将两个平台的内容进行同步更新，这样方便后续内容的更新与维护。</p>
+<p>首先我们要在ubuntu16.04上部署一个nginx服务器，没错H2+跑的是对应已经做好的镜像，这里我也不再赘述，每一个厂家都有做好的镜像来使用。</p>
+<pre><code class="language-bash">sudo apt update
+sudo apt install nginx
+</code></pre>
+<p>使用命令：</p>
+<pre><code class="language-bash">sudo systemctl status nginx
+</code></pre>
+<p>如果没有报错，那说明成功了：</p>
+<pre><code class="language-bash">orangepi@orangepir1:~$ sudo systemctl status nginx
+● nginx.service - A high performance web server and a reverse proxy server
+   Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+   Active: active (running) since Fri 2021-04-02 07:51:53 UTC; 2h 54min ago
+  Process: 1192 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0
+  Process: 1101 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited,
+ Main PID: 1203 (nginx)
+   CGroup: /system.slice/nginx.service
+           ├─1203 nginx: master process /usr/sbin/nginx -g daemon on; master_process on
+           ├─1204 nginx: worker process                           
+           ├─1205 nginx: worker process                           
+           ├─1206 nginx: worker process                           
+           └─1207 nginx: worker process                           
+</code></pre>
+<p>接下来我们需要将博客发布到这台服务器上，就需要修改nginx配置，然后转移到我们对应的文件夹，作为nginx的起始目录。</p>
+<p>使用命令：</p>
+<pre><code class="language-bash">cd /etc/nginx/sites-available/
+</code></pre>
+<p>在这里我们修改default文件：</p>
+<pre><code class="language-clike">server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        root /home/orangepi/blogs;
+
+        # Add index.php to the list if you are using PHP
+        index index.html index.htm index.nginx-debian.html;
+        server_name blogs;
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+        }
+}
+
+</code></pre>
+<p>每个修改的对象是什么意思我不再赘述，只需要知道修改了，根目录，location管理部分，其他没有修改。</p>
+<p>然后我们重启nginx，让其重新载入设置;</p>
+<pre><code class="language-bash">sudo systemctl reload nginx
+sudo systemctl restart nginx
+</code></pre>
+<p>当然这里设置的blogs文件夹，需要你提前创建好，同时这个文件夹，在你本地电脑推送到服务器的时候也是要有一定的权限的，所以不要使用sudo来创建。</p>
+<p>重启之后我们应该看见，这样一个博客就创建完成了～</p>
+<img src="https://s2.loli.net/2024/09/28/PJL5cakTy9GQ6rK.png" alt="image-20240928225345569" style="zoom:67%;">
+<h2><span id="完成多平台同步推送">完成多平台同步推送</span></h2>
+<p>多平台同步推送依赖于hexo的deploy功能，根据官方文档，我需要向git和一台服务器进行推送，为了满足这个要求，我们将项目的配置文件修改为如下形式：</p>
+<pre><code class="language-yml">deploy:
+  - type: git
+    repository: git@github.com:NeoNexusX/NeoNexusX.github.io.git
+    branch: main
+  - type: rsync
+    host: 你的服务器ip
+    user: 你服务器user
+    root: /home/orangepi/blogs
+    port: 22
+    delete: true
+    verbose: true
+    ignore_errors: false
+  
+</code></pre>
+<p>然后使用命令：</p>
+<pre><code class="language-bash">hexo deploy
+</code></pre>
+<p>实现推送，效果如下：</p>
+<img src="https://s2.loli.net/2024/09/28/UrhAX79sebBWauf.png" alt="image-20240928231857713" style="zoom:67%;">
+<h2><span id="添加math公式支持">添加Math公式支持</span></h2>
+<p>依据博客修改：</p>
+<p><a target="_blank" rel="noopener" href="https://pku-zyf.github.io/formula/">https://pku-zyf.github.io/formula/</a></p>
+<p>将上文post.pug添加如下脚本内容：</p>
+<pre><code class="language-pug">    if theme.mathjax.enable
+      script(type="text/x-mathjax-config").
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          }
+        });
+        MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i &lt; all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+        });
+      script(type="text/javascript", src=theme.mathjax.cdn)
+</code></pre>
+<p>注意缩进和空格，剩下完全和博客内容一致，不再赘述，只不过不需要打开MathJax开关部分内容。</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/09/21/Bionet-Server01%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%20%E2%80%94%E2%80%94Docker%E7%AF%87/" title="BionetServer-No1使用说明-进阶（Docker方式）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: BionetServer-No1使用说明-进阶（Docker方式）</span></a><a class="button is-default" href="/2024/09/21/%E6%9E%84%E5%BB%BA%E4%B8%80%E5%8F%B0%E5%85%88%E8%BF%9B%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="如何构建一台机器学习服务器"><span class="has-text-weight-semibold">Next: 如何构建一台机器学习服务器</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2025</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>
