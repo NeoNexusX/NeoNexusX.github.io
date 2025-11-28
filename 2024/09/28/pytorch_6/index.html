@@ -1,0 +1,426 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>Pytorch--基础指北_陆</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="Pytorch ——基础指北_陆
+
+
+
+软件环境：
+基础知识：
+如何通过官方数据集构建自己的数据集？
+
+MNIST数据集
+如何使用MNIST数据集？
+Transforms类的数据处理方法
+
+torchvision.transforms.ToTensor
+图像的维度变换
+那么如何使用ToTensor方法呢？
+torchvision.transforms.Normalize（mean ，std）
+torchvision.transforms.Compose（transforms）
+
+
+
+
+
+
+[TOC]
+软件环境：
+
+pytorch 1.10
+pycharm
+
+基础知识：
+本次混入讲解过程。
+如何通过官方数据集构建自己的数据集？
+MNIST数据集
+MNIST数据库是非常经典的一个数据集，就像你学编程起初写一个“.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Pytorch--基础指北_陆</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Pytorch ——基础指北_陆</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">软件环境：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">基础知识：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">如何通过官方数据集构建自己的数据集？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">MNIST数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">如何使用MNIST数据集？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Transforms类的数据处理方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">torchvision.transforms.ToTensor</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">图像的维度变换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">那么如何使用ToTensor方法呢？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">torchvision.transforms.Normalize（mean ，std）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">torchvision.transforms.Compose（transforms）</span></a></li></ol></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Pytorch"><i class="tag post-item-tag">Pytorch</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Pytorch--基础指北_陆</h1><time class="has-text-grey" datetime="2024-09-27T16:00:00.000Z">2024-09-28</time><article class="mt-2 post-content"><h1><span id="pytorch-基础指北_陆">Pytorch ——基础指北_陆</span></h1>
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom:67%;">
+<!-- toc -->
+<ul>
+<li><a href="#%E8%BD%AF%E4%BB%B6%E7%8E%AF%E5%A2%83">软件环境：</a></li>
+<li><a href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">基础知识：</a></li>
+<li><a href="#%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E5%AE%98%E6%96%B9%E6%95%B0%E6%8D%AE%E9%9B%86%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E6%95%B0%E6%8D%AE%E9%9B%86">如何通过官方数据集构建自己的数据集？</a>
+<ul>
+<li><a href="#mnist%E6%95%B0%E6%8D%AE%E9%9B%86">MNIST数据集</a></li>
+<li><a href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8mnist%E6%95%B0%E6%8D%AE%E9%9B%86">如何使用MNIST数据集？</a></li>
+<li><a href="#transforms%E7%B1%BB%E7%9A%84%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95">Transforms类的数据处理方法</a>
+<ul>
+<li><a href="#torchvisiontransformstotensor">torchvision.transforms.ToTensor</a></li>
+<li><a href="#%E5%9B%BE%E5%83%8F%E7%9A%84%E7%BB%B4%E5%BA%A6%E5%8F%98%E6%8D%A2">图像的维度变换</a></li>
+<li><a href="#%E9%82%A3%E4%B9%88%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8totensor%E6%96%B9%E6%B3%95%E5%91%A2">那么如何使用ToTensor方法呢？</a></li>
+<li><a href="#torchvisiontransformsnormalizemean-std">torchvision.transforms.Normalize（mean ，std）</a></li>
+<li><a href="#torchvisiontransformscomposetransforms">torchvision.transforms.Compose（transforms）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p>[TOC]</p>
+<h2><span id="软件环境">软件环境：</span></h2>
+<ul>
+<li><strong>pytorch 1.10</strong></li>
+<li><strong>pycharm</strong></li>
+</ul>
+<h2><span id="基础知识">基础知识：</span></h2>
+<p>本次混入讲解过程。</p>
+<h2><span id="如何通过官方数据集构建自己的数据集">如何通过官方数据集构建自己的数据集？</span></h2>
+<h3><span id="mnist数据集">MNIST数据集</span></h3>
+<p>MNIST数据库是非常经典的一个数据集，就像你学编程起初写一个“Hello Word”的程序一样，学Deep Learning你就会写识别MNIST数据集的Model。</p>
+<p>MNIST数据集是由0〜9手写数字图片和数字标签所组成的，由60000个训练样本和10000个测试样本组成，每个样本都是一张28 * 28像素的灰度手写数字图片。</p>
+<h3><span id="如何使用mnist数据集">如何使用MNIST数据集？</span></h3>
+<p>在Pytorch中你可以很方便的使用它，只需要下载后，就可以立即使用，下载方法很简单，首先引用针对MNIST数据集的类：<code>from torchvision.datasets import MNIST</code>。</p>
+<p><img src="https://s2.loli.net/2024/09/29/k4hY8Xcu9dT2ipj.png" alt="1"></p>
+<p>创建这个类的实例<code>MNIST_dataset = MNIST(root="./data",train=True,download=True,transform=None)</code>。</p>
+<p>其中参数分别是</p>
+<ul>
+<li>root 存储位置；</li>
+<li>train 是否为训练集；</li>
+<li>download是否下载；</li>
+<li>transform处理函数，下一个节点会具体介绍其作用；</li>
+</ul>
+<p>下载完成后我们可以输出一个看看一看是什么：</p>
+<pre><code class="language-python">print(MNIST_dataset[0])
+</code></pre>
+<p><img src="https://s2.loli.net/2024/09/29/BSZNAM5pWL3XTxh.png" alt="2"></p>
+<p>可以看到由两部分组成：</p>
+<p>图片+一个数字，这个数字就是标记好的数据集的label，指明了本张图片的内容。</p>
+<p>值得注意的是MINST_dataset本身就是一个data包下的Dataset类，你从他的继承关系就可以看到：</p>
+<p><img src="https://s2.loli.net/2024/09/29/M5yxA8pD7sLiX3Y.png" alt="3"></p>
+<p>父类就是继承于Dataset。</p>
+<p><img src="https://s2.loli.net/2024/09/29/rS94w53qaNlTsOu.png" alt="4"></p>
+<h3><span id="transforms类的数据处理方法">Transforms类的数据处理方法</span></h3>
+<h4><span id="torchvisiontransformstotensor">torchvision.transforms.ToTensor</span></h4>
+<p>ToTensor是Pytorch内置的数据处理方法，常规的图像数据通常是这样的:</p>
+<p><strong>[H,W,C]</strong></p>
+<p>H代表了图像高度，也是H维度的大小；</p>
+<p>W代表了图像宽度，也是W维度的大小；</p>
+<p>C代表的是通道数，也就是每个像素点后的颜色通道大小，通常就是RGB，也就是3，你可以理解为每个像素点都是由这三个颜色在0-255之间混合起来的。</p>
+<p>回到我们这个数据集来说，每张图片其实本身是黑白的，也就是说通道数只有一，每张图片的结构应该是**[28,28,1]**。</p>
+<p>但是对于Pytorch很多处理函数来说并不支持这样的格式，而是支持 [C,H,W]  的格式，这就麻烦了，我们就需要做维度变换（视角变换）来变换数据格式，为什么这样说的呢？因为本身来说数据是固定的，我们只不过换了一种描述方式来对其进行新的描述，那么我们怎么把数据变换成[1,28,28]呢？很简单调用ToTensor这个方法就可以，我们把这个方法传入transforms，transforms会自动调用ToTensor来进行处理。</p>
+<p>但是这里还是要讨论一下如果不是支持的格式，我们该怎么使用pytorch进行手动变换呢？</p>
+<p>这就要介绍其内置的变换函数，具体使用规则可以参考第一篇所讲解的用法：，这里直接讲解理论。</p>
+<h4><span id="图像的维度变换">图像的维度变换</span></h4>
+<p>对于常规图像来说都是遵循这样的格式，**[W,H,C]<strong>或者</strong>[H,W,C]**但这样并不是通用的格式，便于理解但是不便于计算，如果我们设想有这样一张图片他的格式是这样的，[2,2,3]也就是一张2x2的图片，每个像素点三个通道分别是RGB，</p>
+<p>把三个通道分解开就是这样：</p>
+<p><img src="https://s2.loli.net/2024/09/29/LRSriZT4u9b8BqC.png" alt="5"></p>
+<p>加上维度坐标系就是这样:</p>
+<img src="https://s2.loli.net/2024/09/29/1xdMluNcE69ToWk.png" alt="6" style="zoom:80%;">
+<p>我们将数据填补进去，每个颜色在像素点的大小都是在0-255之间，这里就用[1-12]来替代看得更清楚：</p>
+<img src="https://s2.loli.net/2024/09/29/UCO1qkrSXgHKAIB.png" alt="7">
+<p>你可能会好奇，如果使用**[W,H,C]**怎么表示这个图片呢？</p>
+<p>可以展示一下：</p>
+<pre><code class="language-python">&gt;&gt;&gt;t1
+&gt;&gt;&gt;tensor([[[ 1,  2,  3],
+           [ 4,  5,  6]],
+           [[ 7,  8,  9],
+           [10, 11, 12]]])
+</code></pre>
+<p><strong>以最内的逗号最为z轴的分割，次外层作为y轴的分割，最外层的逗号作为x轴的分割</strong>，你可以看到：</p>
+<img src="https://s2.loli.net/2024/09/29/gxathm2bo7NIT6l.png" alt="8" style="zoom:80%;">
+<p>可以看出来，最里边的括号就是代表一个像素点的三个通道，对于下标（0，0）的点，他三个通道的值就是1，2，3.从上图也可以看出。</p>
+<p><strong>那为什么说轴变换就是视角变换呢？</strong></p>
+<p>我们举个例子,在目前的情况下我们将图像从**[W,H,C]<strong>变换到</strong>[C,H,W]**,图像的样子会发生什么？</p>
+<p>我们使用permute函数进行变换，T1的结果如下：</p>
+<pre><code class="language-python">&gt;&gt;&gt;t1= t1.permute(2,1,0)#交换 0 和 2 维度
+&gt;&gt;&gt;t1
+&gt;&gt;&gt;tensor([[[ 1,  7],
+            [ 4, 10]],
+           [[ 2,  8],
+            [ 5, 11]],
+           [[ 3,  9],
+            [ 6, 12]]])
+
+</code></pre>
+<p>我们同样以<strong>最内的逗号最为z轴的分割，次外层作为y轴的分割，最外层的逗号作为x轴的分割</strong>，再来把这样图画出来：</p>
+<p>你可以发现坐标轴样子没有变，而代表轴的意思不同的了，相当于就是同一块数据使用了不同的视角来进行描述。</p>
+<img src="https://s2.loli.net/2024/09/29/XVfWmcd2Lo7SZgr.png" alt="10" style="zoom:80%;">
+<p><strong>如果我们回到二维，你会发现这个操作其实就是矩阵的转置，而目前这个操作就可以叫三维矩阵的转置。</strong></p>
+<p>最后补一张思考时候的手稿，大家先凑活着看吧。</p>
+<img src="https://s2.loli.net/2024/09/29/kGTyPMmKZUJj3eN.png" alt="11" style="zoom:80%;">
+<p>总结一句话：</p>
+<p><strong>ToTensor方法就是帮我们实现了 ”维度变换“ 这个操作。</strong></p>
+<h4><span id="那么如何使用totensor方法呢">那么如何使用ToTensor方法呢？</span></h4>
+<p>使用方法很简单，直接通过其类的call方法传入参数即可</p>
+<p>举例：</p>
+<pre><code class="language-python">from torchvision import transforms
+
+MNIST_dataset = MNIST(root="./data", train=True, download=True, transform=None)
+
+MNIST_tensor = transforms.ToTensor()(MNIST_dataset[0][0])
+print(MNIST_tensor)
+</code></pre>
+<p>就可以打印出来刚才的图片5。当然实际上你看不出来这一堆数据到底相容的什么。你只要知道他是对</p>
+<pre><code class="language-shell">tensor([[[0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0118, 0.0706, 0.0706, 0.0706,
+          0.4941, 0.5333, 0.6863, 0.1020, 0.6510, 1.0000, 0.9686, 0.4980,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.1176, 0.1412, 0.3686, 0.6039, 0.6667, 0.9922, 0.9922, 0.9922,
+          0.9922, 0.9922, 0.8824, 0.6745, 0.9922, 0.9490, 0.7647, 0.2510,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.1922,
+          0.9333, 0.9922, 0.9922, 0.9922, 0.9922, 0.9922, 0.9922, 0.9922,
+          0.9922, 0.9843, 0.3647, 0.3216, 0.3216, 0.2196, 0.1529, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0706,
+          0.8588, 0.9922, 0.9922, 0.9922, 0.9922, 0.9922, 0.7765, 0.7137,
+          0.9686, 0.9451, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.3137, 0.6118, 0.4196, 0.9922, 0.9922, 0.8039, 0.0431, 0.0000,
+          0.1686, 0.6039, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0549, 0.0039, 0.6039, 0.9922, 0.3529, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.5451, 0.9922, 0.7451, 0.0078, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0431, 0.7451, 0.9922, 0.2745, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.1373, 0.9451, 0.8824, 0.6275,
+          0.4235, 0.0039, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.3176, 0.9412, 0.9922,
+          0.9922, 0.4667, 0.0980, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.1765, 0.7294,
+          0.9922, 0.9922, 0.5882, 0.1059, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0627,
+          0.3647, 0.9882, 0.9922, 0.7333, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.9765, 0.9922, 0.9765, 0.2510, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.1804, 0.5098,
+          0.7176, 0.9922, 0.9922, 0.8118, 0.0078, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.1529, 0.5804, 0.8980, 0.9922,
+          0.9922, 0.9922, 0.9804, 0.7137, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0941, 0.4471, 0.8667, 0.9922, 0.9922, 0.9922,
+          0.9922, 0.7882, 0.3059, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0902, 0.2588, 0.8353, 0.9922, 0.9922, 0.9922, 0.9922, 0.7765,
+          0.3176, 0.0078, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0706, 0.6706,
+          0.8588, 0.9922, 0.9922, 0.9922, 0.9922, 0.7647, 0.3137, 0.0353,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.2157, 0.6745, 0.8863, 0.9922,
+          0.9922, 0.9922, 0.9922, 0.9569, 0.5216, 0.0431, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.5333, 0.9922, 0.9922, 0.9922,
+          0.8314, 0.5294, 0.5176, 0.0627, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+          0.0000, 0.0000, 0.0000, 0.0000]]])
+
+Process finished with exit code 0
+
+</code></pre>
+<h4><span id="torchvisiontransformsnormalizemean-std">torchvision.transforms.Normalize（mean ，std）</span></h4>
+<p>你可以看到这个方法也是在transforms包下的，说明他也是用来对数据集进行处理的预置方法，这个方法的作用很简单，就是标准化图像里面的数据，使用的时候只需要传入对应的mean（均值），std（标准差）即可，值得注意的是，标准差和方差都指的是图像每个通道的标准差与均值，假如RGB图像，你就应该传入一个（三位的list[a,b,c]）。</p>
+<p>那么什么是标准化呢？</p>
+<p>图像标准化是将数据通过去均值实现中心化的处理，根据凸优化理论与数据概率分布相关知识，数据中心化符合数据分布规律，更容易取得训练之后的泛化效果, 数据标准化是<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86&amp;spm=1001.2101.3001.7020">数据预处理</a>的常见方法之一</p>
+<p>有公式：<br>
+$$<br>
+Normailized_{image} = \frac{(image - mean ) }{Std}\<br>
+其中\<br>
+Std =\sqrt{\sigma^{2}}=\sqrt{\frac{\sum_{i=1}^{N}\left(x_{i}-\mu\right)^{2}}{N}}(X_i是某像素的某一通道值)<br>
+$$</p>
+<p>这一大波操作看的头皮发麻，实际上有一个更常用的公式：</p>
+<p><img src="https://s2.loli.net/2024/09/29/wZBteI9X8urfVhy.png" alt="12"></p>
+<p>你应该瞬间就明白了，就是把图像的数据分布转换成一个均值为0，标准差为1的分布。但是值得注意的是并不是一定为正态分布，取决于原来数据分布的情况。</p>
+<p>使用方法同样也是调用call方法也就是在实例化对象后直接（）传入图像。</p>
+<pre><code class="language-python">from torchvision.datasets import MNIST
+import torchvision
+from torchvision import transforms
+
+MNIST_dataset = MNIST(root="./data", train=True, download=True, transform=None)
+
+MNIST_tensor = transforms.ToTensor()(MNIST_dataset[0][0])
+
+MNIST_tensor_nom = transforms.Normalize(10, 10)(MNIST_tensor)
+
+print(MNIST_tensor_nom)
+</code></pre>
+<p>值得注意的是，这里的(10, 10)并不是真正的标准差和均值，是我随意写的，主要是用来验证使用方法而已。</p>
+<h4><span id="torchvisiontransformscomposetransforms">torchvision.transforms.Compose（transforms）</span></h4>
+<p>这个就更简单了，将多个<code>transform</code>组合起来使用。</p>
+<p>例如：</p>
+<pre><code class="language-python">transforms.Compose(
+    [torchvision.transforms.ToTensor(), #先转化为Tensor
+     torchvision.transforms.Normalize(mean,std)] #在进行正则化
+     )
+</code></pre>
+<p>可以看到传入的参数实际上是一个由多个transforms包下的处理类组成的List。</p>
+<p>知道了这样，我们就可以改写一下上边所进行两个操作：</p>
+<pre><code class="language-python">from torchvision.datasets import MNIST
+from torchvision.transforms import Compose, ToTensor, Normalize
+
+transforms_fn = Compose([ToTensor(), Normalize(mean=(0.1307,), std=(0.3081,))])
+
+MNIST_dataset = MNIST(root="./data", train=True, download=True, transform=transforms_fn)
+
+print(MNIST_dataset)
+</code></pre>
+<p>你如果看过**<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_20540901/article/details/123531083?spm=1001.2014.3001.5502">上一篇</a>**关于数据集类的介绍，就知道Dataset类都是用来初始化数据集的，并不能对数据集做分批，打乱，等操作，所以对一个完整的数据集来说应该配合有对应的Dataloader类来进一步对数据集操作，并将数据送入网络。</p>
+<p>结合Dataloader进行操作：</p>
+<pre><code class="language-python">from torchvision.datasets import MNIST
+from torchvision.transforms import Compose, ToTensor, Normalize
+
+transforms_fn = Compose([ToTensor(), Normalize(mean=(0.1307,), std=(0.3081,))])
+
+MNIST_dataset = MNIST(root="./data", train=True, download=True, transform=transforms_fn)
+
+#构建dataloader
+MNIST_dataloader = DataLoader(dataset=MNIST_dataset, batch_size=2, drop_last=True, shuffle=True)
+</code></pre>
+<p>这样基本的一个数据集就构建完成了，当然我们可以给他增加一些功能并整合成一个函数，可以通过MNIST_dataset的train参数来设置是训练集还是测试集，只要传入一个参数即可，最后让他返回制作好的Dataloader。</p>
+<pre><code class="language-python">def MNIST_create_dataloader(train=True):
+    transforms_fn = Compose([ToTensor(), Normalize(mean=0.1307, std=0.3081)])
+
+    MNIST_dataset = MNIST(root="./data", train=train, download=True, transform=transforms_fn)
+
+    MNIST_dataloader = DataLoader(dataset=MNIST_dataset, batch_size=2, drop_last=True, shuffle=True)
+    return MNIST_dataloader
+</code></pre>
+<p>我们来遍历一下制作好的Dataloader，完整代码如下：</p>
+<pre><code class="language-python">import sys
+import torch
+import torch.nn as nn
+import torch.optim as opt
+import numpy as np
+import pandas as pd
+from torch.utils.data import Dataset, DataLoader
+from torchvision.datasets import MNIST
+from torchvision.transforms import Compose, ToTensor, Normalize
+
+
+def MNIST_create_dataloader(train=True):
+    transforms_fn = Compose([ToTensor(), Normalize(mean=0.1307, std=0.3081)])
+
+    MNIST_dataset = MNIST(root="./data", train=train, download=True, transform=transforms_fn)
+
+    MNIST_dataloader = DataLoader(dataset=MNIST_dataset, batch_size=2, drop_last=True, shuffle=True)
+    return MNIST_dataloader
+
+
+def get_MNIST_dataloader():
+    MNIST_dataloader = MNIST_create_dataloader(False)
+    for num, i in enumerate(MNIST_dataloader):
+        print(num, i)
+
+
+get_MNIST_dataloader()
+
+</code></pre>
+<p>只看最后一batch的输出结果：</p>
+<p>因为batch_size=2，每组就是由两张照片所组成的。</p>
+<pre><code>29999 [tensor([[[[-0.4242, -0.4242, -0.4242,  ..., -0.4242, -0.4242, -0.4242],
+          [-0.4242, -0.4242, -0.4242,  ..., -0.4242, -0.4242, -0.4242],
+          [-0.4242, -0.4242, -0.4242,  ..., -0.4242, -0.4242, -0.4242],
+          ...,
+          [-0.4242, -0.4242, -0.4242,  ..., -0.4242, -0.4242, -0.4242],
+          [-0.4242, -0.4242, -0.4242,  ..., -0.4242, -0.4242, -0.4242],
+          [-0.4242, -0.4242, -0.4242,  ..., -0.4242, -0.4242, -0.4242]]],
+
+
+        [[[-0.4242, -0.4242, -0.4242,  ..., -0.4242, -0.4242, -0.4242],
+          [-0.4242, -0.4242, -0.4242,  ..., -0.4242, -0.4242, -0.4242],
+          [-0.4242, -0.4242, -0.4242,  ..., -0.4242, -0.4242, -0.4242],
+          ...,
+          [-0.4242, -0.4242, -0.4242,  ..., -0.4242, -0.4242, -0.4242],
+          [-0.4242, -0.4242, -0.4242,  ..., -0.4242, -0.4242, -0.4242],
+          [-0.4242, -0.4242, -0.4242,  ..., -0.4242, -0.4242, -0.4242]]]]), tensor([5, 8])]
+</code></pre>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/09/28/pytorch_5/" title="Pytorch--基础指北_伍"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Pytorch--基础指北_伍</span></a><a class="button is-default" href="/2024/09/28/pytorch_7/" title="Pytorch--基础指北_柒"><span class="has-text-weight-semibold">Next: Pytorch--基础指北_柒</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2025</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>

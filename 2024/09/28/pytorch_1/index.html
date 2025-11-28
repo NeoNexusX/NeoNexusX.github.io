@@ -1,0 +1,245 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>Pytorch——基础指北_壹</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="Pytorch——基础指北_壹
+
+软件环境：
+
+pytorch 1.10
+pycharm
+CUDA 10.2
+
+
+
+一些基础知识：
+
+python的切片
+二维数组的切片
+
+
+Tensor:
+
+如何使用
+
+
+
+
+[TOC]
+一些基础知识：
+python的切片
+一个完整的切片表达式包含两个“:”，用于分隔三个参数(start_index、end_index、step)。当只有一个“:”时，默认第三个参数step=1；当一个“:”也没有时，start_index=end_index，表示切取start_index指定的那个元素。
+Array[start_index:end_index:step]
+
+step：正负数均可，其绝对值大小决定了切取数据时的 ‘‘步长”，而正负号决定了“切取方向”，正表示 “从左往右”取.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Pytorch——基础指北_壹</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Pytorch——基础指北_壹</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">软件环境：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">一些基础知识：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">python的切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">二维数组的切片</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Tensor:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">如何使用</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Pytorch"><i class="tag post-item-tag">Pytorch</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Pytorch——基础指北_壹</h1><time class="has-text-grey" datetime="2024-09-27T16:00:00.000Z">2024-09-28</time><article class="mt-2 post-content"><h1><span id="pytorch基础指北_壹">Pytorch——基础指北_壹</span></h1>
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom:67%;">
+<h2><span id="软件环境"><strong>软件环境：</strong></span></h2>
+<ul>
+<li><strong>pytorch 1.10</strong></li>
+<li><strong>pycharm</strong></li>
+<li><strong>CUDA 10.2</strong></li>
+</ul>
+<!-- toc -->
+<ul>
+<li><a href="#%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">一些基础知识：</a>
+<ul>
+<li><a href="#python%E7%9A%84%E5%88%87%E7%89%87">python的切片</a></li>
+<li><a href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%88%87%E7%89%87">二维数组的切片</a></li>
+</ul>
+</li>
+<li><a href="#tensor">Tensor:</a>
+<ul>
+<li><a href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8">如何使用</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p>[TOC]</p>
+<h2><span id="一些基础知识">一些基础知识：</span></h2>
+<h3><span id="python的切片">python的切片</span></h3>
+<p>一个完整的切片表达式包含两个“:”，用于分隔三个参数(start_index、end_index、step)。当只有一个“:”时，默认第三个参数step=1；当一个“:”也没有时，start_index=end_index，表示切取start_index指定的那个元素。</p>
+<pre><code class="language-python">Array[start_index:end_index:step]
+</code></pre>
+<p><strong>step</strong>：正负数均可，其绝对值大小决定了切取数据时的 ‘‘步长”，<strong>而正负号决定了“切取方向”</strong>，正表示 “<strong>从左往右</strong>”取值，负表示“<strong>从右往左</strong>”取值。当step省略时，默认为1，即从左往右以步长1取值。</p>
+<p><strong>start_index</strong>：表示起始索引（包含该索引对应值）；该参数省略时，<strong>表示从对象“端点”开始取值</strong>，至于是从“起点”还是从“终点”开始，则由step参数的正负决定，step为正从“起点”开始，为负从“终点”开始。</p>
+<p><strong>end_index</strong>：表示终止索引（不包含该索引对应值）；该参数省略时，表示一直取到<strong>数据“端点”</strong>，至于是到“起点”还是到“终点”，同样由step参数的正负决定，step为正时直到“终点”，为负时直到“起点”。</p>
+<p>举例：</p>
+<pre><code class="language-python">&gt;&gt;&gt; array([0,1,2,3,4,5,6,7,8,9])
+&gt;&gt;&gt; array[-1:-6:-1]
+&gt;&gt;&gt; [9, 8, 7, 6, 5]
+step=-1，从右往左取值，start_index=-1到end_index=-6同样是从右往左取值。
+</code></pre>
+<h3><span id="二维数组的切片">二维数组的切片</span></h3>
+<p>​	多维的切片是在中括号中用逗号运算符, 将不同维上的操作分开，分割开后每个维度上单独操作即可。</p>
+<pre><code class="language-python">&gt;&gt;&gt; array = np.array([[1,2,3,4],[5,6,7,8]])
+&gt;&gt;&gt; array[1:3,2:3]
+array([[7]])
+&gt;&gt;&gt; array[0:3,2:3]
+array([[3],
+       [7]])
+</code></pre>
+<h2><span id="tensor">Tensor:</span></h2>
+<p>在深度学习里，Tensor实际上就是一个多维数组（multidimensional array）。而Tensor的目的是能够创造更高维度的矩阵、向量。<br>
+作为初学者的一些想法：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/48982978">Tensor的描述</a></p>
+<h3><span id="如何使用">如何使用</span></h3>
+<p>例子 A:<br>
+随机生成一个<strong>张量</strong></p>
+<pre><code class="language-python">import torch
+a = torch.rand(2,2);
+print(a)
+&gt;&gt;&gt; tensor([[0.8105, 0.5156],
+        [0.4006, 0.7924]])
+</code></pre>
+<p>例子 B:</p>
+<p>生成一个全是1的张量</p>
+<pre><code class="language-PYTHON">b = torch.ones(2, 2)
+print(b)
+&gt;&gt;&gt; tensor([[1., 1.],
+        [1., 1.]])
+</code></pre>
+<p>例子 C:</p>
+<p>生成一个全是1的张量，且指定类型是<strong>double</strong></p>
+<pre><code class="language-python">c = torch.ones(2, 2, dtype=torch.double)
+print(c)
+&gt;&gt;&gt; tensor([[1., 1.],
+        [1., 1.]], dtype=torch.float64)
+</code></pre>
+<p>例子 D:</p>
+<p>通过Python List 生成一个张量</p>
+<pre><code class="language-python">d = torch.tensor([2.5, 0.1, 1, 1])
+print(d)
+&gt;&gt;&gt; tensor([2.5000, 0.1000, 1.0000, 1.0000])
+</code></pre>
+<p>例子 E:</p>
+<p>直接累加</p>
+<pre><code class="language-python">e = torch.rand(2, 2)
+print(e)
+e.add_(b)
+print(e)
+&gt;&gt;&gt;
+tensor([[0.6713, 0.2451],
+        [0.5231, 0.4814]])
+
+tensor([[1.6713, 1.2451],
+        [1.5231, 1.4814]])
+</code></pre>
+<p>例子 E_2:</p>
+<p>直接累乘</p>
+<pre><code class="language-python">e.mul_(a)
+print(e)
+&gt;&gt;&gt; tensor([[1.3954, 0.9191],
+        [0.4332, 0.2947]])
+</code></pre>
+<p>例子 F:</p>
+<p>对 张量 进行切片</p>
+<pre><code class="language-PYTHON">f = e[:1, 0].item()
+print(f)
+&gt;&gt;&gt; 1.3954157829284668
+</code></pre>
+<p>例子 G:</p>
+<p>重构张量会根据重构大小自我调整 如下 <strong>2 * 2</strong>  变换为  <strong>1*4</strong></p>
+<pre><code class="language-python">g = e.view(4)
+print(g)
+&gt;&gt;&gt; tensor([1.3954, 0.9191, 0.4332, 0.2947])
+</code></pre>
+<p>例子 H:</p>
+<p>将一个张量转换成numpy的一个list ，可以发现其指向的是同一个区域内存，修改其中一个另一个也会跟着改变。</p>
+<pre><code class="language-python">h = g.numpy()
+print(type(h))
+print(h)
+g.add_(1)
+print(g)
+print(h)
+&gt;&gt;&gt;	&lt;class 'numpy.ndarray'&gt;
+	[1.3954158  0.91908276 0.4331597  0.29474875]
+	tensor([2.3954, 1.9191, 1.4332, 1.2947])
+	[2.3954158 1.9190828 1.4331597 1.2947488]
+</code></pre>
+<p>例子 特殊:</p>
+<p>torch 只支持在同一个设备内存下的运算，只有当默认情况下处于cpu状态的转换到GPU才可进行运算，转换是个很消耗时间的方法。值得一提的是numpy只允许在cpu内存运行。</p>
+<pre><code class="language-python">if torch.cuda.is_available():
+    #numpy only support cpu
+    device = torch.device("cuda")
+    h = torch.ones(5, device=device)
+    i = torch.ones(5)
+    i = i.to(device)
+    i = i.add_(h)
+    print(i)
+&gt;&gt;&gt; tensor([2., 2., 2., 2., 2.], device='cuda:0')
+#转换至CUDA
+</code></pre>
+<p>新补充：</p>
+<p>torch.max</p>
+<p>在分类问题中，通常需要使用<code>max()</code>函数对<code>softmax</code>函数的输出值进行操作，求出预测值索引，然后与标签进行比对，计算准确率。下面讲解一下<code>torch.max()</code>函数的输入及输出值都是什么，便于我们理解该函数。</p>
+<pre><code>output = torch.max(input, dim)
+</code></pre>
+<blockquote>
+<p>输入</p>
+<ul>
+<li><code>input</code>是softmax函数输出的一个<code>tensor</code></li>
+<li><code>dim</code>是max函数索引的维度<code>0/1</code>，<code>0</code>是每列的最大值，<code>1</code>是每行的最大值</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>输出</p>
+<ul>
+<li>函数会返回两个<code>tensor</code>，第一个<code>tensor</code>是每行的最大值；第二个<code>tensor</code>是每行最大值的索引。</li>
+</ul>
+</blockquote>
+<p>在多分类任务中我们并不需要知道各类别的预测概率，所以返回值的第一个<code>tensor</code>对分类任务没有帮助，而第二个<code>tensor</code>包含了预测最大概率的索引，所以在实际使用中我们仅获取第二个<code>tensor</code>即可。</p>
+<p>例子：</p>
+<p>输出每行的最大值和其</p>
+<pre><code class="language-python">&gt;&gt;&gt;
+t1 = torch.tensor([[1,2,3,4],[5,6,7,8],[9,10,11,12]])
+&gt;&gt;&gt;
+print(t1.data.max(1,keepdim = True))
+torch.return_types.max(
+                        values=tensor([[4],
+                                [ 8],
+                                [12]]),
+                        indices=tensor([[3],
+                                [3],
+                                [3]]))
+</code></pre>
+<p>运行一些操作可能会导致新结果分配到了新内存</p>
+<p>参考文献：</p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=c36lUUr864M">youtobe教程（需要科学上网）有需要搬运联系我 </a></p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/09/28/Python%E7%AD%91%E5%9F%BA(1)%E2%80%94%E2%80%94%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1/" title="Python类基础筑基（1）————面对对象"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Python类基础筑基（1）————面对对象</span></a><a class="button is-default" href="/2024/09/28/pytorch_2/" title="Pytorch ——基础指北_贰"><span class="has-text-weight-semibold">Next: Pytorch ——基础指北_贰</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2025</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>

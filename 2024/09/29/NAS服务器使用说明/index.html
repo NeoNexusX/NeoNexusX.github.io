@@ -1,0 +1,236 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>NAS服务器使用说明</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="NAS服务器使用说明
+
+
+Version:1.0
+Date: 2024.04.23
+Authors：Tr，NeoNeuxs
+
+
+基本的网络要求
+目录结构
+如何建立映射来上传内容
+上传内容没有及时更新该怎么办？
+一些使用规则
+上传之后如何在服务器上使用
+最佳实践
+
+一些基础知识
+最佳实践
+
+
+
+
+基本的网络要求
+网络要求需要在校园网中，在校园网外需要使用VPN来进行上传。上传文件的速度取决于你的链接速度，推荐使用网线上传。
+为什么我的网速很慢？打开校园网链接信息，网线连接的用户，一般不用考虑这个问题，此处可以跳过。
+
+查看连接信息：
+
+应连接到5HZ频段，2.4Ghz频段速度较低，较慢的情况如下：
+
+**72Mbps相当于10M左右的网速，如果上传100GB的数据那就需要100*1000/10 = 10000.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">NAS服务器使用说明</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">NAS服务器使用说明</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">基本的网络要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">如何建立映射来上传内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">上传内容没有及时更新该怎么办？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">一些使用规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">上传之后如何在服务器上使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">最佳实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">一些基础知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">最佳实践</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Bionet"><i class="tag post-item-tag">Bionet</i></a><a href="/tags/NAS"><i class="tag post-item-tag">NAS</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">NAS服务器使用说明</h1><time class="has-text-grey" datetime="2024-09-29T12:46:25.000Z">2024-09-29</time><article class="mt-2 post-content"><h1><span id="nas服务器使用说明">NAS服务器使用说明</span></h1>
+<img src="https://s2.loli.net/2024/09/29/F4JzXvoRg5kuWin.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1727547916644" style="zoom:50%;">
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom: 50%;">
+<p>Version:1.0</p>
+<p>Date: 2024.04.23</p>
+<p>Authors：Tr，NeoNeuxs</p>
+<!-- toc -->
+<ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E7%9A%84%E7%BD%91%E7%BB%9C%E8%A6%81%E6%B1%82">基本的网络要求</a></li>
+<li><a href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84">目录结构</a></li>
+<li><a href="#%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8B%E6%98%A0%E5%B0%84%E6%9D%A5%E4%B8%8A%E4%BC%A0%E5%86%85%E5%AE%B9">如何建立映射来上传内容</a></li>
+<li><a href="#%E4%B8%8A%E4%BC%A0%E5%86%85%E5%AE%B9%E6%B2%A1%E6%9C%89%E5%8F%8A%E6%97%B6%E6%9B%B4%E6%96%B0%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E">上传内容没有及时更新该怎么办？</a></li>
+<li><a href="#%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E8%A7%84%E5%88%99">一些使用规则</a></li>
+<li><a href="#%E4%B8%8A%E4%BC%A0%E4%B9%8B%E5%90%8E%E5%A6%82%E4%BD%95%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E4%BD%BF%E7%94%A8">上传之后如何在服务器上使用</a></li>
+<li><a href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">最佳实践</a>
+<ul>
+<li><a href="#%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">一些基础知识</a></li>
+<li><a href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5-1">最佳实践</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h2><span id="基本的网络要求">基本的网络要求</span></h2>
+<p>网络要求需要在校园网中，在校园网外需要使用VPN来进行上传。上传文件的速度取决于你的链接速度，推荐使用网线上传。</p>
+<p>为什么我的网速很慢？打开校园网链接信息，网线连接的用户，一般不用考虑这个问题，此处可以跳过。</p>
+<img src="https://s2.loli.net/2024/04/23/CWBdyLkx72UXKna.png" alt="image-20240423215045985" style="zoom:67%;">
+<p>查看连接信息：</p>
+<img src="https://s2.loli.net/2024/04/23/S2b6eO89k7hdFAH.png" alt="image-20240423215142791" style="zoom:80%;">
+<p>应连接到5HZ频段，2.4Ghz频段速度较低，较慢的情况如下：</p>
+<img src="https://s2.loli.net/2024/04/23/8G6U7LedFmag9z4.png" alt="image-20240423215305320" style="zoom:67%;">
+<p>**72Mbps相当于10M左右的网速，如果上传100GB的数据那就需要100*1000/10 = 10000s，也就是2.78个小时才能完成上传。**所以使用的时候请注意。</p>
+<p>如何从2.4Ghz切换到5Ghz？首先电脑支持5Ghz频段才能使用，2.4Ghz频段切换方法如下：</p>
+<p><img src="https://s2.loli.net/2024/04/23/j2pdsZQyIFPi7C8.png" alt="image-20240423215639861"></p>
+<p>点击<strong>断开连接</strong>后再次点击连接就能查看所连接的信息是否改变，没有改变的情况下，多次尝试即可。</p>
+<h2><span id="目录结构">目录结构</span></h2>
+<p><img src="https://s2.loli.net/2024/04/24/9Yz6UONRdgisnwT.png" alt="image-20240424234753210"></p>
+<p>第一级目录存放了两个文件夹，分别是我个人的用户文件夹，<strong>公用的数据文件夹Dataset</strong>，一般要求如下：</p>
+<p><img src="https://s2.loli.net/2024/04/24/T1PUYLxzKVSsNkl.png" alt="image-20240424235033899"></p>
+<h2><span id="如何建立映射来上传内容">如何建立映射来上传内容</span></h2>
+<p>1.打开我的电脑，并在左侧右击“此电脑”，然后点击“映射网络驱动器”。</p>
+<p><img src="https://s2.loli.net/2024/04/23/zVMEx1q9O4QJt2m.png" alt="image-20240423202540683"></p>
+<p>2.弹出弹窗，点击“连接到可用于存储文档和图片的网站”。</p>
+<p><img src="https://s2.loli.net/2024/04/23/A1ihgnZuxBNJY97.png" alt="image-20240423203018882"></p>
+<p>3.点两次下一步。</p>
+<p><img src="https://s2.loli.net/2024/04/23/QjiskIncw7T9E4G.png" alt="image-20240423203100159"></p>
+<p><img src="https://s2.loli.net/2024/04/23/O1yt4lv8H95XdWn.png" alt="image-20240423203212778"></p>
+<p>4.输入Internet地址或网络地址：</p>
+<pre><code>ftp://10.26.58.111
+</code></pre>
+<p><img src="https://s2.loli.net/2024/04/23/s981hadbKNUWYJr.png" alt="image-20240423203455064"></p>
+<p>5.一定记得<strong>取消匿名登录</strong>！！输入用户名“bionet"。</p>
+<p><img src="https://s2.loli.net/2024/04/23/NnB3aCoSYVpLDzy.png" alt="image-20240423203635552"></p>
+<p><img src="https://s2.loli.net/2024/04/23/heH3M2NxyAZXmUf.png" alt="image-20240423203732896"></p>
+<p>6.给你这个网络位置起一个名字，这里自己起一个方便自己标识的名字就行，这里我起名叫做bionet-tr。</p>
+<p><img src="https://s2.loli.net/2024/04/23/rXPga2uA43iMG8W.png" alt="image-20240423204219721"></p>
+<p>7.输入密码之后，密码详见群内信息，完成。</p>
+<p><img src="https://s2.loli.net/2024/04/23/GUFsW2z6jOCyVxH.png" alt="image-20240423204302462"></p>
+<p>8.使用。此时“我的电脑”会出现以下网络连接图标，点击图标进入。此时就可以通过拖拽进行数据上传了。</p>
+<p><img src="https://s2.loli.net/2024/04/23/1DqclYEfFA2Jpia.png" alt="image-20240423204424138"></p>
+<p><img src="https://s2.loli.net/2024/04/23/tnK86qs74ToNxZD.png" alt="image-20240423204739094"></p>
+<h2><span id="上传内容没有及时更新该怎么办">上传内容没有及时更新该怎么办？</span></h2>
+<p>映射之后，我们打开：</p>
+<p><img src="https://s2.loli.net/2024/04/23/THoBR5P9wdnQmK7.png" alt="image-20240423214856217"></p>
+<p>点击刷新即可：</p>
+<p><img src="https://s2.loli.net/2024/04/23/3W4yhu2RpxQgZd7.png" alt="image-20240423214906566"></p>
+<h2><span id="一些使用规则">一些使用规则</span></h2>
+<p>由于FTP权限管理比较薄弱，各位拥有的权限都比较高，所以请将较大的数据集放入Dataset文件夹：</p>
+<p>再强调一遍！请将对应的数据放到Dataset文件夹，按照以下命名规则：</p>
+<p><code>使用者姓名__数据集名__版本</code>。举个例子：</p>
+<p><img src="https://s2.loli.net/2024/04/23/ySpLnWN9D3VewUu.png" alt="image-20240423220546039"></p>
+<p><strong>需要强调的是，v是小写，<code>_</code>是英文下划线，一个即可。</strong></p>
+<p><strong>创建之后没有及时显示，请刷新即可</strong>。</p>
+<p>私人文件请放入上一层，以自己名字命名的文件夹下，请创建自己的文件夹如图所示：</p>
+<img src="https://s2.loli.net/2024/04/23/x59UIvJ81hN7HmY.png" alt="image-20240423220213345" style="zoom:67%;">
+<p><strong>创建之后没有及时显示，请刷新即可</strong>。</p>
+<h2><span id="上传之后如何在服务器上使用">上传之后如何在服务器上使用</span></h2>
+<p>该NAS服务器映射在原来服务器的/home/Data_NAS/路径下。进入该路径即可看到所有上传的数据。</p>
+<img src="https://s2.loli.net/2024/04/23/ZcW8fD2J1u6gib5.png" alt="image-20240423205229731" style="zoom:80%;">
+<img src="https://s2.loli.net/2024/04/23/BARezykG3fYimQ2.png" alt="image-20240423205433620" style="zoom:80%;">
+<h2><span id="最佳实践">最佳实践</span></h2>
+<h3><span id="一些基础知识">一些基础知识</span></h3>
+<p>下图展示了存储配置的全部架构：</p>
+<pre class="mermaid">graph LR;
+    A["容器(最高权限)"] 
+    B["服务器主机A"]
+    F["服务器主机B(待建设)"]
+    C["NAS(网络附加存储)"]
+    D["你的本地电脑"]
+    E["外部网盘"]
+    
+    
+    A--"Datasets文件夹依赖于"---&gt;C
+    A--"运行依赖于"---&gt;B
+    A--"运行依赖于"---&gt;F
+    B--"Datasets文件夹依赖于"---&gt;C
+    F--"Datasets文件夹依赖于"---&gt;C
+    A--"NCZone、R_Share、P_Share文件夹直接存在于"---&gt;B
+    D =="Bionet(Datasets)文件夹依赖于"==&gt;C
+    D--"连接运行"---&gt;A
+    E--"数据"--&gt;D</pre>
+<p>在这里再次对主机（服务器主机）上存在的文件解释一下：</p>
+<p>主机上的文件存储由这样的硬盘空间组成的,分为高速、中速、低速区。顾名思义，每个区域速度不同，速度不同的同时稳定性也存在一定的差异，稳定性和速度正好相反：</p>
+<p><code>Data_NAS(Datasets) &gt; Samsung 860evo 512G  &gt; GLOWAY YCQ4TNVMe-M.2</code></p>
+<p>其中每一条格式如下：[分区名、挂载路径、分区大小]</p>
+<pre class="mermaid">graph TB;
+  subgraph HighSpeed
+  nvme0n1("nvme0n1:GLOWAY YCQ4TNVMe-M.2")
+  nvme0n1 --&gt; nvme0n1p1("nvme0n1p1,[/home],2.5T")
+  nvme0n1 --&gt; nvme0n1p2("nvme0n1p2,[/],1T")
+  nvme0n1 --&gt; nvme0n1p3("nvme0n1p3,[swap],256G")
+  nvme0n1 --&gt; nvme0n1p4("nvme0n1p4,[/var],128G")
+  nvme0n1 --&gt; nvme0n1p5("nvme0n1p5,[/opt],128G")
+  nvme0n1 --&gt; nvme0n1p6("nvme0n1p6,[/tmp],50G")
+  end
+  HighSpeed --&gt; MiddleSpeed
+  subgraph MiddleSpeed
+  sda("sda:Samsung 860evo 512G")
+  sda --&gt; sda1["sda1,[/boot/efi],500MB"]
+  sda --&gt; sda2["sda2,[/boot],1GB"]
+  sda --&gt; empty["docker lvm[/var/lib/docker] 400G"]
+  end
+  MiddleSpeed --&gt; LowSpeed
+  subgraph LowSpeed
+  NAS --&gt; NFS1(NFS,/home/Data_NAS,16T)
+  NAS --&gt; NFS2(NFS,/home/Datasets,16T)
+  end</pre>
+<p>这其中包含了共享文件夹和用户文件夹，如图共享文件夹使用红框标注，用来传递文件</p>
+<p><img src="https://s2.loli.net/2024/05/13/hMrBjZOIpcC5Fgv.png" alt="image-20240513230049068"></p>
+<p>一共包含五个文件夹：</p>
+<ul>
+<li>
+<p>Datasets文件夹是用来放置公用数据集的，其命名需要遵循以下方式：<code>上传者_数据集名称_上传日期</code>。</p>
+<ul>
+<li>此文件夹使用详见：<a target="_blank" rel="noopener" href="http://10.26.58.109/2024/09/29/NAS%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">NAS服务器使用说明</a></li>
+</ul>
+</li>
+<li>
+<p>Data_NAS是直接连接到NAS的文件夹，其目录内容与Datasets保持一致，但是二者物理通道不同（挂载在不同的IP），使用起来是一模一样的。</p>
+</li>
+<li>
+<p>PastData文件夹是过去硬盘中的所有数据，在三个月后将会自动删除，各位及时使用。【现在已经删除】</p>
+</li>
+<li>
+<p>NCZone文件夹是没有做任何保护的文件夹，用户随时可写可删除，使用的时候需要小心删除，并避免写冲突问题（多人对同一个文件修改），其不被多个服务器所共享，<strong>只保存在No1或者No2服务器上</strong>。</p>
+</li>
+<li>
+<p>Some_scripts文件夹使用分享一个shell脚本的，用来管理系统方便的，使用需要管理员权限。</p>
+</li>
+<li>
+<p>SoftWares文件夹比较特殊：</p>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2024/04/01/dXxH8ARVvPUEf6r.png" alt="image-20240401205431946"></p>
+<p>里面包含了P_Share和R_Share,分别挂载到了对应的容器用来分享文件，容器使用的时候只可读，部分情况下可以写入，如果报错则说明无法写入（处于权限和安全考虑这样设置的），需要通过桌面用户来写入文件。</p>
+<p>P代指python容器，R代指R语言容器的存储空间。</p>
+<h3><span id="最佳实践">最佳实践</span></h3>
+<p>简化后的路径当中红色的路径为推荐的上传数据集的方式：</p>
+<img src="https://s2.loli.net/2024/10/21/mZun6qNW3tvPTKB.png" alt="image-20241021232145477" style="zoom:80%;">
+<p>代码等数据集合比较小的可以直接上传：</p>
+<p><img src="https://s2.loli.net/2024/10/21/y6vCgVmNFjOHD4T.png" alt="image-20241021234950722"></p>
+<p>对于R容器，建议直接使用R_Share或者NCZone,可以考虑如下路径：</p>
+<p><img src="https://s2.loli.net/2024/10/21/naqj2KiNpMvyzoP.png" alt="image-20241021235340468"></p>
+<p>Matlab使用路径同其他。</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/09/29/Bionet_WiFi/" title="Bionet_WIFI使用指南"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Bionet_WIFI使用指南</span></a><a class="button is-default" href="/2024/09/28/%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%20%20%E2%80%94%E2%80%94%20%20%E5%BF%AB%E9%80%9F%E5%A4%8D%E8%8B%8F%E7%AC%94%E8%AE%B0%5B%E8%B4%B0%5D%EF%BC%88%E5%BA%94%E7%94%A8%E7%AF%87%EF%BC%89/" title="运算放大器  ——  快速复苏笔记[贰]（应用篇）"><span class="has-text-weight-semibold">Next: 运算放大器  ——  快速复苏笔记[贰]（应用篇）</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2025</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>

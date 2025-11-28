@@ -1,0 +1,229 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>Android开发笔记——快速入门（Kotlin的NULL）</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="Android开发笔记——快速入门 (Kotlin与NULL)
+
+
+软件环境：
+
+Jetbrains Toolbox
+Android Sudio 2021.1.1 Bumblebee
+JDK 17.0.2
+
+
+
+Kotlin的空指针与辅助工具
+
+Kotlin的判空
+Kotlin的可空类型
+Kotlin的判空辅助工具
+
+?.
+?:
+let函数
+
+
+Kotlin判空的特殊情况
+
+
+
+
+[TOC]
+Kotlin的空指针与辅助工具
+Kotlin的判空
+在写java或者c的时候最让人难受的就是空指针的问题了，当你写了一大段代码，运行时来一个报错，心态是很爆炸的，怎么又找不到变量在哪里了？但是你如果正常情况下书写kotlin就不会遇到这些问题，为什么呢？
+因为kotlin将判空过程不是放在运行时，而是放在了编译过程中，.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Android开发笔记——快速入门（Kotlin的NULL）</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Android开发笔记——快速入门 (Kotlin与NULL)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">软件环境：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Kotlin的空指针与辅助工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Kotlin的判空</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Kotlin的可空类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Kotlin的判空辅助工具</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">?.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">?:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">let函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Kotlin判空的特殊情况</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Android"><i class="tag post-item-tag">Android</i></a><a href="/tags/Kotlin"><i class="tag post-item-tag">Kotlin</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Android开发笔记——快速入门（Kotlin的NULL）</h1><time class="has-text-grey" datetime="2024-10-21T16:00:00.000Z">2024-10-22</time><article class="mt-2 post-content"><h1><span id="android开发笔记快速入门-kotlin与null">Android开发笔记——快速入门 (Kotlin与NULL)</span></h1>
+<img src="https://s2.loli.net/2024/09/29/9rGTdRm4giweluL.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1727617602165" style="zoom:50%;">
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom: 50%;">
+<h4><span id="软件环境">软件环境：</span></h4>
+<ul>
+<li><strong>Jetbrains Toolbox</strong></li>
+<li><strong>Android Sudio 2021.1.1 Bumblebee</strong></li>
+<li><strong>JDK 17.0.2</strong></li>
+</ul>
+<!-- toc -->
+<ul>
+<li><a href="#kotlin%E7%9A%84%E7%A9%BA%E6%8C%87%E9%92%88%E4%B8%8E%E8%BE%85%E5%8A%A9%E5%B7%A5%E5%85%B7">Kotlin的空指针与辅助工具</a>
+<ul>
+<li><a href="#kotlin%E7%9A%84%E5%88%A4%E7%A9%BA">Kotlin的判空</a></li>
+<li><a href="#kotlin%E7%9A%84%E5%8F%AF%E7%A9%BA%E7%B1%BB%E5%9E%8B">Kotlin的可空类型</a></li>
+<li><a href="#kotlin%E7%9A%84%E5%88%A4%E7%A9%BA%E8%BE%85%E5%8A%A9%E5%B7%A5%E5%85%B7">Kotlin的判空辅助工具</a>
+<ul>
+<li><a href="#"><code>?.</code></a></li>
+<li><a href="#"><code>?:</code></a></li>
+<li><a href="#let%E5%87%BD%E6%95%B0">let函数</a></li>
+</ul>
+</li>
+<li><a href="#kotlin%E5%88%A4%E7%A9%BA%E7%9A%84%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5">Kotlin判空的特殊情况</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p>[TOC]</p>
+<h2><span id="kotlin的空指针与辅助工具">Kotlin的空指针与辅助工具</span></h2>
+<h3><span id="kotlin的判空">Kotlin的判空</span></h3>
+<p>在写java或者c的时候最让人难受的就是空指针的问题了，当你写了一大段代码，运行时来一个报错，心态是很爆炸的，怎么又找不到变量在哪里了？但是你如果正常情况下书写kotlin就不会遇到这些问题，为什么呢？</p>
+<p>因为kotlin将判空过程不是放在运行时，而是放在了编译过程中，甚至有些在kotlin语言设计的时候就已经在考虑如何避免了，说起来可能很复杂，接下来详细介绍一下kotlin的判空机制。</p>
+<p>先来看一段代码：</p>
+<pre><code class="language-kotlin">class Zzy(val gender: String = "Boy") : Person(22,"zhuzeyu")
+{
+    constructor(iq:Int, eq:Int) : this("man")
+    {
+        println("his iq is "+iq+" eq is " + eq)
+    }
+    init
+    {
+        println(name+" is a "+gender+" age is "+age)
+    }
+}
+
+fun main(args: Array&lt;String&gt;)
+{
+    //koltin 空指针检查 //这段代码没有空指针风险
+    val zzy = Zzy("boy")
+}
+
+</code></pre>
+<p>我们构造了一个类并且继承了Person类，最后在主函数中调用这个类的构造方法，需要注意的是构造方法需要传入的一个字符串，如果传入的是一个空的字符串这里就会产生空指针问题，在java中是不给你任何提示的，但是在kotlin中就有所不同：</p>
+<p><img src="https://s2.loli.net/2024/09/29/ob2dVHwq4IxAWSU.png" alt="image-20220408215120939"></p>
+<p>可以看到kotlin因为传入空而报错，这不是最重要的，因为这里显式的传入了null，那如果我们传入的是一个变量呢？</p>
+<p>这里为了方便演示再传入一段代码：</p>
+<pre><code class="language-kotlin">fun main(args: Array&lt;String&gt;)
+{
+    //koltin 空指针检查 //这段代码没有空指针风险
+    val zzy = Zzy(null)
+    var fake_zzy :String = null;
+}
+</code></pre>
+<p>实际上<code>var fake_zzy :String = null</code>是不能运行的，kotlin给出了错误提示：</p>
+<p><img src="https://s2.loli.net/2024/09/29/ASvpMjH15egbKnd.png" alt="image-20220408222048233"></p>
+<p>编译器知道你这里传入就是一个null，所以代码实际上是不能运行的。</p>
+<p>可以看到Kotlin从编译层面就避免了空指针问题的发生，但是这就意味着null在kotlin中就没有用处了吗？当然不是，接下来来介绍kotlin的可空类型。</p>
+<h3><span id="kotlin的可空类型">Kotlin的可空类型</span></h3>
+<p>如果在某个情况下我需要根据传入的变量的情况（空或者不空）来进行操作，但是你意识到这里面所有的传递参数都不能是空，甚至连编译都没办法通过这怎么办？</p>
+<p>kotlin其实提供了可空类型</p>
+<p>我们来看一个例子：</p>
+<p><img src="https://s2.loli.net/2024/09/29/q7HRpfNolbKTBs8.png" alt="image-20220408221845089"></p>
+<p>你注意到String后边添加了一个？这事 String的变量不再报错了，对这就是可空的String类型。</p>
+<p>当然不止String有，每个kotlin的类型都可以声明为可空类型，基本结构如下：</p>
+<pre><code class="language-kotlin">var 变量名 ： 变量类型 ? = null
+</code></pre>
+<p>当然你也许也注意到了方法传入的参数也被报错了，</p>
+<p>其中test类是用来创建测试函数的，函数具体内容如下：</p>
+<pre><code class="language-kotlin">fun eat_empty_food (person: Person) = 
+    if (person != null) 
+        person.eat_empty() 
+    else
+        "empty"
+</code></pre>
+<p>可以看到此方法接受一个Person类作为参数，而zzy类继承了People类正好可以作为参数传递进去，但是这里我们传入了一个null，编译器报错了，为什么呢？因为参数也需要设置成可空的类型：</p>
+<pre><code class="language-kotlin">fun eat_empty_food (person: Person?) = 
+	if (person != null) 
+		person.eat_empty() 
+	else 
+		"empty"
+</code></pre>
+<p>这段代码什么意思呢？就是如果传进来的参数不是null的就正常调用一个方法，如果是空的就返回empty字符串。</p>
+<p>是不是很简单呢？这是kotlin为了避免空指针问题而做的隔离，完全将空指针和正常变量做了一个隔离。</p>
+<h3><span id="kotlin的判空辅助工具">Kotlin的判空辅助工具</span></h3>
+<p>在上面我们介绍了kotlin如何将空指针赶尽杀绝，但是我们有些时候也需要通过空指针来判断一些具体情况，Kotlin同时提供了一套完整、便捷的判断工具。</p>
+<h4><span id><code>?.</code></span></h4>
+<p>首先介绍：<code>?.</code></p>
+<p>在上一节，如果你更改了参数为可空类型，实际上他还会报错，因为这时候函数使用的时候，就有可能遇到null问题，如何更改呢？就要使用<code>?.</code>。</p>
+<pre><code class="language-kotlin">fun eat_empty_food_update (person: Person?) = person?.eat_empty()
+</code></pre>
+<p><code>?.</code>当对象不为空的时候正常调用方法，当为空的时候什么也不做。这里的作用就是为了避免空指针调用方法，你会说这好鸡肋啊没什么用，先别急后边会有更方便的方法一起组合来使用。</p>
+<h4><span id><code>?:</code></span></h4>
+<p>我们先介绍第二个工具关键词：<code>?:</code></p>
+<p>这个操作符左右两边都接受一个表达式，如果左边表达式的结果不为空就返回左边的表达式，否则就返回右边的表达式的结果。你如果问这个有什么用？我们返回去看一段代码：</p>
+<pre><code class="language-kotlin">fun eat_empty_food (person: Person?) = 
+	if (person != null) 
+		person.eat_empty() 
+	else 
+		"empty"
+</code></pre>
+<p><code>?:</code>就和if和else作用一摸一样，就是其的简写，这样看起来是不是很简单很方便？</p>
+<pre><code class="language-kotlin">fun eat_empty_food_plus (person: Person?) = person?.eat() ?: "empty"
+</code></pre>
+<p>当person为空的时候<code>?.</code>就会返回一个null这时候配合<code>?:</code>就实现了简化版的if else，从而避免了为null的情况。</p>
+<h4><span id="let函数">let函数</span></h4>
+<p>let函数是kotlin独特的一个函数，这个函数接收的参数是一个函数式API接口，也就是需要你传入进去一个lambda表达式来使用，如果你不懂就翻回去看上一篇。</p>
+<p>我这里直接介绍let如何使用：</p>
+<pre><code class="language-kotlin">obj.let{
+	obj -&gt; //函数体
+}
+</code></pre>
+<p>举个例子：</p>
+<pre><code class="language-kotlin">private var special : String? = "empty_special"
+
+//let函数
+this.special?.let{it.length}
+
+输出结果：
+13
+</code></pre>
+<p>你可以发现let函数默认将调用它的对象作为参数传入到了lambda表达式中，这有什么用呢？</p>
+<p>如果存在一种情况，你需要判断的对象调用了两个方法，你要这样写吗？</p>
+<pre><code class="language-kotlin">fun eat_twofood (person: Person?) = 
+{
+    person?.eat_empty()
+    person?.eat()
+}
+</code></pre>
+<p>这样一点也不优雅，打咩！</p>
+<p>kotlin就是讲究优雅，我们改写以后使用let函数会将对象自动作为参数的特性：</p>
+<pre><code class="language-kotlin">fun eat_twofood (person: Person?) = person?.let { it.eat_empty(); it.eat();  }
+</code></pre>
+<p>kotlin的函数一行就足够了！</p>
+<p>可以看到我们使用let函数的特性来实现了对单个对象引用多方法的判空处理，这样我们只需要判断一次就可以了，如果有多个方法调用，也只需要一次，省力又省时。我们只需要在let函数前使用<code>?.</code>判断一次即可,然后使用let函数的参数来调用对应方法。</p>
+<h3><span id="kotlin判空的特殊情况">Kotlin判空的特殊情况</span></h3>
+<p>Kotlin的判空并不是完美的，某些情况下会阻碍我们的书写，因此要提前预知从而避免。</p>
+<pre><code class="language-kotlin">//特殊情况
+if (test.special!=null)
+    println(test.eat_empty_food_special())
+</code></pre>
+<p>其中<code>eat_empty_food_specia</code>方法如下：</p>
+<pre><code class="language-kotlin">fun eat_empty_food_special () = this.special.length
+</code></pre>
+<p><img src="https://s2.loli.net/2024/09/29/lkxcVzMjhs3oUGq.png" alt="image-20220408232756812"></p>
+<p>实际上这里是有报错的，因为这里编译器判定special可能为空，但是实际我们在函数的外，调用方法之前已经对其做了防空处理，但是IDE感知不到，但是问题不大，我们更换写法即可。</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/10/22/Android%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%20(Kotlin%E5%85%A5%E9%97%A8)/" title="Android开发笔记——快速入门（Kotlin入门）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Android开发笔记——快速入门（Kotlin入门）</span></a><a class="button is-default" href="/2024/10/22/Android%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%20(Kotlin%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95)%20/" title="Android开发笔记——快速入门（Kotlin的对象扩展与高阶函数深入）"><span class="has-text-weight-semibold">Next: Android开发笔记——快速入门（Kotlin的对象扩展与高阶函数深入）</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2025</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>

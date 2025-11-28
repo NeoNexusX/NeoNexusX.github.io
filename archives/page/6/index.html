@@ -1,0 +1,169 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>NeoNexus's blog</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/widget-post-list.css"><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><span>Archives · All</span></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><article class="post-container is-flex is-justify-content-center section container is-max-widescreen pt-4 px-2"><div class="columns is-variable is-1-tablet is-3-desktop-only is-2-widescreen is-full-width"><section class="column"><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://s2.loli.net/2024/09/29/vNKRfOVDTng7wdL.jpg" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2024/09/21/Bionet-Server01%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"><img class="post-cover-img js-img-fadeIn" src="https://s2.loli.net/2024/09/29/vNKRfOVDTng7wdL.jpg" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Bionet"><i class="tag post-item-tag">Bionet</i></a><a href="/tags/ops"><i class="tag post-item-tag">ops</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2024/09/21/Bionet-Server01%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">BionetServer-No1使用说明-基础篇</a></h2><time class="has-text-grey" datetime="2024-09-21T12:46:25.000Z">2024-09-21</time><p class="is-flex-grow-2 mt-2">BionetServer-No1使用说明-基础篇
+
+
+Version:1.0
+基础篇更新记录：
+
+V1.0 简化了文档的内容，拆分了文档分为入门和进阶使用。添加了Anaconda的使用介绍，方便入门。
+
+过往更新记录：
+
+V1.9 简化了文档的内容，拆分了文档分为入门和进阶使用，删除了容器Matlab的内容。
+V1.8 新增了R使用说明，划分了端口和详细的版本，简单撰写了使用注意事项。
+V1.7 新增了UI使用说明，同时请注意显卡使用。
+V1.6 新增了Tensorflow专用的镜像，使用Tensorflow的可以使用新的镜像，运行速度提升两倍。
+V1.5版本更新，修复Pytorch shm报错的问题，添加了新的镜像，新的镜像自带pytorch等常用python包，添加了Shared memory size..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2024/09/21/Bionet-Server01%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">Read more</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://s2.loli.net/2024/09/29/qWjluktz8hxAV4E.jpg" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2024/09/21/Bionet-Server01%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%20%E2%80%94%E2%80%94Docker%E7%AF%87/"><img class="post-cover-img js-img-fadeIn" src="https://s2.loli.net/2024/09/29/qWjluktz8hxAV4E.jpg" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Bionet"><i class="tag post-item-tag">Bionet</i></a><a href="/tags/ops"><i class="tag post-item-tag">ops</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2024/09/21/Bionet-Server01%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%20%E2%80%94%E2%80%94Docker%E7%AF%87/">BionetServer-No1使用说明-进阶（Docker方式）</a></h2><time class="has-text-grey" datetime="2024-09-21T12:46:25.000Z">2024-09-21</time><p class="is-flex-grow-2 mt-2">BionetServer-No1使用说明-进阶（Docker方式）
+
+
+Version:1.3
+Docker篇更新记录：
+
+添加了常见错误解决方案
+添加了复制容器使用说明
+修改了镜像使用指南
+删除了R部分内容，将在下一个版本重构R说明
+
+Date: 2025.9.24
+Authors：魏持之，NeoNexus
+
+
+开发的最佳实践
+
+Docker的使用与创建
+image（镜像）和container（容器）的关系
+Docker本身的安装
+通过portainer构建自己的容器
+
+Images（镜像）
+container（容器）
+容器的配置
+
+存储配置
+存储配置的最佳实践
+lable配置
+重启策略配置
+运行时配置
+
+
+Tensorflow使用Jupyter登录
+使用已有容器复制
+使用VSCode连接容器
+开启代码补..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2024/09/21/Bionet-Server01%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%20%E2%80%94%E2%80%94Docker%E7%AF%87/">Read more</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://s2.loli.net/2024/09/29/6Xo9VwZBhLIJ8Yk.jpg" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2024/09/21/Hexo+github+Markdown%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"><img class="post-cover-img js-img-fadeIn" src="https://s2.loli.net/2024/09/29/6Xo9VwZBhLIJ8Yk.jpg" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Bionet"><i class="tag post-item-tag">Bionet</i></a><a href="/tags/blog"><i class="tag post-item-tag">blog</i></a><a href="/tags/hexo"><i class="tag post-item-tag">hexo</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2024/09/21/Hexo+github+Markdown%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">Hexo+github+Markdown博客搭建</a></h2><time class="has-text-grey" datetime="2024-09-21T12:46:25.000Z">2024-09-21</time><p class="is-flex-grow-2 mt-2">Hexo+github+Markdown博客搭建
+
+
+
+
+特性：
+工具：
+
+
+Hexo工具链配置
+mermaid添加支持
+部署在cortex-A7之上
+完成多平台同步推送
+添加Math公式支持
+
+
+[TOC]
+特性：
+
+build工具链支持跨平台使用：linux &amp;amp; windows
+部署支持多平台：linux(32&amp;amp;64)&amp;amp;windows&amp;amp;github&amp;amp;docker
+一次部署即可使用，支持markdown,mermaid,math公式，TOC目录等markdown特性。
+
+工具：
+markdown工具：Typora
+跨平台后端：Nginx
+部署平台：orangepi R1 cortex-A7架构 32位双核 &amp;amp; github.io
+Hexo工具链配置
+hexo..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2024/09/21/Hexo+github+Markdown%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">Read more</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2024/09/21/%E6%9E%84%E5%BB%BA%E4%B8%80%E5%8F%B0%E5%85%88%E8%BF%9B%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%9C%8D%E5%8A%A1%E5%99%A8/"><img class="post-cover-img js-img-fadeIn" src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Bionet"><i class="tag post-item-tag">Bionet</i></a><a href="/tags/ops"><i class="tag post-item-tag">ops</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2024/09/21/%E6%9E%84%E5%BB%BA%E4%B8%80%E5%8F%B0%E5%85%88%E8%BF%9B%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%9C%8D%E5%8A%A1%E5%99%A8/">如何构建一台机器学习服务器</a></h2><time class="has-text-grey" datetime="2024-09-21T12:46:25.000Z">2024-09-21</time><p class="is-flex-grow-2 mt-2">如何构建一台机器学习服务器
+Version：V1.0
+Author：NeoNexus
+Date：2024.03.26
+服务器设计要求：高性能、满足同时多人开发的需求、架构清晰、后期方便维护。因此写下此文档。
+基于 最先进的架构、最先进硬件。
+
+监修中敬告
+
+本文处于Preview阶段，不对文章内容负任何责任，如有意见探讨欢迎留言。
+联系方式——绿泡泡：NeoNexusX
+
+
+系统信息
+
+系统安装
+
+
+硬件配置：
+
+硬件安装指南
+CPU
+GPU
+硬盘分区结果
+以太网和IP设置
+
+
+基础内容配置
+
+Jetbrain IDE &amp;amp; VSCode安装
+
+Jetbrains shell scripts有什么用？
+
+
+Matlab安装与配置
+R Studio Server安装
+VSCode安装与配置
+将软件快捷方..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2024/09/21/%E6%9E%84%E5%BB%BA%E4%B8%80%E5%8F%B0%E5%85%88%E8%BF%9B%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%9C%8D%E5%8A%A1%E5%99%A8/">Read more</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://s2.loli.net/2024/09/29/qWjluktz8hxAV4E.jpg" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2024/09/21/Bionet-Server01%20Q&amp;A%E2%80%94%E2%80%94Docker%E7%AF%87/"><img class="post-cover-img js-img-fadeIn" src="https://s2.loli.net/2024/09/29/qWjluktz8hxAV4E.jpg" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Bionet"><i class="tag post-item-tag">Bionet</i></a><a href="/tags/ops"><i class="tag post-item-tag">ops</i></a><a href="/tags/Q&amp;A"><i class="tag post-item-tag">Q&amp;A</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2024/09/21/Bionet-Server01%20Q&amp;A%E2%80%94%E2%80%94Docker%E7%AF%87/">BionetServer-No1. Q&amp;A-Docker</a></h2><time class="has-text-grey" datetime="2024-09-21T12:46:25.000Z">2024-09-21</time><p class="is-flex-grow-2 mt-2">BionetServer-No1. Q&amp;amp;A-Docker
+
+
+Version:1.0
+Date: 2025.10.10
+Authors：NeoNexus
+
+
+Q&amp;amp;A：
+
+问题零 通过容器写入的文件无法运行？
+问题一 容器重启之后无法连接？
+问题二 创建一个Docker失败之后再次连接相同端口为什么不行？
+问题三 关闭了VSCode代码就停止运行了？
+问题四 Bad owner or permissions on
+问题五 Python脚本使用nohup运行时，指定文件没有输出内容
+问题六 R_studio打开之后没有见对应这两个文件夹
+问题七 创建容器提示Code Failed 500 代码错误
+
+
+
+
+[TOC]
+Q&amp;amp;A：
+问题零 通过容器写入的文件无法运行？
+容器的用户都是root..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2024/09/21/Bionet-Server01%20Q&amp;A%E2%80%94%E2%80%94Docker%E7%AF%87/">Read more</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://s2.loli.net/2023/10/23/UvSq4AxVNdbzeWC.jpg" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2023/10/21/PyCharm%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%EF%BC%881%EF%BC%89%E2%80%94%E2%80%94%E7%BC%96%E8%BE%91%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/"><img class="post-cover-img js-img-fadeIn" src="https://s2.loli.net/2023/10/23/UvSq4AxVNdbzeWC.jpg" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Pycharm"><i class="tag post-item-tag">Pycharm</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2023/10/21/PyCharm%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%EF%BC%881%EF%BC%89%E2%80%94%E2%80%94%E7%BC%96%E8%BE%91%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/">PyCharm使用技巧（1）——编辑基础部分</a></h2><time class="has-text-grey" datetime="2023-10-20T16:00:00.000Z">2023-10-21</time><p class="is-flex-grow-2 mt-2">Pycharm编辑基础部分</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2023/10/21/PyCharm%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%EF%BC%881%EF%BC%89%E2%80%94%E2%80%94%E7%BC%96%E8%BE%91%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/">Read more</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://s2.loli.net/2023/11/23/wy1u6H7pXNJfIdx.jpg" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2023/10/21/PyCharm%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%EF%BC%882%EF%BC%89%E2%80%94%E2%80%94%E4%BB%A3%E7%A0%81%E8%A1%A5%E5%85%A8/"><img class="post-cover-img js-img-fadeIn" src="https://s2.loli.net/2023/11/23/wy1u6H7pXNJfIdx.jpg" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Pycharm"><i class="tag post-item-tag">Pycharm</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2023/10/21/PyCharm%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%EF%BC%882%EF%BC%89%E2%80%94%E2%80%94%E4%BB%A3%E7%A0%81%E8%A1%A5%E5%85%A8/">PyCharm使用技巧（2）——代码补全</a></h2><time class="has-text-grey" datetime="2023-10-20T16:00:00.000Z">2023-10-21</time><p class="is-flex-grow-2 mt-2">Pycharm代码补全</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2023/10/21/PyCharm%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%EF%BC%882%EF%BC%89%E2%80%94%E2%80%94%E4%BB%A3%E7%A0%81%E8%A1%A5%E5%85%A8/">Read more</a></section></article><section class="paginator is-flex is-justify-content-flex-end is-flex-wrap-wrap mt-5"><a class="extend prev" rel="prev" href="/archives/page/5/"><i class="iconfont icon-prev has-text-grey"></i></a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/4/">4</a><a class="page-number" href="/archives/page/5/">5</a><span class="page-number current">6</span></section></section><aside class="column is-hidden-mobile is-4-tablet is-3-widescreen"><div style="position: sticky; top: 50px;"><main class="aside-card-container archives-widget is-in-archive-page"><h3>Archives</h3><section><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">November 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a><span class="archive-list-count">2</span></li></ul></section></main></div></aside></div></article><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
+
+window.addEventListener('resize', $claudia.throttle(function () {
+    var images = document.querySelectorAll('.js-img-fadeIn')
+
+    images.forEach($claudia.blurBackdropImg)
+}, 150))</script></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2025</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
+
+window.addEventListener('resize', $claudia.throttle(function () {
+    var images = document.querySelectorAll('.js-img-fadeIn')
+
+    images.forEach($claudia.blurBackdropImg)
+}, 150))</script></body></html>

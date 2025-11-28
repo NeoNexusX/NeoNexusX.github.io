@@ -1,0 +1,1490 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>如何构建一台机器学习服务器</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="如何构建一台机器学习服务器
+Version：V1.0
+Author：NeoNexus
+Date：2024.03.26
+服务器设计要求：高性能、满足同时多人开发的需求、架构清晰、后期方便维护。因此写下此文档。
+基于 最先进的架构、最先进硬件。
+
+监修中敬告
+
+本文处于Preview阶段，不对文章内容负任何责任，如有意见探讨欢迎留言。
+联系方式——绿泡泡：NeoNexusX
+
+
+系统信息
+
+系统安装
+
+
+硬件配置：
+
+硬件安装指南
+CPU
+GPU
+硬盘分区结果
+以太网和IP设置
+
+
+基础内容配置
+
+Jetbrain IDE &amp;amp; VSCode安装
+
+Jetbrains shell scripts有什么用？
+
+
+Matlab安装与配置
+R Studio Server安装
+VSCode安装与配置
+将软件快捷方.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">如何构建一台机器学习服务器</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">如何构建一台机器学习服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">监修中敬告</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">系统信息</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">系统安装</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">硬件配置：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">硬件安装指南</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">CPU</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">GPU</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">硬盘分区结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">以太网和IP设置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">基础内容配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Jetbrain IDE &amp; VSCode安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Jetbrains shell scripts有什么用？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Matlab安装与配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">R Studio Server安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">VSCode安装与配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">将软件快捷方式（desktop）送到用户桌面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">内网磁盘映射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">使用SAMBA服务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">安装Git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">用户与用户组管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">查看文件权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">查看当前用户</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Docker部署</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">深度学习配置相关</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">安装Python和Pip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">安装CUDA Toolkit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">安装cuDNN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">安装Anaconda环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Pytorch安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">NVIDIA Container Toolkit</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">运行docker部署测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">此处应使用dockerfile来配置，后续更新，先手动。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">选配：rootless来操作docker daemon</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">参考文章</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Bionet"><i class="tag post-item-tag">Bionet</i></a><a href="/tags/ops"><i class="tag post-item-tag">ops</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">如何构建一台机器学习服务器</h1><time class="has-text-grey" datetime="2024-09-21T12:46:25.000Z">2024-09-21</time><article class="mt-2 post-content"><h1><span id="如何构建一台机器学习服务器">如何构建一台机器学习服务器</span></h1>
+<p>Version：V1.0</p>
+<p>Author：NeoNexus</p>
+<p>Date：2024.03.26</p>
+<p>服务器设计要求：高性能、满足同时多人开发的需求、架构清晰、后期方便维护。因此写下此文档。</p>
+<p>基于 最先进的架构、最先进硬件。</p>
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom:67%;">
+<h2><span id="监修中敬告">监修中敬告</span></h2>
+<img src="https://s2.loli.net/2023/12/09/LBTPhiN6luzHw7Q.jpg" alt="标准监修中" style="zoom:67%;">
+<p><strong>本文处于Preview阶段，不对文章内容负任何责任，如有意见探讨欢迎留言。</strong></p>
+<p><strong>联系方式——绿泡泡：NeoNexusX</strong></p>
+<!-- toc -->
+<ul>
+<li><a href="#%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF">系统信息</a>
+<ul>
+<li><a href="#%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85">系统安装</a></li>
+</ul>
+</li>
+<li><a href="#%E7%A1%AC%E4%BB%B6%E9%85%8D%E7%BD%AE">硬件配置：</a>
+<ul>
+<li><a href="#%E7%A1%AC%E4%BB%B6%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97">硬件安装指南</a></li>
+<li><a href="#cpu">CPU</a></li>
+<li><a href="#gpu">GPU</a></li>
+<li><a href="#%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA%E7%BB%93%E6%9E%9C">硬盘分区结果</a></li>
+<li><a href="#%E4%BB%A5%E5%A4%AA%E7%BD%91%E5%92%8Cip%E8%AE%BE%E7%BD%AE">以太网和IP设置</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E7%A1%80%E5%86%85%E5%AE%B9%E9%85%8D%E7%BD%AE">基础内容配置</a>
+<ul>
+<li><a href="#jetbrain-ide-vscode%E5%AE%89%E8%A3%85">Jetbrain IDE &amp; VSCode安装</a>
+<ul>
+<li><a href="#jetbrains-shell-scripts%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8">Jetbrains shell scripts有什么用？</a></li>
+</ul>
+</li>
+<li><a href="#matlab%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE">Matlab安装与配置</a></li>
+<li><a href="#r-studio-server%E5%AE%89%E8%A3%85">R Studio Server安装</a></li>
+<li><a href="#vscode%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE">VSCode安装与配置</a></li>
+<li><a href="#%E5%B0%86%E8%BD%AF%E4%BB%B6%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8Fdesktop%E9%80%81%E5%88%B0%E7%94%A8%E6%88%B7%E6%A1%8C%E9%9D%A2">将软件快捷方式（desktop）送到用户桌面</a></li>
+<li><a href="#%E5%86%85%E7%BD%91%E7%A3%81%E7%9B%98%E6%98%A0%E5%B0%84">内网磁盘映射</a>
+<ul>
+<li><a href="#%E4%BD%BF%E7%94%A8samba%E6%9C%8D%E5%8A%A1">使用SAMBA服务</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%89%E8%A3%85git">安装Git</a></li>
+<li><a href="#%E7%94%A8%E6%88%B7%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86">用户与用户组管理</a>
+<ul>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90">查看文件权限</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E7%94%A8%E6%88%B7">查看当前用户</a></li>
+</ul>
+</li>
+<li><a href="#docker%E9%83%A8%E7%BD%B2">Docker部署</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3">深度学习配置相关</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85python%E5%92%8Cpip">安装Python和Pip</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85cuda-toolkit">安装CUDA Toolkit</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85cudnn">安装cuDNN</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85anaconda%E7%8E%AF%E5%A2%83">安装Anaconda环境</a></li>
+<li><a href="#pytorch%E5%AE%89%E8%A3%85">Pytorch安装</a></li>
+<li><a href="#nvidia-container-toolkit">NVIDIA Container Toolkit</a>
+<ul>
+<li><a href="#%E8%BF%90%E8%A1%8Cdocker%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95">运行docker部署测试</a></li>
+<li><a href="#%E6%AD%A4%E5%A4%84%E5%BA%94%E4%BD%BF%E7%94%A8dockerfile%E6%9D%A5%E9%85%8D%E7%BD%AE%E5%90%8E%E7%BB%AD%E6%9B%B4%E6%96%B0%E5%85%88%E6%89%8B%E5%8A%A8"><strong>此处应使用dockerfile来配置，后续更新，先手动。</strong></a></li>
+<li><a href="#%E9%80%89%E9%85%8Drootless%E6%9D%A5%E6%93%8D%E4%BD%9Cdocker-daemon">选配：rootless来操作docker daemon</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0">参考文章</a></li>
+</ul>
+<!-- tocstop -->
+<p>[TOC]</p>
+<h1><span id="系统信息">系统信息</span></h1>
+<h2><span id="系统安装">系统安装</span></h2>
+<p>系统安装这里就不再赘述，推荐使用ventory作为PE盘，来安装系统，这样方便快捷，可同时包含多个镜像，无需重复制作，需要注意的是在安装系统的时候需要手动进行分区，我们可以看一下我的分区结果：</p>
+<p><img src="https://s2.loli.net/2024/04/02/sQPGFI2a9SgNR3Y.png" alt="image-20240402012233365"></p>
+<p>目前系统是由这样的硬盘空间组成的,分为高速、中速、低速区：</p>
+<pre class="mermaid">graph TB;
+  subgraph HighSpeed
+  nvme0n1("nvme0n1:GLOWAY YCQ4TNVMe-M.2")
+  nvme0n1 --&gt; nvme0n1p1("nvme0n1p1,[/home],2.5T")
+  nvme0n1 --&gt; nvme0n1p2("nvme0n1p2,[/],1T")
+  nvme0n1 --&gt; nvme0n1p3("nvme0n1p3,[swap],256G")
+  nvme0n1 --&gt; nvme0n1p4("nvme0n1p4,[/var],128G")
+  nvme0n1 --&gt; nvme0n1p5("nvme0n1p5,[/opt],128G")
+  nvme0n1 --&gt; nvme0n1p6("nvme0n1p6,[/tmp],50G")
+  end
+  HighSpeed --&gt; MiddleSpeed
+  subgraph MiddleSpeed
+  sda("sda:Samsung 860evo 512G")
+  sda --&gt; sda1["sda1,[/boot/efi],500MB"]
+  sda --&gt; sda2["sda2,[/boot],1GB"]
+  sda --&gt; empty["empty 500G"]
+  end
+  MiddleSpeed --&gt; LowSpeed
+  subgraph LowSpeed
+  sdc["sdc,[/home/pastdata]"]
+  sdb["sdc,[/home/pastdata]"]
+  end</pre>
+<p>在安装系统之后请先确认系统版本等内容和预想一致，使用命令：</p>
+<pre><code class="language-bash">uname -m &amp;&amp; cat /etc/*release
+</code></pre>
+<p>结果：</p>
+<pre><code class="language-bash">x86_64
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=22.04
+DISTRIB_CODENAME=jammy
+DISTRIB_DESCRIPTION="Ubuntu 22.04.3 LTS"
+PRETTY_NAME="Ubuntu 22.04.3 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.3 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=jammy
+</code></pre>
+<p>GCC版本：</p>
+<pre><code class="language-bash">gcc --version
+</code></pre>
+<pre><code class="language-bash">bionet@Bionet:/usr/local/cuda-12.4$ gcc --version
+gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+</code></pre>
+<p>由于后边要配置cuda信息，这里就直接先把需求放上来，各位要看符不符合要求：</p>
+<p>下图由CUDA官方文档发布：<a target="_blank" rel="noopener" href="https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html">1. Introduction — Installation Guide for Linux 12.4 documentation (nvidia.com)</a></p>
+<img src="https://s2.loli.net/2024/03/23/734rQdhOzfJWxTD.png" alt="image-20240323212858242" style="zoom:80%;">
+<h1><span id="硬件配置">硬件配置：</span></h1>
+<h2><span id="硬件安装指南">硬件安装指南</span></h2>
+<p>由于服务器上存在几个残缺的pcie插槽，什么叫残缺的呢？如下图：</p>
+<img src="https://s2.loli.net/2024/03/26/UZIauqwEWxQCepl.png" alt="image-20240326234211574" style="zoom:80%;">
+<p>不适合安装显卡，所以通过转接版来安装PCIE下的NVME协议M.2接口固态硬盘，其优点是稳定，速度快。</p>
+<p>相比普通的SATA顺序读写快上5倍~10倍，测试效果如下：</p>
+<p><img src="https://s2.loli.net/2024/03/26/CnUOb7MFvJdcYQe.png" alt="image-20240326234855494"></p>
+<h2><span id="cpu">CPU</span></h2>
+<pre><code class="language-bash">bionet@Bionet:~$ lscpu
+Architecture:            x86_64
+  CPU op-mode(s):        32-bit, 64-bit
+  Address sizes:         46 bits physical, 48 bits virtual
+  Byte Order:            Little Endian
+CPU(s):                  32
+  On-line CPU(s) list:   0-31
+Vendor ID:               GenuineIntel
+  Model name:            Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz
+    CPU family:          6
+    Model:               79
+    Thread(s) per core:  2
+    Core(s) per socket:  8
+    Socket(s):           2
+    Stepping:            1
+    CPU max MHz:         3000.0000
+    CPU min MHz:         1200.0000
+    BogoMIPS:            4199.71
+NUMA:                    
+  NUMA node(s):          2
+  NUMA node0 CPU(s):     0-7,16-23
+  NUMA node1 CPU(s):     8-15,24-31
+</code></pre>
+<h2><span id="gpu">GPU</span></h2>
+<pre><code class="language-bash">bionet@Bionet:~$ nvidia-smi
+Sat Mar 23 19:30:36 2024       
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 535.161.07             Driver Version: 535.161.07   CUDA Version: 12.2     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA GeForce RTX 2080 Ti     Off | 00000000:04:00.0 Off |                  N/A |
+|  0%   27C    P8              16W / 300W |      1MiB / 11264MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   1  NVIDIA GeForce RTX 4090        Off | 00000000:09:00.0 Off |                  Off |
+|  0%   29C    P8              20W / 450W |      1MiB / 24564MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   2  NVIDIA GeForce RTX 2080 Ti     Off | 00000000:86:00.0 Off |                  N/A |
+|  0%   28C    P8              13W / 300W |      1MiB / 11264MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   3  NVIDIA GeForce RTX 3090        Off | 00000000:8A:00.0 Off |                  N/A |
+|  0%   23C    P8               7W / 370W |      1MiB / 24576MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|  No running processes found                                                           |
++---------------------------------------------------------------------------------------+
+
+</code></pre>
+<p>简单查询：</p>
+<pre><code class="language-bash">bionet@Bionet:~$ nvidia-smi --query-gpu=index,name,uuid,serial --format=csv
+index, name, uuid, serial
+0, NVIDIA GeForce RTX 2080 Ti, GPU-2fdf7ca3-be62-5646-3d62-2e2db057e8b2, [N/A]
+1, NVIDIA GeForce RTX 4090, GPU-3d19dd88-2507-8278-5045-9f68011b7ce0, [N/A]
+2, NVIDIA GeForce RTX 2080 Ti, GPU-6384bfe4-3e8a-18a2-2132-fc5e686d1404, [N/A]
+3, NVIDIA GeForce RTX 3090, GPU-d91f3e9a-e7d0-4f91-2798-1d8b05587fb6, [N/A]
+</code></pre>
+<p>验证显卡速率正常：</p>
+<pre><code class="language-bash">nvidia-smi -i 0 -q
+</code></pre>
+<p>指定GPUID来实现，0为0号设备，再输出信息中找到：</p>
+<p>16x带宽为正常</p>
+<img src="https://s2.loli.net/2024/03/23/8VJdjM35sNW6FwL.png" alt="image-20240323194150217" style="zoom: 80%;">
+<h2><span id="硬盘分区结果">硬盘分区结果</span></h2>
+<img src="https://s2.loli.net/2024/03/23/fIqMHlWtZJ4X1Uo.png" alt="image-20240323192410929" style="zoom: 80%;">
+<h2><span id="以太网和ip设置">以太网和IP设置</span></h2>
+<p>使用命令查看目前已安装的，能检测到对应的驱动的网卡信息：</p>
+<pre><code class="language-bash">bionet@Bionet:~$ lspci | grep -i 'eth'
+</code></pre>
+<p>结果如下：</p>
+<pre><code class="language-bash">81:00.0 Ethernet controller: Intel Corporation I350 Gigabit Network Connection (rev 01)
+81:00.1 Ethernet controller: Intel Corporation I350 Gigabit Network Connection (rev 01)
+#双千兆网口
+</code></pre>
+<h1><span id="基础内容配置">基础内容配置</span></h1>
+<h2><span id="jetbrain-ide-amp-vscode安装">Jetbrain IDE &amp; VSCode安装</span></h2>
+<p>Jetbrain系IDE针对在校大学生都是免费的，该如何申请JetBrian系的IDE呢？</p>
+<p>详见此文，申请后就拥有了一个免费的JetBrain全家桶账号，非常方便，可以使用他们家的全部IDE，关于IDE的使用和优化，可以参考我的专栏：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/NeoNexus/category/2353180.html">Jetbrain入门指南 - 文章分类 - NeoNexus - 博客园 (cnblogs.com)</a></p>
+<p>为了方便管理和使用IDE这里使用Toolbox来操作IDE：</p>
+<p>首先下载ToolBox：</p>
+<img src="https://s2.loli.net/2024/03/24/5iwrMZOUXonm6Sp.png" alt="image-20240324153451737" style="zoom:67%;">
+<p>下载之后是一个.tar.gz的压缩包，我们使用命令解压即可：</p>
+<pre><code class="language-bash">tar -zxvf 文件名.tar.gz
+</code></pre>
+<p>其中，-z 表示使用 gzip 解压缩，-x 表示解压缩，-v 表示显示详细信息，-f 表示指定文件名。</p>
+<pre><code class="language-bash">(base) bionet@Bionet:~/Downloads$ tar -zxvf ./jetbrains-toolbox-2.2.3.20090.tar.gz 
+</code></pre>
+<p>如下图所示解压之后效果如下：</p>
+<pre><code class="language-bash">jetbrains-toolbox-2.2.3.20090/
+jetbrains-toolbox-2.2.3.20090/jetbrains-toolbox
+(base) bionet@Bionet:~/Downloads$ ls
+Anaconda3-2024.02-1-Linux-x86_64.sh                jetbrains-toolbox-2.2.3.20090
+cudnn-local-repo-ubuntu2204-9.0.0_1.0-1_amd64.deb  jetbrains-toolbox-2.2.3.20090.tar.gz
+</code></pre>
+<p>将解压过后的文件夹的内容迁移到我们规定的目录，命令执行如下：</p>
+<pre><code class="language-bash">base) bionet@Bionet:~/Downloads$ sudo mv jetbrains-toolbox-2.2.3.20090 jetbrain-toolbox-2.2.3
+[sudo] password for bionet: 
+(base) bionet@Bionet:~/Downloads$ ls
+Anaconda3-2024.02-1-Linux-x86_64.sh                jetbrains-toolbox-2.2.3.20090.tar.gz
+cudnn-local-repo-ubuntu2204-9.0.0_1.0-1_amd64.deb  jetbrain-toolbox-2.2.3
+(base) bionet@Bionet:~/Downloads$ sudo mv ./jetbrain-toolbox-2.2.3 /home/jetbrain-toolbox-2.2.3
+(base) bionet@Bionet:~/Downloads$ cd /home/
+(base) bionet@Bionet:/home$ ls
+anaconda3  bionet  jetbrain-toolbox-2.2.3  lost+found  Neo
+</code></pre>
+<p>同时将其添加到启动项中：</p>
+<img src="https://s2.loli.net/2024/03/24/ZJrUOk1RewSPxHI.png" alt="image-20240324160813034" style="zoom: 80%;">
+<img src="https://s2.loli.net/2024/03/24/BJcwkxNFEnDIv5S.png" alt="image-20240324161010897" style="zoom:67%;">
+<p>添加即可：</p>
+<p><img src="https://s2.loli.net/2024/03/24/MY5XPsRQOkH8g3e.png" alt="image-20240324161237620"></p>
+<p>用户登录之后toolbox就可以启动：</p>
+<p>登录过程稍微有点慢，慢慢等就行。</p>
+<img src="https://s2.loli.net/2024/03/24/vqTteIGOnsmBjxX.png" alt="image-20240324161356269" style="zoom:67%;">
+<p>当然选择之后登陆即可下载对应的IDE：</p>
+<p><img src="https://s2.loli.net/2024/03/24/7n2CIQrYWqJBa1L.png" alt="image-20240324161446694"></p>
+<p>效果如下：</p>
+<img src="https://s2.loli.net/2024/03/24/MCyk1QFanAWEJh5.png" alt="image-20240324161716126" style="zoom:80%;">
+<p>需要注意的是我们需要修改安装路径到指定位置：</p>
+<img src="https://s2.loli.net/2024/03/24/CMXpz96h4lVIWdE.png" alt="image-20240324161828077" style="zoom:80%;">
+<p>我们在管理用户的Home下创建一个文件夹来专门存放IDE，这样每个用户就不需要重复下载IDE了，同时需要有一个环境变量的路径来存放安装的IDE的运行脚本：</p>
+<p>向全局变量中导入一个PATH：</p>
+<pre><code class="language-bash">(base) bionet@Bionet:~/Desktop$ sudo vim /etc/profile
+</code></pre>
+<p>打开后在最下面添加一个PATH：</p>
+<pre><code class="language-bash">export PATH="/home/SoftWares/JetBrains/Scripts:$PATH"
+</code></pre>
+<p>注意这里的路径要放在有权限的地方，大家都有权限可以使用才可以。</p>
+<p>工具安装位置也要放置到大家都能使用的位置，如下图所示（隔了一个命令）。</p>
+<p>让环境变量生效：</p>
+<pre><code class="language-bash">source /etc/profile
+</code></pre>
+<p>这时候你会发现shell scripts location还是会报错，不过没关系，我们只需要将此用户重新登出再登入即可：</p>
+<img src="https://s2.loli.net/2024/03/24/xaTC3sAcEPJfGMQ.png" alt="image-20240324222348356" style="zoom:80%;">
+<h3><span id="jetbrains-shell-scripts有什么用">Jetbrains shell scripts有什么用？</span></h3>
+<p>让我们先安装一个IDE在讨论这个问题：</p>
+<img src="https://s2.loli.net/2024/03/24/YFaQmTulzcMWNqw.png" alt="image-20240324164321949" style="zoom: 80%;">
+<p>打开一个IDE设置：</p>
+<img src="https://s2.loli.net/2024/03/24/OTGClBNVSrQLEtK.png" alt="image-20240324164457014" style="zoom:80%;">
+<p>我们拉到最下面：</p>
+<img src="https://s2.loli.net/2024/03/24/L78aSMAlx5F3Hds.png" alt="image-20240324164846866" style="zoom:80%;">
+<p>随便写个缩写名字,比如:</p>
+<p><img src="https://s2.loli.net/2024/03/24/Tq65rbFGP8DRYmz.png" alt="image-20240324164943952"></p>
+<p>打开命令行直接执行PCP，可以发现直接运行了~</p>
+<img src="https://s2.loli.net/2024/03/24/ujVRG8dJ6bwIkhP.png" alt="image-20240324165119297" style="zoom:80%;">
+<p>需要注意的是JetbrainToolBox只能让一个用户来使用！每个用户如果要使用ToolBox的话需要单独安装，这里只给root用户安装，是为了方便管理。</p>
+<h2><span id="matlab安装与配置">Matlab安装与配置</span></h2>
+<p>MATLAB学校购买了正版，这里需要按照学校的安装步骤来走：</p>
+<img src="https://s2.loli.net/2024/03/24/XOTPBYd1JkG4mz8.png" alt="image-20240324235018812" style="zoom:80%;">
+<p>我们直接跳转到下载的步骤：</p>
+<img src="https://s2.loli.net/2024/03/24/ZY9ANqGh2kTaM5P.png" alt="image-20240324235053576" style="zoom:80%;">
+<p>登录之后下载，在之后是一个安装包：</p>
+<p>注意要解决安装路径的问题我们可以把他放在我们建立好的SoftWare目录之下：</p>
+<p>参照官方教程安装：<a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/install/ug/install-products-with-internet-connection.html">下载并安装 MATLAB - MATLAB &amp; Simulink - MathWorks 中国</a></p>
+<p>注意这一步只需要执行这个既可：</p>
+<p><img src="https://s2.loli.net/2024/03/25/3WTQKorstmXL2jO.png" alt="image-20240325001102684"></p>
+<p>一路安装下去即可：</p>
+<img src="https://s2.loli.net/2024/03/25/RcIiet74sdYJkBn.png" alt="image-20240325001426614" style="zoom:80%;">
+<p>勾选全部内容：</p>
+<img src="https://s2.loli.net/2024/03/25/7IDRPKZgpeWLOB8.png" alt="image-20240325001517608" style="zoom:80%;">
+<p>注意下一页需要将脚本映射到合理位置，这里映射到了如下路径,就不放图了：</p>
+<pre><code class="language-bash">/home/SoftWares/MATLAB/MATLABScripts
+</code></pre>
+<img src="https://s2.loli.net/2024/03/25/AM35wUlOh1tG7ba.png" alt="image-20240325003117797" style="zoom: 80%;">
+<p>在对应安装目录下运行一下：</p>
+<p><img src="https://s2.loli.net/2024/03/25/bvjCq79QFYDzAin.png" alt="image-20240325004145626"></p>
+<p>效果如下：</p>
+<p><img src="https://s2.loli.net/2024/03/25/RFh1fZXWOQEg6zm.png" alt="image-20240325004206345"></p>
+<h2><span id="r-studio-server安装">R Studio Server安装</span></h2>
+<p>R使用过Docker来部署的：</p>
+<p>R-studio server版本的镜像都在这里：<a target="_blank" rel="noopener" href="https://hub.docker.com/r/rocker/rstudio/tags">rocker/rstudio Tags | Docker Hub</a></p>
+<p>我们直接创建一个容器：</p>
+<pre><code class="language-bash">docker run -d -p 8787:8787 -p 8788:22\
+  -v /home/SoftWares/R_Share:/home/rstudio/R_Share \
+  -v /etc/timezone:/etc/timezone \
+  -v /etc/localtime:/etc/localtime \
+  --name R_422 \
+  rocker/rstudio:4.2.2
+</code></pre>
+<p><code>-v /etc/timezone:/etc/timezone \ -v /etc/localtime:/etc/localtime \</code>为时间同步命令</p>
+<p><code>-v /home/SoftWares/R_Share:/home/rstudio/R_Share \</code>将对应的文件挂载到系统上某个盘</p>
+<p><code>--name R_422 \</code>名字命名为R422</p>
+<p><code>rocker/rstudio:4.2.2</code>拉去这个版本的镜像</p>
+<p><code>-p 8787:8787 -p 8788:22</code>端口映射命令 主机的8788映射到22端口</p>
+<p>进入容器里面：</p>
+<pre><code class="language-bash">docker exec -it R_422 /bin/bash
+</code></pre>
+<p>R_422是容器的名字。可根据需要切换</p>
+<p>我们安装一些必要的内容，来保证容器的运行：</p>
+<p>首先设置密码：</p>
+<pre><code class="language-sh">passwd root
+</code></pre>
+<p>设置完毕之后需要安装ssh，来方便管理，使用命令：</p>
+<pre><code class="language-bash">sudo apt update
+sudo apt-get install -y vim openssh-server
+sudo apt upgrade
+</code></pre>
+<p>配置容器内的SSH：</p>
+<pre><code class="language-sh">echo "PermitRootLogin yes"&gt;&gt;/etc/ssh/sshd_config
+echo "export VISIBLE=now" &gt;&gt;/etc/profile
+</code></pre>
+<p><code>echo "PermitRootLogin yes"&gt;&gt;/etc/ssh/sshd_config</code>添加一段信息到sshd_config中。</p>
+<p><code>echo "export VISIBLE=now" &gt;&gt; /etc/profile</code>：向 <code>/etc/profile</code> 文件中添加一行 <code>export VISIBLE=now</code>，这个设置使得 SSH 会话可以在登录时创建 <code>utmp</code> 记录，使得用户能够在 <code>w</code> 或 <code>who</code> 命令中看到 SSH 登录的用户信息。</p>
+<p>然后运行重启：</p>
+<pre><code class="language-shell">service ssh restart
+</code></pre>
+<p>这时候你如果打开另一个宿主机命令行运行以下命令可以看到：</p>
+<pre><code class="language-bash">Neo@Bionet:~/Desktop$ docker port pytorch 22
+0.0.0.0:10003
+[::]:10003
+</code></pre>
+<p>这时候我们打开一个远程的命令行来来连接一下容器：</p>
+<p><img src="C:%5CUsers%5CNeoNexus%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240326230313082.png" alt="image-20240326230313082"></p>
+<p>输入后正常登录即可。</p>
+<p>为什么要添加用户呢因为RStudio默认不允许root用户登录，我们需要添加一些用户进来，这里可以使用我的脚本，来批量添加用户，我们直接运行即可：</p>
+<pre><code class="language-shell">sudo ./createuser4R.sh
+</code></pre>
+<p>默认密码为名字+123即 名字123.</p>
+<p>登录之后可以看到：</p>
+<p><img src="https://s2.loli.net/2024/03/26/3f2JtQ4rSYeE7OC.png" alt="image-20240326231825010"></p>
+<h2><span id="vscode安装与配置">VSCode安装与配置</span></h2>
+<p>首先下载VsCode安装包，在官网这里：<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">Visual Studio Code - Code Editing. Redefined</a></p>
+<p>然后使用命令：</p>
+<pre><code class="language-bash">(base) bionet@Bionet:~/Desktop$ sudo dpkg -i code_1.87.2-1709912201_amd64.deb 
+</code></pre>
+<p>进行安装，效果如下：</p>
+<p><img src="https://s2.loli.net/2024/03/25/ub1CoS3lHrJKLmz.png" alt="image-20240325003045185"></p>
+<p>报错了不要慌，实际上是传输过来的时候安装包损坏了，也就是无法通过校验。</p>
+<p><img src="https://s2.loli.net/2024/03/25/KpsmUYXflR8DZr7.png" alt="image-20240325003455964"></p>
+<p>安装完成之后就可以在目录中看到了：</p>
+<p><img src="https://s2.loli.net/2024/03/25/OrEwUaFhgA6zI4b.png" alt="image-20240325004401181"></p>
+<h2><span id="将软件快捷方式desktop送到用户桌面">将软件快捷方式（desktop）送到用户桌面</span></h2>
+<p>到这里还没结束呢，安装完成之后我们还需要再把快捷方式丢去每个用户的目录，这里提示一下，每个创建的用户都需要在这个目录下有对应的文件才能看到应用程序，或者直接将软件丢去此目录也可以这里展示其中一个比较通用的方式：</p>
+<p>一般桌面的软件的快捷方式都在此文件夹下：</p>
+<pre><code class="language-bash">/usr/share/applications/
+</code></pre>
+<p>用户安装的软件目录在：</p>
+<pre><code class="language-bash">~/.local/share/applications/
+</code></pre>
+<p>我们需要将安装软件的用户的目录下的图标迁移到此目录下，使用如下命令：</p>
+<pre><code class="language-bash">sudo cp -r  ~/.local/share/applications/.  /usr/share/applications/ 
+</code></pre>
+<p>r如果无法执行，需要切换到对应的用户，这里安装的用户就是bonet所以可以使用bionet的，如果还不行的话只能使用root来实现，输入以下命令之后安装：</p>
+<pre><code class="language-bash">sudo -i
+</code></pre>
+<p>这样后来的用户都可以看到安装的软件了。</p>
+<h2><span id="内网磁盘映射">内网磁盘映射</span></h2>
+<p>虽然目前已经实现了文件的传输，直接复制粘贴就可以，但是对于一些稍微大一点的文件，还是不靠谱，所以通过另一个服务将服务器上的磁盘映射过来：</p>
+<h3><span id="使用samba服务">使用SAMBA服务</span></h3>
+<p>安装SAMBA：</p>
+<pre><code class="language-bash">sudo apt-get install samba samba-common-bin
+</code></pre>
+<p>配置SAMBA：</p>
+<pre><code class="language-bash">sudo gedit /etc/samba/smb.conf
+</code></pre>
+<p>在最下面加入一行：</p>
+<pre><code class="language-bash"># 共享文件夹显示的名称
+[Storge]
+# 说明信息
+comment = Bionet No1 WorkStation Storage
+# 可以访问的用户
+valid users = Neo,root,Bionet
+# 共享文件的路径
+path = /home/SAMBA/Storge/
+# 可被其他人看到资源名称（非内容）
+browseable = yes
+# 可写
+writable = yes
+# 新建文件的权限为 664
+create mask = 0664
+# 新建目录的权限为 775
+directory mask = 0775
+</code></pre>
+<p>运行以下命令来测试：</p>
+<pre><code class="language-bash">bionet@Bionet:~$ testparm
+</code></pre>
+<p>结果如下：</p>
+<pre><code class="language-bash">Load smb config files from /etc/samba/smb.conf
+Loaded services file OK.
+Weak crypto is allowed
+
+Server role: ROLE_STANDALONE
+
+Press enter to see a dump of your service definitions
+
+# Global parameters
+[global]
+	log file = /var/log/samba/log.%m
+	logging = file
+	map to guest = Bad User
+	max log size = 1000
+	obey pam restrictions = Yes
+	pam password change = Yes
+	panic action = /usr/share/samba/panic-action %d
+	passwd chat = *Enter\snew\s*\spassword:* %n\n *Retype\snew\s*\spassword:* %n\n *password\supdated\ssuccessfully* .
+	passwd program = /usr/bin/passwd %u
+	server role = standalone server
+	server string = %h server (Samba, Ubuntu)
+	unix password sync = Yes
+	usershare allow guests = Yes
+	idmap config * : backend = tdb
+
+
+[printers]
+	browseable = No
+	comment = All Printers
+	create mask = 0700
+	path = /var/spool/samba
+	printable = Yes
+
+
+[print$]
+	comment = Printer Drivers
+	path = /var/lib/samba/printers
+
+
+[Storge]
+	comment = Bionet No1 WorkStation Storage
+	create mask = 0664
+	directory mask = 0775
+	path = /home/SAMBA/Storge/
+	read only = No
+	valid users = Neo root Bionet
+</code></pre>
+<p>添加SMB用户（必须是已经创建了的linux用户）：</p>
+<pre><code class="language-bash">bionet@Bionet:~$ sudo smbpasswd -a Neo
+New SMB password:
+Retype new SMB password:
+Added user Neo.
+</code></pre>
+<p>这里由于学校网络分割，这一部分暂且搁置</p>
+<h2><span id="安装git">安装Git</span></h2>
+<p>使用命令：</p>
+<pre><code class="language-shell"> sudo apt install git
+</code></pre>
+<p>版本：</p>
+<pre><code class="language-bash">bionet@Bionet:~$ git --version
+git version 2.34.1
+</code></pre>
+<p>git本身需要设置用户名等内容，这里建议先设置一个全局的通用的用户名和账号，个人用户有需求再用个人的key来进行代码同步，这里就简单说一下，详细内容敬请百度。</p>
+<pre><code>git config --global user.name "Your Name"
+git config --global user.email "youremail@yourdomain.com"
+</code></pre>
+<p>配置完成以后验证一下：</p>
+<pre><code class="language-bash">bionet@Bionet:/usr/local/cuda-12.4$ git config --global user.name "Bionet"
+bionet@Bionet:/usr/local/cuda-12.4$ git config --global user.email "Bionet@xmu.edu.cn"
+bionet@Bionet:/usr/local/cuda-12.4$ git config --list
+user.name=Bionet
+user.email=Bionet@xmu.edu.cn
+</code></pre>
+<p>注册一个Github账号（实验室已经有账号了，详询老大）：</p>
+<img src="https://s2.loli.net/2024/03/23/JLCDzv8N3UlMBsf.png" alt="image-20240323210820829" style="zoom:67%;">
+<p>生成密钥：</p>
+<pre><code class="language-bash">bionet@Bionet:/usr/local/cuda-12.4$ ssh-keygen -t ed25519 -C "BioNet@xmu.edu.cn"
+Generating public/private ed25519 key pair.
+Enter file in which to save the key (/home/bionet/.ssh/id_ed25519): 
+Created directory '/home/bionet/.ssh'.
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/bionet/.ssh/id_ed25519
+Your public key has been saved in /home/bionet/.ssh/id_ed25519.pub
+</code></pre>
+<p>然后添加到咱们的账户中即可，如果重装的话，此处就要把原来的删除掉，在生成一个新的来作为验证。</p>
+<p>没有添加密钥，验证失败结果如下：</p>
+<pre><code class="language-bash">bionet@Bionet:/usr/local/cuda-12.4$ ssh -T git@github.com
+git@github.com: Permission denied (publickey).
+</code></pre>
+<p>等待添加密钥即可</p>
+<pre><code class="language-bash">(base) bionet@Bionet:~/Desktop$ ssh -T git@github.com
+Hi NeoNexusX! You've successfully authenticated, but GitHub does not provide shell access.
+</code></pre>
+<h2><span id="用户与用户组管理">用户与用户组管理</span></h2>
+<p>管理用户及用户组的权限是十分重要的，合理的权限分配能大大的减少后期维护成本。这里简单介绍一下linux文件权限的内容，并由此来介绍一下如何配用户组的权限。</p>
+<p>Linux系统一般将文件可存/取访问的<strong>身份</strong>分为3个类别：owner、group、others，且3种身份各有read、write、execute等权限。在<strong>多用户</strong>（可以不同时）计算机系统的管理中，权限是指<strong>某个特定的用户具有特定的系统资源使用权力</strong>，像是文件夹、特定系统指令的使用。</p>
+<ul>
+<li>
+<p>读权限：</p>
+<p>对于文件夹来说，读权限影响用户是否能够列出目录结构<br>
+对于文件来说，读权限影响用户是否可以查看文件内容</p>
+</li>
+<li>
+<p>写权限：</p>
+<p>对文件夹来说，写权限影响用户是否可以在文件夹下“创建/删除/复制到/移动到”文档<br>
+对于文件来说，写权限影响用户是否可以编辑文件内容</p>
+</li>
+<li>
+<p>执行权限：</p>
+<p>一般都是对于文件来说，特别脚本文件</p>
+</li>
+</ul>
+<p>上述说了身份也分为很多种，下面是详细介绍：</p>
+<ul>
+<li>Owner身份：文件所有者，默认为文档的创建者</li>
+<li>Group身份：与文件所有者同组的用户</li>
+<li>Others身份：其他人，相对于所有者所在组</li>
+<li>Root用户：超级用户，管理着普通用户，具有所有权限</li>
+</ul>
+<h3><span id="查看文件权限">查看文件权限</span></h3>
+<p>使用命令如下可以查看当前文件下的文件的权限：</p>
+<p><img src="https://s2.loli.net/2024/03/24/Tk5GZMtNqE8VrHC.png" alt="image-20240324211325591"></p>
+<p>权限区一共有10个字母，每个的内容意思是：</p>
+<p><img src="https://s2.loli.net/2024/03/24/oRCPZhtelAB8xuX.png" alt="image-20240324211953007"></p>
+<p>上图中权限为：<code>-rwxr-xr-x</code> 意思是 文件(-)、在bionet用户下有全部权限(rwx)、在所属用户组下有除了写的全部权限(r-x)、其他用户有除了写的全部权限(r-x)。</p>
+<h3><span id="查看当前用户">查看当前用户</span></h3>
+<p>使用命令：</p>
+<pre><code class="language-bash">Neo@Bionet:/home/jetbrain-toolbox-2.2.3$ getent passwd
+</code></pre>
+<img src="https://s2.loli.net/2024/03/24/nr1ldGAc5sNThqu.png" alt="image-20240324210427485" style="zoom:80%;">
+<p>上述内容表达为：<code>用户名:密码(x):用户ID:组ID:描述信息(无用):HOME目录:执行终端(默认bash)</code></p>
+<p>查看当前用户组：</p>
+<pre><code class="language-bash">getent group
+</code></pre>
+<img src="https://s2.loli.net/2024/03/24/tEP1hJfdBqwFWam.png" alt="image-20240324210905590" style="zoom: 67%;">
+<p>在我们划分的时候需要将所有core组成员公用的地方加上权限，效果如下：</p>
+<img src="https://s2.loli.net/2024/03/26/u1SaOYPkzHmRlZ7.png" alt="image-20240326232226188" style="zoom:67%;">
+<p>红框的三个文件夹都是公用的所以要加上权限</p>
+<pre><code class="language-shell">sudo chown -R :core /path/to/folder
+</code></pre>
+<pre><code class="language-shell">sudo chmod -R 770 /path/to/folder
+</code></pre>
+<h2><span id="docker部署">Docker部署</span></h2>
+<p>Docker也是虚拟化环境的神器，前面说的conda虽然可以提供python的虚拟环境并方便地切换，但是有的时候我们的开发环境并不只是用到python，比如有的native库需要对应gcc版本的编译环境，或者进行交叉编译时哟啊安装很多工具链等等。如果这些操作都在服务器本地上进行，那时间久了就会让服务器的文件系统非常杂乱，而且还会遇到各种软件版本冲突问题。</p>
+<p>简单理解Docker为一个轻量化的虚拟机即可，但是其并不是虚拟机，虚拟机需要提供操作系统等，Docker只需要提供程序运行所需要的环境，对与常规开发流程来说一般是：</p>
+<pre class="mermaid">graph TB;
+A("本地docker环境搭建")--&gt; B("代码编写测试") --&gt; C("打包镜像") --&gt; D("部署到服务器运行")</pre>
+<p>这里主要考虑服务器环境搭建和运行</p>
+<p>docker官方教程：<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/ubuntu/">Install Docker Engine on Ubuntu | Docker Docs</a></p>
+<p>首先设置docker的apt仓库信息：</p>
+<pre><code class="language-bash"># Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release &amp;&amp; echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+sudo apt-get update
+</code></pre>
+<p>命令一条一条复制，比较安全。</p>
+<p>安装docker：</p>
+<pre><code class="language-bash">sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+</code></pre>
+<p><img src="https://s2.loli.net/2024/03/25/fdDPS1hzF5j3v9U.png" alt="image-20240325141511920"></p>
+<p>运行测试的镜像：</p>
+<pre><code class="language-bash">sudo docker run hello-world
+</code></pre>
+<p><img src="https://s2.loli.net/2024/03/25/CgZedvBxkL61IcV.png" alt="image-20240325143800000"></p>
+<p>运行版本信息查看一下：</p>
+<p><img src="https://s2.loli.net/2024/03/25/O7WUMoAcYS6hkJa.png" alt="image-20240325144047989"></p>
+<p>为了方便后边Docker设置：我们先来创建一个用户组，因为对于后面使用docker来说，其守护进程使用的是Unix socket，并不是TCP socket，Docker的守护进程通常只能运行在root权限用户下，因此我们只能创建一个docker用户组来专门赋予权限，我们先看看是否有docker用户组，已经被创建好了，因为在某些发行版的linux下，安装完成docker后会自行创建：</p>
+<p>使用命令：</p>
+<pre><code>getent group
+</code></pre>
+<p><img src="https://s2.loli.net/2024/03/25/b6xaBAJolPy1I2g.png" alt="image-20240325145438859"></p>
+<p>果然有！所以我们就需要把当前的需要使用docker的用户加入到这个用户组里面去，这样运行的时候就不需要sudo权限了。</p>
+<pre><code class="language-shell">sudo usermod -aG docker $USER
+</code></pre>
+<p><code>-aG</code>：这是 <code>usermod</code> 命令的选项之一，其中：</p>
+<ul>
+<li><code>-a</code> 表示“追加”，它告诉 <code>usermod</code> 命令将用户添加到指定的组，而不是覆盖原有的组成员资格。</li>
+<li><code>-G</code> 表示“组”，它指定要操作的组。</li>
+</ul>
+<p>登出后重新登录这个账户，并输入以下内容：</p>
+<pre><code class="language-bash">newgrp docker
+</code></pre>
+<p>重新再来验证一下，目前是否能使用了</p>
+<p><img src="https://s2.loli.net/2024/03/25/lrAoBRVNweg38yI.png" alt="image-20240325150823273"></p>
+<p>设置开机自启动：</p>
+<pre><code class="language-sh">Neo@Bionet:~/Desktop$ sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
+[sudo] password for Neo: 
+Synchronizing state of docker.service with SysV service script with /lib/systemd/systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install enable docker
+</code></pre>
+<p>如果需要关闭请使用：</p>
+<pre><code class="language-bash">sudo systemctl disable docker.service
+sudo systemctl disable containerd.service
+</code></pre>
+<p>到此完成docker的基本部署，接下来安装Nvida的docker，这部分在深度学习配置最后。</p>
+<h1><span id="深度学习配置相关">深度学习配置相关</span></h1>
+<p>安装NVIDIA驱动，由于新的版Ubuntu可以在管理器中直接安装，这里就不再赘述，只需要点击即可，新的显卡使用较新的驱动是最好的了：</p>
+<p><img src="https://s2.loli.net/2024/03/23/SXtZomEUCzbgjDM.png" alt="image-20240323202228201"></p>
+<h2><span id="安装python和pip">安装Python和Pip</span></h2>
+<p>使用命令</p>
+<pre><code class="language-bash">sudo apt install python3
+sudo apt install python3-pip
+</code></pre>
+<p>安装完成之后，替换python的pip源</p>
+<pre><code class="language-bash">bionet@Bionet:~$ cd ~
+bionet@Bionet:~$ mkdir .pip
+bionet@Bionet:~$ sudo gedit ~/.pip/pip.conf
+</code></pre>
+<p>其中gedit是ubuntu自带的图形化文本编辑器，如果你喜欢vim那么可以替换成：</p>
+<pre><code class="language-bash">bionet@Bionet:~$ sudo vim ~/.pip/pip.conf
+</code></pre>
+<p>将以下内容填入：</p>
+<pre><code class="language-conf">[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple/ 
+[install]
+trusted-host = pypi.tuna.tsinghua.edu.cn
+</code></pre>
+<p>测试一下：</p>
+<pre><code class="language-bash">bionet@Bionet:~$ python3
+Python 3.10.12 (main, Nov 20 2023, 15:14:05) [GCC 11.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+&gt;&gt;&gt; quit();
+</code></pre>
+<h2><span id="安装cuda-toolkit">安装CUDA Toolkit</span></h2>
+<p>这里选择最新的CUDA Toolkit12.4，在<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-downloads?target_os=Linux&amp;target_arch=x86_64&amp;Distribution=Ubuntu&amp;target_version=22.04&amp;target_type=runfile_local">网页</a>上按我的选择如下：</p>
+<p><img src="https://s2.loli.net/2024/03/23/mOPwalncxsRDruI.png" alt="image-20240323202435763"></p>
+<p>复制对应的命令后下载下来：</p>
+<pre><code class="language-bash">bionet@Bionet:~$ wget https://developer.download.nvidia.com/compute/cuda/12.4.0/local_installers/cuda_12.4.0_550.54.14_linux.run
+
+Saving to: ‘cuda_12.4.0_550.54.14_linux.run’
+cuda_12.4.0_550.54.14_linux.run              100%[==============================================================================================&gt;]   4.15G  89.4MB/s    in 57s     
+2024-03-23 20:26:43 (73.9 MB/s) - ‘cuda_12.4.0_550.54.14_linux.run’ saved [4454353277/4454353277]
+
+bionet@Bionet:~$ ls
+cuda_12.4.0_550.54.14_linux.run  Desktop  Documents  Downloads  matlab  Music  Pictures  Public  snap  Templates  thinclient_drives  Videos
+</code></pre>
+<p>使用命令执行：</p>
+<pre><code class="language-bash">sudo sh cuda_12.4.0_550.54.14_linux.run
+</code></pre>
+<p>注意进入选择模式之后，不要选择驱动，我们已经打了新驱动了，无需在安装一次：</p>
+<p>至于这里选择不选择新驱动要看这个图：</p>
+<img src="https://s2.loli.net/2024/03/26/QY2W4txbGJ1zgBv.png" alt="image-20240326131315726" style="zoom:80%;">
+<p><strong>如果你不满足对应的驱动条件我建议可以打上新驱动。</strong></p>
+<img src="https://s2.loli.net/2024/03/23/DVEkXiT4hLeIZAz.png" alt="image-20240323204149764" style="zoom:67%;">
+<p>根据提示我们需要套件的内容添加到环境变量里面：</p>
+<pre><code class="language-bash">bionet@Bionet:~$ sudo gedit ~/.bashrc
+</code></pre>
+<p>环境变量如下：</p>
+<pre><code class="language-bash">export CUDA_HOME=/usr/local/cuda-12.4
+export LD_LIBRARY_PATH=${CUDA_HOME}/lib64
+export PATH=${CUDA_HOME}/bin:${PATH}
+</code></pre>
+<p>使其生效：</p>
+<pre><code class="language-bash">bionet@Bionet:~$ source ~/.bashrc
+</code></pre>
+<p>使用命令测试：</p>
+<pre><code class="language-bash">bionet@Bionet:~$ nvcc -V
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2024 NVIDIA Corporation
+Built on Tue_Feb_27_16:19:38_PST_2024
+Cuda compilation tools, release 12.4, V12.4.99
+Build cuda_12.4.r12.4/compiler.33961263_0
+</code></pre>
+<p>到这一步并不代表成功了，要成功运行cuda才说明环境没有问题：</p>
+<p>自从11.7之后cuda不再单独提供测试样例，我们可以从github上克隆下来，直接编译后运行即可：</p>
+<pre><code class="language-bash">cd /usr/local/cuda-12.4/
+git clone https://github.com/NVIDIA/cuda-samples.git
+cd /cuda-samples/Samples/1_Utilities/deviceQuery
+make
+./deviceQuery
+</code></pre>
+<p>结果如下：</p>
+<pre><code class="language-bash">bionet@Bionet:/usr/local/cuda-12.4/cuda-samples/Samples/1_Utilities/deviceQuery$ ./deviceQuery 
+./deviceQuery Starting...
+
+ CUDA Device Query (Runtime API) version (CUDART static linking)
+
+Detected 4 CUDA Capable device(s)
+
+Device 0: "NVIDIA GeForce RTX 4090"
+  CUDA Driver Version / Runtime Version          12.2 / 12.4
+  CUDA Capability Major/Minor version number:    8.9
+  Total amount of global memory:                 24217 MBytes (25393692672 bytes)
+  (128) Multiprocessors, (128) CUDA Cores/MP:    16384 CUDA Cores
+  GPU Max Clock rate:                            2580 MHz (2.58 GHz)
+  Memory Clock rate:                             10501 Mhz
+  Memory Bus Width:                              384-bit
+  L2 Cache Size:                                 75497472 bytes
+  Maximum Texture Dimension Size (x,y,z)         1D=(131072), 2D=(131072, 65536), 3D=(16384, 16384, 16384)
+  Maximum Layered 1D Texture Size, (num) layers  1D=(32768), 2048 layers
+  Maximum Layered 2D Texture Size, (num) layers  2D=(32768, 32768), 2048 layers
+  Total amount of constant memory:               65536 bytes
+  Total amount of shared memory per block:       49152 bytes
+  Total shared memory per multiprocessor:        102400 bytes
+  Total number of registers available per block: 65536
+  Warp size:                                     32
+  Maximum number of threads per multiprocessor:  1536
+  Maximum number of threads per block:           1024
+  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)
+  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)
+  Maximum memory pitch:                          2147483647 bytes
+  Texture alignment:                             512 bytes
+  Concurrent copy and kernel execution:          Yes with 2 copy engine(s)
+  Run time limit on kernels:                     No
+  Integrated GPU sharing Host Memory:            No
+  Support host page-locked memory mapping:       Yes
+  Alignment requirement for Surfaces:            Yes
+  Device has ECC support:                        Disabled
+  Device supports Unified Addressing (UVA):      Yes
+  Device supports Managed Memory:                Yes
+  Device supports Compute Preemption:            Yes
+  Supports Cooperative Kernel Launch:            Yes
+  Supports MultiDevice Co-op Kernel Launch:      Yes
+  Device PCI Domain ID / Bus ID / location ID:   0 / 9 / 0
+  Compute Mode:
+     &lt; Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) &gt;
+
+Device 1: "NVIDIA GeForce RTX 3090"
+  CUDA Driver Version / Runtime Version          12.2 / 12.4
+  CUDA Capability Major/Minor version number:    8.6
+  Total amount of global memory:                 24260 MBytes (25438126080 bytes)
+  (082) Multiprocessors, (128) CUDA Cores/MP:    10496 CUDA Cores
+  GPU Max Clock rate:                            1755 MHz (1.75 GHz)
+  Memory Clock rate:                             9751 Mhz
+  Memory Bus Width:                              384-bit
+  L2 Cache Size:                                 6291456 bytes
+  Maximum Texture Dimension Size (x,y,z)         1D=(131072), 2D=(131072, 65536), 3D=(16384, 16384, 16384)
+  Maximum Layered 1D Texture Size, (num) layers  1D=(32768), 2048 layers
+  Maximum Layered 2D Texture Size, (num) layers  2D=(32768, 32768), 2048 layers
+  Total amount of constant memory:               65536 bytes
+  Total amount of shared memory per block:       49152 bytes
+  Total shared memory per multiprocessor:        102400 bytes
+  Total number of registers available per block: 65536
+  Warp size:                                     32
+  Maximum number of threads per multiprocessor:  1536
+  Maximum number of threads per block:           1024
+  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)
+  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)
+  Maximum memory pitch:                          2147483647 bytes
+  Texture alignment:                             512 bytes
+  Concurrent copy and kernel execution:          Yes with 2 copy engine(s)
+  Run time limit on kernels:                     No
+  Integrated GPU sharing Host Memory:            No
+  Support host page-locked memory mapping:       Yes
+  Alignment requirement for Surfaces:            Yes
+  Device has ECC support:                        Disabled
+  Device supports Unified Addressing (UVA):      Yes
+  Device supports Managed Memory:                Yes
+  Device supports Compute Preemption:            Yes
+  Supports Cooperative Kernel Launch:            Yes
+  Supports MultiDevice Co-op Kernel Launch:      Yes
+  Device PCI Domain ID / Bus ID / location ID:   0 / 138 / 0
+  Compute Mode:
+     &lt; Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) &gt;
+
+Device 2: "NVIDIA GeForce RTX 2080 Ti"
+  CUDA Driver Version / Runtime Version          12.2 / 12.4
+  CUDA Capability Major/Minor version number:    7.5
+  Total amount of global memory:                 11012 MBytes (11546394624 bytes)
+  (068) Multiprocessors, (064) CUDA Cores/MP:    4352 CUDA Cores
+  GPU Max Clock rate:                            1650 MHz (1.65 GHz)
+  Memory Clock rate:                             7000 Mhz
+  Memory Bus Width:                              352-bit
+  L2 Cache Size:                                 5767168 bytes
+  Maximum Texture Dimension Size (x,y,z)         1D=(131072), 2D=(131072, 65536), 3D=(16384, 16384, 16384)
+  Maximum Layered 1D Texture Size, (num) layers  1D=(32768), 2048 layers
+  Maximum Layered 2D Texture Size, (num) layers  2D=(32768, 32768), 2048 layers
+  Total amount of constant memory:               65536 bytes
+  Total amount of shared memory per block:       49152 bytes
+  Total shared memory per multiprocessor:        65536 bytes
+  Total number of registers available per block: 65536
+  Warp size:                                     32
+  Maximum number of threads per multiprocessor:  1024
+  Maximum number of threads per block:           1024
+  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)
+  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)
+  Maximum memory pitch:                          2147483647 bytes
+  Texture alignment:                             512 bytes
+  Concurrent copy and kernel execution:          Yes with 3 copy engine(s)
+  Run time limit on kernels:                     No
+  Integrated GPU sharing Host Memory:            No
+  Support host page-locked memory mapping:       Yes
+  Alignment requirement for Surfaces:            Yes
+  Device has ECC support:                        Disabled
+  Device supports Unified Addressing (UVA):      Yes
+  Device supports Managed Memory:                Yes
+  Device supports Compute Preemption:            Yes
+  Supports Cooperative Kernel Launch:            Yes
+  Supports MultiDevice Co-op Kernel Launch:      Yes
+  Device PCI Domain ID / Bus ID / location ID:   0 / 4 / 0
+  Compute Mode:
+     &lt; Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) &gt;
+
+Device 3: "NVIDIA GeForce RTX 2080 Ti"
+  CUDA Driver Version / Runtime Version          12.2 / 12.4
+  CUDA Capability Major/Minor version number:    7.5
+  Total amount of global memory:                 11012 MBytes (11546394624 bytes)
+  (068) Multiprocessors, (064) CUDA Cores/MP:    4352 CUDA Cores
+  GPU Max Clock rate:                            1650 MHz (1.65 GHz)
+  Memory Clock rate:                             7000 Mhz
+  Memory Bus Width:                              352-bit
+  L2 Cache Size:                                 5767168 bytes
+  Maximum Texture Dimension Size (x,y,z)         1D=(131072), 2D=(131072, 65536), 3D=(16384, 16384, 16384)
+  Maximum Layered 1D Texture Size, (num) layers  1D=(32768), 2048 layers
+  Maximum Layered 2D Texture Size, (num) layers  2D=(32768, 32768), 2048 layers
+  Total amount of constant memory:               65536 bytes
+  Total amount of shared memory per block:       49152 bytes
+  Total shared memory per multiprocessor:        65536 bytes
+  Total number of registers available per block: 65536
+  Warp size:                                     32
+  Maximum number of threads per multiprocessor:  1024
+  Maximum number of threads per block:           1024
+  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)
+  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)
+  Maximum memory pitch:                          2147483647 bytes
+  Texture alignment:                             512 bytes
+  Concurrent copy and kernel execution:          Yes with 3 copy engine(s)
+  Run time limit on kernels:                     No
+  Integrated GPU sharing Host Memory:            No
+  Support host page-locked memory mapping:       Yes
+  Alignment requirement for Surfaces:            Yes
+  Device has ECC support:                        Disabled
+  Device supports Unified Addressing (UVA):      Yes
+  Device supports Managed Memory:                Yes
+  Device supports Compute Preemption:            Yes
+  Supports Cooperative Kernel Launch:            Yes
+  Supports MultiDevice Co-op Kernel Launch:      Yes
+  Device PCI Domain ID / Bus ID / location ID:   0 / 134 / 0
+  Compute Mode:
+     &lt; Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) &gt;
+&gt; Peer access from NVIDIA GeForce RTX 4090 (GPU0) -&gt; NVIDIA GeForce RTX 3090 (GPU1) : No
+&gt; Peer access from NVIDIA GeForce RTX 4090 (GPU0) -&gt; NVIDIA GeForce RTX 2080 Ti (GPU2) : No
+&gt; Peer access from NVIDIA GeForce RTX 4090 (GPU0) -&gt; NVIDIA GeForce RTX 2080 Ti (GPU3) : No
+&gt; Peer access from NVIDIA GeForce RTX 3090 (GPU1) -&gt; NVIDIA GeForce RTX 4090 (GPU0) : No
+&gt; Peer access from NVIDIA GeForce RTX 3090 (GPU1) -&gt; NVIDIA GeForce RTX 2080 Ti (GPU2) : No
+&gt; Peer access from NVIDIA GeForce RTX 3090 (GPU1) -&gt; NVIDIA GeForce RTX 2080 Ti (GPU3) : No
+&gt; Peer access from NVIDIA GeForce RTX 2080 Ti (GPU2) -&gt; NVIDIA GeForce RTX 4090 (GPU0) : No
+&gt; Peer access from NVIDIA GeForce RTX 2080 Ti (GPU2) -&gt; NVIDIA GeForce RTX 3090 (GPU1) : No
+&gt; Peer access from NVIDIA GeForce RTX 2080 Ti (GPU2) -&gt; NVIDIA GeForce RTX 2080 Ti (GPU3) : No
+&gt; Peer access from NVIDIA GeForce RTX 2080 Ti (GPU3) -&gt; NVIDIA GeForce RTX 4090 (GPU0) : No
+&gt; Peer access from NVIDIA GeForce RTX 2080 Ti (GPU3) -&gt; NVIDIA GeForce RTX 3090 (GPU1) : No
+&gt; Peer access from NVIDIA GeForce RTX 2080 Ti (GPU3) -&gt; NVIDIA GeForce RTX 2080 Ti (GPU2) : No
+
+deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 12.2, CUDA Runtime Version = 12.4, NumDevs = 4
+Result = PAS
+</code></pre>
+<p>可以看到4090的ECC没有开启不过问题不大，这个以后再处理。</p>
+<p>同样可以再跑一个BandwidthTest，编译后结果如下</p>
+<img src="https://s2.loli.net/2024/03/23/iT1SDxWPe5Yvs6g.png" alt="image-20240323215326894" style="zoom: 80%;">
+<pre><code class="language-bash">bionet@Bionet:/usr/local/cuda-12.4/cuda-samples/Samples/1_Utilities/bandwidthTest$ ./bandwidthTest 
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 0: NVIDIA GeForce RTX 4090
+ Quick Mode
+
+ Host to Device Bandwidth, 1 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(GB/s)
+   32000000			11.9
+
+ Device to Host Bandwidth, 1 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(GB/s)
+   32000000			13.2
+
+ Device to Device Bandwidth, 1 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(GB/s)
+   32000000			3627.5
+
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+</code></pre>
+<h2><span id="安装cudnn">安装cuDNN</span></h2>
+<p>cuDNN是nvidia专门用来加速深度学习的一些库，需要注意的是安装的时候要和你的cuda版本对应</p>
+<img src="https://s2.loli.net/2024/03/23/tedrqYc2GHNjak6.png" alt="image-20240323215837575" style="zoom:67%;">
+<p>这里是网页下载途径，但是网有墙，很烂，推荐使用这个<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cudnn-downloads?target_os=Linux&amp;target_arch=x86_64&amp;Distribution=Ubuntu&amp;target_version=22.04&amp;target_type=deb_local">页面</a>下载，选择对应的命令即可，我这里是cuda12所以要用cuda12的内容：</p>
+<img src="https://s2.loli.net/2024/03/23/76MqebZXjNEic9p.png" alt="image-20240323221544281" style="zoom:67%;">
+<p>注意这个和网上的不太一样，这里使用的是系统原生的包管理器来进行安装，详见：<a target="_blank" rel="noopener" href="https://docs.nvidia.com/deeplearning/cudnn/installation/linux.html">Installing cuDNN on Linux — NVIDIA cuDNN 9.0.0 documentation</a>。</p>
+<h2><span id="安装anaconda环境">安装Anaconda环境</span></h2>
+<p>从清华镜像站下载：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/?C=M&amp;O=D">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/?C=M&amp;O=D</a></p>
+<img src="https://s2.loli.net/2024/03/23/Fqe3SIQMdvUXp59.png" alt="image-20240323223642952" style="zoom:80%;">
+<pre><code class="language-shell">bionet@Bionet:~/Downloads$ chmod +x Anaconda3-2024.02-1-Linux-x86_64.sh 
+bionet@Bionet:~/Downloads$ sudo ./Anaconda3-2024.02-1-Linux-x86_64.sh 
+</code></pre>
+<p>注意这里我修改到了home目录下,home很大，我就喜欢整整齐齐的</p>
+<img src="https://s2.loli.net/2024/03/23/FBHezfQ3X9UpawE.png" alt="image-20240323224007486" style="zoom:67%;">
+<img src="https://s2.loli.net/2024/03/23/l7CS91emGqt6ZQF.png" alt="image-20240323224112452" style="zoom:67%;">
+<p>安装完成之后再输入一个yes，最后会给你显示目前安装的内容：</p>
+<img src="https://s2.loli.net/2024/03/23/E6P9C2sb4rcuVgG.png" alt="image-20240323224126302" style="zoom:67%;">
+<p>你安装完成以后发现不行啊没有conda的环境变量，其实并不是，他只是把环境变量写到了root的shell里面，这就很尴尬了。</p>
+<p>所以我们需要手动baroot里面的内容复制过来：</p>
+<img src="https://s2.loli.net/2024/03/23/ERfHxMYudmF3GI2.png" alt="image-20240323230739401" style="zoom:67%;">
+<p>这里下边打个样：</p>
+<pre><code class="language-sh"># &gt;&gt;&gt; conda initialize &gt;&gt;&gt;
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/anaconda3/bin/conda' 'shell.bash' 'hook' 2&gt; /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# &lt;&lt;&lt; conda initialize &lt;&lt;&lt;
+</code></pre>
+<p>不同的系统需要的路径也不一样，这里需要注意下。</p>
+<p>使用的命令如下：</p>
+<pre><code class="language-bash">bionet@Bionet:~/Desktop$ sudo vim ~/.bashrc
+bionet@Bionet:~/Desktop$ source ~/.bashrc
+</code></pre>
+<p>可以看到使用后的结果：</p>
+<p><img src="https://s2.loli.net/2024/03/23/XN4tJWkhMyVZTOC.png" alt="image-20240323231141009"></p>
+<p>你以为到这里就结束了吗？当然不可能对于我一个目录洁癖的人来说，肯定不止于此，我们要设置其包的路径，来保证整洁。</p>
+<p>在开始之前先完成换源：</p>
+<pre><code class="language-bash">(base) bionet@Bionet:~$ sudo vim ~/.condarc 
+</code></pre>
+<p>替换成如下内容：</p>
+<pre><code class="language-bash">channels:
+  - defaults
+show_channel_urls: true
+default_channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
+custom_channels:
+  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  pytorch-lts: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  deepmodeling: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/
+</code></pre>
+<p><img src="https://s2.loli.net/2024/03/23/ilpDM1PsCfrLSvo.png" alt="image-20240323231634153"></p>
+<p>我们检查一下当前路径结果：</p>
+<pre><code class="language-bash">(base) bionet@Bionet:~$ conda info
+
+     active environment : base
+    active env location : /home/anaconda3
+            shell level : 1
+       user config file : /home/bionet/.condarc
+ populated config files : /home/bionet/.condarc
+          conda version : 24.1.2
+    conda-build version : 24.1.2
+         python version : 3.11.7.final.0
+                 solver : libmamba (default)
+       virtual packages : __archspec=1=broadwell
+                          __conda=24.1.2=0
+                          __cuda=12.2=0
+                          __glibc=2.35=0
+                          __linux=6.5.0=0
+                          __unix=0=0
+       base environment : /home/anaconda3  (read only)
+      conda av data dir : /home/anaconda3/etc/conda
+  conda av metadata url : None
+           channel URLs : https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/linux-64
+                          https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/noarch
+                          https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r/linux-64
+                          https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r/noarch
+                          https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2/linux-64
+                          https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2/noarch
+          package cache : /home/anaconda3/pkgs
+                          /home/bionet/.conda/pkgs
+       envs directories : /home/bionet/.conda/envs
+                          /home/anaconda3/envs
+</code></pre>
+<p>发现目录正好不用改都在/home下，注意这里的路径是/home不是用户的home。</p>
+<h2><span id="pytorch安装">Pytorch安装</span></h2>
+<p>终于到了这一步了，我们在conda上创建一个新环境：</p>
+<pre><code class="language-bash">conda create --name test python=3.10
+conda activate test
+</code></pre>
+<p>在pytorch官网中找到合适的版本：<a target="_blank" rel="noopener" href="https://pytorch.org/">PyTorch</a></p>
+<p><img src="https://s2.loli.net/2024/03/23/nzDTKOdvbeHfWoY.png" alt="image-20240323232757248"></p>
+<p>复制命令下载：</p>
+<pre><code>conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+</code></pre>
+<p>随便写一个脚本，然后运行一下看看：</p>
+<pre><code class="language-bash">sudo vim test.py
+</code></pre>
+<p>脚本内容如下：</p>
+<pre><code class="language-python">import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.optim as optim
+import torch.backends.cudnn as cudnn
+from torchvision import datasets, transforms
+
+
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(1, 10, kernel_size=5)
+        self.conv2 = nn.Conv2d(10, 20, kernel_size=5)
+        self.conv2_drop = nn.Dropout2d()
+        self.fc1 = nn.Linear(320, 50)
+        self.fc2 = nn.Linear(50, 10)
+
+
+    def forward(self, x):
+        x = F.relu(F.max_pool2d(self.conv1(x), 2))
+        x = F.relu(F.max_pool2d(self.conv2_drop(self.conv2(x)), 2))
+        x = x.view(-1, 320)
+        x = F.relu(self.fc1(x))
+        x = F.dropout(x, training=self.training)
+        x = self.fc2(x)
+        return F.log_softmax(x, dim=1)
+
+
+def train(model, device, train_loader, optimizer, epoch):
+    model.train()
+    for batch_idx, (data, target) in enumerate(train_loader):
+        data, target = data.to(device), target.to(device)
+        optimizer.zero_grad()
+        output = model(data)
+        loss = F.nll_loss(output, target)
+        loss.backward()
+        optimizer.step()
+        if batch_idx % 10 == 0:
+            print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
+                epoch, batch_idx * len(data), len(train_loader.dataset),
+                       100. * batch_idx / len(train_loader), loss.item()))
+
+
+def main():
+    cudnn.benchmark = True
+    torch.manual_seed(1)
+    device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
+    print("Using device: {}".format(device))
+    kwargs = {'num_workers': 1, 'pin_memory': True}
+    train_loader = torch.utils.data.DataLoader(
+        datasets.MNIST('./data', train=True, download=True,
+                       transform=transforms.Compose([
+                           transforms.ToTensor(),
+                           transforms.Normalize((0.1307,), (0.3081,))
+                       ])),
+        batch_size=64, shuffle=True, **kwargs)
+
+    model = Net().to(device)
+    optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.5)
+
+    for epoch in range(1, 11):
+        train(model, device, train_loader, optimizer, epoch)
+
+if __name__ == '__main__':
+    main()
+</code></pre>
+<p>运行后没有报错的话就因该是这样的：</p>
+<pre><code class="language-bash">test) bionet@Bionet:~$ python  test.py                                                                                                        
+Using device: cuda                                                                                                                               
+Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz                                                                          
+Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz to ./data/MNIST/raw/train-images-idx3-ubyte.gz                        
+100.0%                                                                                                                                           
+Extracting ./data/MNIST/raw/train-images-idx3-ubyte.gz to ./data/MNIST/raw                                                             
+100.0%
+Extracting ./data/MNIST/raw/t10k-labels-idx1-ubyte.gz to ./data/MNIST/raw
+
+Train Epoch: 1 [0/60000 (0%)]	Loss: 2.327492
+Train Epoch: 1 [640/60000 (1%)]	Loss: 2.328194
+Train Epoch: 1 [1280/60000 (2%)]	Loss: 2.278235
+Train Epoch: 1 [1920/60000 (3%)]	Loss: 2.281009
+省略一部分
+Train Epoch: 10 [56320/60000 (94%)]	Loss: 0.196389
+Train Epoch: 10 [56960/60000 (95%)]	Loss: 0.387766
+Train Epoch: 10 [57600/60000 (96%)]	Loss: 0.109143
+Train Epoch: 10 [58240/60000 (97%)]	Loss: 0.077670
+Train Epoch: 10 [58880/60000 (98%)]	Loss: 0.182428
+Train Epoch: 10 [59520/60000 (99%)]	Loss: 0.392815
+</code></pre>
+<p>**注意这里的device一定要是cuda。**别急，这是裸机部分，但我们真正需要的是Docker！</p>
+<h2><span id="nvidia-container-toolkit">NVIDIA Container Toolkit</span></h2>
+<p>英伟达虚拟化环境技术分类：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yjy420/article/details/132305356">nvidia docker, nvidia docker2, nvidia container toolkits三者的区别-CSDN博客</a></p>
+<p>不扯没用的，我们直接上最新的nvidia-container-toolkits</p>
+<p>NVIDIA Container Toolkit 的目的是为了能够创造一个合适的环境来运行显卡的程序。同时有一定的自由度，可以切换CUDA版本等操作，最重要的是实现在不同机器上、不同硬件上无需提前配置相同环境就可以直接运行。</p>
+<p>官方教程：<a target="_blank" rel="noopener" href="https://github.com/NVIDIA/nvidia-container-toolkit?tab=readme-ov-file">NVIDIA/nvidia-container-toolkit: Build and run containers leveraging NVIDIA GPUs (github.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">Installing the NVIDIA Container Toolkit — NVIDIA Container Toolkit 1.14.5 documentation</a></p>
+<p><img src="https://s2.loli.net/2024/03/25/sTH5thkGBKiJvdy.png" alt="docker"></p>
+<p>NVIDIA 容器工具包允许用nvidai户构建和运行 GPU 加速容器。该工具包包括一个容器运行时<a target="_blank" rel="noopener" href="https://github.com/NVIDIA/libnvidia-container">库</a>和实用程序，用于自动配置容器以利用 NVIDIA GPU。产品文档（包括体系结构概述、平台支持以及安装和使用指南）可以在<a target="_blank" rel="noopener" href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/overview.html">文档存储库</a>中找到。</p>
+<p>需要注意的是，这里的使用的docker无需安装Nvidia Toolkit，但是需要在宿主机上安装Nvidia的驱动来支撑运行，</p>
+<p>首先需要配置仓库信息：</p>
+<pre><code class="language-bash">curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+  &amp;&amp; curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+</code></pre>
+<p>这里把命令行拉的长一点看的清楚一点：</p>
+<p><img src="https://s2.loli.net/2024/03/25/IMOomtcPW7uUZJl.png" alt="image-20240325151700669"></p>
+<p>使用如下命令：</p>
+<pre><code class="language-bash">sudo apt-get update
+</code></pre>
+<p><img src="https://s2.loli.net/2024/03/25/BOImxtPeWRpTZ9G.png" alt="image-20240325153736177"></p>
+<p>开始安装：</p>
+<pre><code class="language-sh">sudo apt-get install -y nvidia-container-toolkit
+</code></pre>
+<p>安装完成之后开始配置部分：</p>
+<p>使用nvidia-ctk命令修改docker在宿主机上的配置文件，来让Docker能使用 NVIDIA Container Runtime：</p>
+<pre><code class="language-sh">sudo nvidia-ctk runtime configure --runtime=docker
+</code></pre>
+<p><img src="https://s2.loli.net/2024/03/25/AXYErZSMo6tBGxK.png" alt="image-20240325154515232"></p>
+<h3><span id="运行docker部署测试">运行docker部署测试</span></h3>
+<p>先跑一个简单一点的测试：</p>
+<p>使用命令创建一个Ubuntu的镜像，并输出容器内GPU的信息</p>
+<pre><code class="language-sh">Neo@Bionet:~/Desktop$ docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
+</code></pre>
+<p>结果如下：</p>
+<pre><code class="language-sh">Neo@Bionet:~/Desktop$ docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
+Mon Mar 25 09:15:30 2024       
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 535.161.07             Driver Version: 535.161.07   CUDA Version: 12.2     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA GeForce RTX 2080 Ti     Off | 00000000:04:00.0 Off |                  N/A |
+|  0%   28C    P8              17W / 300W |      1MiB / 11264MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   1  NVIDIA GeForce RTX 4090        Off | 00000000:09:00.0 Off |                  Off |
+|  0%   31C    P8              34W / 450W |      1MiB / 24564MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   2  NVIDIA GeForce RTX 2080 Ti     Off | 00000000:86:00.0 Off |                  N/A |
+|  0%   28C    P8              12W / 300W |      1MiB / 11264MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   3  NVIDIA GeForce RTX 3090        Off | 00000000:8A:00.0 Off |                  N/A |
+|  0%   27C    P8              20W / 370W |      1MiB / 24576MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+                                                                                         
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|  No running processes found                                                           |
++---------------------------------------------------------------------------------------+
+
+</code></pre>
+<p>接着测试代码任务，使用命令安装一个镜像，然后配置环境之后打包成新的镜像保存下来供大家使用：</p>
+<p>执行以下命令之前需要使用，命令：</p>
+<pre><code class="language-bash">newgrp docker
+</code></pre>
+<p>来刷新一下用户组信息，当然前提是你的账户已经被添加到用户组了，否则需要联系管理员处理。</p>
+<pre><code class="language-sh">docker run  -it -p 10003:22 -p 10004:10002 --name pytorch \
+ -v /etc/timezone:/etc/timezone \
+ -v /etc/localtime:/etc/localtime \
+ -v /home/Neo/WorkSpace/_Share:/home/workspace/_share  \
+ --gpus all nvidia/cuda:12.2.2-cudnn8-runtime-ubuntu22.04
+</code></pre>
+<p><code>-v /etc/timezone:/etc/timezone</code> 和 <code>-v /etc/localtime:/etc/localtime</code>：这两个选项用于将宿主机的 <code>/etc/timezone</code> 和 <code>/etc/localtime</code> 文件挂载到容器内对应的位置，以确保容器内的时间设置与宿主机一致。</p>
+<p><code>-v /home/Neo/WorkSpace/_Share:/home/workspace/_share</code>：这个选项将宿主机上的 <code>/home/Neo/WorkSpace/_Share</code> 目录挂载到容器内的 <code>/home/workspace/_share</code> 目录，以实现宿主机和容器之间的共享文件。</p>
+<p>每个标签都具有以下格式：</p>
+<p><strong>11.4.0-base-ubuntu20.04</strong>docker</p>
+<ul>
+<li>11.4.0 – CUDA version.</li>
+<li>base – Image flavor.  <strong>Image的变种类型，常见有base runtime等，有不同功能。</strong></li>
+<li>ubuntu20.04 – Operating system version.</li>
+</ul>
+<p>目前有什么Tags，请参考：</p>
+<p><a target="_blank" rel="noopener" href="https://hub.docker.com/r/nvidia/cuda/tags">nvidia/cuda Tags | Docker Hub</a></p>
+<p>这里需要注意的是：cuda tollkit的版本要和驱动的版本匹配：</p>
+<p>详见：<a target="_blank" rel="noopener" href="https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html">1. CUDA 12.4 Release Notes — Release Notes 12.4 documentation (nvidia.com)</a></p>
+<img src="https://s2.loli.net/2024/03/26/QY2W4txbGJ1zgBv.png" alt="image-20240326131315726" style="zoom:80%;">
+<p>同时需要把对应的端口映射出来，SSH端口是22，从容器中映射出来，映射到主机的10001端口。同时保留一个10002端口以备不时之需。</p>
+<img src="https://s2.loli.net/2024/04/02/nVM3ioc69xewlbF.png" alt="image-20240325173154854" style="zoom: 80%;">
+<p>此时就进入了docker之中，可以愉快的运行了~</p>
+<img src="https://s2.loli.net/2024/03/25/UGgEQ1p2wmIt8TC.png" alt="image-20240325221935676" style="zoom:80%;">
+<p>我们把裸机的例子拿来再跑一遍看看有什么效果~</p>
+<pre><code class="language-shell">root@54990fb612d5:/# nvidia-smi
+</code></pre>
+<p>你如果仔细看这张图就看到了docker的真正优点：在于CUDA版本的切换！这里的cuda版本成功切换到12.3版本~</p>
+<img src="https://s2.loli.net/2024/03/25/ReDn2iNISfszZxm.png" alt="image-20240325173527240" style="zoom:80%;">
+<p>当然你在容器里面随便操作也不会太影响其他人，这是最棒的优点。</p>
+<h3><span id="此处应使用dockerfile来配置后续更新先手动"><strong>此处应使用dockerfile来配置，后续更新，先手动。</strong></span></h3>
+<p>接下来安装一些必要的工具来方便后边的开发：</p>
+<pre><code class="language-sh">apt update
+apt-get install sudo
+sudo apt-get install -y vim git curl unzip net-tools openssh-server
+</code></pre>
+<p>修改源：</p>
+<pre><code class="language-bash">sudo vim /etc/apt/sources.list
+</code></pre>
+<p>将以下内容填入：</p>
+<p>适用 22.04：</p>
+<pre><code class="language-bash">deb https://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse
+
+deb https://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse
+
+deb https://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
+
+# deb https://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
+# deb-src https://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
+
+deb https://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
+</code></pre>
+<p>适用 20.04：</p>
+<pre><code class="language-bash">deb https://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
+
+deb https://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
+
+deb https://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
+
+# deb https://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
+# deb-src https://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
+
+deb https://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
+</code></pre>
+<p>记得再次升级：</p>
+<pre><code class="language-sh">sudo apt update
+sudo apt upgrade
+</code></pre>
+<p>当然别忘记设置密码：</p>
+<pre><code class="language-sh">root@49906fdf69a6:/# passwd root
+New password: 
+Retype new password: 
+passwd: password updated successfully
+</code></pre>
+<p>配置容器内的SSH：</p>
+<pre><code class="language-sh">echo "PermitRootLogin yes"&gt;&gt;/etc/ssh/sshd_config
+echo "export VISIBLE=now" &gt;&gt;/etc/profile
+</code></pre>
+<p><code>echo "PermitRootLogin yes"&gt;&gt;/etc/ssh/sshd_config</code>添加一段信息到sshd_config中。</p>
+<p><code>echo "export VISIBLE=now" &gt;&gt; /etc/profile</code>：向 <code>/etc/profile</code> 文件中添加一行 <code>export VISIBLE=now</code>，这个设置使得 SSH 会话可以在登录时创建 <code>utmp</code> 记录，使得用户能够在 <code>w</code> 或 <code>who</code> 命令中看到 SSH 登录的用户信息。</p>
+<p>然后运行重启：</p>
+<pre><code class="language-shell">service ssh restart
+</code></pre>
+<p>这时候你如果打开另一个宿主机命令行运行以下命令可以看到：</p>
+<pre><code class="language-bash">Neo@Bionet:~/Desktop$ docker port pytorch 22
+0.0.0.0:10003
+[::]:10003
+</code></pre>
+<p>这时候我们打开一个远程的命令行来来连接一下容器：</p>
+<pre><code class="language-bash">ssh root@10.26.58.61 -p 10003
+</code></pre>
+<img src="https://s2.loli.net/2024/03/25/OGcCnmvXyBYQMlT.png" alt="image-20240325224800133" style="zoom: 80%;">
+<p>这时候我们就成功进入啦，到这里已经完成一个镜像的50%了，我们还需要安装python环境，这里选择miniconda来作为虚拟Python环境运行，或者你觉得麻烦，直接用pip也可以，这里不赘述pip方案，这里选择conda 方案。</p>
+<p>额外注意如果你出现以下报错：</p>
+<pre><code class="language-bash">PS C:\Users\NeoNexus\Desktop&gt; ssh root@10.26.58.61 -p 10003
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+The fingerprint for the ED25519 key sent by the remote host is
+SHA256:8jZY1c5+1VHkr9H0HoLXl6dV6c/oGj1i6HlsPsUCjPA.
+Please contact your system administrator.
+Add correct host key in C:\\Users\\NeoNexus/.ssh/known_hosts to get rid of this message.
+Offending ECDSA key in C:\\Users\\NeoNexus/.ssh/known_hosts:9
+Host key for [10.26.58.61]:10003 has changed and you have requested strict checking.
+</code></pre>
+<p>同样的问题在vscode中报错如下：</p>
+<p><img src="https://s2.loli.net/2024/03/26/4KidMqgxcREQInX.png" alt="image-20240326125312882"></p>
+<p>请按照下图删除对应内容即可</p>
+<p><img src="https://s2.loli.net/2024/03/26/cg56lzJjRbsOVW2.png" alt="image-20240326125202797"></p>
+<p>再来安装miniconda：</p>
+<p>首先去官网下载好miniconda的安装包，地址如下：</p>
+<p><a target="_blank" rel="noopener" href="https://docs.anaconda.com/free/miniconda/index.html">Miniconda — Anaconda documentation</a></p>
+<p><img src="https://s2.loli.net/2024/03/26/vSbVclCLysOPtIh.png" alt="image-20240326100332914"></p>
+<p>这里就安装在默认的位置，这样好安排一点，就不做路径修改了。</p>
+<pre><code class="language-bash">root@6ee3c0747be2:/# echo "PermitRootLogin yes"&gt;&gt;/etc/ssh/sshd_config
+root@6ee3c0747be2:/# echo "export VISIBLE=now" &gt;&gt;/etc/profile
+root@6ee3c0747be2:/# service ssh restart
+ * Restarting OpenBSD Secure Shell server sshd                                                                                                                                                         [ OK ] 
+root@6ee3c0747be2:/# cd /home/workspace/_share/
+root@6ee3c0747be2:/home/workspace/_share# chmod +x Miniconda3-latest-Linux-x86_64.sh 
+root@6ee3c0747be2:/home/workspace/_share# sudo ./Miniconda3-latest-Linux-x86_64.sh 
+</code></pre>
+<p><img src="https://s2.loli.net/2024/03/26/GDHy16CMAheYm9R.png" alt="image-20240326101023244"></p>
+<p><img src="https://s2.loli.net/2024/03/26/2LlMjI9KXRaTzdq.png" alt="image-20240326101132042"></p>
+<p><img src="https://s2.loli.net/2024/03/26/uTxGIA75yfitWJL.png" alt="image-20240326101254365"></p>
+<p>安装完成之后我们可以使用了，这时候需要推出一下容器的命令行然后再进入：</p>
+<pre><code class="language-bash">root@49906fdf69a6:/home/workspace/_share# exit
+exit
+Neo@Bionet:~/Desktop$ docker ps -a
+CONTAINER ID   IMAGE                                    COMMAND                  CREATED        STATUS        PORTS                                                                                    NAMES
+49906fdf69a6   nvidia/cuda:12.3.2-runtime-ubuntu22.04   "/opt/nvidia/nvidia_…"   12 hours ago   Up 12 hours   0.0.0.0:10003-&gt;22/tcp, :::10003-&gt;22/tcp, 0.0.0.0:10004-&gt;10002/tcp, :::10004-&gt;10002/tcp   pytorch
+Neo@Bionet:~/Desktop$ docker exec -it pytorch /bin/bash
+#这时候就会看到conda的启动，我们直接安装pytorch来运行一下上边的测试代码，不同的是我们这次使用vscode来远程连接docker。
+(base) root@49906fdf69a6:/# 
+(base) root@49906fdf69a6:/# 
+</code></pre>
+<p>vscode通过SSH连接之后我们创建一个test文件夹在这里，同时把测试代码复制过来：</p>
+<img src="https://s2.loli.net/2024/03/26/4h2sKfOWkv7zARq.png" alt="image-20240326102200378" style="zoom: 80%;">
+<p>将推荐的插件安装一下：</p>
+<img src="https://s2.loli.net/2024/03/26/QVI764NsxBRSdi1.png" alt="image-20240326102347258" style="zoom:80%;">
+<p>选择方才的conda来使用：</p>
+<img src="https://s2.loli.net/2024/03/26/1ceMju2y48dNrqw.png" alt="image-20240326102527175" style="zoom:80%;">
+<p><img src="https://s2.loli.net/2024/03/26/PMwArnD9lWTUb1a.png" alt="image-20240326102657022"></p>
+<p>选择完成之后会自动帮你创建一个新的虚拟环境：</p>
+<p><img src="https://s2.loli.net/2024/03/26/AQ6iHkPvRcGJqtD.png" alt="image-20240326102742908"></p>
+<p>我们来打开terminal来安装一下pytorh环境：</p>
+<p><img src="https://s2.loli.net/2024/03/26/N8Bou4eOazdYyit.png" alt="image-20240326102842940"></p>
+<p>使用命令如下：</p>
+<pre><code class="language-bash">conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+</code></pre>
+<img src="https://s2.loli.net/2024/03/26/ym1x8NOrXRBJt9s.png" alt="image-20240326102939664" style="zoom:80%;">
+<p>在其下载的同时我们来看一下性能的消耗：</p>
+<img src="https://s2.loli.net/2024/03/26/QVdepj3Bok8PsAY.png" alt="image-20240326103216672" style="zoom:80%;">
+<p>点击右上角直接执行，运行结果如下：</p>
+<img src="https://s2.loli.net/2024/03/26/ShvL5FToCAB2K37.png" alt="image-20240326103713020" style="zoom:80%;">
+<p>你仔细看会看到这里实际上运行的设备是cpu！这是不对的，因为cuda版本驱动版本不匹配导致的，修改后（就是上边的命令已经修改好了，你正常安装应该是我下边的结果）：</p>
+<p><img src="https://s2.loli.net/2024/03/26/fqHr6MlpiGsvg5h.png" alt="image-20240326134143504"></p>
+<p>我们将镜像打包一下方便以后用：</p>
+<p>命令格式：</p>
+<pre><code class="language-bash">docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
+</code></pre>
+<pre><code class="language-bash">docker commit  -a Neo -m "first commit" pytorch pytorch221_cuda122
+</code></pre>
+<p>打包完成之后使用docker images查看：</p>
+<img src="https://s2.loli.net/2024/03/26/XbuxyQOUsipekVH.png" alt="image-20240326111101210" style="zoom:80%;">
+<p>打包成镜像以后，要保存成tar方便传输：</p>
+<pre><code class="language-bash">docker save [OPTIONS] IMAGE [IMAGE...]
+</code></pre>
+<p>示例：</p>
+<pre><code class="language-bash">docker save -o pytorch221_cuda122 pytorch
+</code></pre>
+<h3><span id="选配rootless来操作docker-daemon">选配：rootless来操作docker daemon</span></h3>
+<p>根据提示restart一下docker：</p>
+<pre><code class="language-sh">systemctl --user restart docker
+</code></pre>
+<pre><code>Neo@Bionet:~/Desktop$ systemctl --user restart docker
+Failed to restart docker.service: Unit docker.service not found.
+</code></pre>
+<img src="https://s2.loli.net/2024/03/25/wFPKalfxHhJSZYO.png" alt="image-20240325165138808" style="zoom:80%;">
+<p>实际上只是添加了几个参数：</p>
+<img src="https://s2.loli.net/2024/03/25/RjUeq6KVMvuT7OZ.png" alt="image-20240325165226532" style="zoom:67%;">
+<p>这里暂停，因为服务器权限不开放，所以暂停这样使用。</p>
+<h1><span id="参考文章">参考文章</span></h1>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/citrus/p/13385176.html">Ubuntu - 测试硬盘读写速度 - Citrusliu - 博客园 (cnblogs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.weizhiyong.com/archives/1436">Ubuntu 20.04安装XRDP远程桌面服务及xfce轻量桌面 – 技术什锦派 (weizhiyong.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7275977439657377844">Ubuntu 20.04 安装xfce4桌面、Xrdp远程桌面 - 掘金 (juejin.cn)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.myfreax.com/how-to-install-xrdp-on-ubuntu-20-04/">如何在 Ubuntu 20.04 安装 Xrdp 服务器 | myfreax</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.helpwire.app/blog/remote-desktop-transfer-files/">How To Transfer Files Over Remote Desktop (All You Need To Know) (helpwire.app)</a></p>
+<p>[debian 关闭gnome-掘金 (<a target="_blank" rel="noopener" href="http://juejin.cn">juejin.cn</a>)](<a target="_blank" rel="noopener" href="https://juejin.cn/s/debian">https://juejin.cn/s/debian</a> 关闭gnome)</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/336429888">【保姆级教程】个人深度学习工作站配置指南 - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/467200809">linux之用户和权限管理（干货） - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/xdx_dili/article/details/132733472">Linux——用户和权限、用户组管理、权限管理_用户权限跟组权限的关系linux-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cwp-bg/p/8257843.html">/etc/profile、/etc/bashrc、~/.bash_profile、~/.bashrc 文件的作用 - 倥偬时光 - 博客园 (cnblogs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html">1. Introduction — Installation Guide for Linux 12.4 documentation (nvidia.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-downloads?target_os=Linux&amp;target_arch=x86_64&amp;Distribution=Ubuntu&amp;target_version=22.04&amp;target_type=runfile_local">CUDA Toolkit 12.4 Downloads | NVIDIA Developer</a></p>
+<p><a target="_blank" rel="noopener" href="https://hub.docker.com/r/nvidia/cuda/tags">nvidia/cuda Tags | Docker Hub</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tangjiahao10/article/details/125225786">【Linux】CUDA Toolkit和cuDNN版本对应关系（更新至2022年6月，附官网永久更新链接）_cuda12.0对应cudnn-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yaoqingzhuan/p/10889718.html">linux添加环境变量 - ilovetesting - 博客园 (cnblogs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jingzh/p/17397843.html">Anaconda下载与安装详解 - 上善若泪 - 博客园 (cnblogs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014636245/article/details/83933402">【anaconda】激活环境失败-bash: activate:No such file/没有那个文件或目录_bash: activate: no such file or directory-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://circleci.com/blog/ssh-into-docker-container/">How to SSH into Docker containers | CircleCI</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/winter2121/article/details/118223637">ssh连接docker容器；docker容器设置root密码_docker容器root用户密码-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33259057/article/details/124737659">使用Docker容器配置ssh服务，远程直接进入容器_ssh连接docker容器 群晖-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://circleci.com/blog/ssh-into-docker-container/">如何通过 SSH 连接到 Docker 容器 |CircleCI的</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/ubuntu/">Install Docker Engine on Ubuntu | Docker Docs</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/linux-postinstall/">Linux post-installation steps for Docker Engine | Docker Docs</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository">Install Docker Engine on Ubuntu | Docker Docs</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/security/rootless/">Run the Docker daemon as a non-root user (Rootless mode) | Docker Docs</a></p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/09/21/Hexo+github+Markdown%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" title="Hexo+github+Markdown博客搭建"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Hexo+github+Markdown博客搭建</span></a><a class="button is-default" href="/2024/09/21/Bionet-Server01%20Q&amp;A%E2%80%94%E2%80%94Docker%E7%AF%87/" title="BionetServer-No1. Q&amp;A-Docker"><span class="has-text-weight-semibold">Next: BionetServer-No1. Q&amp;A-Docker</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2025</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>

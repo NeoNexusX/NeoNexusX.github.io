@@ -1,0 +1,518 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>Android开发笔记——快速入门（优雅的开发Activity）</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="Android开发笔记——快速入门（优雅的开发Activity）
+
+
+软件环境：
+
+Jetbrains Toolbox
+Android Sudio 2021.1.1 Bumblebee
+JDK 17.0.2
+
+请先参考前一篇文章复习一下Kotlin的一些语法。
+[TOC]
+
+
+使用Android手机在AS直接进行开发
+Activity的启动模式
+
+standard
+sigleTop
+sigleTask
+singleInstance
+
+
+充分管理和了解你的ACT
+
+如何知晓当前ACT的名字？
+随时退出程序
+启动ACT的最佳写法
+
+
+Activity的生命周期
+
+正则表达式
+
+基本匹配
+限定符
+针对多个字符的运算符
+逻辑运算符
+字符集
+转码特殊字符
+
+
+
+
+锚点
+- ^号
+- $ 号
+
+简写字符集
+贪婪匹配与惰.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Android开发笔记——快速入门（优雅的开发Activity）</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Android开发笔记——快速入门（优雅的开发Activity）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">软件环境：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">使用Android手机在AS直接进行开发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Activity的启动模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">standard</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">sigleTop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">sigleTask</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">singleInstance</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">充分管理和了解你的ACT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">如何知晓当前ACT的名字？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">随时退出程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">启动ACT的最佳写法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Activity的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">基本匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">限定符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">针对多个字符的运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">逻辑运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">字符集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">转码特殊字符</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">锚点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">^号</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">$ 号</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">简写字符集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">贪婪匹配与惰性匹配 (Greedy vs lazy matching)</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Android"><i class="tag post-item-tag">Android</i></a><a href="/tags/Activity"><i class="tag post-item-tag">Activity</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Android开发笔记——快速入门（优雅的开发Activity）</h1><time class="has-text-grey" datetime="2024-10-21T16:00:00.000Z">2024-10-22</time><article class="mt-2 post-content"><h1><span id="android开发笔记快速入门优雅的开发activity">Android开发笔记——快速入门（优雅的开发Activity）</span></h1>
+<img src="https://s2.loli.net/2024/09/29/fDGVwPp6OMtaZ5E.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1727616671844" style="zoom:50%;">
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom: 50%;">
+<h2><span id="软件环境">软件环境：</span></h2>
+<ul>
+<li><strong>Jetbrains Toolbox</strong></li>
+<li><strong>Android Sudio 2021.1.1 Bumblebee</strong></li>
+<li><strong>JDK 17.0.2</strong></li>
+</ul>
+<p>请先参考前一篇文章复习一下Kotlin的一些语法。</p>
+<p>[TOC]</p>
+<!-- toc -->
+<ul>
+<li><a href="#%E4%BD%BF%E7%94%A8android%E6%89%8B%E6%9C%BA%E5%9C%A8as%E7%9B%B4%E6%8E%A5%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91">使用Android手机在AS直接进行开发</a></li>
+<li><a href="#activity%E7%9A%84%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F">Activity的启动模式</a>
+<ul>
+<li><a href="#standard">standard</a></li>
+<li><a href="#sigletop">sigleTop</a></li>
+<li><a href="#sigletask">sigleTask</a></li>
+<li><a href="#singleinstance">singleInstance</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%85%E5%88%86%E7%AE%A1%E7%90%86%E5%92%8C%E4%BA%86%E8%A7%A3%E4%BD%A0%E7%9A%84act">充分管理和了解你的ACT</a>
+<ul>
+<li><a href="#%E5%A6%82%E4%BD%95%E7%9F%A5%E6%99%93%E5%BD%93%E5%89%8Dact%E7%9A%84%E5%90%8D%E5%AD%97">如何知晓当前ACT的名字？</a></li>
+<li><a href="#%E9%9A%8F%E6%97%B6%E9%80%80%E5%87%BA%E7%A8%8B%E5%BA%8F">随时退出程序</a></li>
+<li><a href="#%E5%90%AF%E5%8A%A8act%E7%9A%84%E6%9C%80%E4%BD%B3%E5%86%99%E6%B3%95">启动ACT的最佳写法</a></li>
+</ul>
+</li>
+<li><a href="#activity%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">Activity的生命周期</a>
+<ul>
+<li><a href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F">正则表达式</a>
+<ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%8C%B9%E9%85%8D">基本匹配</a></li>
+<li><a href="#%E9%99%90%E5%AE%9A%E7%AC%A6">限定符</a></li>
+<li><a href="#%E9%92%88%E5%AF%B9%E5%A4%9A%E4%B8%AA%E5%AD%97%E7%AC%A6%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6">针对多个字符的运算符</a></li>
+<li><a href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6">逻辑运算符</a></li>
+<li><a href="#%E5%AD%97%E7%AC%A6%E9%9B%86">字符集</a></li>
+<li><a href="#%E8%BD%AC%E7%A0%81%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6">转码特殊字符</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E9%94%9A%E7%82%B9">锚点</a><br>
+- <a href="#%E5%8F%B7">^号</a><br>
+- <a href="#%E5%8F%B7"><code>$</code> 号</a>
+<ul>
+<li><a href="#%E7%AE%80%E5%86%99%E5%AD%97%E7%AC%A6%E9%9B%86">简写字符集</a></li>
+<li><a href="#%E8%B4%AA%E5%A9%AA%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%83%B0%E6%80%A7%E5%8C%B9%E9%85%8D-greedy-vs-lazy-matching">贪婪匹配与惰性匹配 (Greedy vs lazy matching)</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p><strong>大部分内容参考了郭霖先生的《第一行代码》，在书的基础上针对目前的实际情况进行实践记录。</strong></p>
+<h2><span id="使用android手机在as直接进行开发">使用Android手机在AS直接进行开发</span></h2>
+<p>参考过的文章链接：</p>
+<p><a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1717480652313244278&amp;wfr=spider&amp;for=pc">如何在Android12开启开发者模式</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42851946/article/details/121332064">荣耀 打开USB调试 Android开发</a></p>
+<p>首先安装google的驱动：打开SDK管理器：</p>
+<p><img src="https://s2.loli.net/2024/09/29/LXJgQSdiZCvPOIE.png" alt="23"></p>
+<p>找到：Google USB Driver下载：</p>
+<p><img src="https://s2.loli.net/2024/09/29/XnRos5Embja3Qpx.png" alt="1"></p>
+<p>然后开启设备管理器：</p>
+<p><img src="https://s2.loli.net/2024/09/29/Rq27KFcE9xPmjnN.png" alt="24"></p>
+<p>为设备安装驱动：</p>
+<p><img src="https://s2.loli.net/2024/09/29/L4JXsKcUrfyxtj1.png" alt="25"></p>
+<p>在本地找到刚下载的驱动，路径如下，需要参考你的具体路径：</p>
+<p><img src="https://s2.loli.net/2024/09/29/92UsVMwN8GjelEf.png" alt="26"></p>
+<p>等待安装完成</p>
+<p><img src="https://s2.loli.net/2024/09/29/rNuAqF7DBMtvEle.png" alt="3"></p>
+<p>打开开发者模式：</p>
+<p>连续点击<strong>内部版本号</strong>：直到提示打开开发者模式：</p>
+<img src="https://s2.loli.net/2024/09/29/47nQZH5fvT9qArx.jpg" alt="16" style="zoom:50%;">
+<p>打开如下选项就可以看到开发者选项：</p>
+<p><img src="https://s2.loli.net/2024/09/29/Gpe6YnmbuTHX7Aw.png" alt="17"></p>
+<p>打开开发者选项：</p>
+<p><img src="https://s2.loli.net/2024/09/29/pcLrnjf6GV4Sbmu.png" alt="19"></p>
+<p><img src="https://s2.loli.net/2024/09/29/wS89kgBdJ5aVNLW.png" alt="18"></p>
+<p>往下拉找到USB配置选项：</p>
+<p><img src="https://s2.loli.net/2024/09/29/24C8vLnRpSPlZac.png" alt="20"></p>
+<p>如果不是RNDIS选择改成RNDIS,不知道为什么即使开启<strong>仅充电模式下开启ADB</strong>调试选项，也不无法在仅充电模式下调试，所以手动开启RNDIS稳妥一点。</p>
+<p><strong>如果选择此模式还是没有反应，就在其它模式和本模式切换一下</strong>。</p>
+<p><img src="https://s2.loli.net/2024/09/29/ZJEDhVyHjOTcqtu.png" alt="21"></p>
+<p>可以看到AS中出现了设备：</p>
+<p><img src="https://s2.loli.net/2024/09/29/Mors4Tiq6fHkpdP.png" alt="22"></p>
+<h2><span id="activity的启动模式">Activity的启动模式</span></h2>
+<p>Android的Activity的启动模式一共有四种。</p>
+<p><strong>standard、sigleTop、sigleTask、singleInstace</strong>。</p>
+<h3><span id="standard">standard</span></h3>
+<p>standard模式是Activity的默认启动模式，在不显式指定的情况下，所有Activity都会使用这种模式。</p>
+<p>举个例子：</p>
+<pre><code class="language-kotlin">override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    //此处注意
+    Log.d("FirstActivity","Task id is $taskId")
+   val  binding = ActivityFirstBinding.inflate(layoutInflater)
+    setContentView(binding.root)
+    binding.button1.setOnClickListener()
+    {
+        val intent = Intent(this,FirstActivity::class.java)
+        startActivity(intent)
+    }
+}
+</code></pre>
+<p>我们给一个Act设定一个操作当点击按钮的时候再次创建一个一摸一样的Act出来。</p>
+<p><img src="https://s2.loli.net/2024/09/29/4KpASe7gfj5a89t.png" alt="4"></p>
+<p>实际上两个ACT的实例句柄并不相同，也就是说ACT中有两个相同的ACT实例。</p>
+<p>具体实现模式如下图所示：</p>
+<p><img src="https://s2.loli.net/2024/09/29/XU9teNOwGMDQsnF.png" alt="11"></p>
+<h3><span id="sigletop">sigleTop</span></h3>
+<p>对于标准启动模式你会觉得奇怪，明明我的ACT已经在栈顶了为什么还要启动一个重复的呢？</p>
+<p>在sigleTop模式下就能解决你这个疑问，在本模式下，当ACT的启动模式指定为sigleTop，再启动之前就会查询栈顶元素，如果发现返回栈顶已经是该ACT，则认为可以直接使用它，不会在创建新的实例。</p>
+<p>我们这里使用一个ACT来测试，在第一个ACT中在来创建一个相同ACT，看是否会创建。</p>
+<p><img src="https://s2.loli.net/2024/09/29/AP3oEg7iwv2krSM.png" alt="6"></p>
+<p>果然点击多次并没有新的ACT产生。</p>
+<p>模式图如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/PkvMnN92j3CDZrY.png" alt="12"></p>
+<h3><span id="sigletask">sigleTask</span></h3>
+<p>在SigleTop模式下你会有一个疑问，如果有两个ACT相互调用怎么办呢？如果我们使用sigleTop模式，在第二个ACT2中调用第一个ACT（此时栈顶是ACT2）仍会导致创建一个和第一个ACT相同的ACT导致资源的浪费，sigleTask就是能完美解决重复创建栈顶ACT的问题。</p>
+<p>每次启动ACT的时候就会检查ACT是否存在该ACT的实例，如果发现已经存在则直接使用这个ACT，并将本ACT之上的所有ACT统统出栈，如果发现没有则创建一个新的ACT实例在栈顶。</p>
+<p>我们这里创建两种测试，首先创建两个ACT，一个ACT中调用第二个ACT，在第二个ACT中调用第一个ACT，此时应该会把第一个ACT重新唤醒。</p>
+<p><img src="https://s2.loli.net/2024/09/29/1PRjmeLucSxDndt.png" alt="7"></p>
+<p>可以看到ACT1被重新唤醒了。</p>
+<p>模式图如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/P9hYJliIbgjoqSX.png" alt="14"></p>
+<h3><span id="singleinstance">singleInstance</span></h3>
+<p>不同于以上三种模式，singleInstance模式会启用一个新的返回栈来管理新的ACT，那么这样做有什么意义呢？</p>
+<p>假设我们的程序中有一个ACT是允许其他程序调用的，如果想实现其他程序和我们的程序可以共享找个ACT的实例，应该如何实现呢？</p>
+<p>前三种方式肯定是不正确的，因为他们都是在自己的返回栈的基础上进行操作，每一个应用程序都有自己的返回栈，同一个ACT在不同的返回栈中入栈的时候都必然创建新的实例。而在本模式下，不管是哪个应用程序来访问这个ACT，都会共用一个返回栈，就解决了ACT实例的问题。</p>
+<p>我们这里使用三个ACT来实现操作：</p>
+<p>将第一个第三个设置为stander启动模式，再将第二个设置成singleInstance启动模式。</p>
+<p>我们让第一个调用第二个ACT，第二个调用第三个ACT.</p>
+<p>可以通过输出的信息看到：</p>
+<p><img src="https://s2.loli.net/2024/09/29/YnSj1cxkMK9HfGA.png" alt="9"></p>
+<p>我们先启动了第一个ACT他的返回栈ID是106，在启动了第二个ACT他的返回栈ID是107，最后启动了第三个ACT他的返回栈是106和第一个返回栈id相同，因为他们三个都是standard模式。</p>
+<p>我们在第三个ACT按下返回键，最后我们看到在提示信息里面有ACT1的restart方法的调用，我们在第三个ACT返回却直接返回的是ACT1，这里很好理解因为ACT1和ACT3在同一个返回栈里面。</p>
+<p>singleInstance的返回模式图如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/9MWjTyOgXfYKaqF.png" alt="13"></p>
+<h2><span id="充分管理和了解你的act">充分管理和了解你的ACT</span></h2>
+<p>在阅读之一部分前请先阅读：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/24304289/answer/38218810">关于JAVA的反射与Class</a>。</p>
+<h3><span id="如何知晓当前act的名字">如何知晓当前ACT的名字？</span></h3>
+<p>创建一个<code>BaseActivity类</code>，注意是Kotlin的类，并不是创建一个ACT，让他继承<code>AppCompatActivity类</code>，并重写<code>onCreate方法</code>：</p>
+<pre><code class="language-kotlin">override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    Log.d("BaseActivity",javaClass.simpleName)
+}
+</code></pre>
+<p>使用Log来输出当前的类名，值得注意的是，这里使用的是类似于java的反射机制，你可以注意到当前的类就是<code>BaseActivity</code>为什么还要通过<code>javaClass.simpleName</code>来输出类名呢？</p>
+<p>实际上并不是这样的，我们先看一个结果：</p>
+<p>运行一个FirstActivity以后：</p>
+<p><img src="https://s2.loli.net/2024/09/29/ApDtHvN2JnKYQh3.png" alt="image-20220504101007423"></p>
+<p>在Koltin中javaclass表示获取当前实例的Class对象，相当于在Java中调用getClass方法。</p>
+<p>具体什么是Class类和对象请参考上文链接，简单的来说就是JVM中用来管理每个类的一个专门的管理类，通过这个类可以获取具体的信息包括对应类的存储位置，类的方法，类名等。</p>
+<p>我们在重写父类的onCreate方法同时调用了父类的<code>super.onCreate(savedInstanceState)</code>方法，这样就相当于在本类中使用了<code>Log.d("BaseActivity",javaClass.simpleName)</code>方法，通过class来获取当前的实例名。</p>
+<p>只要我们让<code>BaseActivity</code>成为所有ACT的父类就能输出类的信息。</p>
+<p>当然你也可以这样写：</p>
+<pre><code class="language-kotlin">override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    Log.d("BaseActivity",this.toString())
+}
+</code></pre>
+<p>这样输出内容在创建相同实例的时候更准确：</p>
+<p><img src="https://s2.loli.net/2024/09/29/VUTAtxGlkSifBPw.png" alt="10"></p>
+<h3><span id="随时退出程序">随时退出程序</span></h3>
+<p>如果你目前栈内已经有了三个ACT，而现在你想检测退出程序对应ACT阶段回调函数的运行效果怎么样，总不能连续按下三次返回按键吧，那如果有很多的ACT，就连续按下多次？当然不现实了。</p>
+<p>解决思路很简单，这里创建一个专门的类针对所有类进行管理。</p>
+<p>先看个例子，创建了一个<code>ActitvityCollector</code>类：</p>
+<pre><code class="language-kotlin">object ActitvityCollector
+{
+    private val activities = ArrayList&lt;Activity&gt;()
+    fun addActivity(activity: Activity)
+    {
+        activities.add(activity)
+    }
+    fun removeActivity(activity: Activity)
+    {
+        activities.remove(activity)
+    }
+    fun finishALL()
+    {
+        for (activity in activities)
+        {
+            if(!activity.isFinishing)
+            {
+                activity.finish()
+            }
+        }
+        activities.clear()
+    }
+}
+</code></pre>
+<p>这里ActitvityCollector是一个单例类，因为全局实际上只需要一个ActitvityCollector来管理所有ACT就可以了。</p>
+<p>我们创建了一个ArrayList来存放当前所有Activity，又声明了三个方法：</p>
+<ul>
+<li><code>addActivity</code> 用于向集合添加现有的ACT。</li>
+<li><code>removeActivity</code> 用于移除某个ACT</li>
+<li><code>finishALL</code> 用于将所有ACT销毁，销毁的时候需要注意当前ACT是否正在被销毁。</li>
+</ul>
+<p>接下来我们使用这个三个方法来管理自己的ACT</p>
+<p>首先我们要配合<code>BaseActivity</code>来管理，首先是<code>addActivity</code>我们不需要自己手动每次调用的时候都添加这到集合中，我们配合BaseActivity的<code>onCreate</code>就可以在创建的时候自动调用了，修改后的<code>onCreate</code>如下：</p>
+<pre><code class="language-kotlin">override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    Log.d("BaseActivity",javaClass.simpleName)
+    ActitvityCollector.addActivity(this)
+}
+</code></pre>
+<p>接下来修改BaseActivity的<code>onDestroy</code>方法，让他在退出或者销毁的的时候直接把自己从队列里面移除。</p>
+<pre><code class="language-kotlin">override fun onDestroy() {
+    super.onDestroy()
+    ActitvityCollector.removeActivity(this)
+}
+</code></pre>
+<p>实现一键退出也很简单，我们在任何需要退出的地方调用：</p>
+<pre><code class="language-kotlin">ActitvityCollector.finishALL()
+</code></pre>
+<h3><span id="启动act的最佳写法">启动ACT的最佳写法</span></h3>
+<p>在一个ACT中启动到另一个ACT的方法很简单，首先通过intent来构造<strong>意图</strong>，指明需要启动的ACT：</p>
+<pre><code class="language-kotlin">val intent = Intent(this,SecondActivity::class.java)
+</code></pre>
+<p>其中this为上下文对象，<code>SecondActivity::class.java</code>也是获取对应类的Class对象，为启动传输class参数。</p>
+<p>然后通过<code>startActivity(intent)</code>或者<code>startActivityForResult()</code>将ACT启动起来，如果有数据可以使用Intent来传输，这里就不再赘述。</p>
+<p>但是如果在另一个ACT需要启动这个ACT我们该如何传输参数呢？这时候就得跑去阅读代码了或者去问写这个ACT的人，但实际上我们应该把每一个ACT的启动都规整化把它封装一下，这样和别人一起协作的时候你写完的ACT很容易就能让别人利用起来。</p>
+<p>在这里我们利用了companion object来实现因为这样方便在调用的时候不需要自己创建一个对象再去调用它的方法，我们本着高内聚低耦合的想法，就把启动方法声明在伴生对象里面。</p>
+<pre><code class="language-kotlin">companion object {
+    fun actionStart(context: Context, data1: String, data2: String) {
+        val intent = Intent(context, SecondActivity::class.java).apply {
+            putExtra("param1", data1)
+            putExtra("param2", data2)
+        }
+        context.startActivity(intent)
+    }
+}
+</code></pre>
+<p>我们通过这个方法把上下文传递进来然后传入要传递的参数最后构造intent实现数据传递和ACT启动。</p>
+<h2><span id="activity的生命周期">Activity的生命周期</span></h2>
+<p>《第一行代码》虽然是新的但其中关于Act的生命周期的部分已经发生了很大的改变，我推荐还是具体实验来真正手动去实践一下，实践才是检验真理的唯一标准。</p>
+<p>我们在原来BasicActivity的基础上来进行修改，在每个回调之中输出对应的回调函数：</p>
+<pre><code class="language-kotlin">open class BaseActivity : AppCompatActivity() {
+
+    val tag :String = javaClass.simpleName
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d(tag,"onCreate")
+        ActitvityCollector.addActivity(this)
+    }
+
+    override fun onDestroy() {
+        Log.d(tag,"onDestroy")
+        super.onDestroy()
+        ActitvityCollector.removeActivity(this)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(tag, "onStart")
+    }
+    override fun onResume() {
+        super.onResume()
+        Log.d(tag, "onResume")
+    }
+    override fun onPause() {
+        super.onPause()
+        Log.d(tag, "onPause")
+    }
+    override fun onStop() {
+        super.onStop()
+        Log.d(tag, "onStop")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(tag, "onRestart")
+    }
+
+}
+</code></pre>
+<p>输出的方式很简答，我们通过Log来输出tag是一个成员获取当前类的实例名称，为了让获取Log的结果更加准确，我们要使用正则表达式来过滤掉不必要的信息。所以插入学习一下正则表达式来看看具体结果。</p>
+<h3><span id="正则表达式">正则表达式</span></h3>
+<p>在开始之前我们先来学习一下什么是正则表达式，这个在以后调试的时候非常有用。</p>
+<p>正则表达式(regular expression)描述了一种字符串匹配的模式（pattern），可以用来检查一个串是否含有某种子串、将匹配的子串替换或者从某个串中取出符合某个条件的子串等。</p>
+<p>在线测试网站：<a target="_blank" rel="noopener" href="https://regexr.com/%E3%80%82">https://regexr.com/。</a></p>
+<p>教程地址：<a target="_blank" rel="noopener" href="https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md">Regex</a></p>
+<h4><span id="基本匹配">基本匹配</span></h4>
+<p>正则表达式其实就是在执行搜索时的格式，它由一些字母和数字组合而成。 例如：一个正则表达式 <code>the</code>，它表示一个规则：由字母<code>t</code>开始，接着是<code>h</code>，再接着是<code>e</code>。</p>
+<p>正则表达式是大小写敏感的，所以<code>The</code>不会匹配<code>the</code>。</p>
+<h4><span id="限定符">限定符</span></h4>
+<ul>
+<li><strong>runoo+b</strong>，可以匹配 <strong>runoob、runooob、runoooooob</strong> 等，<strong>+</strong> 号代表前面的一个字符必须至少出现一次（1次或多次）。</li>
+<li><strong>colou?r</strong> 可以匹配 <strong>color</strong> 或者 <strong>colour</strong>，<strong>?</strong> 问号代表前面的字符最多只可以出现一次（0次或1次），简单来说？代表的就是前一个字符是可有可无的。这里的例子就是u是可有可无的。</li>
+<li><strong>runo*b</strong>，可以匹配 <strong>rund</strong>、<strong>runob、runoob、runoooooob</strong> 等，***** 号代表前面的字符可以不出现，也可以出现一次或者多次（0次、或1次、或多次）。</li>
+<li><strong>ab{2,}c</strong>，表示字符b至少需要出现两次，本质上是**+**的增强版。<strong>ab{2,6}c</strong> 表示b出现次数区间在【2.6】大于6的也不能算匹配。</li>
+</ul>
+<p>以上字符都只能作用于一个字符，这是需要注意的。</p>
+<h4><span id="针对多个字符的运算符">针对多个字符的运算符</span></h4>
+<p><strong>（ab)+</strong>,是()和+的结合，这里将ab看为一个整体来做+运算。</p>
+<h4><span id="逻辑运算符">逻辑运算符</span></h4>
+<p><strong>a(cat|dog)</strong>，表示匹配到a的情况下，后边是cat或者dog都是可以的。</p>
+<p>需要注意的是，这里如果这样写：<strong>acat|dog</strong> 匹配结果就变成了：<strong>acat</strong>或者<strong>dog</strong></p>
+<p>如果输入是acatdog,则匹配结果包含两个匹配项。</p>
+<p><img src="https://s2.loli.net/2024/09/29/SmxuADRf6Z8X5HJ.png" alt="12"></p>
+<h4><span id="字符集">字符集</span></h4>
+<p><strong>[ ]</strong>,代表的是字符集，[abc]表示我们要匹配的是含有字符abc的单词，是abc中任意一个字母哦。</p>
+<p>特殊用法：</p>
+<p>[a-z]表示含有任意一个小写字母即可。</p>
+<p>[a-z0-9]表示含有小写字母和数字即可。</p>
+<p>[^ 0-9]表示所有不含有数字的单词，包含换行符。</p>
+<h4><span id="转码特殊字符">转码特殊字符</span></h4>
+<p>反斜线 <code>\</code> 在表达式中用于转码紧跟其后的字符。用于指定 <code>{ } [ ] / \ + * . $ ^ | ?</code> 这些特殊字符。如果想要匹配这些特殊字符则要在其前面加上反斜线 <code>\</code>。</p>
+<p>举个例子：</p>
+<p><code>(com\.)</code>匹配效果：</p>
+<p><img src="https://s2.loli.net/2024/09/29/eYJruWMF12y7qHO.png" alt="11"></p>
+<h2><span id="锚点">锚点</span></h2>
+<p>在正则表达式中，想要匹配指定开头或结尾的字符串就要使用到锚点。<code>^</code> 指定开头，<code>$</code> 指定结尾。</p>
+<h5><span id="号">^号</span></h5>
+<p><code>^</code> 用来检查匹配的字符串是否在所匹配字符串的开头。</p>
+<p>例如，在 <code>abc</code> 中使用表达式 <code>^a</code> 会得到结果 <code>a</code>。但如果使用 <code>^b</code> 将匹配不到任何结果。因为在字符串 <code>abc</code> 中并不是以 <code>b</code> 开头。</p>
+<p><code>^(T|t)he</code> 匹配以 <code>The</code> 或 <code>the</code> 开头的字符串</p>
+<p>匹配结果：</p>
+<p><img src="https://s2.loli.net/2024/09/29/wFtMEofDlqU8pmW.png" alt="13"></p>
+<p><strong>注意这里是这个字符串的开头，不是单词的开头。</strong></p>
+<p>在上边基础类得基础上，我们为每一个周期的回调函数添加一个状态输出代码如下：</p>
+<h5><span id="号"><code>$</code> 号</span></h5>
+<p>同理于 <code>^</code> 号，<code>$</code> 号用来匹配字符是否是最后一个。</p>
+<p>例如，<code>(at\.)$</code> 匹配以 <code>at.</code> 结尾的字符串。</p>
+<p><img src="https://s2.loli.net/2024/09/29/ug62VsdMfGbXZDI.png" alt="14"></p>
+<h3><span id="简写字符集">简写字符集</span></h3>
+<table>
+<thead>
+<tr>
+<th>.</th>
+<th>除换行符外的所有字符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\w</td>
+<td>匹配所有字母数字，等同于 <code>[a-zA-Z0-9_]</code></td>
+</tr>
+<tr>
+<td>\W</td>
+<td>匹配所有非字母数字，即符号，等同于： <code>[^\w]</code></td>
+</tr>
+<tr>
+<td>\d</td>
+<td>匹配数字： <code>[0-9]</code></td>
+</tr>
+<tr>
+<td>\D</td>
+<td>匹配非数字： <code>[^\d]</code></td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配所有空格字符，等同于： <code>[\t\n\f\r\p{Z}]</code></td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配所有非空格字符： <code>[^\s]</code></td>
+</tr>
+<tr>
+<td>\f</td>
+<td>匹配一个换页符</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>匹配一个换行符</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>匹配一个回车符</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>匹配一个制表符</td>
+</tr>
+<tr>
+<td>\v</td>
+<td>匹配一个垂直制表符</td>
+</tr>
+<tr>
+<td>\p</td>
+<td>匹配 CR/LF（等同于 <code>\r\n</code>），用来匹配 DOS 行终止符</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="贪婪匹配与惰性匹配-greedy-vs-lazy-matching">贪婪匹配与惰性匹配 (Greedy vs lazy matching)</span></h3>
+<p>正则表达式默认采用贪婪匹配模式，在该模式下意味着会匹配尽可能长的子串。我们可以使用 <code>?</code> 将贪婪匹配模式转化为惰性匹配模式。</p>
+<p>贪婪匹配，指的是每次匹配都选择匹配最多的内容：</p>
+<p><img src="https://s2.loli.net/2024/09/29/hf1XMRBEyPUw8cj.png" alt="15"></p>
+<p>如果需要在第一个地方就筛选出来（尽量短的匹配），就要配合？来实现：</p>
+<p><img src="https://s2.loli.net/2024/09/29/Od8MelFQc3bZDon.png" alt="16"></p>
+<p>学会了以后我们看看在AS中如何使用正则表达式来进行调试信息的输出：</p>
+<p>选择下拉栏的Logcat模块：</p>
+<p><img src="https://s2.loli.net/2024/09/29/RmrhSsLvABxTX8H.png" alt="18"></p>
+<p>选择自定义效果：</p>
+<p><img src="https://s2.loli.net/2024/09/29/yGfPcQYErJdsIeV.png" alt="19"></p>
+<p>在Tag中定义自己需要的Tag：</p>
+<p><img src="https://s2.loli.net/2024/09/29/Qxns8yGIacq7z5A.png" alt="17"></p>
+<p>这样就可以自定义看到想要看到的结果啦。</p>
+<p>这里我让他显示了FirtAct和SecondAct的所有信息。</p>
+<p>我们在FirstAct中调用SecondAct然后在一步一步通过返回按键返回到主界面（退出程序）。</p>
+<p>开启程序主Act完成：</p>
+<p>界面如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/adZutNsRQcbqwf4.png" alt="22"></p>
+<p>此时Log中的输出为：</p>
+<p><img src="https://s2.loli.net/2024/09/29/V9fYIqNGaBbv4Ud.png" alt="20"></p>
+<p>点击button打开第二个界面：</p>
+<p><img src="https://s2.loli.net/2024/09/29/ZDbP8Oujm3MV6l1.png" alt="21"></p>
+<p>此时输出为：</p>
+<p><img src="https://s2.loli.net/2024/09/29/1ceQqrZHlKOuENy.png" alt="24"></p>
+<p>可以看到FirstAct实际上在SecondAct完全就绪的时候才会调用onStop方法。</p>
+<p>我们使用返回键返回到第一个Act，结果如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/WXaLnYKo7wvizVE.png" alt="25"></p>
+<p>这时候在SecondAct返回时先调用了onPause方法，直到完全被覆盖才调用onStop和onDestory。</p>
+<p>我们再次按下返回键这时候就要返回到主界面了，结果会是什么呢？</p>
+<p><img src="https://s2.loli.net/2024/09/29/buTEKCoqjAt5fxH.png" alt="26"></p>
+<p>在返回主界面以后会有会连续调用<strong>onPause</strong>和<strong>onStop</strong>，但是没有调用<strong>onDestory</strong>！</p>
+<p>这是和原来完全不一样的，也就是说，退出程序并不会去调用<strong>onDestory。</strong></p>
+<p>还有一个细节就是，onPause是在退出前调用的，onStop是在被完全销毁退出后调用的。</p>
+<p>最后放一张完全的图流程图：</p>
+<p><img src="https://s2.loli.net/2024/09/29/T4BpjRCSZYP8A7O.png" alt="27"></p>
+<p>总结Act的生命周期只有三点需要详细记忆。</p>
+<ul>
+<li><strong>前台生命周期：指的是在onResume到onPause之间的过程，在这个过程之间Act是正在运行的，可以交互和操作。</strong></li>
+<li><strong>可见生命周期：指的是onStrart到onStop方法之间的过程，在onStop之前都是可见的，在不可见之后会执行onStop()。</strong></li>
+<li><strong>OnDestory方法：他的情况在新版之后有些特殊，只有在返回栈退栈的时候才会调用方法，退出程序也不会执行。</strong></li>
+</ul>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/10/22/Android%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%20(Kotlin%E7%9A%84%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1)%20/" title="Android开发笔记——快速入门（Kotlin的面对对象）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Android开发笔记——快速入门（Kotlin的面对对象）</span></a><a class="button is-default" href="/2024/10/22/Android%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%EF%BC%88Fragment%E4%B8%AD%E4%BD%BF%E7%94%A8Viewbinding%EF%BC%89/" title="Android开发笔记——快速入门（从入门ACT到Fragment放肆）"><span class="has-text-weight-semibold">Next: Android开发笔记——快速入门（从入门ACT到Fragment放肆）</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2025</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>

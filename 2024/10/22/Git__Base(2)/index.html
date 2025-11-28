@@ -1,0 +1,379 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>Git(2)</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="Git——分支管理（2）
+
+
+提示：图床在国外且动图比较多的情况下，需要时间加载。
+目录：
+
+
+Git基础
+
+Git的分支与HEAD
+
+Git的存储机制
+Git的分支指针
+
+
+Git的远程仓库
+Git的远程分支管理
+
+
+远程分支和本地仓库的冲突处理
+
+查看当前分支情况
+
+
+
+
+[TOC]
+Git基础
+关于Git的基础请参考上一篇基础的教程，这里主要是关于Git的分支管理的内容，在讲解完成之后会以实战的形式让各位更好的理解如何使用Git这一个强大的工具。
+Git的分支与HEAD
+Git的存储机制
+当你发起提交的时候，Git存储的是提交对象，其中包含了指向暂存区快照的指针。
+Git在仓库区一般会这样保存对象：
+graph LR
+A(&quot;提交对象&quot;) --&amp;gt; C(&quot;Tree对象&quot;) --&amp;gt;B(&quot;Blob.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Git(2)</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Git——分支管理（2）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">提示：图床在国外且动图比较多的情况下，需要时间加载。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">目录：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Git基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Git的分支与HEAD</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">Git的存储机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">Git的分支指针</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Git的远程仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Git的远程分支管理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">远程分支和本地仓库的冲突处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">查看当前分支情况</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/branch"><i class="tag post-item-tag">branch</i></a><a href="/tags/base"><i class="tag post-item-tag">base</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Git(2)</h1><time class="has-text-grey" datetime="2024-10-21T16:40:01.000Z">2024-10-22</time><article class="mt-2 post-content"><h1><span id="git分支管理2">Git——分支管理（2）</span></h1>
+<img src="https://s2.loli.net/2024/10/22/zFJb9U6fiaprvdR.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1729527720427" style="zoom:50%;">
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom:50%;">
+<h2><span id="提示图床在国外且动图比较多的情况下需要时间加载">提示：图床在国外且动图比较多的情况下，需要时间加载。</span></h2>
+<h2><span id="目录">目录：</span></h2>
+<!-- toc -->
+<ul>
+<li><a href="#git%E5%9F%BA%E7%A1%80">Git基础</a>
+<ul>
+<li><a href="#git%E7%9A%84%E5%88%86%E6%94%AF%E4%B8%8Ehead">Git的分支与HEAD</a>
+<ul>
+<li><a href="#git%E7%9A%84%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6">Git的存储机制</a></li>
+<li><a href="#git%E7%9A%84%E5%88%86%E6%94%AF%E6%8C%87%E9%92%88">Git的分支指针</a></li>
+</ul>
+</li>
+<li><a href="#git%E7%9A%84%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93">Git的远程仓库</a></li>
+<li><a href="#git%E7%9A%84%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86">Git的远程分支管理</a></li>
+</ul>
+</li>
+<li><a href="#%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E5%92%8C%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E7%9A%84%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86">远程分支和本地仓库的冲突处理</a>
+<ul>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF%E6%83%85%E5%86%B5">查看当前分支情况</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p>[TOC]</p>
+<h2><span id="git基础">Git基础</span></h2>
+<p>关于Git的基础请参考上一篇基础的教程，这里主要是关于Git的分支管理的内容，在讲解完成之后会以实战的形式让各位更好的理解如何使用Git这一个强大的工具。</p>
+<h3><span id="git的分支与head">Git的分支与HEAD</span></h3>
+<h4><span id="git的存储机制">Git的存储机制</span></h4>
+<p>当你发起提交的时候，Git存储的是提交对象，其中包含了指向暂存区快照的指针。</p>
+<p>Git在仓库区一般会这样保存对象：</p>
+<pre class="mermaid">graph LR
+A("提交对象") --&gt; C("Tree对象") --&gt;B("Blob1对象")
+C--&gt;D("Blob2对象")</pre>
+<ul>
+<li>
+<p>提交对象，一次提交包含着元数据以及指向项目根目录的树对象的指针，以便需要的时候重新创建这次快照。</p>
+<img src="https://pic4.zhimg.com/80/v2-b8b7d634df1cf8a9d079c762fc2781b3_720w.webp" alt="image.png" style="zoom:80%;">
+</li>
+<li>
+<p>Blob 对象，只用于存储单个文件内容，一般都是二进制的数据文件，不包含任何其他文件信息，比如不包含文件名和其他元数据,可以同时有多个。</p>
+</li>
+<li>
+<p>Tree 对象，对应文件系统的目录结构，里面主要有：子目录 (tree)，文件列表 (blob)，文件类型以及一些数据文件权限模型等。</p>
+</li>
+</ul>
+<p>Git将文件的快照存储为对象，每个对象都有一个唯一的哈希值。当文件发生变化时，Git会计算新文件的哈希值，并将其作为新对象存储在对象数据库中。当Git检测到两个文件版本相似时，它会计算差异（即两个版本之间的不同之处），并将这些差异作为一个新的对象存储。这个差异对象会引用原始文件的哈希值，以便可以重构原始文件的内容。</p>
+<h4><span id="git的分支指针">Git的分支指针</span></h4>
+<p>Git的分支只不过是一个指向某次提交的轻量级的可以移动指针，Git默认的分支名是master,当你发起提交的时候就有了一个指向最后一次提交的master分支。每次提交时他都会自己向前移动。</p>
+<p>举个例子：</p>
+<pre class="mermaid">graph LR
+	H("HEAD")  --&gt;G
+	G("master") ==&gt; Commit_C
+    direction LR
+    subgraph Commit_A
+        direction TB
+        A("提交对象A") --&gt; B("文件对象A")
+     end
+    subgraph Commit_B
+        direction TB
+        C("提交对象B") --&gt; D("文件对象B")
+     end
+     Commit_A --&gt; Commit_B
+    subgraph Commit_C
+        direction TB
+        E("提交对象C") --&gt; F("文件对象C")
+     end
+     Commit_B --&gt; Commit_C</pre>
+<p>也就是说分支其实就是指针，指针指向某一次提交。其中比较特殊的是HEAD指针，是用来指向当前分支指针的指针，表示当前在master分支上。</p>
+<h3><span id="git的远程仓库">Git的远程仓库</span></h3>
+<p>远程分支是指远程仓库的分支指针，这些指针存在于本地且无法被移动，当你与服务器进行网络通信的时候，他会自动更新，也就是使用pull等命令的时候，远程分支有点像书签，会提示你上一次连接服务器时远程仓库中每个分支的位置。</p>
+<pre class="mermaid">graph LR
+	G("master") ==&gt; Commit_C
+	
+    direction LR
+    subgraph Commit_A
+        direction TB
+        A("提交对象A") --&gt; B("文件对象A")
+     end
+    subgraph Commit_B
+        direction TB
+        C("提交对象B") --&gt; D("文件对象B")
+     end
+     Commit_A --&gt; Commit_B
+    subgraph Commit_C
+        direction TB
+        E("提交对象C") --&gt; F("文件对象C")
+     end
+     Commit_B --&gt; Commit_C
+     H("remote") ==&gt; Commit_C</pre>
+<p>remote指针同master指针一样，都是一个指针而已。</p>
+<h3><span id="git的远程分支管理">Git的远程分支管理</span></h3>
+<p>合并冲突</p>
+<p>Fast-forward操作指的是当前分支所在位置是在已有要合并分支的后面，打个比方：</p>
+<pre class="mermaid">graph LR
+	G("main") ==&gt; Commit_B
+	
+    direction LR
+    subgraph Commit_A
+        direction TB
+        A("提交对象A") --&gt; B("文件对象A")
+     end
+    subgraph Commit_B
+        direction TB
+        C("提交对象B") --&gt; D("文件对象B")
+     end
+     Commit_A --&gt; Commit_B
+    subgraph Commit_C
+        direction TB
+        E("提交对象C") --&gt; F("文件对象C")
+     end
+     Commit_B --&gt; Commit_C
+     H("orgin/main") ==&gt; Commit_C</pre>
+<p>main节点落后于服务器上的main（以后都称之为origin/main），<strong>此时执行Fast-forward操作就是把本地分支main合并到orgin/main之上</strong>，此时main指针会向前走一个，这样的操作就是Fast-forward。</p>
+<p>合并之后结果如下：</p>
+<pre class="mermaid">graph LR
+	G("main") ==&gt; Commit_C
+	
+    direction LR
+    subgraph Commit_A
+        direction TB
+        A("提交对象A") --&gt; B("文件对象A")
+     end
+    subgraph Commit_B
+        direction TB
+        C("提交对象B") --&gt; D("文件对象B")
+     end
+     Commit_A --&gt; Commit_B
+    subgraph Commit_C
+        direction TB
+        E("提交对象C") --&gt; F("文件对象C")
+     end
+     Commit_B --&gt; Commit_C
+     H("orgin/main") ==&gt; Commit_C</pre>
+<p>merge操作指的是在本地分支和远程分支在同一个基点产生分歧的时候如下图所示：</p>
+<pre class="mermaid">graph LR
+	G("main") ==&gt; Commit_B
+	
+    direction LR
+    subgraph Commit_A
+        direction TB
+        A("提交对象A") --&gt; B("文件对象A")
+     end
+    subgraph Commit_B
+        direction TB
+        C("提交对象B") --&gt; D("文件对象B")
+     end
+     Commit_A --&gt; Commit_B
+    subgraph Commit_C
+        direction TB
+        E("提交对象C") --&gt; F("文件对象C")
+     end
+     Commit_A --&gt; Commit_C
+     H("orgin/main") ==&gt; Commit_C</pre>
+<p>在你的第一次提交之后本地已有个第二次提交，远程也有一个基于第一次提交的远程提交，此时就需要merge将两次提交合并成新的提交：merge_commit，来进行合并。</p>
+<pre class="mermaid">graph LR
+	
+    direction LR
+    subgraph Commit_A
+        direction TB
+        A("提交对象A") --&gt; B("文件对象A")
+     end
+     
+    subgraph Commit_B
+        direction TB
+        C("提交对象B") --&gt; D("文件对象B")
+     end
+     
+    subgraph Commit_C
+        direction TB
+        E("提交对象C") --&gt; F("文件对象C")
+     end
+     
+    
+     
+     subgraph merge_commit
+        direction TB
+        G("提交对象C") --&gt; H("文件对象C")
+     end
+     
+     Commit_A --&gt; Commit_B
+     Commit_A --&gt; Commit_C
+     Commit_C --&gt; merge_commit
+     Commit_B --&gt; merge_commit
+     merge_commit --&gt; J("orgin/main")
+     merge_commit --&gt; I("main")</pre>
+<p>Rebase操作指的是在上述情况之上直接将某个分支之上所有提交的更改在另一个分支上重现一遍。</p>
+<p>为了Rebase需要先找到两个要整合的分支的共同祖先，然后取得当前所在分支的每次提交引入的变更，并把这些变更保存成文件，这之后将当前分支重置为要整合到的分支，然后在该分支上依次引入之前保存的每个更改。</p>
+<p>在合并之前分支已成这个样子：</p>
+<pre class="mermaid">graph LR
+	G("main") ==&gt; Commit_B
+	
+    direction LR
+    subgraph Commit_A
+        direction TB
+        A("提交对象A") --&gt; B("文件对象A")
+     end
+    subgraph Commit_B
+        direction TB
+        C("提交对象B") --&gt; D("文件对象B")
+     end
+     Commit_A --&gt; Commit_B
+    subgraph Commit_C
+        direction TB
+        E("提交对象C") --&gt; F("文件对象C")
+     end
+     Commit_A --&gt; Commit_C
+     H("orgin/main") ==&gt; Commit_C</pre>
+<p>当我们想把远程分支的内容整合到main分支之上（就是将orgin/main rebase到 main）的话就会有如下情况，合并之后：</p>
+<pre class="mermaid">graph LR
+	G("main") ==&gt; Commit_B
+	
+    direction LR
+    subgraph Commit_A
+        direction TB
+        A("提交对象A") --&gt; B("文件对象A")
+     end
+    subgraph Commit_B
+        direction TB
+        C("提交对象B") --&gt; D("文件对象B")
+     end
+     Commit_A --&gt; Commit_B
+    subgraph Commit_C+
+        direction TB
+        E("提交对象C") --&gt; F("文件对象C")
+     end
+     Commit_B --&gt; Commit_C+
+     H("orgin/main") ==&gt; Commit_C+</pre>
+<p>可以看到这里实际上变化成了Fast-forward所处理的情况，再次执行Fast-forward（merge）即可完成操作。</p>
+<h2><span id="远程分支和本地仓库的冲突处理">远程分支和本地仓库的冲突处理</span></h2>
+<h3><span id="查看当前分支情况">查看当前分支情况</span></h3>
+<p>查看当前分支信息：</p>
+<pre><code class="language-bash">(base) neo@NeoNeuxs:~/git_test/Essays$ git branch
+* main
+  test
+</code></pre>
+<p>加上参数v可以显示当前每个分支的最新提交和其的提交信息，加上a则会包括当前的远程分支：</p>
+<pre><code class="language-bash">(base) neo@NeoNeuxs:~/git_test/Essays$ git branch -av
+* main                dd0258f [ahead 3] Merge branch 'test'
+  test                8eafb31 update git rm pycharm
+  remotes/origin/HEAD -&gt; origin/main
+  remotes/origin/main e5d18d7 del copy
+</code></pre>
+<p><code>*</code>代表了HEAD指针所处位置，也就是当前所在的分支。 <code>update git rm pycharm</code>就是对应的提交信息。<code>e5d18d7</code>就是提交对象的散列值。</p>
+<p>如果要查看已并入当前的分支的所有分支信息可以使用：</p>
+<pre><code class="language-bash">(base) neo@NeoNeuxs:~/git_test/Essays$ git branch -av --merged
+* main                dd0258f [ahead 3] Merge branch 'test'
+  test                8eafb31 update git rm pycharm
+  remotes/origin/HEAD -&gt; origin/main
+  remotes/origin/main e5d18d7 del copy
+</code></pre>
+<p>相反的，显示没有并入分支的命令可以使用（注意这里和上文并不是一个仓库，你可以看到对应的路径不同）：</p>
+<pre><code class="language-bash">(base) neo@NeoNeuxs:~/Desktop/Essays$ git branch -av --no-merged
+  remotes/origin/HEAD -&gt; origin/main
+  remotes/origin/main e5d18d7 del copy
+</code></pre>
+<p>但是以上的方式都不够明显展示分支的变化及历史，所以推荐还是使用如下命令：</p>
+<pre><code class="language-bash">git log --graph --decorate --oneline --all
+</code></pre>
+<p>如图展示了两个本地的仓库，其中二者的远程仓库是保持一致的，也就是说二者都有一样的远程信息，但是本地却差别很大，我们的工作就是尽量合并二者的内容并优化分支结构。</p>
+<img src="https://s2.loli.net/2024/05/06/lrENoDWkt92Fd36.png" alt="image-20240506012058410" style="zoom:67%;">
+<p>在看到二者的分支图的时候我们就能看到：</p>
+<p>图中的领先指的是领先远程仓库的意思。</p>
+<img src="https://s2.loli.net/2024/05/06/zuK2aUAx384oBr6.png" alt="image-20240506012643030" style="zoom: 67%;">
+<p>简单来说我们的解决方案如下</p>
+<p>首先rebase仓库A,将仓库A的main分支rebase到远程上然后push到服务器。</p>
+<p>然后将远程新的内容pull到仓库B，再进行一次rebase然后将内容push到服务器。最终再pull，仓库A、仓库B、服务器三者就可以实现同步。</p>
+<pre><code class="language-bash">(base) neo@NeoNeuxs:~/Desktop/Essays$ git rebase origin/main
+Successfully rebased and updated refs/heads/main.
+</code></pre>
+<p>reabase之后：</p>
+<img src="https://s2.loli.net/2024/05/06/v1zQSXFucd45ROx.png" alt="image-20240506020430611" style="zoom:67%;">
+<p>由于仓库B还有部分内容没有提交，这里就再提交一次：</p>
+<pre><code class="language-bash">(base) neo@NeoNeuxs:~/git_test/Essays$ git commit -a -m "finished git 1"
+[main e2fdc30] finished git 1
+ 1 file changed, 61 insertions(+), 6 deletions(-)
+</code></pre>
+<p>提交之后分支如下,本次提交并不影响合并方案，只是单纯多加了一次提交而已。</p>
+<img src="https://s2.loli.net/2024/05/06/ixv7hQX3VoBcWlN.png" alt="image-20240506020817574" style="zoom:67%;">
+<pre><code class="language-bash">git pull --rebase
+# 等价于：
+git fetch origin/main
+git rebase origin/main
+</code></pre>
+<img src="https://s2.loli.net/2024/05/06/Dy1olHPMKZExYLT.png" alt="image-20240506023005761" style="zoom:67%;">
+<p>其中的分支变化如下：</p>
+<img src="https://s2.loli.net/2024/05/06/6XujLS5UyvFc4pf.png" alt="image-20240506032249539">
+<p>关于rebase的变化的解释：</p>
+<p>根据精通Git（第二版）的内容，其变基按照如下的方式：</p>
+<ul>
+<li>判断出分支上那些工作是本地独有的（245d、8ea、dd02、e2fdc）。</li>
+<li>判断出哪些提交不是合并提交（245d、8ea、e2fdc）。</li>
+<li>判断出哪些提交并没有被重写到基分支上（orgin/master）（245d、8ea、e2fdc）。</li>
+<li>把筛选出来的分支重写到基分支上</li>
+</ul>
+<p>Git会将合并提交的更改拆分成多个单独的提交，并将它们重新应用在远程分支的顶部。这意味着原始的合并提交（在这个例子中是 <code>dd0258f</code>）不再存在于变基后的分支历史中。</p>
+<p>245df5e提交和e5d18提交完全一致，并不是有效提交，所以被舍弃。</p>
+<p><img src="https://s2.loli.net/2024/05/06/AXrHNwx89vnEa2I.png" alt="image-20240506025758663"></p>
+<p>需要注意的是，没有手动推送上图中test分支，服务器上实际上是没有245df5e,8eafb31的信息的。</p>
+<p>参考：精通Git（第二版）</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/10/22/Git__Base(1)/" title="Git(1)"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Git(1)</span></a><a class="button is-default" href="/2024/10/22/Android/" title="Android开发笔记——快速入门（第一个Android项目）"><span class="has-text-weight-semibold">Next: Android开发笔记——快速入门（第一个Android项目）</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2025</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>

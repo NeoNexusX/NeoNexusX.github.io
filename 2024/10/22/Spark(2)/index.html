@@ -1,0 +1,454 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>Spark的WSL环境安装与Hadoop环境配置（贰）</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="Spark快速大数据分析——Spark的WSL环境安装与Hadoop环境配置（贰）
+
+
+软件环境：
+
+Hadoop-3.2
+Spark-3.1.3
+JDK 8
+WSL2 Ubuntu20.04
+Windos10 20H2
+
+
+
+Spark的WSL环境搭建：
+
+笔记本Windos如何最快速省事升级专业版？
+WSL的安装
+升级WSL至WSL2
+WSL2换下载源
+Hadoop环境配置
+
+创建hadoop用户
+
+
+更新apt
+安装Vim
+安装SSH、配置SSH无密码登陆
+Java环境配置
+Hadoop环境配置
+提示：
+
+
+
+
+[TOC]
+Spark的WSL环境搭建：
+Hadoop还不算折腾人的，当年caffe环境才是最恶心的，装过caffe以后装什么都很有自信。
+俗话说的好windos是最好的linux发行版，WS.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Spark的WSL环境安装与Hadoop环境配置（贰）</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Spark快速大数据分析——Spark的WSL环境安装与Hadoop环境配置（贰）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">软件环境：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Spark的WSL环境搭建：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">笔记本Windos如何最快速省事升级专业版？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">WSL的安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">升级WSL至WSL2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">WSL2换下载源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Hadoop环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">创建hadoop用户</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">更新apt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">安装Vim</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">安装SSH、配置SSH无密码登陆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Java环境配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Hadoop环境配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">提示：</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Spark"><i class="tag post-item-tag">Spark</i></a><a href="/tags/Hadoop"><i class="tag post-item-tag">Hadoop</i></a><a href="/tags/Scala"><i class="tag post-item-tag">Scala</i></a><a href="/tags/WSL"><i class="tag post-item-tag">WSL</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Spark的WSL环境安装与Hadoop环境配置（贰）</h1><time class="has-text-grey" datetime="2024-10-21T16:00:00.000Z">2024-10-22</time><article class="mt-2 post-content"><h1><span id="spark快速大数据分析spark的wsl环境安装与hadoop环境配置贰">Spark快速大数据分析——Spark的WSL环境安装与Hadoop环境配置（贰）</span></h1>
+<img src="https://s2.loli.net/2024/09/29/AGdij6z9ftuKrh1.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1727611823050" style="zoom:50%;">
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom: 50%;">
+<h3><span id="软件环境">软件环境：</span></h3>
+<ul>
+<li><strong>Hadoop-3.2</strong></li>
+<li><strong>Spark-3.1.3</strong></li>
+<li><strong>JDK 8</strong></li>
+<li><strong>WSL2</strong> <strong>Ubuntu20.04</strong></li>
+<li><strong>Windos10 20H2</strong></li>
+</ul>
+<!-- toc -->
+<ul>
+<li><a href="#spark%E7%9A%84wsl%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA">Spark的WSL环境搭建：</a>
+<ul>
+<li><a href="#%E7%AC%94%E8%AE%B0%E6%9C%ACwindos%E5%A6%82%E4%BD%95%E6%9C%80%E5%BF%AB%E9%80%9F%E7%9C%81%E4%BA%8B%E5%8D%87%E7%BA%A7%E4%B8%93%E4%B8%9A%E7%89%88">笔记本Windos如何最快速省事升级专业版？</a></li>
+<li><a href="#wsl%E7%9A%84%E5%AE%89%E8%A3%85">WSL的安装</a></li>
+<li><a href="#%E5%8D%87%E7%BA%A7wsl%E8%87%B3wsl2">升级WSL至WSL2</a></li>
+<li><a href="#wsl2%E6%8D%A2%E4%B8%8B%E8%BD%BD%E6%BA%90">WSL2换下载源</a></li>
+<li><a href="#hadoop%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE">Hadoop环境配置</a>
+<ul>
+<li><a href="#%E5%88%9B%E5%BB%BAhadoop%E7%94%A8%E6%88%B7">创建hadoop用户</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9B%B4%E6%96%B0apt">更新apt</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85vim">安装Vim</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85ssh-%E9%85%8D%E7%BD%AEssh%E6%97%A0%E5%AF%86%E7%A0%81%E7%99%BB%E9%99%86">安装SSH、配置SSH无密码登陆</a></li>
+<li><a href="#java%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE">Java环境配置</a></li>
+<li><a href="#hadoop%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE-1">Hadoop环境配置</a></li>
+<li><a href="#%E6%8F%90%E7%A4%BA">提示：</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p>[TOC]</p>
+<h2><span id="spark的wsl环境搭建">Spark的WSL环境搭建：</span></h2>
+<p>Hadoop还不算折腾人的，当年caffe环境才是最恶心的，装过caffe以后装什么都很有自信。</p>
+<p>俗话说的好windos是最好的linux发行版，WSL2是证明这个观点的强有力的证据。开个玩笑。</p>
+<p><strong>先来说如何安装WSL2，注意这里说的是WSL2并不是WSL！</strong></p>
+<p>如果你的电脑是Windos专业版，可以直接跳到WSL2安装部分，如果你的电脑是家庭中文版就先往下看。</p>
+<h3><span id="笔记本windos如何最快速省事升级专业版">笔记本Windos如何最快速省事升级专业版？</span></h3>
+<p>找到你的<strong>windos激活界面</strong>先查看自己windos版本，如果是家庭版就需要升级来获取高级的系统组件，点击<strong>更改产品密钥</strong>：</p>
+<img src="https://s2.loli.net/2024/09/29/FaPKcwdSZJRQM7D.png" alt="1" style="zoom:80%;">
+<p>点击更改密钥：</p>
+<p><img src="https://s2.loli.net/2024/09/29/d3OyMjPQxv2uoJL.png" alt="2"></p>
+<p>会让你输入密钥来升级，密钥的获取当然是万能的TB了，直接搜索windos激活码然后先问店家买一个升级码再买一个激活码即可。（注意是两个码！）</p>
+<p><img src="https://s2.loli.net/2024/09/29/w42bfKL1o8EFaXi.png" alt="3"></p>
+<p>先输入升级码进行升级，重启后再使用激活码进行激活，一共<strong>7块钱</strong>就可以搞点，虽然有很多升级办法，但是这个还是最省事的，升级过程最好插上电，防止没电。升级过程因为没办法截图就没有截图，过程都是自动的，不需要太多操作这里就不详细赘述了。</p>
+<p>升级完成后在系统激活中输入激活码直接激活即可：</p>
+<p><img src="https://s2.loli.net/2024/09/29/AVLYUlQJRrGpZ48.png" alt="4"></p>
+<p>激活完成界面：</p>
+<p><img src="https://s2.loli.net/2024/09/29/i2uFdL68HORWSZX.png" alt="5"></p>
+<p>这样一来你就升级到了专业版。</p>
+<h3><span id="wsl的安装">WSL的安装</span></h3>
+<p>然后进行WSL的安装：</p>
+<p>首先添加系统组件：</p>
+<p><img src="https://s2.loli.net/2024/09/29/72G95lHR1Qe4kbO.png" alt="6"></p>
+<p><img src="https://s2.loli.net/2024/09/29/9hdCx1Wy8pTnSMz.png" alt="7"></p>
+<p>确定后等待完成：</p>
+<p><img src="https://s2.loli.net/2024/09/29/uDfm85SXjI6cOh4.png" alt="8"></p>
+<p>在windos商店中查找Ubuntu：</p>
+<p><img src="https://s2.loli.net/2024/09/29/LvqAomlGQXgPhE7.png" alt="9"></p>
+<p>直接点击下载然后等待安装即可，安装完成以后打开，设置一下用户名和密码：</p>
+<img src="https://s2.loli.net/2024/09/29/GVAw8S2c1FY9LmQ.png" alt="10" style="zoom:80%;">
+<p>先关闭界面，因为这里可能安装的是WSL1，不过没关系，我们可以升级一下直接用就行，先检测一下版本：</p>
+<p>打开windos cmd或者powershell（以管理员身份打开）：</p>
+<p>输入命令：<code>wsl -l -v</code></p>
+<img src="https://s2.loli.net/2024/09/29/Jtds9mUN3BFObHu.png" alt="11" style="zoom:80%;">
+<p>如果如图，那么你就安装的是WSL2，可以直接跳到<strong>hadoop安装</strong>，如果你输出的是1请往下看升级步骤：</p>
+<p>升级之前先要注意一个问题就是windos的版本：</p>
+<p>若要更新到 WSL 2：</p>
+<ul>
+<li>对于 x64 系统：<strong>版本 1903</strong> 或更高版本，采用<strong>内部版本 18362</strong> 或更高版本。</li>
+<li>我的是20H2所以没问题，你如果版本不够请先升级windos。</li>
+</ul>
+<p><img src="https://s2.loli.net/2024/09/29/DSg9J1oIBzh7jnN.png" alt="13"></p>
+<h3><span id="升级wsl至wsl2">升级WSL至WSL2</span></h3>
+<p>首先下载Linux内核更新包：<a target="_blank" rel="noopener" href="https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi">点击下载</a>。</p>
+<p>下载完成后直接安装即可：</p>
+<p><img src="https://s2.loli.net/2024/09/29/L2TbWX7HBjFkJ8m.png" alt="12"></p>
+<p>如果你没有安装内核更新包直接打开WSL就有可能遇到以下错误：</p>
+<pre><code class="language-SSH">WslRegisterDistribution failed with error: 0x800701bc
+Error: 0x800701bc WSL 2 ?????????????????? https://aka.ms/wsl2kernelPress any key to continue.. .
+</code></pre>
+<p><img src="https://s2.loli.net/2024/09/29/yDq8HI9sRXYvCZ1.png" alt="14"></p>
+<p>安装内核包以后就没有问题了。</p>
+<p>这时候我们再设置一下WSL的默认版本：</p>
+<p>打开cmd使用命令：</p>
+<pre><code class="language-ssh">wsl --set-version Ubuntu-20.04 2
+</code></pre>
+<p>使用完成后再打开WSL就可以看见：</p>
+<p><img src="https://s2.loli.net/2024/09/29/8CRTyZvqBEXHVNP.png" alt="15"></p>
+<p>等一段时间然后按一下回车就可以看见：</p>
+<p>可以看到WSL已经更新到了WSL2。</p>
+<p><img src="https://s2.loli.net/2024/09/29/BeFguHc83LM74wX.png" alt="16"></p>
+<p>如果你没有这个界面或者更新失败，问题不大，不要慌，卸载然后返回到安装步骤再来一遍即可：</p>
+<p><img src="https://s2.loli.net/2024/09/29/xGML4oR71kYh5fH.png" alt="17"></p>
+<h3><span id="wsl2换下载源">WSL2换下载源</span></h3>
+<p>首先输入命令备份当前源目录：</p>
+<pre><code class="language-ssh">cd /etc/apt  #进入配置文件所在目录
+cp sources.list sources.list.bak  #备份配置文件
+</code></pre>
+<p>使用vim编辑源文件：</p>
+<pre><code class="language-ssh">vim sources.list  #编辑配置文件
+</code></pre>
+<p>打开后将里面内容全部删除并替换成以下内容：</p>
+<p>删除内容方法：</p>
+<ul>
+<li>按一下ESC键，确保退出编辑模式</li>
+<li>按两次键盘上面的g键，让光标移动到文本的首行</li>
+<li>然后按键盘上面的d和G键。其中d键是小写，G键要切换成大写的。</li>
+</ul>
+<p>然后切换到编辑模式（输入i）复制进去即可：</p>
+<pre><code class="language-ssh">deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+
+deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+
+deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+
+deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+
+deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+</code></pre>
+<p>注意换行问题，web可能显示换行实际上每一行都是没有换行的！可以先复制到记事本再copy过去。</p>
+<p>复制以后样子如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/fVmbMJBXYTw1ytg.png" alt="1-1"></p>
+<p>退出编辑并保存：esc+wq</p>
+<p>使用命令更新源：</p>
+<pre><code class="language-ssh">sudo apt-get update  #更新源  
+</code></pre>
+<p><img src="https://s2.loli.net/2024/09/29/bcB48ROESynTuH1.png" alt="1-3"></p>
+<p>更新软件：</p>
+<pre><code>sudo apt-get upgrade  #更新软件
+</code></pre>
+<p><img src="https://s2.loli.net/2024/09/29/7SzMs1EZw8Ax2aU.png" alt="1-4"></p>
+<h3><span id="hadoop环境配置">Hadoop环境配置</span></h3>
+<p>首先介绍一下，WSL下一些常用的功能：</p>
+<p>在WSL下打开windos的文件浏览器来访问linux下的文件。</p>
+<p>输入命令：</p>
+<p><code>explorer.exe .</code></p>
+<p><strong>注意exe后边还有一个空格。</strong></p>
+<h4><span id="创建hadoop用户">创建hadoop用户</span></h4>
+<p>如果你安装 Ubuntu 的时候不是用的 “hadoop” 用户，那么需要增加一个名为 hadoop 的用户。</p>
+<pre><code class="language-ssh">$ sudo useradd -m hadoop -s /bin/bash
+</code></pre>
+<p>这条命令创建了可以登陆的 hadoop 用户，并使用 /bin/bash 作为 shell。（在Ubuntu终端窗口中，复制粘贴的快捷键需要加上 shift，即粘贴是 ctrl+shift+v。）</p>
+<pre><code class="language-ssh">$ sudo passwd hadoop
+</code></pre>
+<p>为hadoop用户增加管理员权限：</p>
+<pre><code class="language-ssh">$ sudo adduser hadoop sudo
+</code></pre>
+<p>最后输入：</p>
+<pre><code class="language-ssh">$ su hadoop
+</code></pre>
+<p>切换到hadoop用户。</p>
+<h3><span id="更新apt">更新apt</span></h3>
+<p>用 hadoop 用户登录后，我们先更新一下 apt，后续我们使用 apt 安装软件，如果没更新可能有一些软件安装不了。 按 ctrl+alt+t 打开终端窗口，执行如下命令：</p>
+<pre><code class="language-ssh">$ sudo apt-get update
+</code></pre>
+<p>若出现如下 “Hash校验和不符” 的提示，可通过更改软件源来解决。若没有该问题，则不需要更改。从软件源下载某 些软件的过程中，可能由于网络方面的原因出现没法下载的情况，那么建议更改软件源。</p>
+<h3><span id="安装vim">安装Vim</span></h3>
+<pre><code>$ sudo apt-get install vim
+</code></pre>
+<p>vim的常用模式有分为命令模式，插入模式，可视模式，正常模式。本教程中，只需要用到正常模式和插入模式。二 者间的切换即可以帮助你完成本指南的学习。</p>
+<ol>
+<li>正常模式 正常模式主要用来浏览文本内容。一开始打开vim都是正常模式。在任何模式下按下Esc键就可以返回正常模式</li>
+<li>插入编辑模式 插入编辑模式则用来向文本中添加内容的。在正常模式下，输入i键即可进入插入编辑模式</li>
+<li>退出vim 如果有利用vim修改任何的文本，一定要记得保存。Esc键退回到正常模式中，然后输入:wq即可保存文本并退出 vim。</li>
+</ol>
+<h3><span id="安装ssh-配置ssh无密码登陆">安装SSH、配置SSH无密码登陆</span></h3>
+<p>集群、单节点模式都需要用到 SSH 登陆（类似于远程登陆，你可以登录某台 Linux 主机，并且在上面运行命令）， Ubuntu 默认已安装了 SSH client，此外还需要安装 SSH server：</p>
+<pre><code class="language-ssh">$ sudo apt-get install openssh-server
+</code></pre>
+<p>安装后，需要重新启动一下：</p>
+<pre><code class="language-ssh">$ sudo service ssh restart
+</code></pre>
+<p>输入命令后发现报错：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/home/jszszzy$ sudo service ssh restart
+sshd: no hostkeys available -- exiting.
+</code></pre>
+<p>使用exit切换到root用户：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/home/jszszzy$ exit
+exit
+jszszzy@LAPTOP-74GAR8S9:~$
+</code></pre>
+<p>检查ssh是否生成密钥，发现没有：</p>
+<pre><code class="language-ssh">jszszzy@LAPTOP-74GAR8S9:~$ cd ~/.ssh/
+-bash: cd: /home/jszszzy/.ssh/: No such file or directory
+</code></pre>
+<p>再切换到hadoop用户尝试连接一下本地ssh：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/home/jszszzy$ sudo ssh localhost
+[sudo] password for hadoop:
+ssh: connect to host localhost port 22: Connection refused
+</code></pre>
+<p>发现报错：</p>
+<p><strong>ssh: connect to host localhost port 22: Connection refused</strong></p>
+<p>这报错可使用下边的命令解决，或者卸载ssh再重新安装一遍也可能会解决。</p>
+<p>使用管理权限开始ssh服务：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/home/jszszzy$ sudo service ssh start
+ * Starting OpenBSD Secure Shell server sshd                                             sshd: no hostkeys available -- exiting.
+</code></pre>
+<p>**sshd: no hostkeys available – exiting.**仍报错</p>
+<p>没办法手动生成一下hostkey，两种加密方式：</p>
+<pre><code class="language-ssh">sudo ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key
+</code></pre>
+<pre><code class="language-ssh">sudo ssh-keygen -t dsa -f /etc/ssh/ssh_host_rsa_key
+</code></pre>
+<pre><code class="language-ssh">sudo ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key
+Generating public/private dsa key pair.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /etc/ssh/ssh_host_dsa_key
+Your public key has been saved in /etc/ssh/ssh_host_dsa_key.pub
+The key fingerprint is:
+SHA256:Oizwqo5xcIIVUTAetxHLW8StQ2+oRT/FMAWei/EoKIA root@LAPTOP-74GAR8S9
+The key's randomart image is:
++---[DSA 1024]----+
+|  *+=o..+=.      |
+|.. * =+..oo      |
+|E o +oo=o.       |
+|o. . o===.       |
+|= + ooooS.       |
+| = o.o .         |
+|. . o +          |
+|.o . . .         |
+|+o.              |
++----[SHA256]-----+
+</code></pre>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/home/jszszzy$ sudo ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key
+Generating public/private rsa key pair.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /etc/ssh/ssh_host_rsa_key
+Your public key has been saved in /etc/ssh/ssh_host_rsa_key.pub
+The key fingerprint is:
+SHA256:2iivZii9bXWn7GXnkK3oVoEbjuVkfKuVnjocVyABTcM root@LAPTOP-74GAR8S9
+The key's randomart image is:
++---[RSA 3072]----+
+|      .=+.       |
+|        E..      |
+|       . o .     |
+|        B o .    |
+|       BS+ =     |
+|      o+* Bo     |
+| . ...o+.X=.o    |
+|. o.+o  B+o=     |
+| ..=o..+=o. .    |
++----[SHA256]-----+
+</code></pre>
+<p>如果还没解决，就卸载ssh后安装：</p>
+<pre><code class="language-ssh">sudo apt-get purge openssh-server
+</code></pre>
+<pre><code class="language-ssh">sudo apt-get update
+</code></pre>
+<pre><code>sudo apt-get install openssh-server
+</code></pre>
+<p>最后启动一下：</p>
+<pre><code>sudo service ssh restart
+</code></pre>
+<p>如果还不成功尝试以下命令：</p>
+<pre><code>sudo ssh-keygen -A
+sudo chmod 600 /etc/ssh/ssh_host_rsa_key
+sudo chmod 600 /etc/ssh/ssh_host_dsa_key
+</code></pre>
+<p>再次打开ssh，发现成功：</p>
+<pre><code class="language-ssh">sudo service ssh restart
+ * Restarting OpenBSD Secure Shell server sshd
+</code></pre>
+<p>然后查找进程是否存在：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/home/jszszzy$ sps -e | grep ssh
+12765 ?        00:00:00 sshd
+</code></pre>
+<p>生成本低公钥添加至免密中：</p>
+<pre><code>hadoop@LAPTOP-74GAR8S9:~/.ssh$ ssh-keygen -t rsa
+
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/hadoop/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/hadoop/.ssh/id_rsa
+Your public key has been saved in /home/hadoop/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:kMkQ2+migmrgDhEKXw4k7pBs8k88Eawq6aqqhFnz2iw hadoop@LAPTOP-74GAR8S9
+The key's randomart image is:
++---[RSA 3072]----+
+|. ..+.           |
+|o+  .* +         |
+|*+..+ B          |
+|B+.= o .         |
+|o+= * . S        |
+|B+ * o           |
+|@.. o            |
++----[SHA256]-----+
+</code></pre>
+<p>添加至免密：</p>
+<p>注意当前所在位置：~/.ssh</p>
+<pre><code>hadoop@LAPTOP-74GAR8S9:~/.ssh$ sudo cat ./id_rsa.pub &gt;&gt; ./authorized_keys
+</code></pre>
+<p>测试一下ssh，发现能连接：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:~/windos_pubkey$ ssh localhost
+
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.10.16.3-microsoft-standard-WSL2 x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Apr 12 22:00:21 CST 2022
+
+  System load:  0.0                Processes:             13
+  Usage of /:   0.8% of 250.98GB   Users logged in:       0
+  Memory usage: 1%                 IPv4 address for eth0: 172.20.4.176
+  Swap usage:   0%
+
+
+19 updates can be applied immediately.
+12 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+
+Last login: Tue Apr 12 21:38:02 2022 from 127.0.0.1
+</code></pre>
+<h3><span id="java环境配置">Java环境配置</span></h3>
+<p>推荐使用openjdk。</p>
+<p>输入命令直接安装：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:~/windos_pubkey$ sudo apt-get install openjdk-8-jdk
+</code></pre>
+<p>安装完成后测试一下：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:~/windos_pubkey$ java -version
+openjdk version "1.8.0_312"
+OpenJDK Runtime Environment (build 1.8.0_312-8u312-b07-0ubuntu1~20.04-b07)
+OpenJDK 64-Bit Server VM (build 25.312-b07, mixed mode)
+</code></pre>
+<p>JAVAHOME环境变量设置：</p>
+<p>打开环境变量设置：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:~$ vim ~/.bashrc
+</code></pre>
+<p>在最下边输入一下内容：</p>
+<pre><code class="language-ssh">export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH=${JAVA_HOME}/bin:$PATH
+</code></pre>
+<h3><span id="hadoop环境配置">Hadoop环境配置</span></h3>
+<p>下载hadoop 3.2：<a target="_blank" rel="noopener" href="https://archive.apache.org/dist/hadoop/common/hadoop-3.2.2/hadoop-3.2.2.tar.gz">hadoop3.2下载</a>。</p>
+<p>使用windos的文件浏览器将下载好的hadoop直接拖拽到root目录对应位置即可：</p>
+<p>这里再介绍一种方法打开文件浏览器：</p>
+<p>在浏览器上栏输入：</p>
+<pre><code class="language-ssh">\\wsl$
+</code></pre>
+<p>效果如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/rYECV8fSRhKolOQ.png" alt="	"></p>
+<p>我拷贝到了这个目录下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/mahEoYtvlAxBVcI.png" alt="19"></p>
+<p>然后使用命令解压到<code>/usr/local</code>目录下：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:~$ sudo tar -zxf /home/jszszzy/hadoop/hadoop-3.2.2.tar.gz -C /usr/local
+</code></pre>
+<p>然后转移到文件夹下，进行一系列操作：</p>
+<pre><code class="language-ssh">$ cd /usr/local/
+$ sudo mv ./hadoop-3.1.3/ ./hadoop # 将文件夹名改为hadoop
+$ sudo chown -R hadoop ./hadoop # 修改文件权限
+</code></pre>
+<p>最后运行一下：</p>
+<pre><code class="language-ssh">$ cd /usr/local/hadoop
+$ ./bin/hadoop version
+</code></pre>
+<h3><span id="提示">提示：</span></h3>
+<p>相对路径与绝对路径 请务必注意命令中的相对路径与绝对路径，本文后续出现的 ./bin/… ， ./etc/… 等包含 ./ 的路径，均 为相对路径，以 /usr/local/hadoop 为当前目录。例如在 /usr/local/hadoop 目录中执行 ./bin/hadoop version 等同于执行 /usr/local/hadoop/bin/hadoop version 。可以将相对路径改成绝对路径来执行，但 如果你是在主文件夹 ~ 中执行 ./bin/hadoop version ，执行的会是 /home/hadoop/bin/hadoop version ， 就不是我们所想要的了。</p>
+<p>下一篇将会介绍Hadoop单机配置、Hadoop伪分布式配置。</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/10/22/Android%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%EF%BC%88%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%92%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%EF%BC%89/" title="Android开发笔记——快速入门（系统架构和Android Studio安装）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Android开发笔记——快速入门（系统架构和Android Studio安装）</span></a><a class="button is-default" href="/2024/10/22/Scala%E5%BA%94%E7%94%A8%E7%AC%94%E8%AE%B0/" title="Scala基础笔记"><span class="has-text-weight-semibold">Next: Scala基础笔记</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2025</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>Android开发笔记——快速入门（Kotlin的面对对象）</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="Android开发笔记——快速入门（Kotlin的面对对象）
+
+
+软件环境：
+
+Jetbrains Toolbox
+Android Sudio 2021.1.1 Bumblebee
+JDK 17.0.2
+
+
+
+Kotlin的面对对象
+
+类与对象
+Kotlin的方法
+Kotlin的继承与构造
+Kotlin的接口与面向接口编程
+
+在接口中预先实现一个方法（默认实现）
+面向接口编程
+
+
+Kotlin的可见性修饰符
+Kotlin的数据类和单例类
+
+数据类
+单例类
+
+
+
+
+
+
+[TOC]
+Kotlin的面对对象
+类与对象
+在上一节我们创建了一个类但是并没有使用，所有的代码都是通过函数实现的，这并不符合面向对象的编程的要求。至于什么是面向对象编程这里就不再多说了有兴趣的或不了解的可以去知乎看一看。
+这里我们再新建一个c.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Android开发笔记——快速入门（Kotlin的面对对象）</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Android开发笔记——快速入门（Kotlin的面对对象）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">软件环境：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Kotlin的面对对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">类与对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">Kotlin的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">Kotlin的继承与构造</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">Kotlin的接口与面向接口编程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">在接口中预先实现一个方法（默认实现）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">面向接口编程</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">Kotlin的可见性修饰符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">Kotlin的数据类和单例类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">数据类</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">单例类</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Android"><i class="tag post-item-tag">Android</i></a><a href="/tags/Kotlin"><i class="tag post-item-tag">Kotlin</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Android开发笔记——快速入门（Kotlin的面对对象）</h1><time class="has-text-grey" datetime="2024-10-21T16:00:00.000Z">2024-10-22</time><article class="mt-2 post-content"><h1><span id="android开发笔记快速入门kotlin的面对对象">Android开发笔记——快速入门（Kotlin的面对对象）</span></h1>
+<img src="https://s2.loli.net/2024/10/04/TU4j1YWLER9caFp.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1727980774295" style="zoom:50%;">
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom: 50%;">
+<h4><span id="软件环境">软件环境：</span></h4>
+<ul>
+<li><strong>Jetbrains Toolbox</strong></li>
+<li><strong>Android Sudio 2021.1.1 Bumblebee</strong></li>
+<li><strong>JDK 17.0.2</strong></li>
+</ul>
+<!-- toc -->
+<ul>
+<li><a href="#kotlin%E7%9A%84%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1">Kotlin的面对对象</a>
+<ul>
+<li><a href="#%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1">类与对象</a></li>
+<li><a href="#kotlin%E7%9A%84%E6%96%B9%E6%B3%95">Kotlin的方法</a></li>
+<li><a href="#kotlin%E7%9A%84%E7%BB%A7%E6%89%BF%E4%B8%8E%E6%9E%84%E9%80%A0">Kotlin的继承与构造</a></li>
+<li><a href="#kotlin%E7%9A%84%E6%8E%A5%E5%8F%A3%E4%B8%8E%E9%9D%A2%E5%90%91%E6%8E%A5%E5%8F%A3%E7%BC%96%E7%A8%8B">Kotlin的接口与面向接口编程</a>
+<ul>
+<li><a href="#%E5%9C%A8%E6%8E%A5%E5%8F%A3%E4%B8%AD%E9%A2%84%E5%85%88%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%96%B9%E6%B3%95%E9%BB%98%E8%AE%A4%E5%AE%9E%E7%8E%B0">在接口中预先实现一个方法（默认实现）</a></li>
+<li><a href="#%E9%9D%A2%E5%90%91%E6%8E%A5%E5%8F%A3%E7%BC%96%E7%A8%8B">面向接口编程</a></li>
+</ul>
+</li>
+<li><a href="#kotlin%E7%9A%84%E5%8F%AF%E8%A7%81%E6%80%A7%E4%BF%AE%E9%A5%B0%E7%AC%A6">Kotlin的可见性修饰符</a></li>
+<li><a href="#kotlin%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%92%8C%E5%8D%95%E4%BE%8B%E7%B1%BB">Kotlin的数据类和单例类</a>
+<ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%B1%BB">数据类</a></li>
+<li><a href="#%E5%8D%95%E4%BE%8B%E7%B1%BB">单例类</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p>[TOC]</p>
+<h2><span id="kotlin的面对对象">Kotlin的面对对象</span></h2>
+<h4><span id="类与对象">类与对象</span></h4>
+<p>在上一节我们创建了一个类但是并没有使用，所有的代码都是通过函数实现的，这并不符合面向对象的编程的要求。至于什么是面向对象编程这里就不再多说了有兴趣的或不了解的可以去知乎看一看。</p>
+<p>这里我们再新建一个class名叫Person。Kotlin 中使用关键字 <code>class</code> 声明类。</p>
+<p><img src="https://s2.loli.net/2024/10/04/DF2Pz5Yp9vkL1ar.png" alt="1"></p>
+<p>类声明由类名、类头（指定其类型参数、主构造函数等）以及由花括号包围的类体构成。类头与类体都是可选的； 如果一个类没有类体，可以省略花括号。</p>
+<pre><code class="language-kotlin">class Person
+</code></pre>
+<p>这样也是完全正确的。</p>
+<p>给他添加一些字段：</p>
+<pre><code class="language-Kotlin">package com.example.codewithkotlin
+
+class Person
+{
+    var  age :Int =0 ;
+    val name  = "";
+}
+</code></pre>
+<p>可以看到我这里使用了两种写法来提示你字段也能自动推导类型。</p>
+<p>下面我们来考虑一下如何实例化这个类：</p>
+<pre><code class="language-kotlin">package com.example.codewithkotlin
+
+class Person
+{
+    var  age :Int =0 ;
+    val name  = "";
+
+}
+fun main()
+{
+    var jack = Person()
+    println(jack.age)
+}
+</code></pre>
+<p>首先看到代码时你如果有Java的编程基础你会有疑问，main为什么不在类里面？而且也不是静态方法？这里暂且先放一放，我们到后边再来说这个我问题，这里先接受它，能运行，是一个程序的入口。</p>
+<p>具体在里面呢我们实例化了一个类，你可以看看非常轻巧简单，保持着<strong>能省就省</strong>的原则，不需要类型名，不需要new关键字，直接调用类名+（）就实现了初始化：</p>
+<pre><code class="language-Kotlin">fun main()
+{
+    var jack = Person()
+    println(jack.age)
+}
+</code></pre>
+<h4><span id="kotlin的方法">Kotlin的方法</span></h4>
+<p>方法也没什么好说的，他和函数的语法糖一摸一样，连关键字也一摸一样，你可以用一行来写一个方法的简单明了，调用的时候也是实例+.+方法。例子如下：</p>
+<pre><code class="language-kotlin">package com.example.codewithkotlin
+
+class Person
+{
+    var  age :Int =0 ;
+    val name  = "";
+    fun study() =  "zzy love study"
+}
+fun main()
+{
+    var zzy = Person()
+    println(zzy.age)
+    println(zzy.study())
+}
+</code></pre>
+<p>输出结果如下：</p>
+<p><img src="https://s2.loli.net/2024/10/04/NpirAk83Z72XQGm.png" alt="2"></p>
+<h4><span id="kotlin的继承与构造">Kotlin的继承与构造</span></h4>
+<p>关于继承的概念也不再详细解释，感兴趣请移步知乎。</p>
+<p>这里直接介绍用法和技巧.</p>
+<p>为了验证使用我们这里需要新建一个类：</p>
+<p><img src="https://s2.loli.net/2024/10/04/UmjrRzg1743pfxh.png" alt="3"></p>
+<p>继承的方法很简单，kotlin将关键字extends替换位：，写起来相对简单一些。可以看到如下就继承了Person类，同时也继承了其类内部的字段。</p>
+<pre><code class="language-kotlin">class Zzy : Person()
+{
+
+}
+</code></pre>
+<p>这里也许你会产生疑问，为啥后边还会跟一个（）？这不就是打破了能省就省的设计思想了吗？当然不是啦！</p>
+<p>这个（）就是每个面向对象不可或缺的构造函数，只不过我们目前构造的都是无参的构造函数，在类后边就不需要写无参构造函数的括号。</p>
+<p>在前边我们说过Kotlin的类的声明中可以省略类体和类头，在 Kotlin 中的一个类可以有一个<em>主构造函数</em>以及一个或多个<em>次构造函数</em>。主构造函数是类头的一部分：它跟在类名与可选的类型参数后。</p>
+<pre><code class="language-kotlin">class Person constructor() { /*……*/ }
+</code></pre>
+<p>如果主构造函数没有任何注解或者可见性修饰符，可以省略这个 <code>constructor</code> 关键字。</p>
+<pre><code class="language-kotlin">class Person() { /*……*/ }
+</code></pre>
+<p>如果构造函数有注解或可见性修饰符，这个 <code>constructor</code> 关键字是必需的，并且这些修饰符在它前面：</p>
+<pre><code class="language-kotlin">class Customer public @Inject constructor(name: String) { /*……*/ }
+</code></pre>
+<p>那么在没有修饰符的情况下，有参数的构造函数如何写呢？我们反过来修改一下父类：</p>
+<pre><code class="language-kotlin">open class Person(age :Int, name:String)
+{
+    fun study() = name + "love study"
+}
+</code></pre>
+<p>可以看到需要在构造函数里声明的字段就写好了，在实例化的时候就需要传入这些字段的参数：</p>
+<pre><code class="language-kotlin">open class Person(age :Int, name:String)
+{
+    val name :String = name;
+    var age :Int = age;
+    fun study() = name + "love study"
+}
+</code></pre>
+<p>这里值得注意的是，这里的age，name和下面字段所指并不是一个，构造函数的参数只是个构造函数的局部变量，而不是成员变量，你如果想直接声明成字段的话就要显示的指定他是val还是var，指定后默认将其作为字段来初始化。</p>
+<pre><code class="language-kotlin">open class Person(var age :Int, val name:String)
+{
+    fun study() = name + "love study"
+}
+</code></pre>
+<p>你可能还会有疑问，那我想写一些逻辑处理函数怎么办呢？Kotlin同时也提供了构造函数的函数体：</p>
+<pre><code class="language-kotlin">open class Person(age :Int, name:String)
+{
+    val name :String = name;
+    var age :Int = 0;//这里不初始化等到init再来初始化它。
+    init {
+        this.age = age;
+    }
+    fun study() = name + "love study"
+}
+</code></pre>
+<p>我们再回到继承上来说，有参的父类怎么继承？很简单在对应的位置输入构造参数就行了：</p>
+<pre><code class="language-Kotlin">package com.example.codewithkotlin
+
+class Zzy(gender: String) : Person(22,"zhuzeyu")
+{
+
+}
+</code></pre>
+<p>同样你也可以使用它的构造参数：</p>
+<pre><code class="language-kotlin">class Zzy(val gender: String) : Person(22,"zhuzeyu")
+{
+	init {
+    		println(name+" is a "+gender+" age is "+age)
+		}
+}
+
+//输出结果
+zhuzeyuis a man age is 22
+</code></pre>
+<p>在我们讨论完了主构造函数以后，既然有主构造函数那么一定有次构造函数，来看看他如何使用：</p>
+<pre><code class="language-kotlin">class Zzy(val gender: String) : Person(22,"zhuzeyu")
+{
+    constructor(iq:Int, eq:Int) : this("man")
+    {
+        println("his iq is "+iq+" eq is " + eq)
+    }
+
+    init {
+    println(name+" is a "+gender+" age is "+age)
+    }
+
+}
+</code></pre>
+<p>使用很简单，constructor关键字就是来创建构造函数的，kotlin规定次构造函数必须要调用主构造函数，所以你可以看到this关键字来调用主构造函数。与主构造函数不同的是此构造函数有函数体，并且次构造函数没办法直接声明成员，这里需要注意一下，参数的作用范围只有在此构造函数之中。</p>
+<p>调用实例：</p>
+<pre><code class="language-kotlin">fun main()
+{
+    var zzy = Zzy(120,100)
+}
+输出结果：
+zhuzeyu is a man age is 22
+his iq is 120 eq is 100
+</code></pre>
+<h4><span id="kotlin的接口与面向接口编程">Kotlin的接口与面向接口编程</span></h4>
+<p>kotlin和java一样都不是多继承的面向对象编程，也就是说你只能继承一个父类，但是对于子类来说需要多继承的时候就很麻烦了，所以这里选择接口会更方便。</p>
+<p>接口和普通类的界限在逐渐变得模糊，不管是针对java还是kotlin都是一样，可以继承多个接口，接口的继承演示如下：</p>
+<p>继承的关键字同样被<code>：</code>所替代，和继承的父类可以直接一起使用，将它们分开就可以同时继承。</p>
+<pre><code class="language-kotlin">class Zzy(val gender: String) : Person(22,"zhuzeyu"),Eat
+{
+    //实现了两个接口中的函数
+    override fun drink_soap() {
+        println("drink soap")
+    }
+
+    override fun eat_rice() {
+       println("eat rice")
+    }
+    constructor(iq:Int, eq:Int) : this("man")
+    {
+        println("his iq is "+iq+" eq is " + eq)
+    }
+
+    init {
+    println(name+" is a "+gender+" age is "+age)
+    }
+
+}
+</code></pre>
+<p>Eat接口：</p>
+<pre><code class="language-kotlin">interface Eat
+{
+    fun drink_soap()
+    fun eat_rice()
+}
+</code></pre>
+<p>为什么说接口和普通类正在变得模糊呢？我们再来看一个操作：</p>
+<h5><span id="在接口中预先实现一个方法默认实现">在接口中预先实现一个方法（默认实现）</span></h5>
+<p>如果你在接口中实现了一个方法：</p>
+<pre><code class="language-kotlin">interface Eat
+{
+    fun drink_soap(){
+        println("drink soap")
+    }
+    fun eat_rice()
+}
+</code></pre>
+<p>在类的实例就可以直接不需要重写他们，IDEA也不会报错：</p>
+<pre><code class="language-kotlin">class Zzy(val gender: String) : Person(22,"zhuzeyu"),Eat
+{
+    override fun eat_rice() 
+    {
+       println("eat rice")
+    }
+    constructor(iq:Int, eq:Int) : this("man")
+    {
+        println("his iq is "+iq+" eq is " + eq)
+    }
+    init 
+    {
+        println(name+" is a "+gender+" age is "+age)
+    }
+}
+</code></pre>
+<p>在使用的时候直接调用即可：</p>
+<pre><code class="language-kotlin">fun main()
+{
+    var zzy = Zzy(120,100)
+    zzy.drink_soap()
+}
+</code></pre>
+<h5><span id="面向接口编程">面向接口编程</span></h5>
+<p>你如果了解面向对象，你也一定可以明白什么是面向接口，如果面向对象的方法参数传递的是对象，那么面向接口，就是传递的是接口：</p>
+<p>我们来看一个复杂一点的例子：</p>
+<pre><code class="language-kotlin">class Zzy(val gender: String) : Person(22,"zhuzeyu"),Eat
+{
+// 以上代码省略，新添加一个方法
+    fun  eat_drink_together( eat : Eat)
+    {
+        eat.drink_soap()
+        eat_rice()
+    }
+}
+</code></pre>
+<p>在这里调用新方法，传入自己作为参数：</p>
+<pre><code class="language-kotlin">fun main()
+{
+    var zzy = Zzy(120,100)
+    zzy.eat_drink_together(zzy)
+}
+</code></pre>
+<p>这段代码可能有点稍微难理解他的目的是什么，注意看到<code>eat_drink_together</code>方法的参数实际上是一个接口，因为zzy类实现了这个接口当然也可以传入作为参数，顺理成章地调用其中的实现的抽象的方法，这里就可以叫接口的多态。</p>
+<h4><span id="kotlin的可见性修饰符">Kotlin的可见性修饰符</span></h4>
+<p>kotlin的修饰符存在很大的与java的不同：</p>
+<p>可以参考一下表：</p>
+<p><img src="https://s2.loli.net/2024/10/04/OYCuzypwlLreh1D.png" alt="3"></p>
+<p>可以看到最大的区别有几点</p>
+<ul>
+<li>Kotlin中默认的类型是public而不是default。</li>
+<li>Kotlin中没有default类型，也就是没有包级可见，Kotlin的protect类型同一包路径下也不可见（牢记没有包可见）。</li>
+<li>新增internal类型，在同一模块下可见。</li>
+</ul>
+<p>可以看到kotlin和android设计首选的语言并不是全无道理，抛弃了原来java的文件构建模式，转而支持更多的android的文件架构，关于模块等到写到的时候再说。</p>
+<h4><span id="kotlin的数据类和单例类">Kotlin的数据类和单例类</span></h4>
+<h5><span id="数据类">数据类</span></h5>
+<p>数据类常常用于将服务器端或数据库中的数据集映射到内存中，为编程提供数据模型的支持。简单来说就是专门用来管理数据在内存中的类。</p>
+<p>在java中为了实现一个数据类我们通常要实现equals（）、hashCode（）方法等。kotlin保持着能省就省的原则，这些没有实际逻辑意义的代码都应该被替换掉，被替换成什么了呢？</p>
+<p>就一个关键字：<code>data</code></p>
+<pre><code class="language-KOTLIN">data class Exam(val exameername:String,val examname:String,val examgrade:Int)
+</code></pre>
+<p>你可能会疑问为什么后边没有{}呢，在提示一下语法糖，没有代码的话可以省略的。</p>
+<p>那么数据类怎么使用呢？</p>
+<p>我这里定义的是考试类，参数分别是考试人名称，考试名称，考试成绩。</p>
+<p>这里我们创建两个实体对象然后调用，.equals()方法进行匹配：</p>
+<pre><code class="language-kotlin">val exam1 = Exam("zzy","exam1",100)
+val exam2 = Exam("zzy","exam1",100)
+if (exam1 == exam2)
+println("same")
+if(exam1.equals(exam2))
+println("yesyes")
+</code></pre>
+<pre><code class="language-shell">same
+yesyes
+</code></pre>
+<h5><span id="单例类">单例类</span></h5>
+<p>单例类是针对单例模式而特殊设计的类，它可以避免创造重复的对象，当我们希望某个类在全局最多只有一个实例的时候们就可以使用单例类。</p>
+<p>对于java我们不再赘述，将构造函数私有化等就可以实现单例类，虽然java实现的并不复杂但是kotlin明显做的更好，我们只需要将关键字class改为object即可，不需要自己去写实现方法，操作简单。</p>
+<p>演示：</p>
+<p>其实在前面我们都是通过直接定义main函数来直接运行的，但是在面向对象的时候大多是是没有函数的概念，这里我们借助单例类来实现类似于java类中的main方法：</p>
+<pre><code class="language-kotlin">object test
+{
+    @JvmStatic
+    fun main(args: Array&lt;String&gt;)
+    {
+        //继承等演示
+        var zzy = Zzy(120,100)
+        zzy.eat_drink_together(zzy)
+        //数据类演示
+        val exam1 = Exam("zzy","exam1",100)
+        val exam2 = Exam("zzy","exam1",100)
+        if (exam1 == exam2)
+            println("same")
+        if(exam1.equals(exam2))
+            println("yesyes")
+        //单例类演示
+        test.tester();
+    }
+    // 单例类方法
+    fun tester()
+    {
+        println("test")
+    }
+}
+</code></pre>
+<p>可以看到创建了一个单例类，并且声明了两个方法，分别是main和tester方法</p>
+<p>你可以看到main上边有一个注释@JvmStatic，你可以意识到这里的main其实并不是static的</p>
+<p>实际上kotlin并没有static这个关键字，这个先留到以后再说，这里的main就是程序的入口，调用单例类的方法很简单而且不需要自己实例化，在启动的时候kotlin已经自动帮忙创建了所有单例类的实例化，在作用范围内调用很简单：</p>
+<pre><code class="language-kotlin">//单例类演示
+test.tester();
+</code></pre>
+<p>直接类名+方法即可，注意这里要和java的静态方法区别开，只是结构类似，本质完全不同，并不是静态的数据类型。</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/10/22/Android%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%20(Kotlin%E7%9A%84%E6%A0%87%E5%87%86%E5%87%BD%E6%95%B0%E5%92%8C%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95)/" title="Android开发笔记——快速入门（Kotlin的标准函数和静态方法）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Android开发笔记——快速入门（Kotlin的标准函数和静态方法）</span></a><a class="button is-default" href="/2024/10/22/Android%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%EF%BC%88Activity2%EF%BC%89%20/" title="Android开发笔记——快速入门（优雅的开发Activity）"><span class="has-text-weight-semibold">Next: Android开发笔记——快速入门（优雅的开发Activity）</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2025</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>

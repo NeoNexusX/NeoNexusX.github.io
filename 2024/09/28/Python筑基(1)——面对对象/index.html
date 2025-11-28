@@ -1,0 +1,725 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>Python类基础筑基（1）————面对对象</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="Python类基础筑基（1）————面对对象
+
+
+本文以Python3主要为主，穿插2.7的信息，如无特别说明默认为Python3
+[TOC]
+1.Python的命名空间与作用域
+1.1命名空间（namespace）
+namespace （命名空间）是从名称到对象的映射。现在，大多数命名空间都使用 Python 字典实现，但除非涉及到性能优化，我们一般不会关注这方面的事情，而且将来也可能会改变这种方式。命名空间的例子有：内置名称集合（包括 abs() 函数以及内置异常的名称等）；一个模块的全局命名空间；一个函数调用中的局部命名空间。对象的属性集合也是命名空间的一种形式。
+命名空间是在不同时刻创建的，且拥有不同的生命周期。下边列出来四种常见的命名空间的简单介绍：
+
+内置名称的命名空间是在 Python 解释器.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Python类基础筑基（1）————面对对象</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Python类基础筑基（1）————面对对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">1.Python的命名空间与作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">1.1命名空间（namespace）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">1.2作用域（scope）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">1.3关于作用域和命名空间的混淆点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">1.1.4作用域的具体例子（global &amp; nonlocal）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">扩展：名称和对象</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">2.面对对象与类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">2.1Python的面对对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">2.2类对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">2.2.1属性引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">2.2.2实例化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">2.3实例对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">2.3.1数据属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">2.3.2方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">2.4方法对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">2.5方法对象&amp;函数对象的区别、类对象&amp;实例对象的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">2.5.1方法对象&amp;函数对象的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">2.5.2类对象&amp;实例对象的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">3.继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">3.1派生类的实例化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">3.2派生类方法的扩展与重载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">3.3 super()函数详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">3.4私有变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">3.4.1名称改写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">4.dataclass</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">参考文章：</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Pytorch"><i class="tag post-item-tag">Pytorch</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Python类基础筑基（1）————面对对象</h1><time class="has-text-grey" datetime="2024-09-27T16:00:00.000Z">2024-09-28</time><article class="mt-2 post-content"><h1><span id="python类基础筑基1面对对象">Python类基础筑基（1）————面对对象</span></h1>
+<img src="https://s2.loli.net/2023/11/30/9ktxJMd1G5perfh.jpg" alt="zXu5EpoCmKH8FiJ" style="zoom:67%;">
+<img src="https://s2.loli.net/2023/12/01/WpEDI6ayQt5zbM9.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1701391443259" style="zoom:67%;">
+<p>本文以Python3主要为主，穿插2.7的信息，如无特别说明默认为Python3</p>
+<p>[TOC]</p>
+<h2><span id="1python的命名空间与作用域">1.Python的命名空间与作用域</span></h2>
+<h3><span id="11命名空间namespace">1.1命名空间（namespace）</span></h3>
+<p><em>namespace</em> （命名空间）是从名称到对象的映射。现在，大多数命名空间都使用 Python 字典实现，但除非涉及到性能优化，我们一般不会关注这方面的事情，而且将来也可能会改变这种方式。命名空间的例子有：内置名称集合（包括 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/functions.html#abs"><code>abs()</code></a> 函数以及内置异常的名称等）；一个模块的全局命名空间；一个函数调用中的局部命名空间。对象的属性集合也是命名空间的一种形式。</p>
+<p>命名空间是在不同时刻创建的，且拥有不同的生命周期。下边列出来四种常见的命名空间的简单介绍：</p>
+<ul>
+<li>内置名称的命名空间是在 Python 解释器启动时创建的，永远不会被删除。内置名称实际上也在模块里，即 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/builtins.html#module-builtins"><code>builtins</code></a> 。</li>
+<li>模块的全局命名空间在读取模块定义时创建；通常，模块的命名空间也会持续到解释器退出。</li>
+<li>从脚本文件读取或交互式读取的，由解释器顶层调用执行的语句是 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/__main__.html#module-__main__"><code>__main__</code></a> 模块调用的一部分，也拥有自己的全局命名空间。</li>
+<li>函数的局部命名空间在函数被调用时被创建，并在函数返回或抛出未在函数内被处理的异常时，被删除。（实际上，用“遗忘”来描述实际发生的情况会更好一些。）当然，每次递归调用都有自己的局部命名空间。</li>
+</ul>
+<p>上述内容代表了常见的四种命名空间：内置命名空间、全局命名空间、main模块命名空间、函数的命名空间。实际上main也应该算作一种全局命名空间，只是他相对特殊这里单列出来。</p>
+<p>“从脚本文件读取或交互式读取的，由解释器顶层调用执行的语句是 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/__main__.html#module-__main__"><code>__main__</code></a> 模块调用的一部分，也拥有自己的全局命名空间” 这句话该如何理解呢？什么是main模块自己的全局命名空间？</p>
+<p>这里可以参考一下python官方文档的解释：</p>
+<p>在 Python 中，特殊名称 <code>__main__</code> 用于两个重要的构造：</p>
+<ol>
+<li>程序的顶层环境的名称，可以使用 <code>__name__ == '__main__'</code> 表达式进行检查；</li>
+<li>Python 包中的 <code>__main__.py</code> 文件。</li>
+</ol>
+<p>这两种机制都与 Python 模块有关，涉及用户如何与模块互动以及模块之间如何互动。下面详细解释了它们的作用。如果你是 Python 模块的新手，请参阅教程部分 <a target="_blank" rel="noopener" href="https://docs.python.org/3/tutorial/modules.html#tut-modules">Modules</a> 以进行介绍。</p>
+<p><code>__main__</code> 是顶层代码运行的环境名称。所谓的 “顶层代码” 是指开始运行的第一个用户指定的 Python 模块。它之所以被称为 “顶层”，是因为它导入了程序所需的所有其他模块。有时 “顶层代码” 也被称为应用程序的 <em>入口点</em>。</p>
+<p>顶层代码环境可以是：</p>
+<ul>
+<li>
+<p>交互式提示符的作用域：</p>
+<pre><code>pythonCopy code&gt;&gt;&gt; __name__
+'__main__'
+</code></pre>
+</li>
+<li>
+<p>作为文件参数传递给 Python 解释器的 Python 模块：</p>
+<pre><code>pythonCopy code$ python helloworld.py
+Hello, world!
+</code></pre>
+</li>
+<li>
+<p>使用 <a target="_blank" rel="noopener" href="https://docs.python.org/3/using/cmdline.html#cmdoption-m"><code>-m</code></a> 参数传递给 Python 解释器的 Python 模块或包：</p>
+<pre><code>pythonCopy code$ python -m tarfile
+usage: tarfile.py [-h] [-v] (...)
+</code></pre>
+</li>
+<li>
+<p>从标准输入中读取的 Python 代码：</p>
+<pre><code>pythonCopy code$ echo "import this" | python
+The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+...
+</code></pre>
+</li>
+<li>
+<p>使用 <a target="_blank" rel="noopener" href="https://docs.python.org/3/using/cmdline.html#cmdoption-c"><code>-c</code></a> 参数传递给 Python 解释器的 Python 代码：</p>
+<pre><code>pythonCopy code$ python -c "import this"
+The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+...
+</code></pre>
+</li>
+</ul>
+<p>在每一种情况下，顶层模块的 <code>__name__</code> 被设置为 <code>'__main__'</code>。</p>
+<p>因此，一个模块可以通过检查自己的 <code>__name__</code> 来发现它是否在顶层环境中运行，这允许一种常见的习惯用法，用于在模块未从导入语句初始化时有条件地执行代码：</p>
+<pre><code>pythonCopy codeif __name__ == '__main__':
+    # 当模块未从导入语句初始化时执行。
+    ...
+</code></pre>
+<pre><code class="language-python">if __name__ == '__main__':
+    # Execute when the module is not initialized from an import statement.
+    ...
+</code></pre>
+<p>这意味着如果脚本文件被直接运行（而不是被导入为模块），那么其中的代码将作为主程序执行，即被解释器顶层调用执行。这是Python中的一种约定，用于标识脚本的主要入口点。</p>
+<h3><span id="12作用域scope">1.2作用域（scope）</span></h3>
+<p>一个命名空间的 <em>作用域</em> 是 Python 代码中的一段文本区域（textual region），<strong>从这个区域可直接访问该命名空间</strong>。“可直接访问”的意思是，该文本区域内的名称在被非限定引用时，查找名称的范围，是包括该命名空间在内的。</p>
+<p>作用域是按字面文本（textual region）确定的解释：模块内定义的函数的全局作用域就是该模块的命名空间，无论该函数从什么地方或以什么别名被调用。另一方面，实际的名称搜索是在运行时动态完成的。但是，Python 正在朝着“编译时静态名称解析”的方向发展，因此不要过于依赖动态名称解析！（局部变量已经是被静态确定了。）</p>
+<p>作用域虽然是被静态确定的，但会被动态使用。执行期间的任何时刻，都会有 3 或 4 个“命名空间可直接访问”的嵌套作用域：</p>
+<ul>
+<li>最内层作用域，包含局部名称，并首先在其中进行搜索</li>
+<li>那些外层闭包函数的作用域，包含“非局部、非全局”的名称，从最靠内层的那个作用域开始，逐层向外搜索。</li>
+<li>倒数第二层作用域，包含当前模块的全局名称</li>
+<li>最外层（最后搜索）的作用域，是内置名称的命名空间</li>
+</ul>
+<p>如果一个名称被声明为全局，则所有引用和赋值都将直接指向“倒数第二层作用域”，即包含模块的全局名称的作用域。</p>
+<h3><span id="13关于作用域和命名空间的混淆点">1.3关于作用域和命名空间的混淆点</span></h3>
+<p>命名空间：名称(name)及其所引用对象(object)的集合。python使用dictionary来表示命名空间，key对应名称(name)，value为名称所对应的对象(object)。</p>
+<p>实际上命名空间是一种映射关系的具体实现，在python中以dictionary来实现，其存储了具体的映射关系。</p>
+<p>而作用域是在命名空间的基础上所遵循的规则信息。其规定了我们的程序将查看哪些命名空间（中的名称）及以顺序。</p>
+<h3><span id="114作用域的具体例子global-amp-nonlocal">1.1.4作用域的具体例子（global &amp; nonlocal）</span></h3>
+<p>如果程序执行时去使用一个变量 hello ，那么 Python， 查找变量顺序为：</p>
+<p><strong>局部的命名空间 -&gt; 全局命名空间 -&gt; 内置命名空间</strong></p>
+<p>如果按照这个顺序找不到相应的变量，它将放弃查找并抛出一个 NameError 异常：</p>
+<pre><code class="language-shell">NameError: name 'hello' is not defined。
+</code></pre>
+<p>Python 有一个特殊规定。如果不存在生效的 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/reference/simple_stmts.html#global"><code>global</code></a> 或 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/reference/simple_stmts.html#nonlocal"><code>nonlocal</code></a> 语句，则对名称的赋值总是会进入最内层作用域。赋值不会复制数据，只是将名称绑定到对象。删除也是如此：语句 <code>del x</code> 从局部作用域引用的命名空间中移除对 <code>x</code> 的绑定。所有引入新名称的操作都是使用局部作用域：尤其是 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/reference/simple_stmts.html#import"><code>import</code></a> 语句和函数定义会在局部作用域中绑定模块或函数名称。</p>
+<p><a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/reference/simple_stmts.html#global"><code>global</code></a> 语句用于表明特定变量在全局作用域里，并应在全局作用域中重新绑定；<a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/reference/simple_stmts.html#nonlocal"><code>nonlocal</code></a> 语句表明特定变量在外层作用域中，并应在外层作用域中重新绑定。</p>
+<p>摘两段关于global和nonlocal的定义：</p>
+<p><a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/reference/simple_stmts.html#global"><code>global</code></a> 语句是作用于整个当前代码块的声明。 它意味着所列出的标识符将被解读为全局变量。 要给全局变量赋值不可能不用到 <code>global</code> 关键字，不过自由变量也可以指向全局变量而不必声明为全局变量。</p>
+<p><a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/reference/simple_stmts.html#nonlocal"><code>nonlocal</code></a> 语句会使得所列出的名称指向之前在最近的包含作用域中绑定的<strong>除全局变量以外的变量</strong>。与 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/reference/simple_stmts.html#global"><code>global</code></a> 语句中列出的名称不同，<a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/reference/simple_stmts.html#nonlocal"><code>nonlocal</code></a> 语句中列出的名称必须指向之前存在于包含作用域之中的绑定（在这个应当用来创建新绑定的作用域不能被无歧义地确定）。</p>
+<p>要重新绑定在最内层作用域以外的变量，可以使用 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/reference/simple_stmts.html#nonlocal"><code>nonlocal</code></a> 语句；如果未使用 nonlocal 声明，这些变量将为只读（尝试写入这样的变量将在最内层作用域中创建一个 <em>新的</em> 局部变量，而使得同名的外部变量保持不变）。</p>
+<p><a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/reference/simple_stmts.html#nonlocal"><code>nonlocal</code></a> 语句中列出的名称不得与之前存在于局部作用域中的绑定相冲突。</p>
+<p>这句话看起来很难理解，不过没关系，下面的例子很好的解释了这个问题：</p>
+<pre><code class="language-python">def scope_test():
+
+    def do_nonlocal():
+        spam = "do_nonlocal spam"
+        nonlocal spam
+        spam = "nonlocal spam"
+        
+    spam = "test spam"
+    do_nonlocal()
+    print("After nonlocal assignment:", spam)
+
+scope_test()
+</code></pre>
+<p><img src="https://s2.loli.net/2023/11/28/hmzu2dqKHFP83yS.png" alt="image-20231128130324612"></p>
+<p>可以看到<code>nonlocal</code>不能绑定已经绑定过的局部变量，这里使用‘绑定’这个词是有原因的，可以看一下下边的内容。</p>
+<h4><span id="扩展名称和对象">扩展：名称和对象</span></h4>
+<p>对于Python来说所有内容都是对象，对象之间相互独立，多个名称（甚至是多个作用域内的多个名称）可以绑定到同一对象。这在其他语言中通常被称为别名。Python 初学者通常不容易理解这个概念，处理数字、字符串、元组等不可变基本类型时，可以不必理会。</p>
+<p>但是，对于涉及可变对象（如列表、字典，以及大多数其他类型）的 Python 代码的语义，别名可能会产生意料之外的效果。这样做，通常是为了让程序受益，因为别名在某些方面就像指针。例如，传递对象的代价很小，因为实现只传递一个指针。</p>
+<p>我们通过以下的例子来综合解释一下如何使用global &amp; nonlocal：</p>
+<pre><code class="language-python">def scope_test():
+    def do_local():
+        spam = "local spam"
+
+    def do_nonlocal():
+        nonlocal spam
+        spam = "nonlocal spam"
+
+    def do_global():
+        global spam
+        spam = "global spam"
+
+    spam = "test spam"
+    do_local()
+    print("After local assignment:", spam)
+    do_nonlocal()
+    print("After nonlocal assignment:", spam)
+    do_global()
+    print("After global assignment:", spam)
+
+scope_test()
+print("In global scope:", spam)
+</code></pre>
+<p>示例代码的输出是：</p>
+<pre><code class="language-shell">After local assignment: test spam
+After nonlocal assignment: nonlocal spam
+After global assignment: nonlocal spam
+In global scope: global spam
+</code></pre>
+<p>在调用<code>scope_test</code>之后，会先创建一个在<code>scope_test</code>函数作用域之内的<code>spam</code>变量其作用域是在<code>scope_test</code>函数的局部变量里面，这时候调用<code>do_local()</code>函数其将<code>do_local()</code>函数小局部作用域中的spam通过nonlocal关键字绑定到了上一个局部作用域中，并进行了赋值，这时上一个局部作用域中的spam被赋值修改了绑定关系。所以输出结果从<code>test spam</code>变化成为了<code>nonlocal spam</code>。</p>
+<p>需要注意的是<code>do_global()</code>函数将在全局一个不存在的spam进行了绑定，相当于在局部变量中创建了全局变量，这是比较特殊的。</p>
+<h2><span id="2面对对象与类">2.面对对象与类</span></h2>
+<h3><span id="21python的面对对象">2.1Python的面对对象</span></h3>
+<p>最简单的类定义形式如下：</p>
+<pre><code class="language-python">class ClassName:
+    """class help doc"""
+    &lt;statement-1&gt;
+    .
+    .
+    .
+    &lt;statement-N&gt;
+</code></pre>
+<p>当进入类定义时，将创建一个新的<strong>命名空间</strong>，并将其用作<strong>局部作用域</strong>，因此，所有对局部变量的赋值都是在这个新<strong>命名空间</strong>之内。</p>
+<p>类的帮助信息可以通过ClassName.__ doc __查看。</p>
+<p>特别的，函数定义会绑定到这里的新函数名称。也就是会将里面的函数定义绑定到对应的函数名称，完成函数的创建。</p>
+<p>当 (从结尾处) 正常离开类定义时，将创建一个 <em><strong>类对象</strong></em>。 这基本上是一个围绕类定义所创建的命名空间的包装器；至于什么是包装器，包装器的作用是什么，这个以后再讨论。</p>
+<p>原始 (在进入类定义之前有效的) 作用域将重新生效，<strong>类对象</strong>将在这里与类定义头所给出的类名称进行绑定 (在这个示例中为 <code>ClassName</code>)。</p>
+<p>这里需要关注的是类其实也是一个对象，<strong>类对象也是对象的一种。在创建的结束将类名和类对象进行绑定</strong>。</p>
+<h3><span id="22类对象">2.2类对象</span></h3>
+<p>类对象支持两种操作：属性引用和实例化。</p>
+<h4><span id="221属性引用">2.2.1属性引用</span></h4>
+<p>使用 Python 中所有属性引用所使用的标准语法: <code>obj.name</code>。 有效的属性名称是类对象被创建时存在于类命名空间中的所有名称。 因此，如果类定义是这样的:</p>
+<pre><code class="language-python">class MyClass:
+    """A simple example class"""
+    i = 12345
+
+    def f(self):
+        return 'hello world'
+</code></pre>
+<p>那么 <code>MyClass.i</code> 和 <code>MyClass.f</code> 就是有效的属性引用，将分别返回一个整数和一个函数对象。 类属性也可以被赋值，因此可以通过赋值来更改 <code>MyClass.i</code> 的值。 有趣的是这样的内容在java系语言中被定为静态属性，其生命周期不会随着类的实例化所变化。</p>
+<p><code>__doc__</code> 也是一个有效的属性，将返回所属类的文档字符串: <code>"A simple example class"</code>。</p>
+<h4><span id="222实例化">2.2.2实例化</span></h4>
+<p>类对象的实例化功能实际上就是其他语言的创建类的实例对象，需要注意的是<strong>实例对象</strong>和<strong>类对象</strong>是两个不同的概念，后面会详细介绍二者的区别。</p>
+<p>类的 <em>实例化</em> 使用函数表示法。 可以把类对象视为是返回该类的一个新实例的不带参数的函数。常见的形式如下：</p>
+<pre><code class="language-python">对象变量 = 类名()
+x = MyClass()
+</code></pre>
+<p>创建类的新 <em>实例</em> 并将此对象分配给局部变量 <code>x</code>。</p>
+<p>上述实例化操作 (“调用”类对象) 会创建一个空对象。 许多类都希望创建的对象实例是根据特定初始状态定制的。</p>
+<p>因此一个类可能会定义名为 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/reference/datamodel.html#object.__init__"><code>__init__()</code></a> 的特殊方法，就像这样:</p>
+<pre><code class="language-python">def __init__(self):
+    self.data = []
+</code></pre>
+<p>当一个类定义了 <code>__init__()</code>方法时，类的实例化会自动为新创建的类实例发起调用 <code>__init__()</code>。 因此在这个例子中，可以通过以下语句获得一个已初始化的新实例:</p>
+<pre><code class="language-python">x = MyClass()
+</code></pre>
+<p>Example：</p>
+<p><img src="https://s2.loli.net/2023/11/28/W9kIqAGpDdoZjh6.png" alt="image-20231128173030208"></p>
+<h3><span id="23实例对象">2.3实例对象</span></h3>
+<p>实例对象所能理解的唯一操作是属性引用。 有两种有效的属性名称：数据属性和方法。</p>
+<h4><span id="231数据属性">2.3.1数据属性</span></h4>
+<p>数据属性就是java中的成员属性，需要注意的是pyhton是一门动态的语言， 数据属性不需要声明；就像局部变量一样，它们将在首次被赋值时产生。且在操作过程中可进行删除操作，删除一个实例对象的数据属性。这是其他静态语言所难以企及的。</p>
+<p>下面举个例子，在上文的基础上进行修改：</p>
+<p><img src="https://s2.loli.net/2023/11/28/c9XjiGlNACIKs42.png" alt="image-20231128174245657"></p>
+<p>只能说python过于自由了。哈哈哈。</p>
+<h4><span id="232方法">2.3.2方法</span></h4>
+<p>另一类实例属性引用称为 <strong>方法</strong>。 方法是<strong>从属于</strong>对象的函数。 （在 Python 中，方法这个术语并不是类实例所特有的：其他对象也可以有方法。 例如，列表对象具有 append, insert, remove, sort 等方法。 然而，在以下讨论中，我们使用方法一词将专指类实例对象的方法，除非另外显式地说明）</p>
+<p>实例对象的有效方法名称依赖于其所属的类。 根据定义，一个类中所有是函数对象的属性都是其实例的相应方法。</p>
+<p>因此在我们的示例中，<code>x.f</code> 是有效的方法引用，因为 <code>MyClass.f</code> 是一个函数，而 <code>x.i</code> 不是方法，因为 <code>MyClass.i</code> 不是函数。 但是 <code>x.f</code> 与 <code>MyClass.f</code> 并不是一回事 — 它是一个 <strong>方法对象</strong>，不是<strong>函数对象</strong>。</p>
+<p>这里让人难以理解的就是什么。为什么方法也是对象，对于函数对象还是比较好理解的，就像变量对象一样，是基础的对象类型，那么什么是方法对象呢？</p>
+<h3><span id="24方法对象">2.4方法对象</span></h3>
+<p>这里在上文的对象中添加一个<code>f()</code>方法，代码如下：</p>
+<pre><code class="language-python">class Complex:
+    def __init__(self,realpart , imagpart):
+        self.r = realpart
+        self.i = imagpart
+    def f(self):
+        return 'hello world'
+</code></pre>
+<p>添加完成以后，Complex对象就有了方法对象，可以通过实例对象来进行引用，如下图所示，它不仅可以在实例对象中进行引用同时也可以将其存储起来，存储对象在xf中，xf就相当于方法的别名，可以看到二者指向的对象是相同。</p>
+<p><img src="https://s2.loli.net/2023/11/28/JmHpSQNYbOwdLt3.png" alt="image-20231128193553688"></p>
+<h3><span id="25方法对象amp函数对象的区别-类对象amp实例对象的区别">2.5方法对象&amp;函数对象的区别、类对象&amp;实例对象的区别</span></h3>
+<h4><span id="251方法对象amp函数对象的区别">2.5.1方法对象&amp;函数对象的区别</span></h4>
+<p>在官方的文档中有这样一句话：</p>
+<p>Each value is an object, and therefore has a <em>class</em> (also called its <em>type</em>). It is stored as <code>object.__class__</code>.</p>
+<p>对于方法对象和函数对象来说而这最大的区别就在于使用方法上，我们可以注意到：</p>
+<p><code>f()</code> 的函数定义指定了一个参数，但上面调用 <code>x.f()</code> 时却没有带参数。 这个参数发生了什么事？ 当一个需要参数的函数在不附带任何参数的情况下被调用时 Python 肯定会引发异常 — 即使参数实际上没有被使用…</p>
+<p>实际上，你可能已经猜到了答案：方法的特殊之处就在于实例对象会作为函数的第一个参数被传入。 在我们的示例中，调用 <code>x.f()</code> 其实就相当于 <code>MyClass.f(x)</code>。</p>
+<p>我们可以构建一个例子关于f的直接引用和实例对象的方法引用，如下代码所展示的</p>
+<pre><code class="language-python">&gt;&gt;&gt;y = Complex.f
+&gt;&gt;&gt;y
+&lt;function Complex.f at 0x000002A8D1C23910&gt;
+</code></pre>
+<p>可以看到直接使用类对象的f引用结果变成了一个函数对象。图像右侧可以看到</p>
+<p><img src="https://s2.loli.net/2023/11/28/Fi3L5f7CmOhurPk.png" alt="image-20231128200522921"></p>
+<p>那如果我们打印一个上文中<code>x.f</code>呢？</p>
+<p><img src="https://s2.loli.net/2023/11/28/oZXjEUHLR51MO79.png" alt="image-20231128200731043"></p>
+<p>这就是二者的核心区别，如果我们直接调用y，他就会因为缺少参数而无法运行：</p>
+<p><img src="https://s2.loli.net/2023/11/28/zl25Kf9Cs4bxdwI.png" alt="image-20231128200824816"></p>
+<p>当然到这里你会更迷惑了，那么一个实例的方法的调用过程是什么呢？</p>
+<p>当对实例对象进行属性引用时，如果该属性在实例中无法找到，将搜索实例所属的类。如果被引用的属性名称表示一个有效的类属性中的函数对象，会打包两者（实例对象和查找到的函数对象）的指针到一个抽象对象，这个抽象对象就是方法对象。当用参数列表调用方法对象时，将基于实例对象和参数列表构建一个新的参数列表，并用这个新参数列表调用相应的函数对象。</p>
+<p>也就是说你本质上调用的是新参数列表的函数对象，当直接调用的时候新参数列表中没有实例对象（self实际上代之的是实例对象自己）而无法运行。</p>
+<p>这也是类对象&amp;实例对象的区别，实际上二者底层实现不一样，功能不同。</p>
+<p><img src="https://s2.loli.net/2023/11/28/5PotQHXh6DyxgWY.png" alt="image-20231128201202962"></p>
+<p>可以看到Complex自己代表了一个命名空间，和x并不相同。</p>
+<p><strong>任何一个作为类属性的函数都为该类的实例定义了一个相应方法</strong>。 <strong>注意的是这里是任何，也就是说任何符合带有self参数的引用的都只能作为方法来使用，这句话下面会解释</strong>。函数定义的文本并非必须包含于类定义之内：将一个函数对象赋值给一个局部变量也是可以的。 例如，下面的代码实现了一个函数并将其添加到了类中：</p>
+<pre><code class="language-python"># Function defined outside the class
+def f1(self, x, y):
+    return min(x, x+y)
+
+class C:
+    f = f1
+
+    def g(self):
+        return 'hello world'
+
+    h = g
+</code></pre>
+<p>现在 <code>f</code>、<code>g</code> 和 <code>h</code> 都 <code>C</code> 类的指向函数对象的属性，因此它们都是 <code>C</code> 实例的方法 — 其中 <code>h</code> 与 <code>g</code> 完全等价。 但请注意这种做法通常只会使程序的阅读者感到迷惑，这里只是展示其完全相同的结果。</p>
+<p>也就是说在类空间中定义的函数对象，被转化成为了方法。实例化后以方法对象的形式调用。</p>
+<p>那么这些函数对象能被调用吗？如何获取呢？</p>
+<p><strong>实例方法对象也具有属性: <code>m.__self__</code> 就是带有 <code>m()</code> 方法的实例对象，而 <code>m.__func__</code> 则是该方法所对应的函数对象。</strong></p>
+<p>举个例子可能会更好理解，在上文代码的基础上做一些简单的修改：</p>
+<pre><code class="language-python">class SonClass(FatherClass):
+
+    def __init__(self):
+        super(SonClass, self).__init__()
+        print('This is son init')
+
+    def method(self, son_value):
+        # super(SonClass, self).method()
+        print('son_value is ' + son_value)
+        print("This is a son method")
+        print(self)
+        # print(self.y)
+        
+son = SonClass()
+m = son.method
+print(m.__self__)
+func = m.__func__
+print(func('self', son_value='func_test'))
+</code></pre>
+<p>注意的是，这里修改了method方法，取消了内部所有对self的引用，至于为什么接下来会说，我们在下边调用了<code>m = son.method</code>来获取<strong>实例对象的方法对象</strong>，简称<strong>实例方法对象</strong>，输出两个属性，并通过<code>__func__</code>来获取其函数对象，最后通过<code>func('self', son_value='func_test')</code>来实现调用函数对象。</p>
+<p>输出结果如下：</p>
+<pre><code class="language-shell">This is son init
+&lt;__main__.SonClass object at 0x000001526B98FA00&gt;
+son_value is func_test
+This is a son method
+self
+</code></pre>
+<p>这里再解释一下为什么要取消self的调用，很简单函数对象并没有继承关系，也不会获取self对象到底是什么，是否是实例对象，所以这里使用字符串来作为参数，输出结果就是self字符。</p>
+<p>若果包含self参数调用，会是什么样呢？报错如下：</p>
+<pre><code class="language-shell">Traceback (most recent call last):
+  File "D:\SafeZone\PythonProjects\ICS_4\main.py", line 52, in &lt;module&gt;
+    print(func('self', son_value='func_test'))
+  File "D:\SafeZone\PythonProjects\ICS_4\main.py", line 33, in method
+    super(SonClass, self).method()
+TypeError: super(type, obj): obj must be an instance or subtype of type
+</code></pre>
+<h4><span id="252类对象amp实例对象的区别">2.5.2类对象&amp;实例对象的区别</span></h4>
+<p>一般来说，实例变量用于每个实例的唯一数据，而类变量用于类的所有实例共享的属性和方法:</p>
+<pre><code class="language-python">class Dog:
+
+    kind = 'canine'         # class variable shared by all instances
+
+    def __init__(self, name):
+        self.name = name    # instance variable unique to each instance
+
+&gt;&gt;&gt; d = Dog('Fido')
+&gt;&gt;&gt; e = Dog('Buddy')
+&gt;&gt;&gt; d.kind                  # shared by all dogs
+'canine'
+&gt;&gt;&gt; e.kind                  # shared by all dogs
+'canine'
+&gt;&gt;&gt; d.name                  # unique to d
+'Fido'
+&gt;&gt;&gt; e.name                  # unique to e
+'Buddy'
+</code></pre>
+<p>正如 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/tutorial/classes.html#tut-object">名称和对象</a> 中已讨论过的，共享数据可能在涉及 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/glossary.html#term-mutable">mutable</a> 对象例如列表和字典的时候导致令人惊讶的结果。 例如以下代码中的 <em>tricks</em> 列表不应该被用作类变量，因为所有的 <em>Dog</em> 实例将只共享一个单独的列表,也就是说所有可变变量不应该放到类中。正如下下面的例子中：</p>
+<pre><code class="language-python">class Dog:
+
+    tricks = []             # mistaken use of a class variable
+
+    def __init__(self, name):
+        self.name = name
+
+    def add_trick(self, trick):
+        self.tricks.append(trick)
+
+&gt;&gt;&gt; d = Dog('Fido')
+&gt;&gt;&gt; e = Dog('Buddy')
+&gt;&gt;&gt; d.add_trick('roll over')
+&gt;&gt;&gt; e.add_trick('play dead')
+&gt;&gt;&gt; d.tricks                # unexpectedly shared by all dogs
+['roll over', 'play dead']
+</code></pre>
+<p>这里回到本小节开头的那句话：</p>
+<p>每个值都是一个对象，因此具有 <em>类</em> （也称为 <em>类型</em>），并存储为 <code>object.__class__</code> 。</p>
+<p>我们上文代码中的打印所有的对象的Class：</p>
+<p><img src="https://s2.loli.net/2023/11/28/gAqiwv28jPy4VDL.png" alt="image-20231128204036052"></p>
+<p>有趣的是Class的类型是type，这就非常有趣了，至于为什么可以参考：</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/349522986">在 Python 中，为什么 type 类对象自身的类型是 type？ - 知乎 (zhihu.com)</a></p>
+<h2><span id="3继承">3.继承</span></h2>
+<p>终于讨论到最有趣的地方的了，Python是我接触的第一个动态语言和多继承语言，当然，如果不支持继承，语言特性就不值得称为“类”。单继承的语言类似Java系，继承很好理解，Python的多继承将会是我们讨论的重点，我们不妨先从单继承的视角来看它的继承。</p>
+<p>子（派生）类的语法定义如下：</p>
+<pre><code class="language-python">class DerivedClassName(BaseClassName):
+    &lt;statement-1&gt;
+    .
+    .
+    .
+    &lt;statement-N&gt;
+</code></pre>
+<p>当构造类对象时，基类会被记住。 此信息将被用来解析属性引用：如果请求的属性在类中找不到，搜索将转往基类中进行查找。 如果基类本身也派生自其他某个类，则此规则将被递归地应用。这只是针对单继承的基本查找规则，多继承相对更加复杂一点，后面会着重讨论。</p>
+<h3><span id="31派生类的实例化">3.1派生类的实例化</span></h3>
+<p>派生类的实例化没有任何特殊之处: <code>DerivedClassName()</code> 会创建该类的一个新实例。 方法引用将按以下方式解析：搜索相应的类属性，如有必要将按基类继承链逐步向下查找，如果产生了一个函数对象则方法引用就生效。</p>
+<p>上边的是官方的文档，实际上什么也没说，和狗屁一样，我们不如实际一点，通过几个例子来详细说明，派生类实例化会涉及到什么，应用的时候应该注意什么。</p>
+<p>3.1.1<code>__init__</code>会怎么调用?</p>
+<pre><code class="language-python">class FatherClass(object):
+    def __init__(self):
+        print('This is father init')
+
+    def method(self):
+        print("This is a father method")
+
+
+class SonClass(FatherClass):
+
+    # def __init__(self):
+    #     #super(SonClass,self).__init__()
+    #     print('This is son init')
+
+    def method(self):
+        print("This is a son method")
+
+
+son = SonClass()
+print(son.__class__)
+son.method()
+</code></pre>
+<p>代码的输出：</p>
+<pre><code class="language-python">This is father init
+&lt;class '__main__.SonClass'&gt;
+This is a son method
+</code></pre>
+<p>可以看到子类初始化的时候没有显式指定<code>__init__</code>，就会默认调用父类的<code>__init__</code>。</p>
+<p>如果我们显式的指定<code>__init__</code>会有什么后果？我们将注释去掉，结果如下：</p>
+<p>注意的是这里的super行仍有注释存在。</p>
+<pre><code class="language-python">This is son init
+&lt;class '__main__.SonClass'&gt;
+This is a son method
+</code></pre>
+<p>这里就要引出<code>super()</code>方法了，这里先不说名为什么要用super()，以及super()是如何实现的，我们就先姑且把它当作父类实例的代指函数，通过他就可以调用父类的对象。</p>
+<p>我们把对应的super注释去掉，看看结果会如何：</p>
+<pre><code class="language-python">This is father init
+This is son init
+&lt;class '__main__.SonClass'&gt;
+This is a son method
+</code></pre>
+<p>可以看到父类的<code>__init__</code>方法也被调用了。</p>
+<p>上述的内容可以一句话总结一下：</p>
+<p>子类没有显式指定的时候，会自动调用父类的init，子类显示指定的时候也要显式调用父类的init。</p>
+<p>需要补充的是，在没有显式指定的时候，父类的实例变量并无法访问，之恩那个访问到对应的父类的类变量。修改上文的代码后，来验证这个内容：</p>
+<pre><code class="language-python">class FatherClass(object):
+    y = 'father class variable'
+
+    def __init__(self):
+        self.x = 'father variable'
+        print('This is father init')
+
+    def method(self):
+        print("This is a father method")
+
+
+class SonClass(FatherClass):
+
+    def __init__(self):
+        #super(SonClass, self).__init__()
+        print('This is son init')
+
+    def method(self):
+        print("This is a son method")
+
+
+son = SonClass()
+print(son.__class__)
+print(son.y)
+print(son.x)
+son.method()
+</code></pre>
+<p>结果如下：</p>
+<pre><code class="language-shell">This is son init
+&lt;class '__main__.SonClass'&gt;
+father class variable
+Traceback (most recent call last):
+  File "D:\SafeZone\PythonProjects\ICS_4\main.py", line 25, in &lt;module&gt;
+    print(son.x)
+AttributeError: 'SonClass' object has no attribute 'x'
+</code></pre>
+<h3><span id="32派生类方法的扩展与重载">3.2派生类方法的扩展与重载</span></h3>
+<p>重载派生类的方法很简单，只需要直接修改参数内容即可：</p>
+<p>如下代码所示，重载了对应的method方法：</p>
+<pre><code class="language-python">class FatherClass(object):
+    y = 'father class variable'
+
+    def __init__(self):
+        self.x = 'father variable'
+        print('This is father init')
+
+    def method(self):
+        print("This is a father method")
+
+
+class SonClass(FatherClass):
+
+    def __init__(self):
+        super(SonClass, self).__init__()
+        print('This is son init')
+
+    def method(self, son_value):
+        print('son_value is ' + son_value)
+        print("This is a son method")
+
+
+son = SonClass()
+print(son.__class__)
+print(son.y)
+print(son.x)
+son.method('mother fucker')
+</code></pre>
+<p>输出结果如下：</p>
+<pre><code class="language-shell">This is father init
+This is son init
+&lt;class '__main__.SonClass'&gt;
+father class variable
+father variable
+son_value is mother fucker
+This is a son method
+</code></pre>
+<p>扩展就更加简单，只需要通过super来调用父类，即可接着父类方法来实现续写：</p>
+<pre><code class="language-python">    def method(self, son_value):
+        super(SonClass, self).method()
+        print('son_value is ' + son_value)
+        print("This is a son method")
+</code></pre>
+<p>输出结果如下：</p>
+<pre><code class="language-python">father class variable
+father variable
+This is a father method
+son_value is mother fucker
+This is a son method
+</code></pre>
+<h3><span id="33-super函数详解">3.3 super()函数详解</span></h3>
+<p>上文中所有super的写法我都依照python2的写法来实现的，实际上python3对于super有了更简便的写法，如下所示：</p>
+<pre><code class="language-python">super(SonClass, self).method()#python 2
+super().method()#python 3
+</code></pre>
+<p>这两个关键的参数被省略了，这对新手来说是一个很方便的事情，但是参数的省略带来信息的丢失，总是让人很迷茫，super到底的作用是什么？同时有很多python3的代码也采用了python2的写法（python3 对这个是兼容的）</p>
+<p>那么不禁让人提问 ：super是如何工作的？两个参数的作用是什么呢？</p>
+<p>super的定义如下：</p>
+<pre><code class="language-python">class super(type, object_or_type=None)
+返回一个代理对象，它会将方法调用委托给 type 的父类或兄弟类。 这对于访问已在类中被重载的继承方法很有用。
+</code></pre>
+<p>type这里只是一个参数名称，如果你要问和type有什么关系，不要忘记了所有class的类型是type，也就是说这里要填一个类对象进去。</p>
+<p>对于后一个参数的理解就更加简单了，填入一个<strong>实例对象</strong>或者<strong>类对象</strong>即可。</p>
+<p>那对这两个参数填入的内容已经有大概的了解，那么这两个参数到底有什么用？</p>
+<p>这两参数被用来实例化super类，对没错。super是一个类对象：</p>
+<pre><code class="language-python">&gt;&gt;&gt;super.__class__
+&lt;class 'type'&gt;
+&gt;&gt;&gt;class A:pass
+&gt;&gt;&gt;super(A).__class__
+&lt;class 'super'&gt;
+</code></pre>
+<p>实例化之后将会返回代理对象，代理的就是他的祖先类的对象（可按照顺序调用各种祖先类对象，具体按照什么顺序稍后会解释）。它会将方法调用委托给 <em>type</em> 的父类或兄弟类。</p>
+<p><em>object_or_type</em> 确定要用于搜索的 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/glossary.html#term-method-resolution-order">method resolution order</a>。 搜索会从 <em>type</em> 之后的类开始。</p>
+<p><strong>MRO</strong> 指的是 type(<strong>object_or_type</strong>)的 MRO, MRO 中的那个类就是 <strong>type</strong>。注意这里使用粗体的指的是参数，前边的type为python内置函数。</p>
+<p>也就是说，object_or_type用于确定在哪一颗祖先树上进行搜索，因为Python是多继承的(这里还没有讲多继承是如何实现的，不过没关系，可以从真实世界的族谱上理解一下)，所以其继承关系会构建出来一颗祖先树。</p>
+<p>在早期python的经典类结构，也就是python2中MRO遵循的是从左到右，深度优先，但是在2.2版本后多继承遵循了C3算法，详细可参考：<a target="_blank" rel="noopener" href="https://www.python.org/download/releases/2.3/mro/">The Python 2.3 Method Resolution Order | Python.org</a>里面详细论述了python是如何实现MRO，考虑到文章的长度，在以后会单独写一篇关于继承顺序的文章，这里可以先看一下参考文献。</p>
+<p>举一个简单的例子：</p>
+<p>For example, if <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html#class.__mro__"><code>__mro__</code></a> of <em>object_or_type</em> is <code>D -&gt; B -&gt; C -&gt; A -&gt; object</code> and the value of <em>type</em> is <code>B</code>, then <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#super"><code>super()</code></a> searches <code>C -&gt; A -&gt; object</code>。</p>
+<p>想要了解某一个类的MRO情况可以通过__mro__属性来获取：</p>
+<pre><code class="language-python">print(SonClass.__mro__)
+输出：
+(&lt;class '__main__.SonClass'&gt;, &lt;class '__main__.FatherClass'&gt;, &lt;class '__main__.UncleClass'&gt;, &lt;class 'object'&gt;)
+</code></pre>
+<p>这里再介绍一下两个内置函数，这两个内置函数用来测试是否满足的super的参数条件。</p>
+<ul>
+<li>使用 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/functions.html#isinstance"><code>isinstance()</code></a> 来检查一个实例的类型: <code>isinstance(obj, int)</code> 仅会在 <code>obj.__class__</code> 为 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/functions.html#int"><code>int</code></a> 或某个派生自 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/functions.html#int"><code>int</code></a> 的类时为 <code>True</code>。简单来说作用是检测实例是否是某一个类子类的实例对象。</li>
+<li>使用 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/functions.html#issubclass"><code>issubclass()</code></a> 来检查类的继承关系: <code>issubclass(bool, int)</code> 为 <code>True</code>，因为 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/functions.html#bool"><code>bool</code></a> 是 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/functions.html#int"><code>int</code></a> 的子类。 但是，<code>issubclass(float, int)</code> 为 <code>False</code>，因为 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/functions.html#float"><code>float</code></a> 不是 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/functions.html#int"><code>int</code></a> 的子类。 检测class对象是否为某一个类对象的子类。</li>
+</ul>
+<p>实际上super的参数还有另一种情况，当object_or_type 输入类型也是type的时候，就需要满足issubclass为true的条件，这时候super的调用就成了这样：</p>
+<pre><code class="language-python">super(type1, type2)
+</code></pre>
+<p>MRO 指的是 <strong>type2</strong> 的 <strong>MRO</strong>, <strong>MRO</strong> 中的那个类就是 <strong>type1</strong> ，同时 <strong>issubclass(type2, type1) == True</strong> 。</p>
+<p>那么， <strong>super()</strong> 实际上做了啥呢？简单来说就是：提供一个 <strong>MRO</strong> 以及一个 <strong>MRO</strong> 中的类 <strong>C</strong> ， <strong>super()</strong> 将返回一个从 <strong>MRO</strong> 中 <strong>C</strong> 之后的类中查找方法的对象。</p>
+<p>那是不是意味着我们也可以这样写，写了之后会有什么效果呢？</p>
+<p>这样调用会有什么结果呢？我们再举一个例子，在上文的代码中扩充添加一个TestClass类，他是最底层的类，是所有类的子类：</p>
+<pre><code class="language-python">class FatherClass(object):
+    y = 'father class variable'
+
+    def __init__(self):
+        self.x = 'father variable'
+        print('This is father init')
+
+    def method(self):
+        print("This is a father method")
+
+    def function():
+        print('This is a father function')
+class SonClass(FatherClass):
+
+    def __init__(self):
+        super(SonClass, self).__init__()
+        print('This is son init')
+
+    def method(self, son_value):
+        super(SonClass, self).method()
+        print('son_value is ' + son_value)
+        print("This is a son method")
+
+
+class TestClass(SonClass):
+    def __init__(self):
+        super().__init__()
+
+    def metod(self):
+        pass
+
+</code></pre>
+<p>然后进行调用：</p>
+<pre><code class="language-python">son = SonClass()
+print(super(SonClass, TestClass).y)
+</code></pre>
+<p>输出结果：</p>
+<pre><code class="language-shell">This is father init
+This is son init
+father class variable
+</code></pre>
+<p>可以看到他直接找到了父类作为调用对象，并输出了对应的y属性，需要注意的是这里无法针对方法对象来实现，原因很简单，并没有self参数作为载体，来进行方法的调用。记住上文说的：<strong>任何一个作为类属性的函数都为该类的实例定义了一个相应方法</strong>。不能把它作为函数对象来调用。</p>
+<h3><span id="34私有变量">3.4私有变量</span></h3>
+<p>那种仅限从一个对象内部访问的“私有”实例变量在 Python 中并不存在。这也算是设计特点， 但是，大多数 Python 代码都遵循这样一个约定：带有一个下划线的名称 (例如 <code>_spam</code>) 应该被当作是 API 的非公有部分 (无论它是函数、方法或是数据成员)。 这应当被视为一个实现细节，可能不经通知即加以改变。</p>
+<p>但是这样并不是很有效的操作，例如避免名称与子类所定义的名称相冲突，即使去使用 <code>_spam</code>的形式也是不合理的，子类仍能继承到，因此Python存在一个机制，叫做<strong>名称改写</strong>。</p>
+<h3><span id="341名称改写">3.4.1名称改写</span></h3>
+<p>形式为 <code>__spam</code> 的标识符，至少带有两个前缀下划线，至多一个后缀下划线）的文本将被替换为 <code>_classname__spam</code>，其中 <code>classname</code> 为去除了前缀下划线的当前类名称。</p>
+<p>这种改写不考虑标识符的句法位置，只要它出现在类定义内部就会进行。</p>
+<p>举个例子：如何使用私有变量进行解耦合</p>
+<pre><code class="language-python">class FatherClass(object):
+    __y = 'father class variable'
+
+    def __init__(self):
+        self.x = 'father variable'
+        print('This is father init')
+        self.method()
+
+    def method(self):
+        print("This is a father method")
+</code></pre>
+<p>可以看到 父类这里的init和method进行了耦合，init依赖于 method。产生了耦合</p>
+<p>子类继承的时候无法重写method方法，如果重写了就会报错：</p>
+<p>子类定义如下：</p>
+<pre><code class="language-python">class SonClass(FatherClass):
+
+    def __init__(self):
+        super(SonClass, self).__init__()
+        print('This is son init')
+
+    def method(self, son_value):
+        super(SonClass, self).method()
+        print('son_value is ' + son_value)
+        print("This is a son method")
+</code></pre>
+<p>报错信息如下：</p>
+<pre><code class="language-shell">Traceback (most recent call last):
+  File "D:\SafeZone\PythonProjects\ICS_4\main.py", line 33, in &lt;module&gt;
+    son = SonClass()
+  File "D:\SafeZone\PythonProjects\ICS_4\main.py", line 16, in __init__
+    super(SonClass, self).__init__()
+  File "D:\SafeZone\PythonProjects\ICS_4\main.py", line 7, in __init__
+    self.method()
+TypeError: SonClass.method() missing 1 required positional argument: 'son_value'
+This is father init
+</code></pre>
+<p>如何进行解耦合呢？</p>
+<pre><code class="language-python">class FatherClass(object):
+    __y = 'father class variable'
+
+    def __init__(self):
+        self.x = 'father variable'
+        print('This is father init')
+        self.__method()
+
+    def method(self):
+        print("This is a father method")
+
+    __method = method
+</code></pre>
+<p>修改父类如上，使用名称改写来实现其解耦，子类无法直接调用到方法__y，实际上被替换为<code>_FatherClass__method()</code> ,不要没事调用他。</p>
+<p>上面的示例即使在 <code>SonClass</code> 引入了一个 <code>__update</code> 标识符的情况下也不会出错，因为它会在 <code>FatherClass</code> 类中被替换为 <code>_FatherClass__update</code> 而在 <code>MappingSubclass</code> 类中被替换为 <code>_MappingSubclass__update</code>。</p>
+<h2><span id="4dataclass">4.dataclass</span></h2>
+<p>有时候需要一些数据类型类似C的struct结构的，需要糅合一部分数据在一起，Python提供了预实现模块<strong>dataclasses</strong>，</p>
+<p>我们引用就可以了，举个例子：</p>
+<pre><code class="language-python">from dataclasses import dataclass
+
+@dataclass
+class Chinese:
+    name: str
+    money: str
+    appearance: str
+    theone:bool
+</code></pre>
+<p>如何使用呢？</p>
+<pre><code class="language-python">neonexus = Chinese('neonexus',money=0,appearance='normal',theone=False)
+print(neonexus.theone)
+</code></pre>
+<p>输出结果：</p>
+<pre><code class="language-python">&lt;super: &lt;class 'SonClass'&gt;, &lt;TestClass object&gt;&gt;
+False
+</code></pre>
+<h1><span id="参考文章">参考文章：</span></h1>
+<p><a target="_blank" rel="noopener" href="https://rhettinger.wordpress.com/2011/05/26/super-considered-super/">Python’s super() considered super! | Deep Thoughts by Raymond Hettinger (wordpress.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://sixty-north.com/blog/pythons-super-not-as-simple-as-you-thought.html">Good With Computers (sixty-north.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/python-super-detail-intro.html">Python super 详解 | 菜鸟教程 (runoob.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/reference/datamodel.html#object.__init__">3. 数据模型 — Python 3.12.0 文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/2.7/reference/datamodel.html?highlight=__init__#object.__init__">3. 数据模型 — Python 2.7.18 文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/functions.html#super">内置函数 — Python 3.12.0 文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/tutorial/classes.html">9. 类 — Python 3.12.0 文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/2.7/tutorial/classes.html">9. 类 — Python 2.7.18 文档</a></p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/09/28/%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%20%20%E2%80%94%E2%80%94%20%20%E5%BF%AB%E9%80%9F%E5%A4%8D%E8%8B%8F%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8F%82%E6%95%B0%E7%AF%87%EF%BC%89/" title="运算放大器  ——  快速复苏笔记（参数篇）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: 运算放大器  ——  快速复苏笔记（参数篇）</span></a><a class="button is-default" href="/2024/09/28/pytorch_1/" title="Pytorch——基础指北_壹"><span class="has-text-weight-semibold">Next: Pytorch——基础指北_壹</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2025</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>

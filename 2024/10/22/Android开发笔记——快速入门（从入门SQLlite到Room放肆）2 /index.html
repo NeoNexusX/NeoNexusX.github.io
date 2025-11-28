@@ -1,0 +1,443 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>Android开发笔记——快速入门（从入门SQLlite到Room放肆）2</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="Android开发笔记——快速入门（从入门SQLlite到Room放肆）2
+
+
+软件环境：
+
+Jetbrains Toolbox
+Android Sudio 2021.1.1 Bumblebee
+JDK 17.0.2
+
+
+
+Android的SharePreferences
+
+将数据存储在SharePreferences当中
+
+1、通过context类的getSharedPreference来获取对象
+2、通过Activity类的getPreferences来获取
+
+
+向SharePreferences存储数据
+
+从SharePreferences读取数据
+
+
+使用高级函数来优化
+
+
+SQLite数据库入门
+
+创建数据库管理对象
+
+创建数据库
+
+
+升级数据库
+数据库的增删改查
+
+向数据库添加数据
+修改对应的数.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Android开发笔记——快速入门（从入门SQLlite到Room放肆）2</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Android开发笔记——快速入门（从入门SQLlite到Room放肆）2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">软件环境：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Android的SharePreferences</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">将数据存储在SharePreferences当中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">1、通过context类的getSharedPreference来获取对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">2、通过Activity类的getPreferences来获取</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">向SharePreferences存储数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">从SharePreferences读取数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">使用高级函数来优化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">SQLite数据库入门</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">创建数据库管理对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">创建数据库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">升级数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">数据库的增删改查</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">向数据库添加数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">修改对应的数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">删除对应的数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">查询对应的数据</span></a></li></ol></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Android"><i class="tag post-item-tag">Android</i></a><a href="/tags/SQLlite"><i class="tag post-item-tag">SQLlite</i></a><a href="/tags/Room"><i class="tag post-item-tag">Room</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Android开发笔记——快速入门（从入门SQLlite到Room放肆）2</h1><time class="has-text-grey" datetime="2024-10-21T16:00:00.000Z">2024-10-22</time><article class="mt-2 post-content"><h1><span id="android开发笔记快速入门从入门sqllite到room放肆2">Android开发笔记——快速入门（从入门SQLlite到Room放肆）2</span></h1>
+<img src="https://s2.loli.net/2024/10/04/WtmHlaEYCXrT5ev.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1727981759445" style="zoom:50%;">
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom: 50%;">
+<h2><span id="软件环境">软件环境：</span></h2>
+<ul>
+<li><strong>Jetbrains Toolbox</strong></li>
+<li><strong>Android Sudio 2021.1.1 Bumblebee</strong></li>
+<li><strong>JDK 17.0.2</strong></li>
+</ul>
+<!-- toc -->
+<ul>
+<li><a href="#android%E7%9A%84sharepreferences">Android的SharePreferences</a>
+<ul>
+<li><a href="#%E5%B0%86%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%9C%A8sharepreferences%E5%BD%93%E4%B8%AD">将数据存储在SharePreferences当中</a>
+<ul>
+<li><a href="#1-%E9%80%9A%E8%BF%87context%E7%B1%BB%E7%9A%84getsharedpreference%E6%9D%A5%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%B1%A1">1、通过<code>context</code>类的<code>getSharedPreference</code>来获取对象</a></li>
+<li><a href="#2-%E9%80%9A%E8%BF%87activity%E7%B1%BB%E7%9A%84getpreferences%E6%9D%A5%E8%8E%B7%E5%8F%96">2、通过<code>Activity</code>类的<code>getPreferences</code>来获取</a></li>
+</ul>
+</li>
+<li><a href="#%E5%90%91sharepreferences%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE">向SharePreferences存储数据</a>
+<ul>
+<li><a href="#%E4%BB%8Esharepreferences%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE">从SharePreferences读取数据</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E9%AB%98%E7%BA%A7%E5%87%BD%E6%95%B0%E6%9D%A5%E4%BC%98%E5%8C%96">使用高级函数来优化</a></li>
+</ul>
+</li>
+<li><a href="#sqlite%E6%95%B0%E6%8D%AE%E5%BA%93%E5%85%A5%E9%97%A8">SQLite数据库入门</a>
+<ul>
+<li><a href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E5%AF%B9%E8%B1%A1">创建数据库管理对象</a>
+<ul>
+<li><a href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93">创建数据库</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8D%87%E7%BA%A7%E6%95%B0%E6%8D%AE%E5%BA%93">升级数据库</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5">数据库的增删改查</a>
+<ul>
+<li><a href="#%E5%90%91%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE">向数据库添加数据</a></li>
+<li><a href="#%E4%BF%AE%E6%94%B9%E5%AF%B9%E5%BA%94%E7%9A%84%E6%95%B0%E6%8D%AE">修改对应的数据</a></li>
+<li><a href="#%E5%88%A0%E9%99%A4%E5%AF%B9%E5%BA%94%E7%9A%84%E6%95%B0%E6%8D%AE">删除对应的数据</a></li>
+<li><a href="#%E6%9F%A5%E8%AF%A2%E5%AF%B9%E5%BA%94%E7%9A%84%E6%95%B0%E6%8D%AE">查询对应的数据</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p>[TOC]</p>
+<p>请先参考前一篇文章复习一下Kotlin的一些语法。</p>
+<p><strong>大部分内容参考了郭霖先生的《第一行代码》，在书的基础上针对目前的实际情况进行实践记录。</strong></p>
+<h2><span id="android的sharepreferences">Android的SharePreferences</span></h2>
+<p><strong>此部分配套代码名称:DataTest2</strong></p>
+<p>将数据存储在SharePreferences中是一个针对多种数据类型的办法，使用文件存储很不方便，不方便的点在于很难对于具有数据类型的结构化数据进行存储，一个double存储进去就变成了文本，这样很不方便，所以我们来介绍如何使用具有数据类型支持的存储方案。</p>
+<h3><span id="将数据存储在sharepreferences当中">将数据存储在SharePreferences当中</span></h3>
+<p>将数据存储到SharePreferences当中就需要先获取到SharePreferences对象，获取的办法有两种：</p>
+<h4><span id="1-通过context类的getsharedpreference来获取对象">1、通过<code>context</code>类的<code>getSharedPreference</code>来获取对象</span></h4>
+<pre><code class="language-kotlin">@Override
+public SharedPreferences getSharedPreferences(String name, int mode) {
+    return mBase.getSharedPreferences(name, mode);
+}
+</code></pre>
+<p>此方法接收两个参数，第一个参数用于指定SharePreferences文件的名称，如果指定的文件不存在则会创建一个，一般存储在：包路径下的/share_prefs/目录下，第二个参数用于指定操作模式，目前只有默认的<strong>MODE_PRIVATE</strong>这一种模式可以选，他表达的意思是只有当前的应用程序才可以针对他进行读写，其他程序一律不可以。</p>
+<h4><span id="2-通过activity类的getpreferences来获取">2、通过<code>Activity</code>类的<code>getPreferences</code>来获取</span></h4>
+<pre><code class="language-kotlin">public SharedPreferences getPreferences(@Context.PreferencesMode int mode) {
+    return getSharedPreferences(getLocalClassName(), mode);
+}
+</code></pre>
+<p>此方法只需要接受一个模式参数即可获取到对象，与上文方法不同的是，这个方法创建的文件名与调用它的Actity类名字一模一样。可以看到此方法实际上是对上文方法的再封装。</p>
+<h3><span id="向sharepreferences存储数据">向SharePreferences存储数据</span></h3>
+<p>存储的过程分为三步：</p>
+<ul>
+<li>通过SharePreferences实例对象的edit()方法,可以获取到一个<code>SharePreferences.Editor</code>对象。</li>
+<li>向<code>SharePreferences.Editor</code>添加数据，针对每一种类型都有其对应的方法可以添加数据，比如添加一个字符串就可以用<code>putString()</code>方法。</li>
+<li>调用apply方法将数据提交，从而完成数据存储操作。</li>
+</ul>
+<p>下面举个例子：</p>
+<pre><code class="language-kotlin">fun load_p()
+{
+    val editor = getSharedPreferences("data",Context.MODE_PRIVATE).edit()
+    editor.putString("data","Jszszzy_Preference")
+    editor.apply()
+}
+</code></pre>
+<p>这里使用了context的getSharedPreference来获取editor对象，然后调用putSrtring来存入一个字符串，他的key值是data当你要获取的时候就要调用”data“了，最后使用apply方法将数据存储进去。</p>
+<p>怎么用验证我们存储的数据呢？</p>
+<p>我可以直接到对应目录下去查看，当然你也可以使用读取再把数据读取出来。</p>
+<h4><span id="从sharepreferences读取数据">从SharePreferences读取数据</span></h4>
+<p>你已经体验到了，我们只需要三行代码就可以将数据存储起来，并且不需要考虑太多的性能细节问题。有一个更好的消息是，读取其实更简单。</p>
+<p>读取只有一个步骤：</p>
+<p>通过SharePreferences实例对象的get方法分别传入键值和数据类型，就可以得到对应的数据，这里我们使用一个Textview来获取对应的数据，然后在程序启动的时候，再将读取到的对应的数据再显示出来。</p>
+<p>onCreate读取数据代码如下：</p>
+<p>需要注意的是这里是在前文已经实现了存储的基础上，程序已经创建好了对应的文件，然后实现的读取。</p>
+<pre><code class="language-kotlin">override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    binding = ActivityMainBinding.inflate(layoutInflater)
+    setContentView(binding.root)
+
+    load_p()?.let {
+        binding.datasave.setText(it)
+    }
+
+    Toast.makeText(this,"Reload data succeed",Toast.LENGTH_SHORT).show()
+}
+</code></pre>
+<p>load的代码如下：</p>
+<pre><code class="language-kotlin">fun load_p():String? {
+    val loader = getSharedPreferences("data",Context.MODE_PRIVATE)
+    return loader.getString("data","Cant get data")
+}
+</code></pre>
+<p>存储的代码也很简单，我们只需要在Activity完全消失的时候，调用存储把数据存储起来，在Activity的回调函数中来保存数据：</p>
+<pre><code class="language-kotlin">override fun onStop() {
+    save_p()
+    super.onStop()
+}
+</code></pre>
+<p>因为要保存显示的数据，所以保存的函数也要修改：</p>
+<pre><code class="language-kotlin">fun save_p()
+{
+    val editor = getSharedPreferences("data",Context.MODE_PRIVATE).edit()
+    editor.putString("data",binding.datasave.text.toString())
+    editor.apply()
+}
+</code></pre>
+<p>效果如下，开启应用程序读取到数据如下：</p>
+<p><img src="https://s3.bmp.ovh/imgs/2022/06/16/5334439cc5794979.png" alt="1-1"></p>
+<p>修改后保存，读取到的数据如下：</p>
+<p><img src="https://s3.bmp.ovh/imgs/2022/06/16/f59c772af7876008.png" alt="1-2"></p>
+<h3><span id="使用高级函数来优化">使用高级函数来优化</span></h3>
+<p>尽管使用SharePreferences已经足够简单了，但实际上还是有一些重复的书写，我们这里就使用高阶函数来优化一下。</p>
+<p>直接举一个例子：</p>
+<pre><code class="language-kotlin">fun SharedPreferences.open(block:SharedPreferences.Editor.()-&gt;Unit){
+    val editor = edit()
+    editor.block()//因为这个扩展函数实际上提供的是SharedPreferences上下文，二传入的参数提供的是SharedPreferences.Editor的上下文，需要加入前缀
+    editor.apply()
+}
+</code></pre>
+<p>以上一段代码看起来可能有点复杂，实际上没有那么复杂，我们实际上是通过扩展函数为SharedPreferences类添加了一个open函数，这个open函数接受一个以SharedPreferences.Editor为上下文的函数参数他的名为block。</p>
+<p>我们为什么要创建这样一个函数呢？</p>
+<p>实际上有两个目的，一个是省略重复的获取对象和提交数据的时候调用apply函数，二是将函数作为参数可以自定义要实现的数据存储操作，并且能提供对应的上下文。</p>
+<p>如何使用这个函数呢？</p>
+<p>我们可以直接调用getSharedPreferences方法获取到这个对象，然后调用open函数传入需要进行的操作即可：</p>
+<p>完整的代码如下</p>
+<pre><code class="language-kotlin">getSharedPreferences("data",Context.MODE_PRIVATE).open {
+    putString("data",binding.datasave.text.toString())
+}
+</code></pre>
+<p>和上文实现相同的操作相比：</p>
+<pre><code class="language-kotlin">val editor = getSharedPreferences("data",Context.MODE_PRIVATE).edit()
+editor.putString("data",binding.datasave.text.toString())
+editor.apply()
+</code></pre>
+<p>省略了不少，尤其当需要添加的数据增多的时候比较方便。</p>
+<p>当然为了避免因为kotlin的匿名类产生的开销，我们使用inline关键字来增强一下避免因为匿名类产生的开销。</p>
+<h2><span id="sqlite数据库入门">SQLite数据库入门</span></h2>
+<p><strong>此部分配套代码名称:DataTest3</strong></p>
+<p>前边两种方式存储的实际上都是一些简单的数据，当我们的数据关系复杂起来的时候，通过前两种办法就变的捉襟见肘了。</p>
+<p>SQLite是一个轻量级的关系数据库，还遵循了数据库的ACID事务，所以只要你以前使用过其他关系型数据库，就可以很快的上手SQLite，同时他不仅在大小上有很大的优化，使用起来也是更加的方便和快捷。</p>
+<h3><span id="创建数据库管理对象">创建数据库管理对象</span></h3>
+<p>Android为了方便管数据库，专门提供了一个抽象类来供你使用，创建数据库的时候只需要单独写一个类然后继承对应的<code>SQLiteOpenHelper</code>类即可，其中包含了两个抽象方法需要你自己去实现，一个是创建的时候调用的<code>override fun onCreate(db: SQLiteDatabase?)</code> 他传递进来一个参数指明当前调用的具体哪个数据库，如果还没有数据库的表就可以通过SQLiteDatabase的方法执行SQL语句来创建表。</p>
+<p>同时还需要重写的方法还有onUpgrade，他是当数据库需要升级的时候来调用的，具体等到数据库升级再详细讨论。</p>
+<p>一般使用SQLiteOpenHelper的时候都会使用它较少参数的构造方法，这个构造方法如下：</p>
+<pre><code class="language-kotlin">public SQLiteOpenHelper(@Nullable Context context, @Nullable String name,
+        @Nullable CursorFactory factory, int version) {
+    this(context, name, factory, version, null);
+}
+</code></pre>
+<p>第一个参数context用来定位数据库的存储位置，包名等等…，没什么好说的，很多函数都需要提供上下文参数，来实现一些信息获取或者Context的内置方法获取。</p>
+<p>第二个参数是数据库的名称。</p>
+<p>第三个参数是允许我们在查询数据的时候返回一个自定义的Cursor，至于这是什么我们晚点再来讨论。</p>
+<p>第四个参数是显示当前数据的版本号，可用于对数据库进行升级操作。</p>
+<h4><span id="创建数据库">创建数据库</span></h4>
+<p>需要注意的是上边只是创建了一个数据库助手对象，并没有将数据库本身创建出来，当我们第一次去调用getWritableDatabase方法的时候才是真正的将数据库创建了出来，我们可以通过阅读源码来知道这一关键点。</p>
+<pre><code class="language-kotlin">Create and/or open a database that will be used for reading and writing. The first time this is called, the database will be opened and onCreate, onUpgrade and/or onOpen will be called.
+Once opened successfully, the database is cached, so you can call this method every time you need to write to the database. (Make sure to call close when you no longer need the database.) Errors such as bad permissions or a full disk may cause this method to fail, but future attempts may succeed if the problem is fixed.
+Database upgrade may take a long time, you should not call this method from the application main thread, including from ContentProvider.onCreate().
+
+Returns:
+a read/write database object valid until close is called
+Throws:
+SQLiteException – if the database cannot be opened for writing
+
+public SQLiteDatabase getWritableDatabase() {
+      synchronized (this) {
+      	 return getDatabaseLocked(true);
+   }
+}
+</code></pre>
+<p>源码的注释说的很清楚，我只阐述以下几个要点，让你对这个方法有更深的了解。</p>
+<p>当第一次这个方法被调用的时候，会触发以下生命周期函数：</p>
+<ul>
+<li>onCreate</li>
+<li>onUpgrade and onOpen</li>
+</ul>
+<p>这个方法的实现不仅包含了在第一次调用的时候创建数据库，同时也包含了在不同生命周期去调用onCreate、onDowngrade（非抽象）、onUpgrade方法、onOpen方法（非抽象），这也是为什么只有第一次调用这个方法的时候，数据库内的表和数据才会被创建。</p>
+<p>数据库的升级过程是个很慢的过程，所以你不应该在某个组件Act或者Fragment的onCreate方法去调用getWritableDatabase或者getReadableDatabase。</p>
+<p>接下来我们直观的体验一下如何创建一个数据库。</p>
+<p>这里我们要创建一个BookStore.db数据库并且在数据库中建立一张表，上文说了，只有数据库第一次</p>
+<p>被创建的时候会调用onCreate方法，所以我们初始化数据应该放在onCreate里面。</p>
+<p>创建一个自己的SQLiteOpenHelper类，并重写初始化方法：</p>
+<pre><code class="language-kotlin">class MyDatabaseHelper(val context:Context,name:String,version: Int)
+    :SQLiteOpenHelper(context,name,null,version) {
+        
+    private val createBook = "create table Book ("+
+            "id integer primary key autoincrement,"+
+            "price real,"+
+            "pages integer,"+
+            "name text)"
+        
+    override fun onCreate(db: SQLiteDatabase?) {
+        db?.execSQL(createBook)
+        Toast.makeText(context,"Create succeed",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+
+    }
+
+
+}
+</code></pre>
+<p>在类里面我们声明了一个成员字符串变量，在字符串中写下SQL的语句，SQLite所包含的数据类并不多，具体如下：</p>
+<ul>
+<li>integer 整型</li>
+<li>real 浮点类型</li>
+<li>text 文本类型</li>
+<li>blob 二进制类型</li>
+</ul>
+<p>其中语句中的关键字primary key 、autoincrement分别代表，设置为主键、内容自动增长。</p>
+<p>最后调用onCreate方法中的数据库对象，执行SQL语句，完成建表。</p>
+<p>那么如何查看建立好的数据库的内容呢？我们可以借助数据库查看器，<a target="_blank" rel="noopener" href="https://sqlitebrowser.org/blog/version-3-12-2-released/">下载查看器</a>。</p>
+<p>从手机中把数据库的内容保存到本地来。</p>
+<p><img src="https://s3.bmp.ovh/imgs/2022/06/16/ca17b99867404014.png" alt="1-5"></p>
+<p>数据库存储位置如下：</p>
+<p><img src="https://s3.bmp.ovh/imgs/2022/06/16/db8170e5bac63ff8.png" alt="1-6"></p>
+<p>在程序的包中：</p>
+<p><img src="https://s3.bmp.ovh/imgs/2022/06/16/39054830e573804d.png" alt="1-7"></p>
+<p>右键另存为，将数据库保存到PC本地，你可以使用插件打开：</p>
+<p><img src="https://s3.bmp.ovh/imgs/2022/06/16/509bbcd04cb47b58.png" alt="1-8"></p>
+<p>效果如下：</p>
+<p><img src="https://s3.bmp.ovh/imgs/2022/06/16/4d0213ff21d660ed.png" alt="1-9"></p>
+<p>或者使用刚下载的浏览器打开:</p>
+<p><img src="https://s3.bmp.ovh/imgs/2022/06/16/07fdb3dd03f477c6.png" alt="1-10"></p>
+<h3><span id="升级数据库">升级数据库</span></h3>
+<p>在SQLiteOpenHelper中实际上还包含着一个onUpdate方法，他就是刚才说的针对数据库升级的方法。</p>
+<p>目前的数据库应将创建完成了，但是我们想增加一个Category表用于存放书的各种分类信息怎么办呢？</p>
+<p>建立表的语句很简单：</p>
+<pre><code class="language-sql">create table Category(id interger primary autoincrement , category_name text , category_code integer)
+</code></pre>
+<p>接下来我们将这条建表语句添加到MyDatabaseHelper中，代码如下所示：</p>
+<pre><code class="language-kotlin">private var tablename:String=""
+
+private val front_test= "drop table if exists ${tablename}"
+
+private val createBook = "create table Book ("+
+        "id integer primary key autoincrement,"+
+        "price real,"+
+        "pages integer,"+
+        "name text)"
+private val createCategory = "create table Category(id integer primary key autoincrement , category_name text , category_code integer)"
+
+override fun onCreate(db: SQLiteDatabase?) {
+    db?.execSQL(createBook)
+    db?.execSQL(createCategory)
+    Toast.makeText(context,"Create succeed",Toast.LENGTH_SHORT).show()
+}
+</code></pre>
+<p>我们在oncreate方法中调用了db来执行创建表的语句，最后提示表创建成功。</p>
+<p>可是这里就存在一个问题，onCreate方法实际上只会在数据库创建的时候执行，也就是说，目前想去更新数据库的内容是无法通过Oncreate方法来执行的，这该怎么办呢？这就需要调用OnUpdate方法来使用了，在改变版本号的情况下，数据库会在创建的时候执行OnUpdate方法，我们只需要在创建管理类的时候传入一个比当前数据库版本更大的数字就可以了，代码如下：</p>
+<pre><code class="language-kotlin">val dbHelper = MyDatabaseHelper(this,"BookStore.db",2)
+</code></pre>
+<p>为了让其满足一定的鲁棒性，也就是说不管数据库存在不存在，是否需要升级，我们保留在Oncreate方法中创建数据库的操作，我们可以在OnUpdate方法中调用OnCreate。</p>
+<p>最后方法实现结果如下：</p>
+<pre><code class="language-kotlin">    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        tablename="Book"
+        db?.execSQL(front_test)
+        tablename="Category"
+        db?.execSQL(front_test)
+        onCreate(db)
+    }
+</code></pre>
+<p>重新启动应用程序，效果如下：</p>
+<p><img src="https://s3.bmp.ovh/imgs/2022/06/16/66cbb88631bc124a.png" alt="image-20220616100553867"></p>
+<p>需要注意的是，你在使用Android的真机调试的时候，实际上每次系统都会给你重新安装程序，也就是说，它会自动执行OncCreate方法重新创建一个数据库。</p>
+<h3><span id="数据库的增删改查">数据库的增删改查</span></h3>
+<p>有时候你可能还没学习过数据库的一些基础内容，不过没关系，Android帮我们实现了一套不需要SQL语句就能操作数据库的API，我们对于数据库的操作也就是SQL实际上功能就分为四种：CRUD。</p>
+<p>在前面我们使用getWritableDatabase方法来创建和修改数据库，实际上这个方法返回的是一个SQLiteDatabase对象，我们借助这个对象就是可实现CRUD操作了。</p>
+<h4><span id="向数据库添加数据">向数据库添加数据</span></h4>
+<p>SQLiteDatabase对象下文简称：SQL对象，包含一个insert方法：</p>
+<pre><code class="language-kotlin">public long insert(String table, String nullColumnHack, ContentValues values) 
+</code></pre>
+<p>第一个参数用来指定是哪一个table，第二个是用于在未指定添加数据的情况下给某些可以为空的列自动赋值为NULL，这里不需要，所以我们把它设置为NULL。第三个参数很直白，就是传入一个需要插入的值。需要注意的是，这里使用的是ContentValues对象。这个对象提供了一系列的方法来将需要的数据添加进去，使用方法如下：</p>
+<p>我们通过来获取对应的SQL对象：</p>
+<pre><code class="language-kotlin"> val sql = dbHelper.writableDatabase
+</code></pre>
+<p>通过这个SQL对象来实现添加数据，再添加数据之前，我们先要把对应的数据嵌入到ContentValues对象当中，通过ContentValues对象指定将数据插入到哪一列当中，当然数据的插入要符合对应的数据类型否则会报错。</p>
+<p>最终插入的代码如下所示：</p>
+<pre><code class="language-kotlin">binding.button.setOnClickListener {
+   val sql = dbHelper.writableDatabase
+   val values = ContentValues().apply {
+        put("name","The Da Vinci Code")
+        put("pages",188)
+        put("price",16.96)
+    }
+   sql.insert("Book",null,values)
+}
+</code></pre>
+<p>可以看到我们把对应的插入函数绑定到了按钮上，只要按下按钮就会执行对应的插入程序。</p>
+<p>插入的结果如下：</p>
+<p><img src="https://s3.bmp.ovh/imgs/2022/06/16/d4da2ab096527caa.png" alt="image-20220616201956921"></p>
+<p>这里有一个需要特殊注意的地方是，我们在本地浏览数据库内容的时候，需要将设备的信息同步刷新下载以后再使用SQLite浏览器打开，并且先关闭原来正在浏览的数据库后删除本地原来存在的数据库内容，防止因为正在访问而导致的本低内容更新失败，我并不推荐使用插件因为bug确实存在。</p>
+<h4><span id="修改对应的数据">修改对应的数据</span></h4>
+<p>对应有insert方法也有update方法，这个方法接收四个参数，第1个参数同样也是制定了操作的表名，指定更新哪张表的数据。第二个参数是ContentValues，就是需要更新的数据，当然也是通过ContentValues来构造对应的数据，并包装起来，第三个、第四个参数用于约束某一行或者某几行中的数据进行更新，没有约束的话默认更新所有数据。</p>
+<p>举个例子：</p>
+<p>对于参数的使用直接说起来，还是很抽象，我们不妨结合例子来说：</p>
+<pre><code class="language-kotlin">binding.update.setOnClickListener {
+    //Data_update_method
+    val sql = dbHelper.writableDatabase
+    val values = ContentValues()
+    values.put("price",10.99)
+    sql.update("Book",values,"name=?", arrayOf("The Da Vinci Code"))
+}
+</code></pre>
+<p>第一第二个参数就不再重复了，我们直接来说第三个参数，第三个参数实际上就是where字句，在这里传入的字符串自动和where拼接起来，实现筛选指定行的目的，比如这里就相当于：</p>
+<pre><code class="language-sql">where name=?
+</code></pre>
+<p>而这里的？就是一个占位符号，当你使用第四个参数的时候可以将一个字符数组的全部内容传递过来放到where单中，所以我在第四个数据当中使用了 arrayof来创建一个数组，当然为什么要用数组呢？实际上呢一个表达式里面可以包含多个占位符，所以这里使用数组来满足多个？的情况。</p>
+<pre><code class="language-kotlin">arrayOf("The Da Vinci Code")
+</code></pre>
+<p>操作结果如下：</p>
+<p>可以看到所有的价格都改为了10.99</p>
+<p><img src="https://s3.bmp.ovh/imgs/2022/06/16/e485a1bb70c828a3.png" alt="image-20220616224216557"></p>
+<h4><span id="删除对应的数据">删除对应的数据</span></h4>
+<p>删除对应的数据更简单，参数和上边基本一样：</p>
+<pre><code class="language-kotlin">binding.delete.setOnClickListener {
+    //Data_update_delete
+    val sql = dbHelper.writableDatabase
+    sql.delete("Book","name = ?", arrayOf("The Da Vinci Code"))
+}
+</code></pre>
+<p>最后删除完成以后效果如下：</p>
+<p>可以看到所有内容都被删除了。</p>
+<p><img src="https://s3.bmp.ovh/imgs/2022/06/16/2f4407fdd5027e09.png" alt="image-20220616225453207"></p>
+<h4><span id="查询对应的数据">查询对应的数据</span></h4>
+<p>SQL实际上是一种结构化的查询语言，他的大部分功能体现在“查”这个字上，具体的SQL操作，可以参考我的数据库专栏。</p>
+<p>query相对来说很复杂，一共有七个参数，参数的含义分别如下：</p>
+<p><img src="https://s3.bmp.ovh/imgs/2022/06/16/f687645e791a0edb.png" alt="image-20220616230920144"></p>
+<p>如果你不理解，没关系，请先参考我的数据库专栏，里面有详细介绍SQL的内容。</p>
+<p>我在这里就很简单的举个例子：</p>
+<pre><code class="language-kotlin">binding.query.setOnClickListener {
+    //Data_update_query
+    val sql = dbHelper.writableDatabase
+    val result =sql.query("Book", null,null,null,null,null,null)
+    binding.datasave.setText( result.columnCount.toString())
+    result.close()
+}
+</code></pre>
+<p>我们新增一个查询按钮，这句查询语句的意思实际上就是获取当前表中有多少行，是不是很好理解？</p>
+<p>其等价于SQL为</p>
+<pre><code class="language-sql">select * from Book
+</code></pre>
+<p>最后通过columnCount成员获取到对应的行数。</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/10/22/Android%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%EF%BC%88%E4%BB%8E%E5%85%A5%E9%97%A8SQLlite%E5%88%B0Room%E6%94%BE%E8%82%86%EF%BC%89/" title="Android开发笔记——快速入门（从入门SQLlite到Room放肆）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Android开发笔记——快速入门（从入门SQLlite到Room放肆）</span></a><a class="button is-default" href="/2024/10/22/Android%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%EF%BC%88%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8ViewBinding%E5%BC%80%E5%8F%91%EF%BC%89/" title="Android开发笔记——快速入门（优雅的使用ViewBinding开发）"><span class="has-text-weight-semibold">Next: Android开发笔记——快速入门（优雅的使用ViewBinding开发）</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2025</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>

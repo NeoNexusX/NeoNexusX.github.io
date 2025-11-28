@@ -1,0 +1,231 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>Spark快速大数据分析——Spark的安装与介绍（壹）</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="Spark快速大数据分析——Spark的安装与介绍（壹）
+
+
+软件环境：
+
+Hadoop-3.3.2
+Spark-3.1.3/Spark-3.2.1（sbt pull）
+JDK 11
+Scala 2.13.8/SCala 2.1（搭配3.1.3使用）
+
+
+
+Spark介绍
+环境搭建：
+
+
+[TOC]
+Spark介绍
+来自美国加州大学伯克利分校、具有 Hadoop MapReduce 经验的研究人员接受了挑战， 并推出了 Spark 项目,2009 年，Spark 项目在 RAD 实验室诞生，后来该实验室改名为 AMPLab（现在名叫 RISELab）.
+Spark 项目的中心思想是，借鉴 Hadoop MR 的思想并增强系统，加上高容错性和高并发， 支持将迭代式或交互式映射和归约计算的中间结果存储在内存中，.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Spark快速大数据分析——Spark的安装与介绍（壹）</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Spark快速大数据分析——Spark的安装与介绍（壹）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">软件环境：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Spark介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">环境搭建：</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Spark"><i class="tag post-item-tag">Spark</i></a><a href="/tags/Hadoop"><i class="tag post-item-tag">Hadoop</i></a><a href="/tags/Scala"><i class="tag post-item-tag">Scala</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Spark快速大数据分析——Spark的安装与介绍（壹）</h1><time class="has-text-grey" datetime="2024-10-20T16:00:00.000Z">2024-10-21</time><article class="mt-2 post-content"><h1><span id="spark快速大数据分析spark的安装与介绍壹">Spark快速大数据分析——Spark的安装与介绍（壹）</span></h1>
+<img src="https://s2.loli.net/2024/09/29/TZ9xIe13HbgNAOn.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1727611659085" style="zoom:50%;">
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom: 50%;">
+<h3><span id="软件环境">软件环境：</span></h3>
+<ul>
+<li><strong>Hadoop-3.3.2</strong></li>
+<li><strong>Spark-3.1.3/Spark-3.2.1（sbt pull）</strong></li>
+<li><strong>JDK 11</strong></li>
+<li><strong>Scala 2.13.8/SCala 2.1（搭配3.1.3使用）</strong></li>
+</ul>
+<!-- toc -->
+<ul>
+<li><a href="#spark%E4%BB%8B%E7%BB%8D">Spark介绍</a></li>
+<li><a href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA">环境搭建：</a></li>
+</ul>
+<!-- tocstop -->
+<p>[TOC]</p>
+<h2><span id="spark介绍">Spark介绍</span></h2>
+<p>来自美国加州大学伯克利分校、具有 Hadoop MapReduce 经验的研究人员接受了挑战， 并推出了 Spark 项目,2009 年，Spark 项目在 RAD 实验室诞生，后来该实验室改名为 AMPLab（现在名叫 RISELab）.</p>
+<p>Spark 项目的中心思想是，借鉴 Hadoop MR 的思想并增强系统，加上高容错性和高并发， 支持将迭代式或交互式映射和归约计算的中间结果存储在内存中，并向用户提供支持多种 语言、简单、易组合的 API 作为编程模型，一站式支持各种使用场景.</p>
+<p>2014 年 5 月，在 Apache 软件基金会的管理下，Databricks 与开源社区的开发人员共同 发布了 Apache Spark 1.0。</p>
+<p>Spark 为中间计算结果提供了基于内存的存储，这让它比 Hadoop MR 快了很多，它整合 了各种上层库，比如用于机器学习的库 MLlib、提供交互式查询功能的 Spark SQL、支持 操作实时数据的流处理库 Structured Streaming，以及图计算库 GraphX，这些库都提供 了易用的 API。</p>
+<p>Spark 的设计哲学围绕下列四大特性展开：</p>
+<p>⚫ 快速 ⚫ 易用 ⚫ 模块化 ⚫ 可扩展</p>
+<h2><span id="环境搭建">环境搭建：</span></h2>
+<p>首先下载Spark：<a target="_blank" rel="noopener" href="https://www.apache.org/dyn/closer.lua/spark/spark-3.2.1/spark-3.2.1-bin-hadoop3.2.tgz">Spark下载地址</a></p>
+<p><img src="https://s2.loli.net/2024/09/29/ek2Zd5c3Caswulr.png" alt="1"></p>
+<p>点击下载Spark，如果你网速慢也该可以通过我的gitee来下载。gitee地址：</p>
+<p>下载后直接解压即可：</p>
+<p>我解压位置如下</p>
+<p><img src="https://s2.loli.net/2024/09/29/rqnCYt8WB5eRFpf.png" alt="2"></p>
+<p>然后添加系统环境变量：</p>
+<p><img src="https://s2.loli.net/2024/09/29/54uJ8Emza3UwxMl.png" alt="3"></p>
+<p>spark的运行需要Hadoop的支持，所以还需要下载Hadoop来支持运行:</p>
+<p><a target="_blank" rel="noopener" href="https://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-3.2.2/hadoop-3.2.2.tar.gz">Hadoop下载地址</a></p>
+<p>也是压缩包需要注意的是<strong>解压需要提供管理员权限</strong>。</p>
+<p>解压完后添加环境变量和系统变量。</p>
+<p><img src="https://s2.loli.net/2024/09/29/vTiX37cSNG8PZWU.png" alt="4"></p>
+<p>新建一个系统变量：</p>
+<p><img src="https://s2.loli.net/2024/09/29/ZyAdfUJjQgvICPo.png" alt="5"></p>
+<p>到这里还没有完，如果你是win环境下开发可能会遇到报错：</p>
+<pre><code class="language-shell">C:\spark-3.2.0-bin-hadoop3.2\bin&gt;spark-shell
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+21/11/11 00:14:24 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+21/11/11 00:14:26 ERROR SparkContext: Error initializing SparkContext.
+java.lang.reflect.InvocationTargetException
+        at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+        at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+        at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+        at java.lang.reflect.Constructor.newInstance(Unknown Source)
+        at org.apache.spark.executor.Executor.addReplClassLoaderIfNeeded(Executor.scala:909)
+        at org.apache.spark.executor.Executor.&lt;init&gt;(Executor.scala:160)
+        at org.apache.spark.scheduler.local.LocalEndpoint.&lt;init&gt;(LocalSchedulerBackend.scala:64)
+        at org.apache.spark.scheduler.local.LocalSchedulerBackend.start(LocalSchedulerBackend.scala:132)
+        at org.apache.spark.scheduler.TaskSchedulerImpl.start(TaskSchedulerImpl.scala:220)
+        at org.apache.spark.SparkContext.&lt;init&gt;(SparkContext.scala:581)
+        at org.apache.spark.SparkContext$.getOrCreate(SparkContext.scala:2690)
+        at org.apache.spark.sql.SparkSession$Builder.$anonfun$getOrCreate$2(SparkSession.scala:949)
+        at scala.Option.getOrElse(Option.scala:189)
+        at org.apache.spark.sql.SparkSession$Builder.getOrCreate(SparkSession.scala:943)
+        at org.apache.spark.repl.Main$.createSparkSession(Main.scala:106)
+        at $line3.$read$$iw$$iw.&lt;init&gt;(&lt;console&gt;:15)
+        at $line3.$read$$iw.&lt;init&gt;(&lt;console&gt;:42)
+        at $line3.$read.&lt;init&gt;(&lt;console&gt;:44)
+        at $line3.$read$.&lt;init&gt;(&lt;console&gt;:48)
+        at $line3.$read$.&lt;clinit&gt;(&lt;console&gt;)
+        at $line3.$eval$.$print$lzycompute(&lt;console&gt;:7)
+        at $line3.$eval$.$print(&lt;console&gt;:6)
+        at $line3.$eval.$print(&lt;console&gt;)
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+        at java.lang.reflect.Method.invoke(Unknown Source)
+</code></pre>
+<p>但没关系，我帮你踩坑了~</p>
+<p>只需要按照对应版本进行下载然后替换bin目录下的内容即可：</p>
+<p><img src="https://s2.loli.net/2024/09/29/fjqKRNx1EAJolit.png" alt="6"></p>
+<p>在任意地方打开cmd：</p>
+<p>输入 <code>spark-shell</code>。等待一会：</p>
+<p><img src="https://s2.loli.net/2024/09/29/rNwTsqxPOpjaQUg.png" alt="7"></p>
+<p>引用一个库看一看：</p>
+<p><img src="https://s2.loli.net/2024/09/29/oXjItYQMHPTg182.png" alt="8"></p>
+<p>如果正常恭喜你完成了80%，这些都是基于命令行的，可是我们要基于IDEA要怎么开发呢？</p>
+<p>首先idea支持的构建方式首选的是SBT，如果你没有安装sbt可以参考上一篇文章：。</p>
+<p>打开IDEA新建一个项目：</p>
+<p><img src="https://s2.loli.net/2024/09/29/UYdgWDZ7sPJ5vxe.png" alt="10"></p>
+<p>系统会自动检测你的安装的SBT和SCALA</p>
+<p><img src="https://s2.loli.net/2024/09/29/9MeCT6stk41SoKu.png" alt="11"></p>
+<p>在创建完成后在<strong>build.sbt</strong>中添加如下代码：</p>
+<pre><code class="language-scala">libraryDependencies += "org.apache.spark" % "spark-core_2.12" % "3.1.3"
+</code></pre>
+<p><img src="https://s2.loli.net/2024/09/29/FgXOuxQjInt8E6e.png" alt="12"></p>
+<p>如果你在MVN找到的sbt依赖添加代码是这样的：</p>
+<pre><code class="language-scala">libraryDependencies += "org.apache.spark" %% "spark-core" % "3.1.3"
+</code></pre>
+<p>或者是这样的：</p>
+<pre><code class="language-scala">libraryDependencies += "org.apache.spark" % "spark-core" % "3.1.3"
+//这个是错的 %% 才能自动指定scala版本
+</code></pre>
+<p>有可能会报错：</p>
+<p><img src="https://s2.loli.net/2024/09/29/uLREd4FMxb3mSKD.png" alt="14"></p>
+<p>没关系更改一下版本就可以：</p>
+<pre><code class="language-Scala">libraryDependencies += "org.apache.spark" %% "spark-core" % "3.2.1"
+</code></pre>
+<p><img src="https://s2.loli.net/2024/09/29/AytSj9mwcUZevbz.png" alt="16"></p>
+<p>如果更改版本还没办法的话可以指定一下版本：</p>
+<pre><code class="language-scala">libraryDependencies += "org.apache.spark" % "spark-core_2.12" % "3.1.3"
+</code></pre>
+<p><img src="https://s2.loli.net/2024/09/29/GmFXyJCrU9clvsh.png" alt="17"></p>
+<p>但是你如过不太清楚构建spark的scala和你本地的scala是否匹配的话建议还是用“%%”来自动匹配版本：</p>
+<p>否则就会报错：</p>
+<pre><code class="language-shell">Exception in thread "main" java.lang.NoSuchMethodError: 'void scala.util.matching.Regex.&lt;init&gt;(java.lang.String, scala.collection.Seq)'
+	at scala.collection.immutable.StringLike.r(StringLike.scala:284)
+	at scala.collection.immutable.StringLike.r$(StringLike.scala:284)
+	at scala.collection.immutable.StringOps.r(StringOps.scala:33)
+	at scala.collection.immutable.StringLike.r(StringLike.scala:273)
+	at scala.collection.immutable.StringLike.r$(StringLike.scala:273)
+	at scala.collection.immutable.StringOps.r(StringOps.scala:33)
+	at org.apache.spark.util.Utils$.&lt;init&gt;(Utils.scala:105)
+	at org.apache.spark.util.Utils$.&lt;clinit&gt;(Utils.scala)
+	at org.apache.spark.SparkConf.loadFromSystemProperties(SparkConf.scala:75)
+	at org.apache.spark.SparkConf.&lt;init&gt;(SparkConf.scala:70)
+	at org.apache.spark.SparkConf.&lt;init&gt;(SparkConf.scala:59)
+	at com.demo.test$.main(test.scala:8)
+	at com.demo.test.main(test.scala)
+</code></pre>
+<p>这里给一段测试代码，如果报错了你就要更换spark版本：</p>
+<pre><code class="language-Scala">package com.demo
+import org.apache.spark.{SparkConf, SparkContext}
+
+object test
+{
+
+  def main(args: Array[String]): Unit = {
+    val conf = new SparkConf().setMaster("local").setAppName("HelloWorld")
+
+    val sc = new SparkContext(conf)
+
+    val helloWorld = sc.parallelize(List("Hello,World!","Hello,Spark!","Hello,BigData!"))
+
+    helloWorld.foreach(line =&gt; println(line))
+  }
+
+}
+</code></pre>
+<p><strong>如果没问题,环境就搭建好了！</strong></p>
+<p>但是你会有个疑问：</p>
+<p>为什么我都本地下载了Spark，还需要下载托管的Spark？</p>
+<p>这是我刚开始的疑问，SBT不能同时管理本地的jar包吗？必须重新下载后才能管理本地内容吗？</p>
+<p>通过SBT手动添加JAR包是可以的，但是有点复杂 而且需要添加多个才能使用，所以这里推荐另一个模式来构建项目：</p>
+<p>我们来利用IDEA本身的管理来构建Scala项目，在创建栏选择IDEA：</p>
+<p><img src="https://s2.loli.net/2024/09/29/ycEgDveXbSGrUk5.png" alt="27"></p>
+<p>后面都是一样的，这里主要讲解一下如何导入本地Spark实现项目构建：</p>
+<p>选择对应选项卡：</p>
+<p><img src="https://s2.loli.net/2024/09/29/ca5CkueJMHloYKp.png" alt="19"></p>
+<p>在<strong>Golobal Libraries</strong>用+添加<strong>Spark</strong>：</p>
+<p><img src="https://s2.loli.net/2024/09/29/k2HflTMyoFxDPCz.png" alt="20"></p>
+<p>选择java选项：</p>
+<p><img src="https://s2.loli.net/2024/09/29/VNUO9b8KTygkjfZ.png" alt="21"></p>
+<p>找到自己Spark安装的：</p>
+<p><img src="https://s2.loli.net/2024/09/29/g1yukNYvUhw54cH.png" alt="22"></p>
+<p>点击OK：</p>
+<p><img src="https://s2.loli.net/2024/09/29/N9vx4PKXlnIijt6.png" alt="23"></p>
+<p>如果出现<strong>Problems</strong>点击一下<strong>Fix</strong>，选择添加到依赖修复即可：</p>
+<p><img src="https://s2.loli.net/2024/09/29/1M7RGnXlYAIqsmL.png" alt="26"></p>
+<p>在外部库中可以看见<strong>jars</strong>，并且可以引用<strong>Spark</strong>：</p>
+<p><img src="https://s2.loli.net/2024/09/29/98toWZRAE4NTKw2.png" alt="28"></p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/10/21/MOS%E7%AE%A1%20%E2%80%94%E2%80%94%20%E5%BF%AB%E9%80%9F%E5%A4%8D%E8%8B%8F%E5%BA%94%E7%94%A8%E7%AC%94%E8%AE%B0%5B%E5%8F%82%E6%95%B0%E4%B8%8E%E5%BA%94%E7%94%A8%E7%AF%87%5D/" title="MOS管 —— 快速复苏应用笔记[参数与应用篇]"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: MOS管 —— 快速复苏应用笔记[参数与应用篇]</span></a><a class="button is-default" href="/2024/09/29/Bionet_WiFi/" title="Bionet_WIFI使用指南"><span class="has-text-weight-semibold">Next: Bionet_WIFI使用指南</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2025</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>MOS管 —— 快速复苏应用笔记[参数与应用篇]</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="MOS管 —— 快速复苏应用笔记[原理篇]
+此篇内容为MOS管的开篇内容，助你从结构上理解和使用MOS管。
+
+
+
+
+场效应晶体管的工作原理
+
+场效应管和双极型晶体管的区别和优势
+场效应管的分类和原理图定义
+场效应管的原理和结构
+
+NMOS的内部结构
+金属氧化物效应的原理
+
+累积阶段
+耗尽阶段
+反型阶段
+
+
+金氧效应与MOS结构的配合工作
+
+MOS的真实结构与寄生二极管
+MOS的工作模式
+截止区（亚阈值区或弱反转区）（cutoff, subthreshold or weak-inversion mode）
+线性区（三极区或欧姆区）（linear region, triode mode or ohmic mode）
+饱和区（放大区）（saturation or active mode）
+
+
+MOS管的符号
+PM.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">MOS管 —— 快速复苏应用笔记[参数与应用篇]</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">MOS管 —— 快速复苏应用笔记[原理篇]</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">场效应晶体管的工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">场效应管和双极型晶体管的区别和优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">场效应管的分类和原理图定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">场效应管的原理和结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">NMOS的内部结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">金属氧化物效应的原理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">累积阶段</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">耗尽阶段</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">反型阶段</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">金氧效应与MOS结构的配合工作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">MOS的真实结构与寄生二极管</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">MOS的工作模式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">截止区（亚阈值区或弱反转区）（cutoff, subthreshold or weak-inversion mode）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">线性区（三极区或欧姆区）（linear region, triode mode or ohmic mode）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">饱和区（放大区）（saturation or active mode）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">MOS管的符号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">PMOS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">NMOS</span></a></li></ol></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/MOSFET"><i class="tag post-item-tag">MOSFET</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">MOS管 —— 快速复苏应用笔记[参数与应用篇]</h1><time class="has-text-grey" datetime="2024-10-20T16:00:00.000Z">2024-10-21</time><article class="mt-2 post-content"><h1><span id="mos管-快速复苏应用笔记原理篇">MOS管 —— 快速复苏应用笔记[原理篇]</span></h1>
+<p>此篇内容为MOS管的开篇内容，助你从结构上理解和使用MOS管。</p>
+<img src="https://s2.loli.net/2024/09/29/nZBpl8GWmNS3dEr.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1727598698710" style="zoom:50%;">
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom: 50%;">
+<!-- toc -->
+<ul>
+<li><a href="#%E5%9C%BA%E6%95%88%E5%BA%94%E6%99%B6%E4%BD%93%E7%AE%A1%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86">场效应晶体管的工作原理</a>
+<ul>
+<li><a href="#%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E5%92%8C%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E4%BC%98%E5%8A%BF">场效应管和双极型晶体管的区别和优势</a></li>
+<li><a href="#%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E7%9A%84%E5%88%86%E7%B1%BB%E5%92%8C%E5%8E%9F%E7%90%86%E5%9B%BE%E5%AE%9A%E4%B9%89">场效应管的分类和原理图定义</a></li>
+<li><a href="#%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E7%BB%93%E6%9E%84">场效应管的原理和结构</a>
+<ul>
+<li><a href="#nmos%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84">NMOS的内部结构</a></li>
+<li><a href="#%E9%87%91%E5%B1%9E%E6%B0%A7%E5%8C%96%E7%89%A9%E6%95%88%E5%BA%94%E7%9A%84%E5%8E%9F%E7%90%86">金属氧化物效应的原理</a>
+<ul>
+<li><a href="#%E7%B4%AF%E7%A7%AF%E9%98%B6%E6%AE%B5">累积阶段</a></li>
+<li><a href="#%E8%80%97%E5%B0%BD%E9%98%B6%E6%AE%B5">耗尽阶段</a></li>
+<li><a href="#%E5%8F%8D%E5%9E%8B%E9%98%B6%E6%AE%B5">反型阶段</a></li>
+</ul>
+</li>
+<li><a href="#%E9%87%91%E6%B0%A7%E6%95%88%E5%BA%94%E4%B8%8Emos%E7%BB%93%E6%9E%84%E7%9A%84%E9%85%8D%E5%90%88%E5%B7%A5%E4%BD%9C">金氧效应与MOS结构的配合工作</a>
+<ul>
+<li><a href="#mos%E7%9A%84%E7%9C%9F%E5%AE%9E%E7%BB%93%E6%9E%84%E4%B8%8E%E5%AF%84%E7%94%9F%E4%BA%8C%E6%9E%81%E7%AE%A1">MOS的真实结构与寄生二极管</a></li>
+<li><a href="#mos%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F">MOS的工作模式</a></li>
+<li><a href="#%E6%88%AA%E6%AD%A2%E5%8C%BA%E4%BA%9A%E9%98%88%E5%80%BC%E5%8C%BA%E6%88%96%E5%BC%B1%E5%8F%8D%E8%BD%AC%E5%8C%BAcutoff-subthreshold-or-weak-inversion-mode">截止区（亚阈值区或弱反转区）（cutoff, subthreshold or weak-inversion mode）</a></li>
+<li><a href="#%E7%BA%BF%E6%80%A7%E5%8C%BA%E4%B8%89%E6%9E%81%E5%8C%BA%E6%88%96%E6%AC%A7%E5%A7%86%E5%8C%BAlinear-region-triode-mode-or-ohmic-mode">线性区（三极区或欧姆区）（linear region, triode mode or ohmic mode）</a></li>
+<li><a href="#%E9%A5%B1%E5%92%8C%E5%8C%BA%E6%94%BE%E5%A4%A7%E5%8C%BAsaturation-or-active-mode">饱和区（放大区）（saturation or active mode）</a></li>
+</ul>
+</li>
+<li><a href="#mos%E7%AE%A1%E7%9A%84%E7%AC%A6%E5%8F%B7">MOS管的符号</a></li>
+<li><a href="#pmos">PMOS</a></li>
+<li><a href="#nmos">NMOS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p>[TOC]</p>
+<h2><span id="场效应晶体管的工作原理">场效应晶体管的工作原理</span></h2>
+<p>场效应管（Field Effect Transistor —— FET）是单极型晶体管，与双极型晶体管BJT都属于晶体管(Transistor)。在双极型晶体管中，载流子包含电子运动也包含空穴运动，像双重合力一般流向两个极；而在场效应管中，只有一种载流子运动，或者电子或者空穴，流向一个极，因此叫单极型晶体管。</p>
+<h3><span id="场效应管和双极型晶体管的区别和优势">场效应管和双极型晶体管的区别和优势</span></h3>
+<p>单极型虽然诞生比较晚，但是通过其本是固有的一些优点，比如低噪声、高阻低功耗、热稳定性好等，同时二者都能实现放大功能和开关功能，因此直接就碾压了BJT，其无敌的低功耗为数字芯片领域所青睐，随着时代变化，MOSFET基本完全替代了BJT，只有在部分模拟器中比如：运算放大器、数模转换器、电源模块、超高频、电流放大、低成本应用领域等BJT还占有一定的比例。</p>
+<h3><span id="场效应管的分类和原理图定义">场效应管的分类和原理图定义</span></h3>
+<p>场效应管大致可以分为以下两种：</p>
+<pre class="mermaid">graph LR
+ A(场效应管) --&gt; B("结型场效应管(Junction FET)")
+ A --&gt; C("金属氧化物效应管(Metal-Oxide-Semiconductor Field Effect Transistor-MOSFET)")</pre>
+<p>结型场效应工作电流很小，适合于模拟信号放大，它分为N沟道和P沟道两种。像双极性晶体管中的NPN和PNP一样，M沟道和P沟道仅仅是工作电流的方向相反。结型场效应管由于应用场合有限，数量较少。这里不详细介绍，仅作了解。</p>
+<p>MOSFET的分类和BJT就不近相同了，MOSEFT作为最常见的FET首先分为两种类型增强型和耗尽型，在两种类型之下又因为掺杂工艺不同又分为N沟道和P沟道。</p>
+<pre class="mermaid">graph TB
+A("金属氧化物效应管(Metal-Oxide-Semiconductor Field Effect Transistor-MOSFET)") --&gt; B("增强型(enhancement mode)")
+A --&gt; C("耗尽型(depletion mode)")
+B --&gt; D(P沟道)
+B --&gt; E(N沟道)
+C --&gt; F(N沟道)</pre>
+<p>当然也有一些区分办法是依据工作电压和电流来区分，一般分为小信号管和功率管两种。</p>
+<h3><span id="场效应管的原理和结构">场效应管的原理和结构</span></h3>
+<p>想要真正了解MOS是如何工作的就必须要知道其物理结构是怎样的，大多数书上的内容这一块都讲的不明不白，今天来根据我所了解的来总结一下。以下内容全部是关于增强型的，因为耗尽型型号比较少，关于两者的区别将在下文中顺便说明。</p>
+<h4><span id="nmos的内部结构">NMOS的内部结构</span></h4>
+<p>下图是一个N型MOS的剖面图，我们来通过剖面图详细解说一下。</p>
+<p><img src="https://s2.loli.net/2024/09/29/lXQh2MAf19nUzpb.png" alt="MOSFET-Cross"></p>
+<p>可以看到他是用一块掺杂浓度比较低的P型硅片作为衬底，利用扩散工艺在衬底上扩散两个高掺杂浓度的N型区域。</p>
+<p>NMOS的源极与漏极上标示的“N+”代表着两个意义：</p>
+<p>（1）N代表掺杂（doped）在源极与漏极区域的杂质极性为N；</p>
+<p>（2）“+”代表这个区域为高掺杂浓度区域（heavily doped region），也就是此区的电子或空穴浓度远高于其他区域。在源极与漏极之间被一个极性相反的区域隔开，也就是所谓的基极（或称基体）区域。如果是NMOS，那么其基体区的掺杂就是p-type。反之对PMOS而言，基体应该是n-type，而源极与漏极(上图的Drain)则为p-type（而且是高掺杂的P+）。基体的掺杂浓度不需要如源极或漏极那么高，故在左图中没有“+”，作为沟道用。</p>
+<p>可以看到在N型区域引出的两个欧姆电极，分别称为源极(Source)和漏极(Drain),为了简化符号书写我们常常使用S和D来分别代表以上的电极。</p>
+<p>你可以注意到引出的电极的上层并不是完全空的，而是有一层氧化薄膜，对应上图中就是场氧化层(Filed Oxide),氧化层的材料多半是<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%BA%8C%E6%B0%A7%E5%8C%96%E7%9F%BD">二氧化硅</a>，其下是作为基极的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%9F%BD">硅</a>，而其上则是作为栅极的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%A4%9A%E6%99%B6%E7%A1%85">多晶硅</a>，当然早期的时候这里的多晶硅被替换为铝电极，并将其引出这就是栅极(Gate)。当上层覆盖的氧化层在早期是金属铝的时候，人们通常把这种结构叫金属氧化物效应管，这也是MOS名称的由来。</p>
+<h4><span id="金属氧化物效应的原理">金属氧化物效应的原理</span></h4>
+<p>MOS管在结构上以一个<strong>金属—氧化物层—半导体(基极)<strong>的</strong>电容</strong>为核心，氧化层的材料多半是<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%BA%8C%E6%B0%A7%E5%8C%96%E7%9F%BD">二氧化硅</a>，其下是作为基极的硅，而其上则是作为栅极的多晶硅（早期是金属）。这样的结构正好等于一个<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%9B%BB%E5%AE%B9%E5%99%A8">电容器</a>。氧化层为电容器中<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%BB%8B%E9%9B%BB%E8%B3%AA">介电质</a>，而电容值由氧化层的厚度与二氧化硅的<strong>介电系数</strong>来决定。栅极多晶硅与基极的<strong>硅</strong>则成为MOS电容的两个端点。完整的结构如下所示：</p>
+<img src="https://s2.loli.net/2024/09/29/OGFsvSI9BlYrRVC.png" alt="Mos_capacitance" style="zoom:67%;">
+<h5><span id="累积阶段">累积阶段</span></h5>
+<p>当一个电压施加在MOS电容的两端时，半导体的电荷分布也会跟着改变。如下图所示：</p>
+<p><img src="https://s2.loli.net/2024/09/29/p1gaJT3DV4FNOfK.gif" alt="Illustration_of_C-V_measurement"></p>
+<p>在这张图片中，显示了具有不同氧化层厚度的块状p型衬底MOS-CAP的C-V曲线。显示的蓝色曲线是指高频C-V曲线，而红色曲线是指低频C-V曲线。在积累和耗尽阶段，MOS电容与所有频率无关。这是因为在这里，总电荷是由多数载流子控制的。在反转区，电荷由少数载流子支配，形成反转层。由于少数载流子产生的时间有限，在较高的频率下，总电荷不能跟随栅极偏置，这可能导致C-V曲线的差异。这里还值得注意的是阈值电压随不同的氧化层厚度的变化。</p>
+<p>电容公式高速我们电容只和介电常数以及厚度和面积相关，所以和电压无关。不过MOS结构的电容会随着电压的变化而变化，所以我们通过C-V曲线来进行分析，由于衬底是P，而积累的也是P-type，所以下电极只是导电特性变好，所有的栅极电压全部加在G上，所以此时电容最大。</p>
+<h5><span id="耗尽阶段">耗尽阶段</span></h5>
+<p>相反，当一个正的电压<em>VGD</em>施加在栅极与基极端（如图）时，空穴的浓度会减少（称为耗尽，如C-V曲线中间所示），<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%9B%BB%E5%AD%90">电子</a>的浓度会增加。</p>
+<h5><span id="反型阶段">反型阶段</span></h5>
+<p>当<em>VGB</em>够强时，接近栅极端的电子浓度会超过空穴。这个在p-type半导体中，电子浓度（带负电荷）超过空穴（带正电荷）浓度的区域，便是所谓的<strong>反转层</strong>（inversion layer）。</p>
+<p>在反型区，也就是Vg大于开启电压时，此时耗尽区宽度达到最大值，所以进入强反型，这个时候的电容达到最小值。当然还有个不容忽略的问题是我们的测试电压的频率，当频率较低时，载流子的速度可以跟的上电压频率的变化，所以此时的反型区是被充电的最终还是达到GOX的厚度。而如果是高频，载流子速度根本赶不上反型区充电速度，所以只能保持在低电容状态。而实际上这个反型区宽度与衬底浓度是有很大关系的(这个可能用Vt与衬底浓度的关系来理解，所以完全可以通过反型区高频电容特性来判断衬底浓度的变化。</p>
+<p>MOS电容的特性决定了金氧半场效晶体管的工作特性，但是一个完整的金氧半场效晶体管结构还需要一个提供<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%A4%9A%E6%95%B8%E8%BC%89%E5%AD%90">多数载流子</a>（majority carrier）的源极以及接受这些多数载流子的漏极。</p>
+<h4><span id="金氧效应与mos结构的配合工作">金氧效应与MOS结构的配合工作</span></h4>
+<h5><span id="mos的真实结构与寄生二极管">MOS的真实结构与寄生二极管</span></h5>
+<p>理论情况下，一个MOS的封装应该会有四个脚,源极（S）、漏极（D）、栅极（G）外，尚有一<strong>基极</strong>（Bulk或是Body），例如如下所示：</p>
+<img src="https://s2.loli.net/2024/09/29/uwkQO3a6iLtJWs7.png" alt="image-20220723103920689" style="zoom:67%;">
+<p>但实际上市面上销售的MOS结构都不是这样的，应该是如下：</p>
+<img src="https://s2.loli.net/2024/09/29/OaRsiWClxLnGZe3.png" alt="image-20220723104549822" style="zoom:50%;">
+<p>这是因为通常把基极和源极接在一起，如上图符号所示，故分布式金氧场效晶体管通常为三端器件。而在集成电路中的金氧半场效晶体管通常因为使用同一个基极（common bulk），所以不标示出基极的极性，而在PMOS的栅极端多加一个圆圈以示区别。</p>
+<p><strong>将衬底也就是B和S连接在一起会导致什么事情呢？</strong></p>
+<p>请看下图：</p>
+<p><img src="https://s2.loli.net/2024/09/29/Vso7Ed6WiHbI5mF.png" alt="image-20220723105235303"></p>
+<p>这是一个NMOS，当衬底和S连接的时候就会像上边一样，此时S到D的通路就会形成一个神奇的东西：<strong>PN结</strong>，如下所示：</p>
+<p><img src="https://s2.loli.net/2024/09/29/gqZmsD3OpuYrUeV.png" alt="image-20220723105538593"></p>
+<p><strong>也就是说，当我们直接对NMOS得S和D极加上一个电压的时候，他就会因为PN结直接导通。<strong>而我们将这个形成的二极管称为</strong>寄生二极管</strong>。这是由MOS结构决定的，是不可避免的。</p>
+<p>你可能不相信，我们通过仿真来测试一下,电路结构如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/yikERIVJWhQSPum.png" alt="image-20220723112854801"></p>
+<p>仿真结果如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/7OhIBnj9xzgks2E.png" alt="image-20220723113005451"></p>
+<p>我们更改一下电路结构，看看DS是否还是导通的？更改后结构如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/qeGLWndrgQTVoXj.png" alt="image-20220723113432002"></p>
+<p>结果如下，果然不导通。</p>
+<p><img src="https://s2.loli.net/2024/09/29/9V15y2H6exhoCUu.png" alt="image-20220723113414469"></p>
+<p>在这里我们需要说明一下：<strong>场效应管(JEFT不是MOS)中，源极和漏极是对称的，可以互换。但是在MOSFET 中，由于衬底和源极在内部已经连同，甚至很多MOSFET内部还在D、S之间并联了一个二极管，注意这里的是真的添加了一个二极管不是体二极管，因此D和S不能互换。</strong></p>
+<h5><span id="mos的工作模式">MOS的工作模式</span></h5>
+<p>依照在MOS管的栅极、源极，与漏极等三个端点施加的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%81%8F%E7%BD%AE">偏置</a>（bias）不同，MOS管将有下列三种工作模式。</p>
+<h5><span id="截止区亚阈值区或弱反转区cutoff-subthreshold-or-weak-inversion-mode">截止区（亚阈值区或弱反转区）（cutoff, subthreshold or weak-inversion mode）</span></h5>
+<p>当 $|V_{GS}| &lt; |V_{th}|$ 时：</p>
+<p>$|V_{GS}|$ 代表栅极到源极的偏置差(电压差)，$|Vth|$ 为材料的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%98%88%E5%80%BC%E7%94%B5%E5%8E%8B">临界电压</a>,也就是上文金氧效应的达到反型时的电压。这个金氧半场效晶体管是处在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E6%88%AA%E6%AD%A2&amp;action=edit&amp;redlink=1">截止</a>（cut-off）的状态，沟道仍保持P断开状态，并没有足够的多数载流子，电流无法流过这个MOS管，也就是这个MOS管不导通。</p>
+<p>此时MOS的状态如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/qCg6KDokyGr3zJS.png" alt="image-20220723170543989"></p>
+<p>可以看到指定区域并没有形成可通过区域，而是由基底和掺杂区域形成的耗尽区(depletion region)，此时没有电流可以通过。</p>
+<h5><span id="线性区三极区或欧姆区linear-region-triode-mode-or-ohmic-mode">线性区（三极区或欧姆区）（linear region, triode mode or ohmic mode）</span></h5>
+<p>当 $V_{GS} &gt; V_{th}$ 且 $V_{GD} &gt; V_{th}$ 时：</p>
+<p>此处$V_{DS}$为NMOS漏极至源极的电压，则这颗NMOS为导通的状况，在氧化层下方的沟道也已形成。此时这颗NMOS的行为类似一个压控电阻（voltage-controlled resistor），而由漏极向源极流出的电流大小为：<br>
+$$<br>
+I_{D}=\mu_{n} C_{o x} \frac{W}{L}\left(V_{G S}-V_{t h}-\frac{V_{D S}}{2}\right) V_{D S}<br>
+$$<br>
+μn是载流子迁移率（carrier mobility）、W是金氧半场效晶体管的栅极宽度、L是金氧半场效晶体管的栅极长度，而<em><strong>Cox</strong></em>则是栅极氧化层的单位电容大小。在这个区域内，MOS管的<strong>电流—电压</strong>关系有一个线性方程式，因而称为线性区。</p>
+<p>当工作在线性区域的时候MOS的解面图如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/BLX2GFi5xvdzhkK.png" alt="image-20220723173426565"></p>
+<p>可以看到对应区域出现了<strong>反转层</strong>，这时候S和D之间出现了Channel。</p>
+<p>下图展示了NMOS的漏极电流$I_{DS}$与漏极电压之间在不同$V_{GS}-V_{th}$的关系：</p>
+<p><img src="https://s2.loli.net/2024/09/29/dekOVY7QGhT5qcz.png" alt="1"></p>
+<p>可以看到随着$V_{GS}-V_{th}$的变化能通过的电流大小也持续增加，直到某个电压值可通过的电流大小不再变化，这个电压值就是下边要说的<strong>饱和区（放大区）</strong>。</p>
+<h5><span id="饱和区放大区saturation-or-active-mode">饱和区（放大区）（saturation or active mode）</span></h5>
+<p>当 $V_{GS} &gt; V_{th}$ 时$V_GS保持一定$ 且 $V_{GD} &lt; V_{th}$ 时：</p>
+<p>这Mos管为导通的状况，也形成了沟道让电流通过。<strong>但是随着漏极电压(D)增加，超过栅极电压时，会使得接近漏极区的反转层电荷为零</strong>，此处的沟道几乎消失（如下图），这种状况称之为<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E5%A4%BE%E6%AD%A2&amp;action=edit&amp;redlink=1">夹断</a>（pinch-off）。</p>
+<p><img src="https://s2.loli.net/2024/09/29/pU4ZKYRNrSMsxOP.png" alt="image-20220723181244898"></p>
+<p>这里注意靠近D极的沟道已经消失。下面一张图显示的更加清楚。</p>
+<p><img src="https://s2.loli.net/2024/09/29/XIAEMYyQvZzmhw7.png" alt="image-20220723181410592"></p>
+<p>注意上图的表达式$V_{DS} &gt; V_{GS}- V_{th}$</p>
+<p>同时此时的电压差也可以写为：$V_{DS _ \mathrm{dv}}=V_{\mathrm{GS}}-V_{\mathrm{GSTH}}$</p>
+<p>在这种状况下，由源极出发的载流子（电子）经由沟道到达夹断点时，会被注入漏极周围的空间电荷区（space charge region），再被电场扫入漏极。此时通过金氧半场效晶体管的电流与其漏极—源极间的电压<em>VDS</em>无关，只与栅极电压有关，主要原因在于靠近漏极区的栅极电压已经不足以让沟道反转，而造成所能提供的载流子有限，限制住了沟道的电流大小，关系式如下：<br>
+$$<br>
+I_{D}=\frac{\mu_{n} C_{o x}}{2} \frac{W}{L}\left(V_{G S}-V_{t h}\right)^{2}<br>
+$$<br>
+上述的公式也是理想状况下，金氧半场效晶体管在饱和区工作的电流与电压关系式。事实上在饱和区的MOS管漏极电流会因为<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E9%80%9A%E9%81%93%E9%95%B7%E5%BA%A6%E8%AA%BF%E8%AE%8A%E6%95%88%E6%87%89&amp;action=edit&amp;redlink=1">沟道长度调制效应</a>而改变，并非与<em>VDS</em>全然无关。考虑沟道长度调制效应之后的饱和区电流—电压关系式如下：<br>
+$$<br>
+I_{D}=\frac{\mu_{n} C_{o x}}{2} \frac{W}{L}\left(V_{G S}-V_{t h}\right)^{2}\left(1+\lambda V_{D S}\right)<br>
+$$<br>
+我们在这里不考虑MOS的放大作用，优先考虑开关作用，具体等到讲解放大电路的时候再详细考虑。</p>
+<p>下图显示了某个N沟道MOS管的转移特性和输出特性图。</p>
+<img src="https://s2.loli.net/2024/09/29/g43OsM5orQUv2ZK.png" alt="image-20220723220252670" style="zoom:80%;">
+<p>所谓转移特性指的是在恒定$V_{DS}$的条件下不同$V_{GS}$的电压条件可输出的电流电大小，即对应了上文饱和区的饱和电流，需要强调的是饱和区的时候通道并没有完全夹断，只是因为限制而导致电流大小无法再上升，也就是上图对应的红色部分和左图。</p>
+<p>输出特性图就是右侧的图形，MOS管做开关等应用的时候就是工作在饱和区，通过控制GS在某个数值和0V之间进行切换来让其在导通和不导通之间切换。</p>
+<p>为了方便理解在不同区域的切换，我找到下图：</p>
+<p><img src="https://s2.loli.net/2024/09/29/lghS3NH7f2WwkR1.png" alt="image-20220723224658911"></p>
+<p>其中$V_{\mathrm{DS \underline{}} \mathrm{dv}}=V_{\mathrm{GS}}-V_{\mathrm{GSTH}} $,本质上是上图中红色和右侧图曲线相交的部分。</p>
+<h4><span id="mos管的符号">MOS管的符号</span></h4>
+<p>下图显示了常见的增强型mos的符号。</p>
+<p><img src="https://s2.loli.net/2024/09/29/xQowWtcNJ7lp3zS.png" alt="image-20220723210344580"></p>
+<p>一般我们不讨论耗尽型，下文只讨论增强型。</p>
+<h4><span id="pmos">PMOS</span></h4>
+<img src="https://i-blog.csdnimg.cn/blog_migrate/1fcd69084fe88caf9c1dc2815e506eda.png" alt="image-20220723213430794" style="zoom: 50%;">
+<p>这个为P沟道的MOS管符号图，根据上文我们知道P沟道的MOS的基极是N型半导体，上图中箭头实际上标明的是体二极管导通的时候，电流的流向，这里就是从D到S。同时GS电压与对应的体二极管导通方向相反，也就是说GS电压小于0的时候才能正常导通。$V_{GS} &lt; 0 $。</p>
+<p>当然有些厂商给的图也很直接，如下图：</p>
+<p><img src="https://s2.loli.net/2024/09/29/XcPO4eCwrUyD1vq.png" alt="image-20220723212941261"></p>
+<p>这种直接表明了对应的二极管，但是这种一般是真的封装了一个二极管进去，并不是体二极管，这里需要注意。</p>
+<h4><span id="nmos">NMOS</span></h4>
+<p>这个为N沟道的MOS管符号图，根据上文我们知道N沟道的MOS的基极是P型半导体,上图中的箭头实际上标明的也是体二极管导通的方向，这里说明就是直接加电压在SD之间就能到导通，当然GS电压满足如下的时候才能实现导通：$V_{GS} &gt; 0 $。</p>
+<img src="https://s2.loli.net/2024/09/29/8hySgmcXkx9LRQT.png" alt="image-20220723213356954" style="zoom:50%;">
+<p>当然有些厂商给的图也很直接，如下图：</p>
+<p><img src="https://s2.loli.net/2024/09/29/MtxAKz9DSBfEui8.png" alt="image-20220723213304229"></p>
+<p>参考文章：</p>
+<p><a target="_blank" rel="noopener" href="http://blog.zy-xcx.cn/?id=101">如何巧用C-V曲线来查Case</a>。</p>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%87%91%E5%B1%AC%E6%B0%A7%E5%8C%96%E7%89%A9%E5%8D%8A%E5%B0%8E%E9%AB%94%E5%A0%B4%E6%95%88%E9%9B%BB%E6%99%B6%E9%AB%94">WIKI百科</a>。</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/10/22/Spark(6)/" title="Spark快速大数据分析——Hive的部署与使用（陆）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Spark快速大数据分析——Hive的部署与使用（陆）</span></a><a class="button is-default" href="/2024/10/21/MOS%E7%AE%A1%20%E2%80%94%E2%80%94%20%E5%BF%AB%E9%80%9F%E5%A4%8D%E8%8B%8F%E5%BA%94%E7%94%A8%E7%AC%94%E8%AE%B0%5B%E5%8F%82%E6%95%B0%E4%B8%8E%E5%BA%94%E7%94%A8%E7%AF%87%5D/" title="MOS管 —— 快速复苏应用笔记[参数与应用篇]"><span class="has-text-weight-semibold">Next: MOS管 —— 快速复苏应用笔记[参数与应用篇]</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2025</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>

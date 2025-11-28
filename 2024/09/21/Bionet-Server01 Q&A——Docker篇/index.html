@@ -1,0 +1,235 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>BionetServer-No1. Q&amp;A-Docker</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="BionetServer-No1. Q&amp;amp;A-Docker
+
+
+Version:1.0
+Date: 2025.10.10
+Authors：NeoNexus
+
+
+Q&amp;amp;A：
+
+问题零 通过容器写入的文件无法运行？
+问题一 容器重启之后无法连接？
+问题二 创建一个Docker失败之后再次连接相同端口为什么不行？
+问题三 关闭了VSCode代码就停止运行了？
+问题四 Bad owner or permissions on
+问题五 Python脚本使用nohup运行时，指定文件没有输出内容
+问题六 R_studio打开之后没有见对应这两个文件夹
+问题七 创建容器提示Code Failed 500 代码错误
+
+
+
+
+[TOC]
+Q&amp;amp;A：
+问题零 通过容器写入的文件无法运行？
+容器的用户都是root.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">BionetServer-No1. Q&amp;A-Docker</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">BionetServer-No1. Q&amp;A-Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Q&amp;A：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">问题零 通过容器写入的文件无法运行？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">问题一 容器重启之后无法连接？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">问题二 创建一个Docker失败之后再次连接相同端口为什么不行？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">问题三 关闭了VSCode代码就停止运行了？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">问题四 Bad owner or permissions on</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">问题五 Python脚本使用nohup运行时，指定文件没有输出内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">问题六 R_studio打开之后没有见对应这两个文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">问题七 创建容器提示Code Failed 500 代码错误</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Bionet"><i class="tag post-item-tag">Bionet</i></a><a href="/tags/ops"><i class="tag post-item-tag">ops</i></a><a href="/tags/Q&amp;A"><i class="tag post-item-tag">Q&amp;A</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">BionetServer-No1. Q&amp;A-Docker</h1><time class="has-text-grey" datetime="2024-09-21T12:46:25.000Z">2024-09-21</time><article class="mt-2 post-content"><h1><span id="bionetserver-no1-qampa-docker">BionetServer-No1. Q&amp;A-Docker</span></h1>
+<img src="https://s2.loli.net/2024/09/29/qWjluktz8hxAV4E.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1727547630579" style="zoom:50%;">
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom: 50%;">
+<p>Version:1.0</p>
+<p>Date: 2025.10.10</p>
+<p>Authors：NeoNexus</p>
+<!-- toc -->
+<ul>
+<li><a href="#qa">Q&amp;A：</a>
+<ul>
+<li><a href="#%E9%97%AE%E9%A2%98%E9%9B%B6-%E9%80%9A%E8%BF%87%E5%AE%B9%E5%99%A8%E5%86%99%E5%85%A5%E7%9A%84%E6%96%87%E4%BB%B6%E6%97%A0%E6%B3%95%E8%BF%90%E8%A1%8C">问题零 通过容器写入的文件无法运行？</a></li>
+<li><a href="#%E9%97%AE%E9%A2%98%E4%B8%80-%E5%AE%B9%E5%99%A8%E9%87%8D%E5%90%AF%E4%B9%8B%E5%90%8E%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5">问题一 容器重启之后无法连接？</a></li>
+<li><a href="#%E9%97%AE%E9%A2%98%E4%BA%8C-%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAdocker%E5%A4%B1%E8%B4%A5%E4%B9%8B%E5%90%8E%E5%86%8D%E6%AC%A1%E8%BF%9E%E6%8E%A5%E7%9B%B8%E5%90%8C%E7%AB%AF%E5%8F%A3%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%A1%8C">问题二 创建一个Docker失败之后再次连接相同端口为什么不行？</a></li>
+<li><a href="#%E9%97%AE%E9%A2%98%E4%B8%89-%E5%85%B3%E9%97%AD%E4%BA%86vscode%E4%BB%A3%E7%A0%81%E5%B0%B1%E5%81%9C%E6%AD%A2%E8%BF%90%E8%A1%8C%E4%BA%86">问题三 关闭了VSCode代码就停止运行了？</a></li>
+<li><a href="#%E9%97%AE%E9%A2%98%E5%9B%9B-bad-owner-or-permissions-on">问题四 Bad owner or permissions on</a></li>
+<li><a href="#%E9%97%AE%E9%A2%98%E4%BA%94-python%E8%84%9A%E6%9C%AC%E4%BD%BF%E7%94%A8nohup%E8%BF%90%E8%A1%8C%E6%97%B6%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E6%B2%A1%E6%9C%89%E8%BE%93%E5%87%BA%E5%86%85%E5%AE%B9">问题五 Python脚本使用nohup运行时，指定文件没有输出内容</a></li>
+<li><a href="#%E9%97%AE%E9%A2%98%E5%85%AD-r_studio%E6%89%93%E5%BC%80%E4%B9%8B%E5%90%8E%E6%B2%A1%E6%9C%89%E8%A7%81%E5%AF%B9%E5%BA%94%E8%BF%99%E4%B8%A4%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9">问题六 R_studio打开之后没有见对应这两个文件夹</a></li>
+<li><a href="#%E9%97%AE%E9%A2%98%E4%B8%83-%E5%88%9B%E5%BB%BA%E5%AE%B9%E5%99%A8%E6%8F%90%E7%A4%BAcode-failed-500-%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AF">问题七 创建容器提示Code Failed 500 代码错误</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p>[TOC]</p>
+<h2><span id="qampa">Q&amp;A：</span></h2>
+<h3><span id="问题零-通过容器写入的文件无法运行">问题零 通过容器写入的文件无法运行？</span></h3>
+<p>容器的用户都是root身份，而UI登陆的是以用户的身份来登陆的，普通用户当然没有权限来操作root的内容，解决办法：</p>
+<p>将文件修改成主机所有者，在容器的终端中使用命令</p>
+<pre><code class="language-bash">sudo chown UID 文件/目录路径
+</code></pre>
+<p>如果要修改某个文件夹的全部文件，可以使用：</p>
+<pre><code class="language-bash">sudo chown -R UID 文件/目录路径
+</code></pre>
+<p>UID信息在UI界面使用命令获取，比如：</p>
+<p><img src="https://s2.loli.net/2024/06/07/dhEWOpuyINHF6SY.png" alt="image-20240607235021091"></p>
+<p>打个比方，修改我在主机上：/Datasets/bionet/Dataset/A/ 文件夹的可以使用：</p>
+<pre><code class="language-bash">sudo chown -R 1001 /Datasets/bionet/Dataset/A/
+</code></pre>
+<p>这样这个文件夹下所有文件都可以正常使用。</p>
+<p>R语言已经实现了UID的同步，所以没有这个问题。</p>
+<p>这里放一个在Jupyter中修改权限的的例子：</p>
+<pre><code class="language-bash"># ls -alh
+total 8.0K
+drwxr-xr-x 2 root root 4.0K Apr 18  2022 .
+drwxr-xr-x 1 root root 4.0K Jun  7 15:51 ..
+# cd /tf 首先要到对应的文件夹下来操作文件
+# ls -alh
+total 6.9M
+drwxrwxrwx  1 root root 4.0K Jun  7 15:51 .
+drwxr-xr-x  1 root root 4.0K Jun  7 15:51 ..
+drwxrwxrwx 11 1001 1002   14 Jun  5 05:03 Datasets
+drwxrwxrwx  6 root root 6.8M May 26 06:23 NCZone
+drwxrwxr--  6 1001 1001 4.0K Jun  7 15:30 Share_Space
+drwxrwxrwx  1 root root 4.0K Sep  2  2023 tensorflow-tutorials
+# cd Share_Space
+# ls -alh
+total 28K
+drwxrwxr-- 6 1001 1001 4.0K Jun  7 15:30 .
+drwxrwxrwx 1 root root 4.0K Jun  7 15:51 ..
+drwx------ 4 root root 4.0K Jun  7 15:30 .Trash-0
+drwxr-xr-x 2 root root 4.0K Jun  7 15:30 .ipynb_checkpoints
+drwxrwxr-- 6 root root 4.0K May  4 11:07 PTM
+drwxrwxr-- 2 1000 1000 4.0K Jun  7 09:13 TEST
+-rwxrwxr-- 1 root root 2.2K Apr 23 15:11 test.py
+# pwd
+/tf/Share_Space
+# sudo chown 1001 TEST
+# ls -alh
+total 28K
+drwxrwxr-- 6 1001 1001 4.0K Jun  7 15:30 .
+drwxrwxrwx 1 root root 4.0K Jun  7 15:51 ..
+drwx------ 4 root root 4.0K Jun  7 15:30 .Trash-0
+drwxr-xr-x 2 root root 4.0K Jun  7 15:30 .ipynb_checkpoints
+drwxrwxr-- 6 root root 4.0K May  4 11:07 PTM
+drwxrwxr-- 2 1001 1000 4.0K Jun  7 09:13 TEST
+-rwxrwxr-- 1 root root 2.2K Apr 23 15:11 test.py
+</code></pre>
+<h3><span id="问题一-容器重启之后无法连接">问题一 容器重启之后无法连接？</span></h3>
+<p>容器重启之后ssh服务被中断，需要手动重启，打开portainer输入以下命令：</p>
+<pre><code class="language-bash"> service ssh restart
+</code></pre>
+<p>即可重新连接。</p>
+<p><img src="https://s2.loli.net/2024/04/26/uPmNqxek4pWlFCa.png" alt="image-20240426194356414"></p>
+<h3><span id="问题二-创建一个docker失败之后再次连接相同端口为什么不行">问题二 创建一个Docker失败之后再次连接相同端口为什么不行？</span></h3>
+<p>因为ssh有校验措施，只能连接到同一台物理设备，当你的设备失效以后就无法使用，删除过去的key即可重新连接：</p>
+<img src="https://s2.loli.net/2024/04/01/yJDmalXE2xfwLR6.png" alt="image-20240401160821511" style="zoom:80%;">
+<h3><span id="问题三-关闭了vscode代码就停止运行了">问题三 关闭了VSCode代码就停止运行了？</span></h3>
+<p>实际上是这样的，SSH需要保持连接才能运行，不过不要紧我们使用命令来将代码任务注册到后台来持久运行，这样你的代码只需要在默认模式下调整好之后，在再使用如下命令即可保持运行：</p>
+<p>当我们运行的代码的时候实际上就是在命令行中调用了命令：</p>
+<p><img src="https://s2.loli.net/2024/04/01/fdlr9SjuFY2qiZx.png" alt="image-20240401192019401"></p>
+<p>我们需要将这个命令和nohup来结合实现运行不掉线：</p>
+<p>同见问题五正确更新</p>
+<p>按方向键盘的上键可以找到上一次运行的命令，当然运行之前要确认当前目录在哪里，是不是你想要的目录？</p>
+<pre><code class="language-bash">(base) root@77d5769f235a:/# cd /home/Share_Space/                          
+(base) root@77d5769f235a:/home/Share_Space# ls
+data  test.py
+(base) root@77d5769f235a:/home/Share_Space# /opt/conda/bin/python /home/Share_Space/test.py
+</code></pre>
+<p>下面我们来使用nohup将任务保持在后台，格式如下：</p>
+<pre><code class="language-sh">nohup 你的运行命令 &gt; output.file 2&gt;&amp;1 &amp;
+</code></pre>
+<p>结合上边的命令，效果如下：</p>
+<pre><code class="language-bash">nohup /opt/conda/bin/python /home/Share_Space/test.py &gt; output.file 2&gt;&amp;1 &amp;
+</code></pre>
+<p>我们来运行一下：</p>
+<p><img src="https://s2.loli.net/2024/04/01/5ui9UFh6DjNaqpd.png" alt="image-20240401195117010"></p>
+<p>同时可以看到，这里有了对应的输出文件，输出文件保存了所有输出：</p>
+<p><img src="https://s2.loli.net/2024/04/01/9tsvoN1ZgQEAajJ.png" alt="image-20240401195140188"></p>
+<img src="https://s2.loli.net/2024/04/01/5ZuA7HsbzYXVJD3.png" alt="image-20240401195202219" style="zoom: 80%;">
+<p>当然运行完成之后文件显示的更加准确~</p>
+<h3><span id="问题四-bad-owner-or-permissions-on">问题四 Bad owner or permissions on</span></h3>
+<p>如果出现**Bad owner or permissions on C:\Users\Administrator/.ssh/config &gt; 过程试图写入的管道不存在。 &gt;**的问题，该问题是config文件权限高，vscode不能修改造成的，两种解决办法第一种是修改原来C:盘的config文件权限；第二种是在其他盘新建一个config文件，用于存储远程连接用户，地址等基本信息。</p>
+<p><strong>第一种解决办法</strong></p>
+<p>a.找到.ssh文件夹。它通常位于C:\Users</p>
+<img src="https://pic2.zhimg.com/80/v2-00510cb6ff02667327ab74cf045e0475_720w.webp" alt="img" style="zoom:80%;">
+<p>b.右键单击.ssh文件夹，然后单击“属性”，选择“安全”</p>
+<img src="https://pic4.zhimg.com/80/v2-403dcc44b073590af68d8350a8d29733_720w.webp" alt="img" style="zoom:80%;">
+<p>c.单击“高级”。 单击“禁用继承”，单击“确定”。 将出现警告弹出窗口。单击“从此对象中删除所有继承的权限”。</p>
+<p>d.此时所有用户都将被删除。添加所有者。在同一窗口中，单击“编辑”按钮，单击“添加”以显示“选择用户或组”窗口。</p>
+<img src="https://pic1.zhimg.com/80/v2-830693015d51071061ff59f4f57d0220_720w.webp" alt="img" style="zoom: 80%;">
+<p>e.单击“高级”，然后单击“立即查找”按钮。应显示用户结果列表。 选择用户帐户。</p>
+<img src="https://pic2.zhimg.com/80/v2-c68f57ffd916d49e56d985c730ccd039_720w.webp" alt="img" style="zoom:80%;">
+<p>f.后面一路点击确定便可。</p>
+<p><strong>记得重启电脑来刷新设置。</strong></p>
+<p><strong>第二种解决办法</strong></p>
+<p>在除了C盘以外的文件夹新建config文件（空的就可以），在romote-SSH插件的扩展设置中，修改config文件的路径。</p>
+<p><img src="https://s2.loli.net/2024/03/27/xgGATnRrw852BNW.png" alt="image-20240326115205575"></p>
+<h3><span id="问题五-python脚本使用nohup运行时指定文件没有输出内容">问题五 Python脚本使用nohup运行时，指定文件没有输出内容</span></h3>
+<p><strong>此问题由戴珏泓发现</strong></p>
+<p>实际上为Python的缓存机制带来的问题，log存在缓存区中没有及时更新：</p>
+<p>可以看到运行之后没有对应的输出;</p>
+<img src="https://s2.loli.net/2024/10/21/OfvYEPxVqanH67c.png" alt="image-20241021235853305" style="zoom: 80%;">
+<p>解决方法：</p>
+<p>cd进入脚本所在目录执行nohup命令，在命令的python路径与脚本路径之间加-u，强制输出不通过缓存直接打印</p>
+<p>例如：</p>
+<pre><code class="language-shell">nohup /opt/conda/bin/python /home/Share_Space/metrics_ml/GA_xgboost.py 2&gt;&amp;1  &amp;
+</code></pre>
+<p>改为：</p>
+<pre><code class="language-shell">nohup /opt/conda/bin/python -u /home/Share_Space/metrics_ml/GA_xgboost.py 2&gt;&amp;1  &amp;
+</code></pre>
+<h3><span id="问题六-r_studio打开之后没有见对应这两个文件夹">问题六 R_studio打开之后没有见对应这两个文件夹</span></h3>
+<p>如打开之后没有见到这两个文件夹，可以先将默认目录设置到~</p>
+<p>使用命令：</p>
+<pre><code class="language-R">setwd("~")
+</code></pre>
+<p>效果如图：</p>
+<p><img src="https://s2.loli.net/2024/11/27/ZcEwh3GUDMXkOKj.png" alt="image-20241127114234957"></p>
+<p>然后刷新一下页面，一定要刷新一下。然后结果：应该是这样：</p>
+<p><img src="https://s2.loli.net/2024/11/27/MLvFi62cVBoDnwu.png" alt="image-20241127114538542"></p>
+<p>如果还不行，可以打开命令行使用如下命令：</p>
+<p><img src="https://s2.loli.net/2024/10/23/gHJXbLxNn9UBS4d.png" alt="image-20241023232258889"></p>
+<p>使用命令：</p>
+<pre><code class="language-bash"># 创建从 /home/user1/host 到 /home/host/R_Share/user1 的软链接
+ln -s /home/host/R_Share/user1 /home/user1/host
+
+# 创建从 /home/user1/Datasets 到 /home/host/Datasets 的软链接
+ln -s /home/host/Datasets /home/user1/Datasets
+</code></pre>
+<p>user1需要替换的你的用户名，比如我的是Neo：</p>
+<img src="https://s2.loli.net/2024/10/23/JjGr1sMXhbpDVWQ.png" alt="image-20241023232512786" style="zoom:67%;">
+<h3><span id="问题七-创建容器提示code-failed-500-代码错误">问题七 创建容器提示Code Failed 500 代码错误</span></h3>
+<p>排查是否有以下几个问题：</p>
+<p>①这一步中，需要修改的名字是否和你的账号名相同（大小写也要一致）</p>
+<p>②端口是否和其他人的重复了？（其他人的端口号可以在Container界面右滑看到）</p>
+<p><img src="https://s2.loli.net/2025/09/26/HAvLQrJxMESh42e.png" alt="image-20250926001725780"></p>
+<p>③检查内存设置是否合理，镜像是否有选择对</p>
+<p>不要偷懒，直接复制这个错误的镜像号码，正确的镜像一般以bionet或者neonexus开头，下边是一个错误示范：</p>
+<p><img src="https://s2.loli.net/2025/09/25/3TsF1QlIkbLBK2D.png" alt="image-20250925235955883"></p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/09/21/%E6%9E%84%E5%BB%BA%E4%B8%80%E5%8F%B0%E5%85%88%E8%BF%9B%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="如何构建一台机器学习服务器"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: 如何构建一台机器学习服务器</span></a><a class="button is-default" href="/2023/10/21/PyCharm%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%EF%BC%881%EF%BC%89%E2%80%94%E2%80%94%E7%BC%96%E8%BE%91%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/" title="PyCharm使用技巧（1）——编辑基础部分"><span class="has-text-weight-semibold">Next: PyCharm使用技巧（1）——编辑基础部分</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2025</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>Spark快速大数据分析——Hive的部署与使用（陆）</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="Spark快速大数据分析——Hive的部署与使用（陆）
+
+
+
+
+软件环境：
+一、安装Hive
+二、安装并配置Mysql
+Hive的mysql配置部分
+
+
+[TOC]
+软件环境：
+强烈提示：
+请按照对应配套版本来进行环境配置！
+
+Hadoop-3.2
+IDEA 2021.3.2
+Spark-3.1.3 搭配  scala版本：2.12  构建方式：IDEA导入本地JAR，Spark库
+JDK 8
+Hive 3.1.3
+MYSQL 8.0.2
+WSL 2 Ubuntu20.04
+
+备注：在安装Hive3.1.2之前，请首先安装Hadoop3.2。
+一、安装Hive
+温馨提示：
+jszszzy@LAPTOP-74GAR8S9:~$
+
+此此前缀代表的是当前用户和目录，并不是命令的一部分。
+首先需要下载Hive安装包.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Spark快速大数据分析——Hive的部署与使用（陆）</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Spark快速大数据分析——Hive的部署与使用（陆）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">软件环境：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">一、安装Hive</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">二、安装并配置Mysql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Hive的mysql配置部分</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Spark"><i class="tag post-item-tag">Spark</i></a><a href="/tags/Hadoop"><i class="tag post-item-tag">Hadoop</i></a><a href="/tags/Scala"><i class="tag post-item-tag">Scala</i></a><a href="/tags/Hive"><i class="tag post-item-tag">Hive</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Spark快速大数据分析——Hive的部署与使用（陆）</h1><time class="has-text-grey" datetime="2024-10-21T16:00:00.000Z">2024-10-22</time><article class="mt-2 post-content"><h1><span id="spark快速大数据分析hive的部署与使用陆">Spark快速大数据分析——Hive的部署与使用（陆）</span></h1>
+<img src="https://s2.loli.net/2024/09/29/9cbeUOHyknhTrLY.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1727612918890" style="zoom:50%;">
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom: 50%;">
+<!-- toc -->
+<ul>
+<li><a href="#%E8%BD%AF%E4%BB%B6%E7%8E%AF%E5%A2%83">软件环境：</a></li>
+<li><a href="#%E4%B8%80-%E5%AE%89%E8%A3%85hive">一、安装Hive</a></li>
+<li><a href="#%E4%BA%8C-%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEmysql">二、安装并配置Mysql</a></li>
+<li><a href="#hive%E7%9A%84mysql%E9%85%8D%E7%BD%AE%E9%83%A8%E5%88%86">Hive的mysql配置部分</a></li>
+</ul>
+<!-- tocstop -->
+<p>[TOC]</p>
+<h2><span id="软件环境">软件环境：</span></h2>
+<p><strong>强烈提示：<br>
+请按照对应配套版本来进行环境配置！</strong></p>
+<ul>
+<li><strong>Hadoop-3.2</strong></li>
+<li><strong>IDEA 2021.3.2</strong></li>
+<li><strong>Spark-3.1.3 搭配  scala版本：2.12  构建方式：IDEA导入本地JAR，Spark库</strong></li>
+<li><strong>JDK 8</strong></li>
+<li><strong>Hive 3.1.3</strong></li>
+<li><strong>MYSQL 8.0.2</strong></li>
+<li><strong>WSL 2 Ubuntu20.04</strong></li>
+</ul>
+<p><strong>备注：在安装Hive3.1.2之前，请首先安装Hadoop3.2。</strong></p>
+<h2><span id="一-安装hive">一、安装Hive</span></h2>
+<p><strong>温馨提示：</strong></p>
+<pre><code class="language-ssh">jszszzy@LAPTOP-74GAR8S9:~$
+</code></pre>
+<p>此此前缀代表的是当前用户和目录，并不是命令的一部分。</p>
+<p>首先需要下载Hive安装包文件， <a target="_blank" rel="noopener" href="http://www.apache.org/dyn/closer.cgi/hive/">Hive官网下载地址</a>。</p>
+<p>开启文件浏览器，将下载的压缩包放入进去，可以先放到root用户目录下：</p>
+<pre><code class="language-ssh">jszszzy@LAPTOP-74GAR8S9:~$ explorer.exe .
+</code></pre>
+<p><img src="https://s2.loli.net/2024/09/29/1ZQRP9H72qwaKzj.png" alt="3"></p>
+<p>最好先下载好hive的配置文件一起放入进去：</p>
+<p>地址，下载压缩包解压即可。</p>
+<p>注意是：<strong>hive-site.xml</strong></p>
+<p><img src="https://s2.loli.net/2024/09/29/K1bVlXgxoNkeqth.png" alt="4"></p>
+<p>将对应文件解压过去：</p>
+<p>此处我事先创建了一个hive文件夹，用来存放内容，可自行通过文件浏览器创建。</p>
+<pre><code class="language-ssh">jszszzy@LAPTOP-74GAR8S9:~$ cd hive
+jszszzy@LAPTOP-74GAR8S9:~/hive$ sudo tar -zxvf ./apache-hive-3.1.3-bin.tar.gz -C /usr/local
+</code></pre>
+<p>随后前往对应文件夹来进行修改：</p>
+<pre><code class="language-ssh">jszszzy@LAPTOP-74GAR8S9:~/hive$ cd /usr/local/
+jszszzy@LAPTOP-74GAR8S9:/usr/local$ sudo mv apache-hive-3.1.3-bin hive
+</code></pre>
+<p>修改完名字后再修改权限：</p>
+<pre><code class="language-ssh">jszszzy@LAPTOP-74GAR8S9:/usr/local$ sudo chown -R jszszzy:jszszzy hive
+</code></pre>
+<p>添加环境变量方便运行：</p>
+<pre><code class="language-ssh">jszszzy@LAPTOP-74GAR8S9:/usr/local$ vim ~ /.bashrc
+</code></pre>
+<p>在最后添加的内容如下：</p>
+<pre><code>export HIVE_HOME=/usr/local/hive
+export PATH=$PATH:$HIVE_HOME/bin
+export HADOOP_HOME=/usr/local/hadoop
+</code></pre>
+<p>生效修改：</p>
+<pre><code class="language-ssh">jszszzy@LAPTOP-74GAR8S9:/usr/local$ source ~/.bashrc
+</code></pre>
+<p>别忘了hadoop用户相应的权限。</p>
+<p>先切换到hadoop用户：</p>
+<pre><code>su hadoop
+</code></pre>
+<p>转移到对应文件夹：</p>
+<pre><code>hadoop@LAPTOP-74GAR8S9:/usr/local$ cd /usr/local/
+hadoop@LAPTOP-74GAR8S9:/usr/local$ sudo chown -R hadoop:hadoop hive
+</code></pre>
+<p>记得添加环境变量这里就不再赘述：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/usr/local$  vim ~/.bashrc
+hadoop@LAPTOP-74GAR8S9:/usr/local$ source ~/.bashrc
+</code></pre>
+<p>添加的内容相同。</p>
+<p>修改hive的配置文件：</p>
+<pre><code>hadoop@LAPTOP-74GAR8S9:/usr/local$ cd /usr/local/hive/conf
+</code></pre>
+<p>修改hive的配置文件的名字：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/usr/local/hive/conf$ mv hive-default.xml.template hive-default.xml
+</code></pre>
+<p>打开配置文件：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/usr/local/hive/conf$ vim hive-site.xml
+</code></pre>
+<p>在hive-site.xml中添加如下配置信息：</p>
+<pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;
+&lt;?xml-stylesheet type="text/xsl" href="configuration.xsl"?&gt;
+&lt;configuration&gt;
+  &lt;property&gt;
+    &lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt;
+    &lt;value&gt;jdbc:mysql://localhost:3306/hive?createDatabaseIfNotExist=true&lt;/value&gt;
+    &lt;description&gt;JDBC connect string for a JDBC metastore&lt;/description&gt;
+  &lt;/property&gt;
+  
+  &lt;property&gt;
+    &lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt;
+    &lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;
+    &lt;description&gt;Driver class name for a JDBC metastore&lt;/description&gt;
+  &lt;/property&gt;
+  
+  &lt;property&gt;
+    &lt;name&gt;javax.jdo.option.ConnectionUserName&lt;/name&gt;
+    &lt;value&gt;hive&lt;/value&gt;
+    &lt;description&gt;username to use against metastore database&lt;/description&gt;
+  &lt;/property&gt;
+  
+  &lt;property&gt;
+    &lt;name&gt;javax.jdo.option.ConnectionPassword&lt;/name&gt;
+    &lt;value&gt;hive&lt;/value&gt;
+    &lt;description&gt;password to use against metastore database&lt;/description&gt;
+  &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre>
+<p>你可能注意到复制过程可能会导致过程混乱，所以推荐你下载我写好的，直接通过文件浏览器复制过去就行了，当然对于这个目录是直接无法访问的，所以推荐先拷贝在root用户下，然后复制过去。</p>
+<p>拷贝到root用户下使用命令，然后拖拽过去：</p>
+<pre><code>jszszzy@LAPTOP-74GAR8S9:~$ explorer.exe .
+</code></pre>
+<p>修改配置文件为新的配置文件：</p>
+<pre><code>hadoop@LAPTOP-74GAR8S9:/usr/local/hive/conf$ rm hive-site.xml
+hadoop@LAPTOP-74GAR8S9:/usr/local/hive/conf$ cp /home/jszszzy/hive-site.xml /usr/local/hive/conf
+</code></pre>
+<h2><span id="二-安装并配置mysql">二、安装并配置Mysql</span></h2>
+<p>这一部分是最折腾的部分，每个人的情况都可能不太一样，所以版本的内容要尽量和我的一模一样再来开始。</p>
+<p>版本的信息内容我已放到最开头部分，请仔细查看。</p>
+<p>目前发文时期最新的APT安装的MYSQL是可以使用的，但是过程有些小麻烦，详见如下：</p>
+<p>网上的安装人云亦云，什么在Mysql的辅助版本下安装等方法层出不穷，我基本都做了尝试，你如果使用的是WSL2最好和我的方法保持一致。</p>
+<p>避免浪费时间。</p>
+<p><strong>如下这种方法，完全不行，始终无法检测到mysql的状态，不推荐使用：</strong></p>
+<p><img src="https://s2.loli.net/2024/09/29/5IB3gMEm7TxGOoj.png" alt="14"></p>
+<p>我们直接使用APT来安装：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/home/jszszzy$ sudo apt-get update
+hadoop@LAPTOP-74GAR8S9:/home/jszszzy$ sudo apt-get install mysql-server -y
+</code></pre>
+<p>安装过程稍微有些长，如果你没有换源请看我前几篇是如何更换下载源的。</p>
+<p>下载过程：</p>
+<pre><code>eading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following additional packages will be installed:
+  libcgi-fast-perl libcgi-pm-perl libencode-locale-perl libevent-core-2.1-7 libevent-pthreads-2.1-7 libfcgi-perl
+  libhtml-parser-perl libhtml-tagset-perl libhtml-template-perl libhttp-date-perl libhttp-message-perl libio-html-perl
+  liblwp-mediatypes-perl libmecab2 libtimedate-perl liburi-perl mecab-ipadic mecab-ipadic-utf8 mecab-utils
+  mysql-client-8.0 mysql-client-core-8.0 mysql-common mysql-server-8.0 mysql-server-core-8.0
+Suggested packages:
+  libdata-dump-perl libipc-sharedcache-perl libwww-perl mailx tinyca
+The following NEW packages will be installed:
+  libcgi-fast-perl libcgi-pm-perl libencode-locale-perl libevent-core-2.1-7 libevent-pthreads-2.1-7 libfcgi-perl
+...............................................
+省略部分信息
+.................................................
+关键地方需要看一眼：
+done!
+update-alternatives: using /var/lib/mecab/dic/ipadic-utf8 to provide /var/lib/mecab/dic/debian (mecab-dictionary) in auto mode
+Setting up libhtml-parser-perl (3.72-5) ...
+Setting up libhttp-message-perl (6.22-1) ...
+Setting up mysql-server-8.0 (8.0.29-0ubuntu0.20.04.3) ...
+invoke-rc.d: could not determine current runlevel
+ * Stopping MySQL database server mysqld                                                                         [ OK ]
+update-alternatives: using /etc/mysql/mysql.cnf to provide /etc/mysql/my.cnf (my.cnf) in auto mode
+Renaming removed key_buffer and myisam-recover options (if present)
+mysqld will log errors to /var/log/mysql/error.log
+mysqld is running as pid 782
+Created symlink /etc/systemd/system/multi-user.target.wants/mysql.service → /lib/systemd/system/mysql.service.
+invoke-rc.d: could not determine current runlevel
+Setting up libcgi-pm-perl (4.46-1) ...
+Setting up libhtml-template-perl (2.97-1) ...
+Setting up mysql-server (8.0.29-0ubuntu0.20.04.3) ...
+Setting up libcgi-fast-perl (1:2.15-1) ...
+Processing triggers for systemd (245.4-4ubuntu3.16) ...
+Processing triggers for man-db (2.9.1-1) ...
+Processing triggers for libc-bin (2.31-0ubuntu9.7) ...
+/sbin/ldconfig.real: /usr/lib/wsl/lib/libcuda.so.1 is not a symbolic link
+</code></pre>
+<p>在最后安装完成的时候会提示：</p>
+<pre><code class="language-ssh"> * Stopping MySQL database server mysqld                                           [ OK ]
+</code></pre>
+<p>不知道为什么自动关闭了，不过问题不大我们手动打开：</p>
+<pre><code class="language-ssh">sudo service mysql restart
+</code></pre>
+<p>这里推荐使用sudo，不知道为什么这里输入hadoop的密码后还是会报错导致无法开启。</p>
+<p><img src="https://s2.loli.net/2024/09/29/C7gZ3dAB456WyPz.png" alt="20"></p>
+<p>使用sudo：</p>
+<p><img src="https://s2.loli.net/2024/09/29/dVzHSY3bE2O4Fic.png" alt="N2YC41{K(SWNKQ)DPL%ZB$F"></p>
+<p>打开后我们再来检测一下状态，发现仍是STOP？？？？这就是一个很离谱的bug，说明他启动没有成功。</p>
+<p>中间还有可能出现一个小问题：</p>
+<p>问题如下：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/etc/mysql/mysql.conf.d$ sudo service mysql start
+ * Starting MySQL database server mysqld                                                 su: warning: cannot change directory to /nonexistent: No such file or directory [ OK ]
+</code></pre>
+<p>解决办法是：</p>
+<pre><code class="language-ssh"># Ubuntu
+sudo service mysql stop
+sudo usermod -d /var/lib/mysql/ mysql
+sudo service mysql start
+</code></pre>
+<p>不过这里我们先放放无法启动的问题，你如果检测的状态如下：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/var/lib/mysql$ sudo service mysql status
+mysql: unrecognized service
+</code></pre>
+<p>这说明没有安装成功推荐安装办法如下：</p>
+<p>记得先卸载原来安装的！</p>
+<p>卸载SQL：</p>
+<pre><code>hadoop@LAPTOP-74GAR8S9:/home/jszszzy$ sudo apt purge mysql-*
+hadoop@LAPTOP-74GAR8S9:/home/jszszzy$ sudo rm -rf /etc/mysql/ /var/lib/mysql
+hadoop@LAPTOP-74GAR8S9:/home/jszszzy$ sudo apt autoremove
+hadoop@LAPTOP-74GAR8S9:/home/jszszzy$ sudo apt autoclean
+</code></pre>
+<p>如果你的检测状态如下，恭喜你一遍就安装成功了，很幸运。请直接跳到Hive的mysql配置部分。</p>
+<pre><code>* /usr/bin/mysqladmin  Ver 8.0.29-0ubuntu0.20.04.3 for Linux on x86_64 ((Ubuntu))
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Server version          8.0.29-0ubuntu0.20.04.3
+Protocol version        10
+Connection              Localhost via UNIX socket
+UNIX socket             /var/run/mysqld/mysqld.sock
+Uptime:                 8 sec
+
+Threads: 2  Questions: 8  Slow queries: 0  Opens: 436  Flush tables: 3  Open tables: 27  Queries per second avg: 1.000
+</code></pre>
+<p>如果你的状态是上图那个，请你继续往下看：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/etc/mysql/mysql.conf.d$ service mysql status
+ * MySQL is stopped.
+</code></pre>
+<p>我们再来看一下默认的3306端口有东西吗？</p>
+<pre><code>hadoop@LAPTOP-74GAR8S9:/etc/mysql/mysql.conf.d$ netstat -an|grep 3306
+</code></pre>
+<p>如果你没有输出，就继续往下看。</p>
+<p>我们先尝试登陆一下MySQL看看具体情况如何：</p>
+<p>你到这里会意识到一个问题，我的MYSQL密码是什么？初始化的时候并没有设置，所以这里应该是有一个随机密码的，我们先找到随机密码：</p>
+<p>使用如下命令：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/etc/mysql/mysql.conf.d$ sudo cat /etc/mysql/debian.cnf
+# Automatically generated for Debian scripts. DO NOT TOUCH!
+[client]
+host     = localhost
+user     = debian-sys-maint
+password = dC6kQukIgXCUqqto
+socket   = /var/run/mysqld/mysqld.sock
+[mysql_upgrade]
+host     = localhost
+user     = debian-sys-maint
+password = dC6kQukIgXCUqqto
+socket   = /var/run/mysqld/mysqld.sock
+</code></pre>
+<p>其中包含了一个默认的用户名（<strong>debian-sys-maint</strong>）和随机密码（<strong>dC6kQukIgXCUqqto</strong>）。</p>
+<p>我们就用这个登录：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/etc/mysql/mysql.conf.d$ mysql -udebian-sys-maint -p
+Enter password:
+</code></pre>
+<p>注意输入密码的时候是看不见所以要分清大小写一个一个登录。</p>
+<p>如果你在这里报错：</p>
+<pre><code class="language-ssh">ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (13)
+</code></pre>
+<p>那就有点麻烦了，注意你报错的如果是这个，那可能是你的密码不正确，再多尝试几次：</p>
+<pre><code>ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)
+</code></pre>
+<p>登陆成功你可以跳转到MYSQL配置HIVE的部分，如果还是报错，请往下看。</p>
+<p>MYSQL有两种登陆方式，一个是通过ssh一个是通过TCP链接，我们尝试通过TCP链接一下：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/etc/mysql/mysql.conf.d$ mysql -u debian-sys-maint -h 127.0.0.1 -p
+Enter password:
+</code></pre>
+<p>果然通过TCP就可以了，说明我们的<strong>socket</strong>出了问题，一般是再MYSQL服务启动的时候会制动生成<strong>mysqld.sock</strong>，这里说是不行我就觉得很离谱。</p>
+<p>不过没关系我也找到了解决办法：</p>
+<p>首先可以尝试如下操作：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/etc/mysql$ cd /var/run/mysqld/
+bash: cd: /var/run/mysqld/: Permission denied
+</code></pre>
+<p>竟然被拒绝，先给对应的文件加上权限，可访问可运行：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/etc/mysql$ sudo chmod 777 /var/run/mysqld/
+</code></pre>
+<p>加上权限后再次检测状态，应该可以检测到了，如果还不能！</p>
+<p>不慌！我们还有办法：</p>
+<p>在安装的时候有个重要信息：</p>
+<pre><code class="language-ssh">update-alternatives: using /etc/mysql/mysql.cnf to provide /etc/mysql/my.cnf (my.cnf) in auto mode
+</code></pre>
+<p>意思是：在自动模式下使用**/etc/mysql/my.cnf (my.cnf)<strong>的配置文件去替代</strong>/etc/mysql/mysql.cnf** 的配置文件，这就意味着我们可以使用他来替代这个文件，不知道为什么这个配置文件会有这样的BUG，我在SO上找到了解决办法：</p>
+<p>注意！请先使用cp备份一下。</p>
+<pre><code>hadoop@LAPTOP-74GAR8S9:/etc/mysql$ sudo cp my.cnf my.cnf.buckup
+</code></pre>
+<p>删除对应配置文件，实际上应该是一个软连接到了mysql.cnf上，所以问题不大。</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/var/lib/mysql$ sudo rm -rf /etc/mysql/my.cnf
+</code></pre>
+<p>重启一下:</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/etc/mysql$ sudo service mysql restart
+</code></pre>
+<p>再次检测状态：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/etc/mysql$ sudo service mysql status
+</code></pre>
+<p>问题解决：</p>
+<pre><code class="language-ssh">adoop@LAPTOP-74GAR8S9:/etc/mysql$ sudo service mysql status
+ * /usr/bin/mysqladmin  Ver 8.0.29-0ubuntu0.20.04.3 for Linux on x86_64 ((Ubuntu))
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Server version          8.0.29-0ubuntu0.20.04.3
+Protocol version        10
+Connection              Localhost via UNIX socket
+UNIX socket             /var/run/mysqld/mysqld.sock
+Uptime:                 8 sec
+
+Threads: 2  Questions: 8  Slow queries: 0  Opens: 436  Flush tables: 3  Open tables: 27  Queries per second avg: 1.000
+</code></pre>
+<p>还有个小bug：</p>
+<pre><code>hadoop@LAPTOP-74GAR8S9:/home/jszszzy$ sudo service mysql restart
+ * Stopping MySQL database server mysqld                                          [ OK ]
+ * /etc/init.d/mysql: WARNING: /etc/mysql/my.cnf cannot be read. See README.Debian.gz
+ * Starting MySQL database server mysqld										[ OK ]
+</code></pre>
+<p>我们删除后会导致有警告，问题不大：</p>
+<p>我们将备份还原即可：</p>
+<p>注意所在路径。</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/etc/mysql$ sudo mv my.cnf.buckup my.cnf
+</code></pre>
+<p>登录MYSQL配置HIVE所需环境，你刚才是用来TCP登陆了，不过这里就是使用socket登录，密码还是前文随机的密码。</p>
+<pre><code>mysql -u debian-sys-maint -p
+</code></pre>
+<p>登陆结果如下：</p>
+<pre><code class="language-ssh">Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 12
+Server version: 8.0.29-0ubuntu0.20.04.3 (Ubuntu)
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+</code></pre>
+<p>修改初始密码：</p>
+<p>选择数据库，<code>use mysql</code></p>
+<pre><code>mysql&gt; use mysql
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+</code></pre>
+<p>先修改密码：<code>alter user 'root'@'localhost' identified by '123456';</code></p>
+<pre><code>mysql&gt; alter user 'root'@'localhost' identified by '123456';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt; select user,plugin from user;
++------------------+-----------------------+
+| user             | plugin                |
++------------------+-----------------------+
+| debian-sys-maint | caching_sha2_password |
+| mysql.infoschema | caching_sha2_password |
+| mysql.session    | caching_sha2_password |
+| mysql.sys        | caching_sha2_password |
+| root             | auth_socket           |
++------------------+-----------------------+
+5 rows in set (0.00 sec)
+</code></pre>
+<p>修改其密码格式<br>
+<code>update user set plugin='mysql_native_password' where user='root';</code></p>
+<p>查询其用户<code>select user,plugin from user;</code></p>
+<pre><code class="language-ssh">mysql&gt; update user set plugin='mysql_native_password' where user='root';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql&gt; select user,plugin from user;
++------------------+-----------------------+
+| user             | plugin                |
++------------------+-----------------------+
+| debian-sys-maint | caching_sha2_password |
+| mysql.infoschema | caching_sha2_password |
+| mysql.session    | caching_sha2_password |
+| mysql.sys        | caching_sha2_password |
+| root             | mysql_native_password |
++------------------+-----------------------+
+5 rows in set (0.00 sec)
+</code></pre>
+<p>保存权限修改：</p>
+<pre><code class="language-ssh">mysql&gt; flush privileges;
+Query OK, 0 rows affected (0.01 sec)
+</code></pre>
+<p>最后退出：</p>
+<pre><code class="language-ssh">mysql&gt; quit
+Bye
+</code></pre>
+<p>尝试登陆：</p>
+<pre><code class="language-ssh">hadoop@LAPTOP-74GAR8S9:/etc/mysql/mysql.conf.d$ mysql -u root -p
+Enter password:
+</code></pre>
+<p>登陆成功。</p>
+<p><img src="https://s2.loli.net/2024/09/29/PBhkb6jfCXrNGxU.png" alt="18"></p>
+<h2><span id="hive的mysql配置部分">Hive的mysql配置部分</span></h2>
+<p>剩下的请参考厦门大学林子雨老师的博客：<a target="_blank" rel="noopener" href="http://dblab.xmu.edu.cn/blog/2440-2/">大数据实验室</a>。直接到配置完成MYSQL,这部分有时间再写！</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/10/22/Spark(7)/" title="Spark快速大数据分析——Spark的部署与使用（柒）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Spark快速大数据分析——Spark的部署与使用（柒）</span></a><a class="button is-default" href="/2024/10/21/MOS%E7%AE%A1%20%E2%80%94%E2%80%94%20%E5%BF%AB%E9%80%9F%E5%A4%8D%E8%8B%8F%E5%BA%94%E7%94%A8%E7%AC%94%E8%AE%B0%5B%E5%8E%9F%E7%90%86%E7%AF%87%5D/" title="MOS管 —— 快速复苏应用笔记[参数与应用篇]"><span class="has-text-weight-semibold">Next: MOS管 —— 快速复苏应用笔记[参数与应用篇]</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2025</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>

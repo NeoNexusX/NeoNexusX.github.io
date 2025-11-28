@@ -1,0 +1,377 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>Android开发笔记——快速入门（Kotlin与lambda）</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="Android开发笔记——快速入门（Kotlin与lambda）
+
+
+软件环境：
+
+Jetbrains Toolbox
+Android Sudio 2021.1.1 Bumblebee
+JDK 17.0.2
+
+
+
+Kotlin与lambda
+
+Kotlin的集合
+
+kotlin的list
+kotlin可变的list
+
+kotlin的ArrayList
+
+
+kotlin的set
+kotlin的map
+
+
+kotlin的lambda
+
+什么时候需要传递lambda作为参数？
+kotlin的闭包
+
+kotlin函数式API
+kotlin的函数式接口
+Java的函数式接口作为参数
+kotlin的语法糖
+Java函数式API的语法糖
+
+
+
+
+
+
+
+
+[TOC]
+Kotlin与lambda
+Kotlin的集合
+在介绍l.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Android开发笔记——快速入门（Kotlin与lambda）</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Android开发笔记——快速入门（Kotlin与lambda）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">软件环境：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Kotlin与lambda</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Kotlin的集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">kotlin的list</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">kotlin可变的list</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">kotlin的ArrayList</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">kotlin的set</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">kotlin的map</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">kotlin的lambda</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">什么时候需要传递lambda作为参数？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">kotlin的闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">kotlin函数式API</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">kotlin的函数式接口</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">Java的函数式接口作为参数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">kotlin的语法糖</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">Java函数式API的语法糖</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Android"><i class="tag post-item-tag">Android</i></a><a href="/tags/Kotlin"><i class="tag post-item-tag">Kotlin</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Android开发笔记——快速入门（Kotlin与lambda）</h1><time class="has-text-grey" datetime="2024-10-21T16:00:00.000Z">2024-10-22</time><article class="mt-2 post-content"><h1><span id="android开发笔记快速入门kotlin与lambda">Android开发笔记——快速入门（Kotlin与lambda）</span></h1>
+<img src="https://s2.loli.net/2024/09/29/Y1eySEM3hX46p8C.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1727617420599" style="zoom:50%;">
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom: 50%;">
+<h4><span id="软件环境">软件环境：</span></h4>
+<ul>
+<li><strong>Jetbrains Toolbox</strong></li>
+<li><strong>Android Sudio 2021.1.1 Bumblebee</strong></li>
+<li><strong>JDK 17.0.2</strong></li>
+</ul>
+<!-- toc -->
+<ul>
+<li><a href="#kotlin%E4%B8%8Elambda">Kotlin与lambda</a>
+<ul>
+<li><a href="#kotlin%E7%9A%84%E9%9B%86%E5%90%88">Kotlin的集合</a>
+<ul>
+<li><a href="#kotlin%E7%9A%84list">kotlin的list</a></li>
+<li><a href="#kotlin%E5%8F%AF%E5%8F%98%E7%9A%84list">kotlin可变的list</a>
+<ul>
+<li><a href="#kotlin%E7%9A%84arraylist">kotlin的ArrayList</a></li>
+</ul>
+</li>
+<li><a href="#kotlin%E7%9A%84set">kotlin的set</a></li>
+<li><a href="#kotlin%E7%9A%84map">kotlin的map</a></li>
+</ul>
+</li>
+<li><a href="#kotlin%E7%9A%84lambda">kotlin的lambda</a>
+<ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E9%9C%80%E8%A6%81%E4%BC%A0%E9%80%92lambda%E4%BD%9C%E4%B8%BA%E5%8F%82%E6%95%B0">什么时候需要传递lambda作为参数？</a></li>
+<li><a href="#kotlin%E7%9A%84%E9%97%AD%E5%8C%85">kotlin的闭包</a>
+<ul>
+<li><a href="#kotlin%E5%87%BD%E6%95%B0%E5%BC%8Fapi">kotlin函数式API</a></li>
+<li><a href="#kotlin%E7%9A%84%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3">kotlin的函数式接口</a></li>
+<li><a href="#java%E7%9A%84%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3%E4%BD%9C%E4%B8%BA%E5%8F%82%E6%95%B0">Java的函数式接口作为参数</a></li>
+<li><a href="#kotlin%E7%9A%84%E8%AF%AD%E6%B3%95%E7%B3%96">kotlin的语法糖</a></li>
+<li><a href="#java%E5%87%BD%E6%95%B0%E5%BC%8Fapi%E7%9A%84%E8%AF%AD%E6%B3%95%E7%B3%96">Java函数式API的语法糖</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p>[TOC]</p>
+<h2><span id="kotlin与lambda">Kotlin与lambda</span></h2>
+<h3><span id="kotlin的集合">Kotlin的集合</span></h3>
+<p>在介绍lambda表达式之前先介绍一下kotlin中的集合类，传统意义上的集合主要是list和set还有map。下面来一一介绍一下kotlin中这些内容如何使用。</p>
+<h4><span id="kotlin的list">kotlin的list</span></h4>
+<p><strong>list的主要实现类是ArrayList与LinkedList</strong>，这里主要是介绍<strong>List</strong>而不是它的具体实现类</p>
+<p>List的特性很简单：</p>
+<ul>
+<li>允许出现重复的元素。</li>
+<li>元素有序，存入和取出的顺序一致。</li>
+<li>元素以一种线性的方式存储，在程序中可以通过索引来访问集合中的主要元素。</li>
+</ul>
+<p>使用传统的list像java一样通过函数一个一个初始化添加在kotlin中也是可以的：</p>
+<pre><code class="language-kotlin">val list_test = ArrayList&lt;String&gt;()
+list_test.add("apple")
+list_test.add("pear")
+</code></pre>
+<p>不过kotlin提供了更加方便的方法,我们使用<code>listof</code>来实现更加方便快捷:</p>
+<pre><code class="language-kotlin">val list_kotlin = listOf&lt;String&gt;("apple","pear")
+for (list in list_kotlin)
+println(list)
+</code></pre>
+<p>你可以注意到这里声明的list使用的是val关键字而不是var说明他是一个不可变的量，除了初始化添加的内容不允许再添加其他内容。</p>
+<p>输出结果如下</p>
+<pre><code class="language-shell">apple
+pear
+</code></pre>
+<h4><span id="kotlin可变的list">kotlin可变的list</span></h4>
+<p>kotlin中使用可修改的list也很简单，更换关键字为<code>mutableListOf</code>即可：</p>
+<pre><code class="language-kotlin">var list_var = mutableListOf("apple","pear")
+list_var.add("no fruits")
+println(list_var[0])
+println(list_var[2])
+</code></pre>
+<p>可以看到调用了add来进行添加。</p>
+<p>输出结果：</p>
+<pre><code class="language-kotlin">apple
+no fruits
+</code></pre>
+<h5><span id="kotlin的arraylist">kotlin的ArrayList</span></h5>
+<p>List与ArrayList的不同点：</p>
+<p>List实际上是接口并不是一个普通的类</p>
+<p>ArrayList继承了几乎全部的<strong>MutableList</strong>的方法，除了继承的方法ArrayList类内部还实现了两个独特的方法：</p>
+<pre><code class="language-kotlin">fun trimToSize()
+fun ensureCapacity(minCapacity: Int)
+</code></pre>
+<p>分别是可以扩容和缩小占用内存，具体可以见：<a target="_blank" rel="noopener" href="https://blog.csdn.net/gzheclipse/article/details/105956271">ArrayList的trimToSize</a>。</p>
+<p>但是！你如果使用<strong>mutableListOf</strong>来实现一个可变的列表，它实际上返回的就是<strong>ArrayList！</strong></p>
+<p>不信可以看源码：</p>
+<pre><code class="language-kotlin">/**
+ * Returns a new [MutableList] with the given elements.
+ * @sample samples.collections.Collections.Lists.mutableList
+ */
+public fun &lt;T&gt; mutableListOf(vararg elements: T): MutableList&lt;T&gt; =
+    if (elements.size == 0) ArrayList() else ArrayList(ArrayAsCollection(elements, isVarargs = true))
+</code></pre>
+<p>ArrayList是List接口的一个实现类，它是程序中最常见的一种集合。</p>
+<pre><code class="language-kotlin">val list_kotlin = arrayListOf("apple","pear")
+for (list in list_kotlin)
+    println(list)
+</code></pre>
+<p>它的使用和list基本一致，当然效率相较于list可能会有些下降，因为ArrayList集合在增加或删除指定位置的数据时，会创建新的数组导致效率变低。</p>
+<h4><span id="kotlin的set">kotlin的set</span></h4>
+<p>set类与list的不同在于底层，set不允许集合内存在相同的内容，set的集合底层使用的是hash映射机制来存放数据的，因此集合的元素保证了内容的不重复，但同时也失去了顺序。</p>
+<p>set的演示：</p>
+<pre><code class="language-kotlin">//set 演示
+val set_kotlin = setOf("apple","pear","apple")
+for (set in set_kotlin)
+    println(set)
+</code></pre>
+<p>可变set演示：</p>
+<pre><code class="language-kotlin">var set_var = mutableSetOf("1","2","3","4")
+for (set in set_var)
+    println(set)
+</code></pre>
+<h4><span id="kotlin的map">kotlin的map</span></h4>
+<p>map类就不再多说，实际上就是通过键值和内容实现的映射集合，值得注意的是他的迭代方式有所不同：</p>
+<pre><code class="language-kotlin">val map_test = HashMap&lt;String,Int&gt;()
+map_test["apple"] = 1
+map_test["banana"] = 2
+for ((fruit ,number) in map_test)
+    println("fruit is $fruit number is $number")
+</code></pre>
+<p>前面介绍过for循环转变为了迭代器，这里就充分发挥了其迭代器的特性，可以同时迭代map中的内容和键值。可以看到输出结果：</p>
+<pre><code class="language-kotlin">fruit is banana number is 2
+fruit is apple number is 1
+</code></pre>
+<p>当然kotlin也提供了简洁的写法通过<code>to</code>来实现，键值与内容的映射，但to在这里并不是关键字而实更复杂的内容，我们到后边再说：</p>
+<pre><code class="language-kotlin">val map_kotlin = mapOf("apple" to 1,"banana" to 2)
+for ((fruit ,number) in map_kotlin)
+    println("fruit is $fruit number is $number")
+</code></pre>
+<p>输出结果：</p>
+<pre><code class="language-kotlin">fruit is apple number is 1
+fruit is banana number is 2
+</code></pre>
+<p>可以看到两次输出结果并不一致，这里先挖一个坑，当然你也注意到set并不能直接用【】类似于数组下标的方式访问，这些等以后再详细说明。</p>
+<h3><span id="kotlin的lambda">kotlin的lambda</span></h3>
+<p>集合的函数式API作为lambda表达式的演示再好不过了。</p>
+<p>首先我们来说一说什么是lambda。</p>
+<p><strong>Lambda就是一小段可以作为参数传递的代码</strong>，这就很厉害，因为常规情况下我们作为参数传递的都是变量，而参数转变为lambda表达式的时候就可以传递进去一段带有逻辑处理的代码。</p>
+<p>对于一小段这个量词的定义并不明确，通产来说在能保持可读性的前提下可以尽量的短或长。</p>
+<p>lambda的常规语法：</p>
+<pre><code>{参数名1 ：参数类型，参数名2，参数类型 -&gt; 函数体（代码块）}
+</code></pre>
+<p>首先最外层是一个大括号，如果有参数需要向lambda传递的话我们需要先声明参数列表，参数列表的结尾是一个“-&gt;”这代表着参数的结束和函数体的开始，<strong>函数体的最后一行会自动作为lambda表达式的返回值</strong>。</p>
+<h4><span id="什么时候需要传递lambda作为参数">什么时候需要传递lambda作为参数？</span></h4>
+<p>在Java里面lambda表达式出现所要替代的对象实际上Java的<strong>单抽像方法接口</strong>也可以被叫做<strong>函数式接口</strong>，他俩共同的所代表的意义就是：</p>
+<p><strong>接口中有且仅有一个抽象方法需要被实现</strong>。</p>
+<p><strong>换句话说就是接口里面只有一个需要被实现的方法。</strong></p>
+<p>当<strong>这种类型的接口</strong>作为参数的时候，我们就需要传递一个内部匿名类来实现其抽象方法</p>
+<p>这里为了方便下边讲解先说几个结论，并不完全，可自行推广：</p>
+<ul>
+<li>kotlin的函数式API</li>
+<li>kotlin的函数式接口</li>
+<li>Java的函数式接口作为参数</li>
+</ul>
+<h4><span id="kotlin的闭包">kotlin的闭包</span></h4>
+<p>与其说Kotlin是一等公民，不如说是闭包才是一等公民。</p>
+<p>闭包在kotlin中常常指的就是由{}构成的lambda表达式，之所以叫他闭包，实际上就是因为他与函数有很大的区别，比如闭包可以访问外部环境的变量，普通函数想要访问外部环境的变量是需要传入参数的，而闭包可以直接访问，并将其保存下来，具体可见参考文章。</p>
+<p>参考文章：</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/b968524a0e95%E3%80%82">https://www.jianshu.com/p/b968524a0e95。</a></p>
+<p><a target="_blank" rel="noopener" href="https://kymjs.com/code/2017/04/09/01/#:~:text=%E9%97%AD%E5%8C%85%E5%BA%94%E8%AF%A5%E7%AE%97%E6%98%AF%20Kotlin%20%E6%9C%80%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E4%B9%8B%E4%B8%80%E4%BA%86%E3%80%82%20%E4%BD%BF%E7%94%A8%E5%A5%BD%E9%97%AD%E5%8C%85%E5%8F%AF%E4%BB%A5%E8%AE%A9%E4%BB%A3%E7%A0%81%E9%87%8F%E5%A4%A7%E5%A4%A7%E5%87%8F%E5%B0%91%EF%BC%8C%E4%BE%8B%E5%A6%82%20Kotlin%20%E6%9C%80%E8%91%97%E5%90%8D%E7%9A%84%E5%BC%80%E6%BA%90%E5%BA%93%EF%BC%9A%20Anko,%EF%BC%8C%E4%BD%BF%E7%94%A8%20Anko%20%E5%8E%BB%E5%8A%A8%E6%80%81%E4%BB%A3%E7%A0%81%E5%B8%83%E5%B1%80%EF%BC%8C%E6%AF%94%E4%BD%BF%E7%94%A8%20Java%20%E4%BB%A3%E7%A0%81%E9%85%8D%E5%90%88%20xml%20%E8%A6%81%E6%9B%B4%E5%8A%A0%E7%AE%80%E6%B4%81%E3%80%82%20%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%EF%BC%8C%E5%85%85%E5%88%86%E8%BF%90%E7%94%A8%E4%BA%86%E9%97%AD%E5%8C%85%E7%9A%84%E7%81%B5%E6%B4%BB%E6%80%A7%EF%BC%8C%E7%9C%81%E7%95%A5%E4%BA%86%E5%BE%88%E5%A4%9A%E7%9A%84%E4%B8%B4%E6%97%B6%E5%8F%98%E9%87%8F%E5%92%8C%E5%8F%82%E6%95%B0%E5%A3%B0%E6%98%8E%E3%80%82">闭包2</a>.</p>
+<p>我在这里举一个例子方便大家理解一下，如果看不懂看完本文再回过头来看效果更好：</p>
+<pre><code class="language-kotlin">    val list = listOf("Apple", "Banana", "Orange", "Pear",
+        "Grape", "Watermelon")
+    val newList = list.map() { fruit: String -&gt;
+        {fruit.uppercase() }}
+
+    for (fruit in newList) {
+        println(fruit)
+    }
+</code></pre>
+<p>这里实际上输出的是闭包或者说是函数类型常量。</p>
+<h5><span id="kotlin函数式api">kotlin函数式API</span></h5>
+<p>我们先说明什么是kotlin函数式API：</p>
+<p>先看一段代码，在最开始的一行我们定义了一个lambda表达式，他接受一个String类型的参数并返回字符的长度。</p>
+<pre><code class="language-kotlin">//lambda 表达式演示
+val lambda = { fruit:String -&gt; fruit.length}
+val Max = list_test.maxOf(lambda)
+println(Max)
+</code></pre>
+<p>我们跳转到maxof函数的定义去看看一看它的参数写的是什么：</p>
+<pre><code class="language-kotlin">public inline fun &lt;T, R : Comparable&lt;R&gt;&gt; Iterable&lt;T&gt;.maxOf(selector: (T) -&gt; R): R {
+    val iterator = iterator()
+    if (!iterator.hasNext()) throw NoSuchElementException()
+    var maxValue = selector(iterator.next())
+    while (iterator.hasNext()) {
+        val v = selector(iterator.next())
+        if (maxValue &lt; v) {
+            maxValue = v
+        }
+    }
+    return maxValue
+}
+</code></pre>
+<p>可以看到它的参数实际上就是一个lambda表达式：<code>selector: (T) -&gt; R</code></p>
+<p>是不是很简单？很明了？我们再来看看什么是kotlin的函数式接口：</p>
+<h5><span id="kotlin的函数式接口">kotlin的函数式接口</span></h5>
+<p>在kotlin1.4中更新了函数接口，与java不同的是，kotlin需要显示的来定义一个函数接口，在<code>interface</code>接口添加一个<code>fun</code>关键字就可以实现把他转换为函数式接口：</p>
+<pre><code class="language-kotlin">fun interface Eat
+{
+    fun eat_rice()
+}
+</code></pre>
+<p>当函数式接口作为参数的时候就可以使用kotlin的lamda表达式：</p>
+<pre><code class="language-kotlin">//lambda
+val lambda2 = { -&gt; println("lambda is ok with kotlin interface")}
+test.lambda_tester(lambda2)
+</code></pre>
+<p>因为原方法中并没有参数，所以前边也没有任何参数需要传递，我们可以简写成：</p>
+<pre><code class="language-kotlin">//lambda
+val lambda2 = { println("lambda is ok with kotlin interface")}
+test.lambda_tester(lambda2)
+</code></pre>
+<h5><span id="java的函数式接口作为参数">Java的函数式接口作为参数</span></h5>
+<p>如果我们在Kotlin代码中调用一个java方法，并且该方法只接收一个java单抽像方法接口作为参数，我们就可以使用lambda来传递参数：</p>
+<p>我们这里来拿java的Thread类来举例子：</p>
+<p>thread类的构造方法接收一个Runnable接口作为参数，Runnable是典型的函数式接口，里面只有一个run方法需要实现，当我们使用匿名内部类来实现的时候写法如下：</p>
+<pre><code class="language-kotlin">Thread(object :Runnable
+{
+    override fun run() {
+        println("kotlin is  ok with anonymous")
+    }
+}).start()
+</code></pre>
+<p>看起来很复杂，这里不再介绍匿名类的具体内容，你只需要知道 kotlin完全舍弃new关键字，这里的object类似于创建一个内部类，先尝试理解一下，实际上和这个感知还是有一定差距，到后面再说，我们直接来说如何用kotlin的lambda来实现java的函数式接口：</p>
+<pre><code class="language-kotlin">Thread(
+    Runnable{-&gt; println("kotlin is ok with java")}
+		).start()
+
+</code></pre>
+<p>语法格式：</p>
+<pre><code class="language-shell">接口名 { 参数 -&gt; 函数体 }
+</code></pre>
+<p>讲到这里我想你应该明白什么时候用lambda什么参数的情况下使用lambda。</p>
+<p>接下来我们顺着kotlin的设计思想，来讨论一下他的语法糖，上边为了你方便理解我并没有使用简写，但kotlin的最关键的还是他的语法糖，语法糖很甜。</p>
+<h5><span id="kotlin的语法糖">kotlin的语法糖</span></h5>
+<p>我们回到maxof方法：</p>
+<pre><code class="language-kotlin">//lambda 表达式演示
+val lambda = { fruit:String -&gt; fruit.length}
+val Max = list_test.maxOf(lambda)
+</code></pre>
+<p>实际上这里的lambda参数可以改写为：</p>
+<pre><code class="language-kotlin">val Max = list_test.maxOf({ fruit:String -&gt; fruit.length})
+</code></pre>
+<p>kotlin规定当lambda参数是函数的最后一个参数的时候可以放到括号外边：</p>
+<pre><code class="language-kotlin">val Max = list_test.maxOf(){ fruit:String -&gt; fruit.length}
+</code></pre>
+<p>接下来如果lambda表达式时函数唯一的参数的话还可以将括号省略：</p>
+<pre><code class="language-kotlin">val Max = list_test.maxOf{ fruit:String -&gt; fruit.length}
+</code></pre>
+<p>不要忘了kotlin具有很强的推导类型的能力，所以参数类型也可以省略：</p>
+<pre><code class="language-kotlin">val Max = list_test.maxOf{ fruit -&gt; fruit.length}
+</code></pre>
+<p>最后如果lambda表达式中只有一个参数的时候可以直接省略参数使用it来替代，同时“-&gt;”也可以省略：</p>
+<pre><code class="language-kotlin">val Max = list_test.maxOf{ it.length}
+</code></pre>
+<p>你会对这些省略规则感到复杂，其实抓住重点就是几条：</p>
+<ul>
+<li>最后一个参数 -&gt;移出到外边</li>
+<li>唯一参数 - &gt; 省略和替代</li>
+<li>参数类型-  &gt;可推导的省略</li>
+</ul>
+<p>我们按照这三个语法糖来实现代码优化：</p>
+<h5><span id="java函数式api的语法糖">Java函数式API的语法糖</span></h5>
+<pre><code class="language-kotlin">Thread(object :Runnable
+{
+    override fun run() {
+        println("kotlin is  ok with anonymous")
+    }
+}).start()
+</code></pre>
+<p>首先Runnable接口是一个java的函数式接口，也就是其中只有一个抽象方法，并且对于Tread来说构造函数也只有这样一个接口参数，这两个唯一就符合上边的省略的替代策略。</p>
+<p>省略接口名称，和重写方法的名称：</p>
+<pre><code class="language-kotlin">Thread({
+        println("kotlin is ok with java")
+    }).start()
+</code></pre>
+<p>同时他也是最后一个参数，也是唯一的参数省略括号和外移：</p>
+<pre><code class="language-kotlin">Thread{
+        println("kotlin is ok with java")
+    }.start()
+</code></pre>
+<p>牢记语法糖的实现规则，很方便的来优化代码。</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/10/22/Android/" title="Android开发笔记——快速入门（第一个Android项目）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Android开发笔记——快速入门（第一个Android项目）</span></a><a class="button is-default" href="/2024/10/22/Android%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%20(Kotlin%E5%85%A5%E9%97%A8)/" title="Android开发笔记——快速入门（Kotlin入门）"><span class="has-text-weight-semibold">Next: Android开发笔记——快速入门（Kotlin入门）</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2025</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>

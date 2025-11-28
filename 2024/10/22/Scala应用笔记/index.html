@@ -1,0 +1,797 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>Scala基础笔记</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="Scala基础笔记
+
+
+
+
+Scala的历史
+
+
+环境搭建
+
+1、SBT构建工具和REPL
+2、使用IDE：
+
+
+Scala 入门
+
+一点点补充
+Scala的脚本
+
+
+声明值和变量
+数据类型：
+Scala运算符
+Scala的控制语句
+
+Range:
+for循环
+
+
+Scala的数据结构
+元组和zip操作
+
+Zip操作
+
+
+集合
+类的定义
+
+辅助构造方法
+单例对象与main
+伴生对象
+
+
+方法与函数
+
+方法的定义
+方法的多参数列表
+函数简写规则
+
+
+类的继承：
+
+Scala Trait(特征)
+
+
+模式匹配
+
+样例类
+
+
+
+
+
+
+Scala的历史
+Scala于2001年由洛桑联邦理工学院（EPFL） 的编程方法实验室研发，它由Martin Odersky（马 丁•奥德斯基）创建。目前，许多公司依靠Java进行.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Scala基础笔记</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Scala基础笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Scala的历史</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">1、SBT构建工具和REPL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">2、使用IDE：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Scala 入门</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">一点点补充</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">Scala的脚本</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">声明值和变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">数据类型：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Scala运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Scala的控制语句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">Range:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">for循环</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Scala的数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">元组和zip操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">Zip操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">类的定义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">辅助构造方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">单例对象与main</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">伴生对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">方法与函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">方法的定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">方法的多参数列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">函数简写规则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">类的继承：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">Scala Trait(特征)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">模式匹配</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">样例类</span></a></li></ol></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Scala"><i class="tag post-item-tag">Scala</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Scala基础笔记</h1><time class="has-text-grey" datetime="2024-10-21T16:00:00.000Z">2024-10-22</time><article class="mt-2 post-content"><h1><span id="scala基础笔记">Scala基础笔记</span></h1>
+<img src="https://s2.loli.net/2024/09/29/fsQuzXhY4FKioqV.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1727611612601" style="zoom:50%;">
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom: 50%;">
+<!-- toc -->
+<ul>
+<li><a href="#scala%E7%9A%84%E5%8E%86%E5%8F%B2">Scala的历史</a></li>
+</ul>
+<ul>
+<li><a href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA">环境搭建</a>
+<ul>
+<li><a href="#1-sbt%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7%E5%92%8Crepl">1、SBT构建工具和REPL</a></li>
+<li><a href="#2-%E4%BD%BF%E7%94%A8ide">2、使用IDE：</a></li>
+</ul>
+</li>
+<li><a href="#scala-%E5%85%A5%E9%97%A8">Scala 入门</a>
+<ul>
+<li><a href="#%E4%B8%80%E7%82%B9%E7%82%B9%E8%A1%A5%E5%85%85">一点点补充</a></li>
+<li><a href="#scala%E7%9A%84%E8%84%9A%E6%9C%AC">Scala的脚本</a></li>
+</ul>
+<ul>
+<li><a href="#%E5%A3%B0%E6%98%8E%E5%80%BC%E5%92%8C%E5%8F%98%E9%87%8F">声明值和变量</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">数据类型：</a></li>
+<li><a href="#scala%E8%BF%90%E7%AE%97%E7%AC%A6">Scala运算符</a></li>
+<li><a href="#scala%E7%9A%84%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5">Scala的控制语句</a>
+<ul>
+<li><a href="#range">Range:</a></li>
+<li><a href="#for%E5%BE%AA%E7%8E%AF">for循环</a></li>
+</ul>
+</li>
+<li><a href="#scala%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">Scala的数据结构</a></li>
+<li><a href="#%E5%85%83%E7%BB%84%E5%92%8Czip%E6%93%8D%E4%BD%9C">元组和zip操作</a>
+<ul>
+<li><a href="#zip%E6%93%8D%E4%BD%9C">Zip操作</a></li>
+</ul>
+</li>
+<li><a href="#%E9%9B%86%E5%90%88">集合</a></li>
+<li><a href="#%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89">类的定义</a>
+<ul>
+<li><a href="#%E8%BE%85%E5%8A%A9%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95">辅助构造方法</a></li>
+<li><a href="#%E5%8D%95%E4%BE%8B%E5%AF%B9%E8%B1%A1%E4%B8%8Emain">单例对象与main</a></li>
+<li><a href="#%E4%BC%B4%E7%94%9F%E5%AF%B9%E8%B1%A1">伴生对象</a></li>
+</ul>
+</li>
+<li><a href="#%E6%96%B9%E6%B3%95%E4%B8%8E%E5%87%BD%E6%95%B0">方法与函数</a>
+<ul>
+<li><a href="#%E6%96%B9%E6%B3%95%E7%9A%84%E5%AE%9A%E4%B9%89">方法的定义</a></li>
+<li><a href="#%E6%96%B9%E6%B3%95%E7%9A%84%E5%A4%9A%E5%8F%82%E6%95%B0%E5%88%97%E8%A1%A8">方法的多参数列表</a></li>
+<li><a href="#%E5%87%BD%E6%95%B0%E7%AE%80%E5%86%99%E8%A7%84%E5%88%99">函数简写规则</a></li>
+</ul>
+</li>
+<li><a href="#%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF">类的继承：</a>
+<ul>
+<li><a href="#scala-trait%E7%89%B9%E5%BE%81">Scala Trait(特征)</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D">模式匹配</a>
+<ul>
+<li><a href="#%E6%A0%B7%E4%BE%8B%E7%B1%BB">样例类</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h3><span id="scala的历史">Scala的历史</span></h3>
+<p>Scala于2001年由洛桑联邦理工学院（EPFL） 的编程方法实验室研发，它由Martin Odersky（马 丁•奥德斯基）创建。目前，许多公司依靠Java进行 的关键性业务应用转向或正在转向Scala，以提高其开发效率、应用程序的可扩展性和整体的可靠性。</p>
+<p>Scala是Scalable Language的简称，它是一门多范式的编程语言， 其设计初衷是实现可伸缩的语言、并集成面向对象编程和函数式编程的 各种特性。</p>
+<p>可伸缩性，简单来说，是以更大的规模来做你现在所做的事。伸展一个 Web 应用的规模在于让更多的人使用你的程序。如果你没法找出方法在伸展规模的同时提高性能，没关系。而且只要你可以伸展规模来处理更大数量的用户，那么有几个单点故障（single point of failure）也没关系。</p>
+<p>Scala语言可以运行在Windows、Linux、Mac OS等系统上。由于Scala是运行在JVM平台上的， 所以安装Scala之前必须配置好JDK环境。具体的环境配置可以见下文。</p>
+<h2><span id="环境搭建">环境搭建</span></h2>
+<h3><span id="1-sbt构建工具和repl">1、SBT构建工具和REPL</span></h3>
+<p><a target="_blank" rel="noopener" href="http://www.scala-sbt.org">SBT构建工具官网</a> 安装 SBT，它是业内公认的构建工具。安装完成后，便可以在 Linux、OS X 终端、Windows 命令窗口中运行 sbt 命令。</p>
+<p>打开 shell 或命令行窗口，进入示例代码解压后的目录，敲入命令 <strong>sbt test</strong>，该命令会 下载所有的依赖项，包括 Scala 编译器及第三方库。下载完毕后，sbt 会编译代码并运行单元测试。该命令最后会输出 success 信息。再次运行 sbt test 命令，由于该命令不需要执行任何事情，你会发现命令很快就结束了，当你启动 sbt 命令时，假如不指定任何任务，SBT 将启动一个交互式 REPL（REPL 是 Read、Eval、Print、Loop 的简写，代表了“读取 - 求值 - 打印 - 循环”）。</p>
+<p>提示：如果报错JAVA version 0 请安装JDK，教程地址：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xch-yang/p/7629351.html">JDK 安装</a>。</p>
+<p>JDK，SBT ，安装完成后可以看到：</p>
+<p>执行：</p>
+<pre><code class="language-shell">sbt test
+</code></pre>
+<p>有一个警告：</p>
+<p><strong>No sbt.version set in project/build.properties, base directory: D:\Scalar\SBT\test</strong></p>
+<p><img src="https://s2.loli.net/2024/09/29/XEPScdRgH64ezVB.png" alt="baocuo"></p>
+<p>找到解决办法：</p>
+<pre><code>sbt sbtVersion
+</code></pre>
+<img src="https://s2.loli.net/2024/09/29/n7QJw8bpGAquY9U.png" alt="image-20240929192333080" style="zoom: 50%;">
+<pre><code class="language-shell">D:\Scalar\SBT\test&gt;sbt sbtVersion
+[info] Updated file D:\Scalar\SBT\test\project\build.properties: set sbt.version to 1.6.2
+[info] welcome to sbt 1.6.2 (Oracle Corporation Java 17.0.2)
+[info] loading project definition from D:\Scalar\SBT\test\project
+[info] set current project to test (in build file:/D:/Scalar/SBT/test/)
+[info] 1.6.2
+</code></pre>
+<p>最后通过<strong>console</strong>进入<strong>REPL</strong></p>
+<pre><code class="language-shell">&gt;sbt console
+[info] welcome to sbt 1.6.2 (Oracle Corporation Java 17.0.2)
+[info] loading project definition from D:\Scalar\SBT\test\project
+[info] set current project to test (in build file:/D:/Scalar/SBT/test/)
+[info] Non-compiled module 'compiler-bridge_2.12' for Scala 2.12.15. Compiling...
+[info]   Compilation completed in 8.133s.
+[info] Starting scala interpreter...
+Welcome to Scala 2.12.15 (OpenJDK 64-Bit Server VM, Java 17.0.2).
+Type in expressions for evaluation. Or try :help.
+</code></pre>
+<p>执行 <strong>scala</strong> 命令时，如果未指定主程序或脚本文件，那么 **scala **将进入 <strong>REPL</strong> 模式，这与在 <strong>sbt</strong> 中运行 <strong>console</strong> 命令类似。（不过，运行 <strong>scala</strong> 时的 <strong>classpath</strong> 与执 行 <strong>console</strong> 任务的 <strong>classpath</strong> 不同。）（如 果你未独立安装 Scala，在 sbt 中执行 console 任务也能进入 Scala REPL 环境）。此时， <strong>REPL</strong> 提示符是 <strong>scala&gt;</strong>。REPL 支持 tab 补全。</p>
+<h3><span id="2-使用ide">2、使用IDE：</span></h3>
+<p><strong>强烈建议使用IDEA，来进行scala开发，省去很多麻烦！</strong></p>
+<p>Idea 社区版 2021.3.2 自带 Scala 插件，无需另行安装，但需要下载 Scala 库。在 Idea 中选择“文件”-&gt;“新建”-&gt;“项目”菜单，在打开的“新建项目”窗口 的左侧列表中选择“Scala”项目类型，在右侧的列表中选择“Idea”子类型， 然后单击“下一步”按钮，如下图所示：</p>
+<p><img src="https://s2.loli.net/2024/09/29/Nftb2WoMBvZ3IVl.png" alt="idea"></p>
+<p>在打开的窗口中输入项目名称、软件包前缀信息并选择项目使用的 Scala 库。如果是使用 Idea 第一次创建 Scala 项目，需要点击“创建”按钮，下 载并创建 Scala 库，Scala 库的版本选择 2.13.8，如下图所示：</p>
+<p><img src="https://s2.loli.net/2024/09/29/pehr5bsZ9gSqW4A.png" alt="%AI_EC$AVRG0@RD@CNRM9F"></p>
+<p>库下载 完成以后，点击“新建项目”窗口中的“完成”按钮，完成 Scala 项目的创建，如 果创建成功，说明 Scala 开发环境配置成功。</p>
+<p><strong>IDEA</strong> 有另一种执行 <strong>REPL</strong> 的方式。特别是当你使用 <strong>Eclipse</strong>、<strong>IntelliJ</strong> IDEA 或 <strong>NetBeans</strong> 时，这种方式会更加实用。<strong>Eclipse</strong> 和 <strong>IDEA</strong> 支持 <strong>worksheet</strong> 功能，当你编辑 <strong>Scala</strong> 代码时，感觉不到它与正常地编辑编译代码或脚本代码有什么区别。不过一旦将该文件保 存，代码便会立刻被执行。因此，假如你需要修改并重新运行重要的代码片段，使用这种 开发方式比使用 <strong>REPL</strong> 更为方便。</p>
+<p>具体使用见：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43913245/article/details/120055975">worksheet指南</a></p>
+<h2><span id="scala-入门">Scala 入门</span></h2>
+<h4><span id="一点点补充">一点点补充</span></h4>
+<h4><span id="scala的脚本">Scala的脚本</span></h4>
+<p>有时我们会使用 scalac 来运行 Scala“脚本”文件，而 java 命令行却没有提供类似的功能。脚本文件的扩展名为 .sc，而编译后的文 件的扩展名为 .scala。通常，脚本文件往往也使用 .scala 扩展 名。不过如果使用 SBT 构建项目，SBT 会尝试编译这些以 scala 命名的文件，而这些脚本 文件却无法编译。脚本设计的初衷是为了简化代码，无须将声明（变量和 函数）封装在对象中便是一种简化。而将 Java 和 Scala 代码编译后，声明必须封装在对象 中（这是 JVM 字节码的需求）。scala 命令通过一个聪明的技巧解决了冲突：将脚本封装 在一个你看不到的匿名对象中。如果非要编译可以使用特殊命令：</p>
+<p>在 scalac 命 令中传入 -Xscript  参数， 表示你所选中的 main 类，它是生成的 Java 应用程序的入口点。</p>
+<p>关于匿名类将会在后边有机会再讨论。</p>
+<h3><span id="声明值和变量">声明值和变量</span></h3>
+<p>Scala 有两种类型的变量，一种是使用关键字 <strong>var</strong> 声明的变量，值是可变的，另一种是关键字 <strong>val</strong> 声明的变量，也叫常量值在初始化后不可变。</p>
+<pre><code class="language-scala">var myVar : String ="Hello"
+</code></pre>
+<pre><code class="language-scala">val myVal : String = "World"
+</code></pre>
+<p>提示 ：Scala 遵循 Java、C#、C 等语言的注释规则，// comment 只能作用到本行行尾， 而 /* comment */ 则可以跨行。</p>
+<p>Scala 的标识符，如方法名和变量名，中允许出现尖括号，例如定义“小于” 方法时，该方法常被命名为 &lt;，这在 Scala 语言中是允许的，而 Java 则不允 许标识符中出现这样的字符。因此，为了避免出现歧义，Scala 使用方括号 而不是尖括号表示参数化类型，并且不允许在标识符中使用方括号，这一点等我们到了泛型的时候再来讨论。</p>
+<h3><span id="数据类型">数据类型：</span></h3>
+<p>Scala中的所有值都有一个类型，包括数值和函数，但其数据类型都是对象，也就是说scala没有java中的原生类型。在scala是可以对数字等基础类型调用方法的。Scala 尽力使其面向对象特性更加一致，因此这些类型在 Scala 中是包含有方法的对象，就像引用类型一样。然而，Scala 编译时将这些类型尽可能地转为原生类型，使你可以得到原生类型的运行效率。</p>
+<table>
+<thead>
+<tr>
+<th>Byte</th>
+<th>8位有符号补码整数。数值区间为 -128 到 127</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Short</td>
+<td>16位有符号补码整数。数值区间为 -32768 到 32767</td>
+</tr>
+<tr>
+<td>Int</td>
+<td>32位有符号补码整数。数值区间为 -2147483648 到 2147483647</td>
+</tr>
+<tr>
+<td>Long</td>
+<td>64位有符号补码整数。数值区间为 -9223372036854775808 到 9223372036854775807</td>
+</tr>
+<tr>
+<td>Float</td>
+<td>32 位, IEEE 754 标准的单精度浮点数</td>
+</tr>
+<tr>
+<td>Double</td>
+<td>64 位 IEEE 754 标准的双精度浮点数</td>
+</tr>
+<tr>
+<td>Char</td>
+<td>16位无符号Unicode字符, 区间值为 U+0000 到 U+FFFF</td>
+</tr>
+<tr>
+<td>String</td>
+<td>字符序列</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>true或false</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>表示无值，和其他语言中void等同。用作不返回任何结果的方法的结果类型。Unit只有一个实例值，写成()。</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>null 或空引用</td>
+</tr>
+<tr>
+<td>Nothing</td>
+<td>Nothing类型在Scala的类层级的最底端；它是任何其他类型的子类型。</td>
+</tr>
+<tr>
+<td>Any</td>
+<td>Any是所有其他类的超类</td>
+</tr>
+<tr>
+<td>AnyRef</td>
+<td>AnyRef类是Scala里所有引用类(reference class)的基类</td>
+</tr>
+</tbody>
+</table>
+<img src="https://s2.loli.net/2024/09/29/lVv4NK9oaZqpbPE.png" alt="image-20240929192445337" style="zoom:80%;">
+<h3><span id="scala运算符">Scala运算符</span></h3>
+<p>Scala中算术操作符（+、-、 * 、/、%）的作用和 Java是一样的，位操作符（&amp;、|、&gt;&gt;、&lt;&lt;）也是一样 的。特别强调的是，Scala的这些操作符其实是方法。例 如，a+b其实是a.+(b)的简写。</p>
+<h3><span id="scala的控制语句">Scala的控制语句</span></h3>
+<p>Scala 也为 for 循环这一常见的控制结构提供了非常多的特性，这些 for 循环的特性被称为 for 推导式（for comprehension）或 for 表达式（for expression）。 事实上，推导式一词起源于函数式编程。它表达了这样一个理念：我们遍历一个或多个集合，对集合中的元素进行“推导”，并从中计算出新的事物，新推导出的事物往往是另一个集合。</p>
+<h4><span id="range">Range:</span></h4>
+<p>有时我们需要一个数字序列，从某个起点到某个终点。而 Range 能满足这个需要。以下 实例将展示如何创建 Range，支持 Range 的类型包括 Int、Long、Float、Double、Char、 BigInt、和 BigDecimal</p>
+<p>你创建的 Range 可以包含区间上限，也可以不包含区间上限；步长默认为 1，也可以指定 一个非 1 的步长：</p>
+<pre><code class="language-scala">import scala.math.BigDecimal.double2bigDecimal
+//range 演示
+for (i&lt;- 1 to 10)
+{
+  println(i)
+}
+output:
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+//不含右边界
+for (i &lt;- 1 until  10)
+{
+  println(i)
+}
+output:
+1
+2
+3
+4
+5
+6
+7
+8
+9
+//步长为3
+for (i &lt;- 1 to  10 by 3)
+{
+  println(i)
+}
+output:
+1
+4
+7
+10
+//非整数步长
+for (j &lt;- 1.1 to 10.3 by 3.1 )//需要头文件支持
+{
+  println(j)
+}
+output:
+1.1
+4.2
+7.3
+</code></pre>
+<h4><span id="for循环">for循环</span></h4>
+<p>基础结构如下：</p>
+<pre><code class="language-scala">for(变量&lt;-表达式/数组/集合)
+{
+    循环语句; 
+}
+</code></pre>
+<p>像 <strong>变量&lt;-表达式</strong> 这样的表达式也被称为<strong>生成器表达式（generator expression）</strong>，生成器表达式之所以叫这个名字，是因为该表达式会基于集合生成单独的数值。左箭头操作符 (&lt;-) 用于对像列表这样的集合进行遍历。</p>
+<p>当然可以用生成器表达式对数字区间进行访问,以这种方式编写的for更加自然。</p>
+<pre><code class="language-scala">for (i &lt;- 1 to 10)
+  println(i)
+
+output：
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</code></pre>
+<h3><span id="scala的数据结构">Scala的数据结构</span></h3>
+<p>Scala中包含两种数组，定长数组和变长数组，定义定长数组，需要使用new关键字，而 定义变长数组时，则需要导包import scala.collection.mutable.ArrayBuffer。</p>
+<p>这里的定长数组指的是，数组的长度不会随着变化。。</p>
+<pre><code class="language-scala">举个例子：
+&gt;&gt;&gt;&gt; var ab= new Array[Int](3)
+ab: Array[Int] = Array(0, 0, 0)
+</code></pre>
+<p>这个数组的长度就是3，但是存在一个问题就是如果我们使用追加函数。</p>
+<p>如下所示：</p>
+<pre><code class="language-scala">scala&gt; ab ++= Array(1,3,4,5)
+scala&gt; ab
+res1: Array[Int] = Array(0, 0, 0, 1, 3, 4, 5)
+</code></pre>
+<p>就离谱！它的长度还是变了。将我们追加的元素放了进去。不知道是怎么想的。</p>
+<p>你还会好奇是不是因为var或者val的问题？</p>
+<p>我们再来试一下：</p>
+<p>使用上文定义的数组，我来实现一个操作：</p>
+<pre><code class="language-scala">scala&gt; ab(1)=1
+scala&gt; ab
+res3: Array[Int] = Array(0, 1, 0, 1, 3, 4, 5)
+</code></pre>
+<p>果然内容被修改了。</p>
+<p>我们再来定义一个val的数组来试一试。</p>
+<pre><code class="language-scala">scala&gt; val ab2= new Array[Int](3)
+ab2: Array[Int] = Array(0, 0, 0)
+</code></pre>
+<p>里面的内容能不能修改呢？</p>
+<pre><code class="language-scala">scala&gt; ab2(2)=1
+scala&gt; ab2
+res10: Array[Int] = Array(0, 0, 1)
+</code></pre>
+<p>也是可以的！那么val到底是什么呢？</p>
+<pre><code class="language-scala">scala&gt; ab2++=Array(1,2,3,4)
+&lt;console&gt;:13: error: value ++= is not a member of Array[Int]
+  Expression does not convert to assignment because receiver is not assignable. ab2++=Array(1,2,3,4)
+</code></pre>
+<p>竟然报错啦！不过你可以意识到一个事情，实际上对于引用类型来说，val，var的实际区别在于其引用对象是否发生了修改，引用的对象的内容发生修改也是完全没有问题的！所以上文实际上是新的一个Array对象，并不是原来的长度发生了变化。</p>
+<h3><span id="元组和zip操作">元组和zip操作</span></h3>
+<p>元组的定义很简单，Scala的元组是对多个不同类型对象的一种简单封装，它将不同 的值用小括号括起来，并用逗号作分隔，即表示元组。</p>
+<pre><code class="language-scala">val tuple=(元素,元素...)
+</code></pre>
+<p>举个例子：</p>
+<pre><code class="language-scala">scala&gt; val tuple_names=("jszszzy","jszslxl")
+tuple_names: (String, String) = (jszszzy,jszslxl)
+</code></pre>
+<p>需要注意的是访问成员的时候需要如下表达式：</p>
+<pre><code class="language-scala">scala&gt; tuple_names._1
+res15: String = jszszzy
+</code></pre>
+<h4><span id="zip操作">Zip操作</span></h4>
+<p>zip操作实际上是把多个集合中的元素关联起来，将其合并成一个个元组，再放到集合中。</p>
+<p>举个例子：</p>
+<pre><code class="language-scala">scala&gt; val names=Array("jszszzy","jszslxl")
+names: Array[String] = Array(jszszzy, jszslxl)
+
+scala&gt; val scores=Array(1,2)
+scores: Array[Int] = Array(1, 2)
+
+scala&gt; names.zip(scores)
+res12: Array[(String, Int)] = Array((jszszzy,1), (jszslxl,2))
+</code></pre>
+<p>实际上每个Array中的元素变成了一个元组。</p>
+<p>当然这个方法不能对两个元组使用，否则会报错。</p>
+<pre><code class="language-scala">scala&gt; tuple_scores.zip(tuple_names)
+&lt;console&gt;:14: error: value zip is not a member of (Int, Int)
+       tuple_scores.zip(tuple_names)
+</code></pre>
+<h3><span id="集合">集合</span></h3>
+<p>在Scala中，集合有三大类： List、Set以及Map，所有的集合都扩展自Iterable特质 。 Scala 集合分为可变的（mutable）和不可变（immutable）的 集合：</p>
+<p>➢ 可变集合可以在适当的地方被更新或扩展，意味着可以对 集合进行修改、添加、移除元素</p>
+<p>➢ 不可变集合类，初始化后就永远不会改变。</p>
+<p>举个例子：</p>
+<pre><code class="language-Scala">// 字符串
+val fruit: List[String] =List("apples","oranges","pears")
+// 整型
+val nums: List[Int] = List(1, 2, 3, 4)
+// 空
+val empty: List[Nothing] = List()
+// 二维列表
+val dim: List[List[Int]] =
+List(
+List(1, 0, 0),
+List(0, 1, 0),
+List(0, 0, 1)
+)
+
+</code></pre>
+<p>在Scala中，Set是没有重复对象的集合，所有元素都是唯一 的。默认情况下，Scala 使用不可变Set集合，若想使用可变的 Set集合，则需要引入 scala.collection.mutable.Set 包。</p>
+<p>举个例子：</p>
+<pre><code class="language-scala">val set: Set[Int] = Set(1,2,3,4,5)
+</code></pre>
+<p>map</p>
+<p>在Scala中，Map是一种可迭代的键值对（key/value）结构， 并且键是唯一的，值不一定是唯一的，所有的值都是通过键来获取 的。Map中所有元素的键与值都存在一种对应关系，这种关系即为 映射。Map有两种类型，可变集合与不可变集合，默认是不可变 Map 。 若 需 要 使 用 可 变 的 Map 集 合 ， 则 需 要 引 入 import scala.collection.mutable.Map 类。</p>
+<p>举个例子：</p>
+<pre><code class="language-scala">var A:Map[Char,Int] = Map(键 -&gt; 值,键 -&gt; 值...)
+</code></pre>
+<h3><span id="类的定义">类的定义</span></h3>
+<p>无论是在Scala中还是Java中，类都是对象的抽象，而对象都是类的具体实例；类不占用内存，而对象占用存储空间。由于面向对象的核心是对 象，若想要在应用程序中使用对象，就必须得先创建一个类。类是用于描 述一组对象的共同特征和行为。</p>
+<p>在 Scala 中定义类时需要输入 class 关键字，整个类定义体包含在最外层的一对大括号中 （{…}）。事实上，这个类定义体同样也是这个类的主构造函数。假如需要将参数传递给这个构造函数，就要在类名之后输入参数列表。</p>
+<pre><code class="language-scala">class 类名 (参数列表)
+</code></pre>
+<p>Scala类的定义主体就是类的构造器，称为主构造器，在类名之后用圆括号列出主构造 器的参数列表 . 主构造器的参数前可以使用val或var关键字，Scala内部将自动为这些参数创建私有字段， 并提供对应的访问方法:</p>
+<p>举个例子：</p>
+<pre><code class="language-scala">scala&gt; class Person(val name:String)
+defined class Person
+
+scala&gt; val jszszzy = new Person("Jszszzy")
+jszszzy: Person = Person@55f4f59a
+
+//访问对应的成员属性，虽然是私有的但是默认提供了对应的访问方法。
+scala&gt; jszszzy.name
+res14: String = Jszszzy
+
+scala&gt; jszszzy.name="Jszslxl"
+&lt;console&gt;:12: error: reassignment to val
+       jszszzy.name="Jszslxl"
+</code></pre>
+<h4><span id="辅助构造方法">辅助构造方法</span></h4>
+<p>辅助构造方法使用this来作为方法名，this的返回类型为Unit，其定义格式如下：</p>
+<pre><code class="language-scala">class 类名{
+	def this(参数){
+		this(主构造器参数)
+		this.属性 = 参数;
+	}
+
+}
+</code></pre>
+<p>每个辅助构造器的第一个表达式必须是调用一个此前已经定义的辅助构造器或主构造器， 调用的形式为“this(参数列表)”</p>
+<h4><span id="单例对象与main">单例对象与main</span></h4>
+<p>与Java不同的是，Scala中提供了object这个关键字用来实现单例模式，使用关键字object创 建的对象为单例对象。你如果在类的文件中直接定义一个mian方法是不能直接运行的，在IDEA中会报错：</p>
+<pre><code class="language-scala">package priv.jszszzy.test
+
+class HelloWorld
+{
+  var myVar : String ="Hello"
+  val myVal : String = "World"
+  def main(strings: Array[String]): Unit =
+  {
+    println(myVar + myVal)
+  }
+}
+
+ERROR: main 方法不是类 priv.jszszzy.test.HelloWorld 中的static, 请将 main 方法定义为: public static void main(String[] args)
+</code></pre>
+<p>但是scala没有static，这个其使用java虚拟机运行有很大关系，你需要这样定义：</p>
+<pre><code class="language-scala">package priv.jszszzy.test
+
+object HelloWorld
+{
+  var myVar : String ="Hello"
+  val myVal : String = "World"
+  def main(strings: Array[String]): Unit =
+  {
+    println(myVar + myVal)
+  }
+}
+</code></pre>
+<p>由此可以看出，其想要main的入口方法需要一个object的单例类，scala 将单例模式视为本语言的第一等级成员。尽管我们声明了一个类，不过 Scala 运行时只会创建 HelloWorld的一个实例。也就是说，你无法 通过 new 创建 HelloWorld 对象。就好像 Java 使用静态类型一样，其他语言使用类成员（class-level member），Scala 则使用对象进行处理。由于 HelloWorld 中并不包含状态信息，所以我们此 处的确不需要多个实例，使用单例便能满足需求。</p>
+<h4><span id="伴生对象">伴生对象</span></h4>
+<p>在一个源文件中有一个类和一个单例对象，若单例对象名与类名相同，则把 这个单例对象称作伴生对象（companion object），这个类则被称为是单例对象的伴生类（companion class）。类和伴生对象之间可以相互访问私有的方法和字段。</p>
+<ul>
+<li><strong>class 中要访问 object 中的私有属性，直接以 object 名来 “点” 相应的变量或方法即可，可以参考下面例子</strong>；</li>
+<li><strong>object 中要访问 class 中的私有属性，必须要通过 class 的对象引用来 “点” 相应变量或方法，可以参考下面例子</strong>。</li>
+</ul>
+<pre><code class="language-scala">package priv.jszszzy.test
+
+
+class HelloWorld
+{
+  private var myName : String ="companion class"
+  def test():Unit =
+  {
+    println(HelloWorld.myVal)
+    //调用伴生对象的成员
+  }
+}
+
+object HelloWorld
+{
+  private var myVar : String ="Hello"
+  private val myVal : String = "World"
+  private var c_ClassName : HelloWorld =new HelloWorld();
+
+  def test():Unit =
+  {
+    println(HelloWorld.myVar)
+  }
+
+  def main(strings: Array[String]): Unit =
+  {
+    println(myVar + myVal)
+    //伴生对象的成员
+    println(c_ClassName.myName)
+    //伴生对象的方法
+    HelloWorld.test()
+    // 伴生类的方法
+    c_ClassName.test()
+  }
+}
+
+output:
+HelloWorld
+companion class
+Hello
+World
+</code></pre>
+<h3><span id="方法与函数">方法与函数</span></h3>
+<p>对于大多数的面向对象编程语言而言，方法指的是类或对象中定义的函数。当调用方 法时，方法中的 this 引用会隐性地指向某一对象。当然，在大多数的 OOP 语言中， 方法调用的语法通常是 :</p>
+<pre><code class="language-scala">this.method_name(other_args)
+</code></pre>
+<p>本文中的“方法”也满足这一 常用规范。我们提到的“函数”尽管不是方法，但在某些时候通常会将方法也归入函 数。当前上下文能够认清它们的区别。</p>
+<h4><span id="方法的定义">方法的定义</span></h4>
+<pre><code class="language-scala">def functionName ([参数列表]):[return type]=
+{
+    function body
+    return [expr]
+}
+</code></pre>
+<p>函数定义：</p>
+<pre><code class="language-scala">val functionName ([参数列表]):[return type]=
+{
+    function body
+    return [expr]
+}
+
+</code></pre>
+<h4><span id="方法的多参数列表">方法的多参数列表</span></h4>
+<p>这里的 draw 方法有两个参数列表，每个参数列表都有一个参数，而不是拥有一个 具有两个参数的参数列表。</p>
+<pre><code class="language-scala">package priv.jszszzy.test
+
+object HelloWorld
+{
+  private var myVar : String ="Hello"
+  private val myVal : String = "World"
+
+  def MultiArgs(a : Int)(b :Int):Unit =
+  {
+    println(a)
+    println(b)
+  }
+  def main(strings: Array[String]): Unit =
+  {
+      /*那么，为什么要允许多个参数列表呢?
+      当最后一个参数列表只包含一个表示函数的参数时，多个参数列表的形式拥有整齐的块结构语法。
+      以下是我们调用新的 draw 方法的表达 方式：*/
+    MultiArgs(1){2}
+  }
+}
+</code></pre>
+<h4><span id="函数简写规则">函数简写规则</span></h4>
+<ul>
+<li>（1）return可以省略，Scala会使用方法体的最后一行代码作为返回值</li>
+<li>（2）返回值类型如果能够推断出来，那么可以省略</li>
+<li>（3）如果方法体只有一行代码，可以省略花括号</li>
+<li>（4）如果方法无参，则可以省略小括号。若定义方法时省略小括号，则调用该方法时，也需省略小括号；若定时方法时未省略，则调用时，可省可不省。</li>
+<li>（5）如果方法明确声明Unit，那么即使方法体中使用return关键字也不起作用</li>
+<li>（6）Scala如果想要自动推断无返回值，可以省略等号</li>
+<li>（7）如果方法明确使用return关键字，那么方法返回就不能使用自行推断了，需要声明返回值类型</li>
+</ul>
+<h3><span id="类的继承">类的继承：</span></h3>
+<ul>
+<li>
+<p>Scala和Java类似，只允许继承一个父类</p>
+</li>
+<li>
+<p>Java只能继承父类中非私有的属性和方法，而Scala可以继承父类中 的所有属性和方法。</p>
+<pre><code class="language-scala"> //父类
+class HelloWorld
+{
+  private var myName : String ="companion class"
+  def test():Unit =
+  {
+    println(HelloWorld.myVal)
+    //调用伴生对象的成员
+  }
+}
+
+//子类
+class HelloWorld_son extends HelloWorld
+{
+  var myName :String = "HelloWorld_Son"
+  override def test(): Unit =//需要加入override关键字，来重写非抽象方法
+  {
+    println(myName);
+  }
+}
+
+//主类用来运行函数
+object HelloWorld
+{
+  private var myVar : String ="Hello"
+  private val myVal : String = "World"
+    
+  //类的继承演示代码
+  def extendsTest(): Unit =
+  {
+    var son :HelloWorld_son= new HelloWorld_son()
+    son.test();
+  }
+  def main(strings: Array[String]): Unit =
+  {
+     //调用继承的方法
+    extendsTest()
+  }
+}
+
+output：
+HelloWorld_Son
+</code></pre>
+<h4><span id="scala-trait特征">Scala Trait(特征)</span></h4>
+<p>​	在Scala中，Trait（特质）的功能类似于Java中的接口，但Trait的 功能却比Java中的接口强大。例如，Trait可以对定义的字段和方法进行实现，而接口却不能。Scala中的Trait可以被类和对象使用关键字extends来继承。</p>
+<p>定义方法：</p>
+<pre><code class="language-scala">//特质演示
+trait HelloWorld_trait
+{
+  val trait_member = "trait"//特质成员
+  def traitTest ()= println(trait_member)//特质方法
+  def traitAbstratTest() :Unit//特质抽象方法
+}
+</code></pre>
+<p>部分代码演示：</p>
+<pre><code class="language-scala">package priv.jszszzy.test
+//父类
+class HelloWorld
+{
+  private var myName : String ="companion class"
+  def test():Unit =
+  {
+    println(HelloWorld.myVal)
+    //调用伴生对象的成员
+  }
+}
+
+object HelloWorld extends HelloWorld_trait
+{
+  private var myVar : String ="Hello"
+  private val myVal : String = "World"
+
+  def main(strings: Array[String]): Unit =
+  {
+     //调用重写后的抽象方法
+    HelloWorld.traitAbstratTest()
+  }
+  //重写特质的抽象方法
+  def traitAbstratTest(): Unit =
+  {
+    HelloWorld.traitTest()
+  }
+}
+
+//特质演示
+trait HelloWorld_trait
+{
+  val trait_member = "trait"
+  def traitTest ()= println(trait_member)
+  def traitAbstratTest() :Unit
+}
+</code></pre>
+</li>
+</ul>
+<h3><span id="模式匹配">模式匹配</span></h3>
+<p>每一个模式匹配都包含了一系列选项，每个都开始于<strong>case</strong>关键字，每个模式和表达式通过**=&gt;**来分开。值得一说的是，case在执行完语句后就不会再去执行其他case。</p>
+<pre><code class="language-scala">object Test {
+   def main(args: Array[String]) {
+      println(matchTest("two"))
+      println(matchTest("test"))
+      println(matchTest(1))
+      println(matchTest(6))
+
+   }
+   def matchTest(x: Any): Any = x match
+    {
+        //对应整型数值 1
+      case 1 =&gt; "one"
+        //对应字符串值 two
+      case "two" =&gt; 2
+        //case 对应类型模式，用于判断传入的值是否为整型
+      case y: Int =&gt; "scala.Int"
+        //表示默认的全匹配备选项
+      case _ =&gt; "many"
+   }
+}
+</code></pre>
+<h4><span id="样例类">样例类</span></h4>
+<p>使用了case关键字的类定义就是样例类(case classes)，样例类是种特殊的类，经过优化以用于模式匹配。</p>
+<p>使用后会有如下自动生成。</p>
+<ul>
+<li>构造器的每个参数都成为val，除非显式被声明为var，但是并不推荐这么做；</li>
+<li>在伴生对象中提供了apply方法，所以可以不使用new关键字就可构建对象；</li>
+<li>提供unapply方法使模式匹配可以工作；</li>
+<li>生成toString、equals、hashCode和copy方法，除非显示给出这些方法的定义。</li>
+</ul>
+<pre><code class="language-scala">object HelloWorld extends HelloWorld_trait
+{
+  def case_test(test : case_test): Unit =
+  {
+    test match
+    {
+      case x:case_test =&gt;println("This is case")
+      case case_test("jszszzy") =&gt; println("This is zzy")
+    }
+  }
+    
+  def main(strings: Array[String]): Unit =
+  {
+    //调用模板类测试方法
+    case_test(new case_test("jszszzy"));
+  }
+
+}
+//模式匹配演示
+case class case_test( name :String)
+</code></pre>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/10/22/Spark(2)/" title="Spark的WSL环境安装与Hadoop环境配置（贰）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Spark的WSL环境安装与Hadoop环境配置（贰）</span></a><a class="button is-default" href="/2024/10/22/Spark(3)/" title="Spark快速大数据分析——Spark的Hadoop配置（叁）"><span class="has-text-weight-semibold">Next: Spark快速大数据分析——Spark的Hadoop配置（叁）</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2025</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>

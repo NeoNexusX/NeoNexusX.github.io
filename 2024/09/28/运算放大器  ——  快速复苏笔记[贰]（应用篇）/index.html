@@ -1,0 +1,509 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>运算放大器  ——  快速复苏笔记[贰]（应用篇）</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="运算放大器  ——  快速复苏笔记[贰]（应用篇）
+
+
+
+
+资源获取
+前置知识
+
+基尔霍夫定律
+齐纳二极管/稳压二极管/Zener diode
+
+主要参数
+
+稳定电压(Uz)
+额定电流(Iz)
+动态电阻(Rz)
+额定功耗(Pz)
+反向漏电流(IR)
+
+
+
+
+
+
+运算放大器应用
+
+应用1
+
+反相比例运算电路
+反向放大的特殊情况
+电流放大\跨阻放大器
+反向加法电路
+
+
+思考问题
+
+平衡电阻大小的推导过程
+
+
+应用2
+
+正向比例运算
+电压跟随器
+同相加法器
+
+
+减法运算电路
+
+
+
+
+阅读前请参考专栏前一篇文章，了解一些基础知识。
+资源获取
+写这篇文章的原因是我经常会忘记运放是如何使用的，希望通过几个样例和分析能快速且详细的分析出来。部分电路的仿真和电路仿真软件，我已经上传到云盘，这里推荐阿里的云盘，不限速下载很快.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">运算放大器  ——  快速复苏笔记[贰]（应用篇）</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">运算放大器  ——  快速复苏笔记[贰]（应用篇）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">资源获取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">前置知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">基尔霍夫定律</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">齐纳二极管&#x2F;稳压二极管&#x2F;Zener diode</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">主要参数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">稳定电压(Uz)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">额定电流(Iz)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">动态电阻(Rz)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">额定功耗(Pz)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">反向漏电流(IR)</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">运算放大器应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">应用1</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">反相比例运算电路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">反向放大的特殊情况</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">电流放大\跨阻放大器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">反向加法电路</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">思考问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">平衡电阻大小的推导过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">应用2</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">正向比例运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">电压跟随器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">同相加法器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">减法运算电路</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Operational%20Amplifier"><i class="tag post-item-tag">Operational Amplifier</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">运算放大器  ——  快速复苏笔记[贰]（应用篇）</h1><time class="has-text-grey" datetime="2024-09-28T14:22:00.000Z">2024-09-28</time><article class="mt-2 post-content"><h1><span id="运算放大器-快速复苏笔记贰应用篇">运算放大器  ——  快速复苏笔记[贰]（应用篇）</span></h1>
+<img src="https://s2.loli.net/2024/09/29/oFphKzqP5k2iwmJ.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1727599199035" style="zoom:50%;">
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom: 50%;">
+<!-- toc -->
+<ul>
+<li><a href="#%E8%B5%84%E6%BA%90%E8%8E%B7%E5%8F%96">资源获取</a></li>
+<li><a href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86">前置知识</a>
+<ul>
+<li><a href="#%E5%9F%BA%E5%B0%94%E9%9C%8D%E5%A4%AB%E5%AE%9A%E5%BE%8B">基尔霍夫定律</a></li>
+<li><a href="#%E9%BD%90%E7%BA%B3%E4%BA%8C%E6%9E%81%E7%AE%A1%E7%A8%B3%E5%8E%8B%E4%BA%8C%E6%9E%81%E7%AE%A1zener-diode">齐纳二极管/稳压二极管/Zener diode</a>
+<ul>
+<li><a href="#%E4%B8%BB%E8%A6%81%E5%8F%82%E6%95%B0">主要参数</a>
+<ul>
+<li><a href="#%E7%A8%B3%E5%AE%9A%E7%94%B5%E5%8E%8Buz">稳定电压(Uz)</a></li>
+<li><a href="#%E9%A2%9D%E5%AE%9A%E7%94%B5%E6%B5%81iz">额定电流(Iz)</a></li>
+<li><a href="#%E5%8A%A8%E6%80%81%E7%94%B5%E9%98%BBrz">动态电阻(Rz)</a></li>
+<li><a href="#%E9%A2%9D%E5%AE%9A%E5%8A%9F%E8%80%97pz">额定功耗(Pz)</a></li>
+<li><a href="#%E5%8F%8D%E5%90%91%E6%BC%8F%E7%94%B5%E6%B5%81ir">反向漏电流(IR)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E5%BA%94%E7%94%A8">运算放大器应用</a>
+<ul>
+<li><a href="#%E5%BA%94%E7%94%A81">应用1</a>
+<ul>
+<li><a href="#%E5%8F%8D%E7%9B%B8%E6%AF%94%E4%BE%8B%E8%BF%90%E7%AE%97%E7%94%B5%E8%B7%AF">反相比例运算电路</a></li>
+<li><a href="#%E5%8F%8D%E5%90%91%E6%94%BE%E5%A4%A7%E7%9A%84%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5">反向放大的特殊情况</a></li>
+<li><a href="#%E7%94%B5%E6%B5%81%E6%94%BE%E5%A4%A7%E8%B7%A8%E9%98%BB%E6%94%BE%E5%A4%A7%E5%99%A8">电流放大\跨阻放大器</a></li>
+<li><a href="#%E5%8F%8D%E5%90%91%E5%8A%A0%E6%B3%95%E7%94%B5%E8%B7%AF">反向加法电路</a></li>
+</ul>
+</li>
+<li><a href="#%E6%80%9D%E8%80%83%E9%97%AE%E9%A2%98">思考问题</a>
+<ul>
+<li><a href="#%E5%B9%B3%E8%A1%A1%E7%94%B5%E9%98%BB%E5%A4%A7%E5%B0%8F%E7%9A%84%E6%8E%A8%E5%AF%BC%E8%BF%87%E7%A8%8B">平衡电阻大小的推导过程</a></li>
+</ul>
+</li>
+<li><a href="#%E5%BA%94%E7%94%A82">应用2</a>
+<ul>
+<li><a href="#%E6%AD%A3%E5%90%91%E6%AF%94%E4%BE%8B%E8%BF%90%E7%AE%97">正向比例运算</a></li>
+<li><a href="#%E7%94%B5%E5%8E%8B%E8%B7%9F%E9%9A%8F%E5%99%A8">电压跟随器</a></li>
+<li><a href="#%E5%90%8C%E7%9B%B8%E5%8A%A0%E6%B3%95%E5%99%A8">同相加法器</a></li>
+</ul>
+</li>
+<li><a href="#%E5%87%8F%E6%B3%95%E8%BF%90%E7%AE%97%E7%94%B5%E8%B7%AF">减法运算电路</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p>阅读前请参考专栏前一篇文章，了解一些基础知识。</p>
+<h2><span id="资源获取">资源获取</span></h2>
+<p>写这篇文章的原因是我经常会忘记运放是如何使用的，希望通过几个样例和分析能快速且详细的分析出来。部分电路的仿真和电路仿真软件，我已经上传到云盘，这里推荐阿里的云盘，不限速下载很快，<a target="_blank" rel="noopener" href="https://www.aliyundrive.com/s/kvHgWETjj9V">下载地址</a>。提取码: 00kx。</p>
+<h2><span id="前置知识">前置知识</span></h2>
+<h3><span id="基尔霍夫定律">基尔霍夫定律</span></h3>
+<p><strong>基尔霍夫电流定律</strong>也叫KCL。是说电路中任一节点上所流入的电流等于所流出的电流，也就是节点上电流的代数合为0。</p>
+<p><img src="https://s2.loli.net/2024/09/29/tFm8oQ2zqnRYLKC.jpg" alt="jehf"></p>
+<p><strong>节点:一个电路的分支点。在这里，可以把任意封闭曲线或曲面，看作一个广义的节点。像力学上的质量一样，可以把物体抽象成质点来分析。</strong></p>
+<p><img src="https://s2.loli.net/2024/09/29/OYGbJivFKlMP5L4.jpg" alt="img"></p>
+<p>简单来说你可以直接画一个圆，对于这个圆来说，这个圆就是一个节点，进入和出去这个圆的电流合为0。</p>
+<h3><span id="齐纳二极管稳压二极管zener-diode">齐纳二极管/稳压二极管/Zener diode</span></h3>
+<p><strong>稳压二极管的特点就是击穿后，其两端的电压基本保持不变</strong>。这个电压在手册中常说的是Nominal Zener Voltage，标称稳压值。这样，当把稳压管接入电路以后，若由于电源电压发生波动，或其它原因造成电路中各点电压变动时，负载两端的电压将基本保持不变。</p>
+<p>其反向特性是在反向电压低于反向击穿电压时，反向电阻很大，反向漏电流极小。但是，当反向电压临近反向电压的临界值时，反向电流骤然增大，称为击穿，在这一临界击穿点上，反向电阻骤然降至很小值。尽管电流在很大的范围内变化，而二极管两端的电压却基本上稳定在击穿电压附近，从而实现了二极管的稳压功能。其原理的关键点就在于过了稳压值的时候电阻很小，即使加上不同的电压，流过的电流也不会让其两端电压变化很大，这就达到了稳压的效果。</p>
+<p><img src="https://s2.loli.net/2024/09/29/VOeQxzG4mcghpja.png" alt="v2-5bbc8b3d2670ef1ebc2e4906359962df_720w"></p>
+<h4><span id="主要参数">主要参数</span></h4>
+<h5><span id="稳定电压uz">稳定电压(Uz)</span></h5>
+<p>指稳压二极管通过额定电流时两端产生的稳定电压值。该值随工作电流和温度的不同而略有改变。由于制造工艺的差别，同一型号稳压二极管的稳压值也不完全一致。例如，2CW51型稳压二极管的Vzmin为3.0V, Vzmax则为3.6V。</p>
+<h5><span id="额定电流iz">额定电流(Iz)</span></h5>
+<p>指稳压二极管产生稳定电压时通过该管的电流值。低于此值时，稳压二极管虽并非不能稳压，但稳压效果会变差;高于此值时，只要不超过额定功率损耗，也是允许的，而且稳压性能会好一些，但要多消耗电能。</p>
+<h5><span id="动态电阻rz">动态电阻(Rz)</span></h5>
+<p>指稳压二极管两端电压变化与电流变化的比值。该比值随工作电流的不同而改变，一般是工作电流愈大，动态电阻则愈小。例如，2CW7C稳压二极管的工作电流为 5mA时，Rz为18Ω;工作电流为1OmA时，Rz为8Ω;为20mA时，Rz为2Ω ; &gt; 20mA则基本维持此数值。</p>
+<h5><span id="额定功耗pz">额定功耗(Pz)</span></h5>
+<p>由芯片允许温升决定，其数值为稳定电压Vz和允许最大电流Izm的乘积。例如2CW51稳压二极管的Vz为3V，Izm为20mA，则该管的Pz为60mWo。</p>
+<h5><span id="反向漏电流ir">反向漏电流(IR)</span></h5>
+<p>指稳压二极管在规定的反向电压下产生的漏电流。例如2CW58稳压二极管的VR=1V时，IR=O.1uA;在VR=6V时，IR=10uA。</p>
+<h2><span id="运算放大器应用">运算放大器应用</span></h2>
+<p>前提：</p>
+<ul>
+<li>虚短：</li>
+</ul>
+<p>$$<br>
+Vin_+ = Vin_-<br>
+$$</p>
+<ul>
+<li>虚断：</li>
+</ul>
+<p>$$<br>
+Iin_+ = Iin_- = 0<br>
+$$</p>
+<h3><span id="应用1">应用1</span></h3>
+<h4><span id="反相比例运算电路">反相比例运算电路</span></h4>
+<p>这里我们先把电路放上来，在看这一篇之前请先去看参数篇，运放的基础知识。详见专栏：</p>
+<p><img src="https://s2.loli.net/2024/09/29/WQ9SznwGj2i4Ip1.png" alt="image-20220713225253744"></p>
+<p>V1是放大器电源输出为+5V的DC电压。</p>
+<p>V2是虚拟地电压，用来模拟没有直接接地的情况。这里提供的是一个2V的DC电压</p>
+<p>V3是正弦波，其参数如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/iOPrZW4tYSasCqD.png" alt="image-20220713225458473"></p>
+<p>反向放大推导：</p>
+<p>虚短：<br>
+$$<br>
+V_+ = V_- = V_{GND}\<br>
+V_{GND}为V-和V+的值<br>
+$$<br>
+虚断：以反相输入端为节点分析。<br>
+$$<br>
+\frac{V_{in} - V_{GND}}{R_2}= \frac{V_{GND} - V_{out}}{R3}\<br>
+KCL方法推导电流相等、方向相反，以V_{GND}到V_{out}为正方向。<br>
+$$</p>
+<p>化简得：<br>
+$$<br>
+V_{out} = V_{GND}(1+\frac{R_3}{R_2}) - V_{in}\frac{R_3}{R_2}<br>
+$$<br>
+我们试一试推导带入，上文情况下，Vout的输出结果是怎么样的：<br>
+$$<br>
+V_{out} = V_{GND}(1+\frac{R_3}{R_2}) - V_{in}\frac{R_3}{R_2}=2*(1+1.5) - V_{in}*1.5\<br>
+其中V_{in}=[0,2]，且为\sin{x}波形\<br>
+结果如下：V_{out}=[2,5]<br>
+$$<br>
+仿真的结果如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/6sIfbt3B4xAdM7F.png" alt="image-20220713231510637"></p>
+<h4><span id="反向放大的特殊情况">反向放大的特殊情况</span></h4>
+<p>可以看到下图中我们放大器的输入+接的是GND，这是一种特殊情况，对应的输入+接的是GND就是电压为0，我们再用上文的分析方法试一试：</p>
+<img src="https://s2.loli.net/2024/09/29/5V9rc6zRoMxkYt4.png" alt="img" style="zoom:67%;">
+<p>同样满足如下条件：</p>
+<p>虚短：<br>
+$$<br>
+V_+ = V_- = V_{GND} = GNDA =0\<br>
+V_{GND}为V-和V+的值<br>
+$$<br>
+虚断：<br>
+$$<br>
+\frac{V_{in} - V_{GND}}{R_2}= \frac{V_{GND} - V_{out}}{R3}\<br>
+KCL方法推导电流相等、方向相反，以V_{GND}到V_{out}为正方向。<br>
+$$</p>
+<p>化简得：<br>
+$$<br>
+V_{out} = -V_{in}\frac{R_3}{R_2}<br>
+$$<br>
+我们仿真一下，修改电路如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/Pk4uZlexUdCVaoT.png" alt="image-20220713232300943"></p>
+<p>对比上文的仿真，少了参考电压DC2V。</p>
+<p>输出结果会是什么呢？</p>
+<p><img src="https://s2.loli.net/2024/09/29/o2C8qleptixshH3.png" alt="image-20220713232404566"></p>
+<p>为什么V_out没有波形呢？这里提示一下是放大器电源的问题，因为放大器此时没有负电压，我们再来修改一下，为放大器添加一个负电源：</p>
+<p><img src="https://s2.loli.net/2024/09/29/WoXPJbE3ySlUs9g.png" alt="image-20220714123259531"></p>
+<p>因为AD8606的电源范围为0-6V，所以正负电源压差也不能超过6V，这里就是±3V。</p>
+<p>仿真后效果如下：<br>
+<img src="https://s2.loli.net/2024/09/29/jnFihtWDTMEsSIc.png" alt="image-20220714123348596"></p>
+<p>存在三种情况：</p>
+<ul>
+<li>$R3 &gt; R2$ 反相放大</li>
+<li>$R3 = R2$ 反相</li>
+<li>$R3 &lt; R2$ 反相缩小波形</li>
+</ul>
+<h4><span id="电流放大跨阻放大器">电流放大\跨阻放大器</span></h4>
+<p><strong>放大器常常还用于电流放大又叫跨阻放大器</strong>，结构更加简单，下面我先把电路举出来，然后解释一下原理：</p>
+<p>下面是电路仿真截图:</p>
+<p><img src="https://s2.loli.net/2024/09/29/ZCmsP8TX537fFLR.png" alt="image-20220713235705056"></p>
+<p>我们将反向输入端换成了一个DC电流源,其提供的电流大小为$5\times10^{-6}A$.</p>
+<p>下面我们来推导一下，它是如何放大的？</p>
+<p>首先也是满足如下两种条件：</p>
+<p>虚短：<br>
+$$<br>
+V_+ = V_- = V_{GND} \<br>
+V_{GND}为V-和V+的值<br>
+$$<br>
+虚断：<br>
+$$<br>
+I_1= \frac{V_{GND} - V_{out}}{R3}\<br>
+KCL方法推导电流相等、方向相反，以V_{GND}到V_{out}为正方向。<br>
+$$</p>
+<p>因为$V_{GND}$是虚拟地电位为0,这里的虚拟地指的是其虚短条件，所以可以简化成如下:<br>
+$$<br>
+V_{out}=-R3 * I_1<br>
+$$<br>
+这时候我们就知道了，放大器输出的电压实际上是电流的倍数关系。需要注意的是这里的倍数关系还存在一个负值，输出的时候是一个负电压，仿真结果如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/t9GzcO52KCkgB1p.png" alt="image-20220714123920761"></p>
+<p>你如果细心的话就会发现，实际上的值并不完全等于上述公式，为什么呢？我们分析的时候使用的是理想状态，实际上仿真的时候需要考虑偏置电压，详见上一篇运放参数。</p>
+<p>完整的公式如下：<br>
+$$<br>
+I_1= \frac{V_{GND} +V_{offset}- V_{out}}{R3}\<br>
+$$<br>
+我们测量一下$V_{offset}$的值：</p>
+<p><img src="https://s2.loli.net/2024/09/29/zyDOfgX9KIbhm4G.png" alt="image-20220714134120857"></p>
+<p>用上边的公式计算一下：<br>
+$$<br>
+V_{out}= V_{offset}-I_1{R3} = -40.096(mv)\<br>
+$$<br>
+<img src="https://s2.loli.net/2024/09/29/mdwlrQ67Xzt9KEL.png" alt="image-20220714134600871"></p>
+<p>我们再来增加一点难度：</p>
+<p><img src="https://s2.loli.net/2024/09/29/LplMndb1qkycJE4.png" alt="image-20220714000647944"></p>
+<p>我们在+输入端增加一个电压，是不是很眼熟？这该如何推导呢？同样满足如下条件：</p>
+<p>虚短：<br>
+$$<br>
+V_+ = V_- = V_{GND} \<br>
+V_{GND}为V-和V+的值<br>
+$$<br>
+虚断：<br>
+$$<br>
+I_1= \frac{V_{GND} - V_{out}}{R3}\<br>
+KCL方法推导电流相等、方向相反，以V_{GND}到V_{out}为正方向。<br>
+$$</p>
+<p>此时$V_{GND}=1V$，我们再来推导一下：<br>
+$$<br>
+V_{out} = V_{GND} - I_1*R_3<br>
+$$<br>
+仿真结果如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/oLt2db1UQEScOen.png" alt="image-20220714001003426"></p>
+<h4><span id="反向加法电路">反向加法电路</span></h4>
+<p><img src="https://s2.loli.net/2024/09/29/UO5pr7AiqcWCLQI.png" alt="image-20220720182419709"></p>
+<p>其中信号$V_3$的参数如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/g4G2IYZ9lizmEjs.png" alt="Alt"></p>
+<p>生成一个方波，周期位0.1s,上升下降波形较陡，持续时间为0.05s。</p>
+<p><img src="https://s2.loli.net/2024/09/29/aZIfPS4nACBMJRV.png" alt="Alt"></p>
+<p>信号$V_4$正弦波形如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/5zZL1eMg3l6okR9.png" alt="image-20220720182530450"></p>
+<p><img src="https://s2.loli.net/2024/09/29/knDIKa1Y5WCzyHM.png" alt="image-20220720182620369"></p>
+<p>推导过程如下：</p>
+<p>同时也满足如下条件：</p>
+<ul>
+<li>虚短：</li>
+</ul>
+<p>$$<br>
+Vin_+ = Vin_-<br>
+$$</p>
+<ul>
+<li>虚断：</li>
+</ul>
+<p>$$<br>
+Iin_+ = Iin_- = 0<br>
+$$</p>
+<p>则有：<br>
+$$<br>
+Vin_+ = Vin_- = 0\<br>
+I_{3} = I_{1}+I_{2}\电流跟随电阻序号<br>
+$$<br>
+对负数输入端使用KCL则有：<br>
+$$<br>
+\frac{V_{GND} - V_{out}}{R_3} = \frac{V_3 - V_{GND}}{R_1} + \frac{V_4 - V_{GND}}{R_2}<br>
+$$<br>
+化简得：<br>
+$$<br>
+V_{out}  = - (\frac{R_3}{R_1}V_3 + \frac{R_3}{R_2}V_4 )<br>
+$$<br>
+实现了放大和相加，上图电路仿真结果如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/IsHzU6NpWo8nLuV.png" alt="image-20220720183510646"></p>
+<h3><span id="思考问题">思考问题</span></h3>
+<p>上文中正向输入端总是接一个10k的电阻的原因是什么？</p>
+<p>其本质是平衡电阻，目的是为了减小运放输入偏置电流在电阻上形成的静态输入电压而带来误差(减少失调电压)。当运放的输入偏置电流较小，或信号较大，其影响可以忽略时，可以不用平衡电阻。某些并不需要平衡电阻。例如OPA227，其内部有校准好的电阻。</p>
+<h4><span id="平衡电阻大小的推导过程">平衡电阻大小的推导过程</span></h4>
+<p><a target="_blank" rel="noopener" href="http://www.ejiguan.cn/2021/changjianwtjd_0525/3512.html">平衡电阻</a></p>
+<img src="https://s2.loli.net/2024/09/29/WoXPJbE3ySlUs9g.png" alt="image-20220714123259531" style="zoom:80%;">
+<p>设输入电阻为$R2$，反馈电阻为$R3$，先假设同相端没有接平衡电阻，直接连接到地，设运放输入偏置电流为$IB$（同相端和反相端相同），流过$R2$和$R3$的电流分别为$I2$和$I3$，反相端电压为$V_-$，运放增益为$A$，那么在反相端运用$KCL$，有（设输入信号为0）：<br>
+$$<br>
+\frac{(0－V_-)}{R2}－\frac{(A - 1)V_-}{R3} ＝ I_B<br>
+$$<br>
+上式可得：<br>
+$$<br>
+V_- ＝ －\frac{(I_B × R2 × R3)}{R3＋(A - 1)R2}<br>
+$$<br>
+此时运放输出电压为：<br>
+$$<br>
+Vo＝A×\frac{(I_B×R2×R3)}{R3＋(A-1)R2}\<br>
+近似为：\<br>
+Vo＝I_B×((A*R2) // R3)\<br>
+注意这里是并联大小符号<br>
+$$<br>
+在不满足虚短的条件下，实际上$V_o$应该如何算呢？，需要注意的是这里不能直接使用虚短条件来运算，因为虚短的前提条件是忽略两端微小电压差。这里因为存在偏置电流所以不能省略。</p>
+<p>如何计算，这里直接说结论，具体怎么来的请看专栏前文：<br>
+$$<br>
+V_o= A * V_{in}\<br>
+V_{in} = V_+ - V_-<br>
+$$<br>
+理论上如果是直接使用虚短条件，$V_o$大的大小应该等于零，但是经过上文分析，并不等于0，这是因为$V_{GND}$处电压不等于0，如果同相端通过一个电阻$R1$到地，且$R1＝R2//R3$，那么同相输入端电压为：<br>
+$$<br>
+V_＋＝I_B * R_1<br>
+$$<br>
+再对反相端分析（设输入信号为0）：<br>
+$$<br>
+\frac{(0－V_-)}{R_2} - \frac{( A ×(V_-)－(V_- - V_+))}{R_3}＝I_B<br>
+$$<br>
+上式子 $I_B = 0$,则此时放大器输出也等于0。</p>
+<h3><span id="应用2">应用2</span></h3>
+<h4><span id="正向比例运算">正向比例运算</span></h4>
+<img src="https://s2.loli.net/2024/09/29/U6S5sYIMgDJQ1tz.png" alt="image-20220720174432642" style="zoom:80%;">
+<p>同时也满足如下条件：</p>
+<ul>
+<li>虚短：</li>
+</ul>
+<p>$$<br>
+Vin_+ = Vin_-<br>
+$$</p>
+<ul>
+<li>虚断：</li>
+</ul>
+<p>$$<br>
+Iin_+ = Iin_- = 0<br>
+$$</p>
+<p>此时VGND等于下边电压源所产生的电压，即满足下式：<br>
+$$<br>
+V_{GND}= V_+ = V_- = \sin{t}<br>
+$$<br>
+针对负输入端使用KCL可得：<br>
+$$<br>
+\frac{V_- - 0}{R_2}= \frac{V_{out} - V_{GND}}{R_3}<br>
+$$<br>
+化简得：<br>
+$$<br>
+V_+ \times (1+\frac{R_3}{R_2}) = V_{out}<br>
+$$<br>
+仿真结果如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/QnbGSp7vKAfkPdz.png" alt="image-20220720174423802"></p>
+<p>同相比例输入电阻大，输出电阻小。需要注意的是有些运放对正向放大倍数有一定要求，所以推荐仔细观看手册。</p>
+<h4><span id="电压跟随器">电压跟随器</span></h4>
+<p>主要特点：输入阻抗高，输出阻抗低，常作为阻抗变换和缓冲级，提高输出能力。</p>
+<img src="https://s2.loli.net/2024/09/29/nsbatXoFdxL7Kyc.png" alt="image-20220720175131290" style="zoom:80%;">
+<p>其放大特点是不放大，没错就是输出电压和输入电压保持一致，具体推导实在过于简单，使用虚短即可。</p>
+<p>一般的运放不能这样，只有数据手册寿命了，单位增益稳定（Unity-Gain Stable）的运放才可以:</p>
+<img src="https://s2.loli.net/2024/09/29/tKQh7F6bYdBkovZ.png" alt="image-20220720175614619" style="zoom:80%;">
+<p>仿真结果：</p>
+<p><img src="https://s2.loli.net/2024/09/29/Unu1b6SY8ygveRF.png" alt="image-20220720175116800"></p>
+<h4><span id="同相加法器">同相加法器</span></h4>
+<p>通向加法器是使用最多的加法器，因为某些信号可能是含有负电压的，而单片机内置的ADC是无法采集负电压的，所以我们需要通过加法器辣酱对应的电压抬升，实现负电压采集。</p>
+<p>举个例子，有以下电路：</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-9iBHL4zz-1658479233051)(<a target="_blank" rel="noopener" href="https://s3.bmp.ovh/imgs/2022/07/20/37ac9ad8f071b78e.png">https://s3.bmp.ovh/imgs/2022/07/20/37ac9ad8f071b78e.png</a>)]</p>
+<p>其中信号$V_3$的参数如下：</p>
+<img src="https://s2.loli.net/2024/09/29/5aQbxctulXmNfWk.png" alt="image-20220720184511182" style="zoom:80%;">
+<p>波形如下：</p>
+<img src="https://s2.loli.net/2024/09/29/wX7UQ21PrjbpeWY.png" style="zoom:80%;">
+<p>V4是一个DC1V的直流信号。</p>
+<p>同时也满足如下条件：</p>
+<ul>
+<li>虚短：</li>
+</ul>
+<p>$$<br>
+Vin_+ = Vin_-<br>
+$$</p>
+<ul>
+<li>虚断：</li>
+</ul>
+<p>$$<br>
+Iin_+ = Iin_- = 0<br>
+$$</p>
+<p>根据上式负输入端的分析则有：<br>
+$$<br>
+\frac{V_- - 0}{R2} =\frac{ V_{out} - V_-}{R_3}<br>
+$$<br>
+实际上我们对于$V_+$应该这样分析：</p>
+<p>使用叠加定理。为了确定每个独立源的作用，所有的其他电源的必须“关闭”（置零）：</p>
+<ol>
+<li>在所有其他独立<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/%E7%94%B5%E5%8E%8B%E6%BA%90">电压源</a>处用<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/%E7%9F%AD%E8%B7%AF">短路</a>（Short circuit）代替（从而消除电压，即令V = 0；理想<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/%E7%94%B5%E5%8E%8B%E6%BA%90">电压源</a>的内部阻抗为零（<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/%E7%9F%AD%E8%B7%AF">短路</a>））。</li>
+<li>在所有其他独立<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/%E7%94%B5%E6%B5%81%E6%BA%90">电流源</a>处用<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/%E5%BC%80%E8%B7%AF">开路</a>（Open circuit）代替 （从而消除电流，即令I = 0；理想的<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/%E7%94%B5%E6%B5%81%E6%BA%90">电流源</a>的内部阻抗为无穷大（开路））。</li>
+</ol>
+<p>依次对每个电源进行以上步骤，然后将所得的响应相加以确定电路的真实操作。所得到的电路操作是不同电压源和电流源的叠加。</p>
+<p>我们知道$Iin_+ = Iin_- = 0$,那么就存在下式：<br>
+$$<br>
+V_+  = \frac{V_3 - 0}{R1+R_4} *R4 + \frac{V_4 - 0}{R1+R_4} *R1<br>
+$$<br>
+再根据虚短和对负输入端的分析则有：<br>
+$$<br>
+V_{out} = (1+\frac{R_3}{R_2})(\frac{V_3 }{R1+R_4} *R4 + \frac{V_4}{R1+R_4} *R1)<br>
+$$<br>
+当R1=R4=R3=R2的时候：</p>
+<p>就满足：<br>
+$$<br>
+V_{out} =V_3+V_4<br>
+$$<br>
+仿真结果如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/JzfIbgt7FSCdWVU.png" alt="image-20220720193058452"></p>
+<p>其中V(gnd)为V+电压，V(n004)为V4信号，Vin和Vout如仿真中的标签。</p>
+<h3><span id="减法运算电路">减法运算电路</span></h3>
+<p>由于减法运算并不分正负所以我们把他单独列出来。</p>
+<p>减法常常用于输出差分信号。</p>
+<p>其电路一般如下：</p>
+<img src="https://s2.loli.net/2024/09/29/o8QblYrAjuDImHL.png" alt="image-20220720194053859" style="zoom:80%;">
+<p>其中V_3为正弦波：<br>
+<img src="https://s2.loli.net/2024/09/29/M84TyktCiAoQqX7.png" alt="image-20220720194138888"></p>
+<p>V_4为直流电源1V。</p>
+<p>同时也满足如下条件：</p>
+<ul>
+<li>虚短：</li>
+</ul>
+<p>$$<br>
+Vin_+ = Vin_- = V_{GND}<br>
+$$</p>
+<ul>
+<li>虚断：</li>
+</ul>
+<p>$$<br>
+Iin_+ = Iin_- = 0<br>
+$$</p>
+<p>其中V_+的计算方法如下：<br>
+$$<br>
+V_+ = \frac{R_4}{R_1+R_4} * Vin_+<br>
+$$<br>
+其中对负输入端使用KCL分析如下：<br>
+$$<br>
+\frac{Vin_- V_{GND}}{R_2} = \frac{ V_{GND} - V_{out}}{R_3}<br>
+$$<br>
+将$Vin_+ = Vin_- = V_{GND}$带入得：<br>
+$$<br>
+V_{out} = Vin_+ \frac{R_4}{R_1+R_4}(1+\frac{R_3}{R_2}) - Vin_-(\frac{R_3}{R_2})<br>
+$$<br>
+当$R_3 = R_4且 R_1 =R_2$条件满足时</p>
+<p>化简为：<br>
+$$<br>
+V_{out} = \frac{R_3}{R_2} ( Vin_+ -  Vin_-)<br>
+$$<br>
+满足减法电路。</p>
+<p>最后仿真结果如下：</p>
+<p><img src="https://s2.loli.net/2024/09/29/toi2znFSUPeArsp.png" alt="image-20220720200858123"></p>
+<p>其中V(gnd)为V+电压，V(n001)为V3信号，Vout如仿真中的标签。</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2024/09/29/NAS%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" title="NAS服务器使用说明"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: NAS服务器使用说明</span></a><a class="button is-default" href="/2024/09/28/%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%20%20%E2%80%94%E2%80%94%20%20%E5%BF%AB%E9%80%9F%E5%A4%8D%E8%8B%8F%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8F%82%E6%95%B0%E7%AF%87%EF%BC%89/" title="运算放大器  ——  快速复苏笔记（参数篇）"><span class="has-text-weight-semibold">Next: 运算放大器  ——  快速复苏笔记（参数篇）</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2025</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>
