@@ -1,0 +1,239 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>Rust 快速入门指北[引用与借用]</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="Rust 快速入门指北[引用与借用]
+
+
+由于所有权和作用域的作用，在我们使用函数的时候可能会不方便：对像 String 这类非 Copy 类型，按值传参会发生 Move，从而导致所有权转移。有办法在不转移所有权的前提下还能对数据进行操作和处理吗？Rust 当然可以，接下来我们将通过介绍引用与借用来解释这里面的机制：
+[TOC]
+引用与可变引用
+回到最早的例子：
+fn take_ownership(some_string: String)-&amp;gt; String {
+    println!(&quot;{}&quot;, some_string);
+    some_string
+}
+fn main()  {
+    let s1 = String::from(&quot;ownership test&quot;);
+    let mut s.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Rust 快速入门指北[引用与借用]</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Rust 快速入门指北[引用与借用]</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">引用与可变引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">悬垂引用（Dangling References）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">总结</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Rust"><i class="tag post-item-tag">Rust</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Rust 快速入门指北[引用与借用]</h1><time class="has-text-grey" datetime="2025-11-27T16:00:00.000Z">2025-11-28</time><article class="mt-2 post-content"><h1><span id="rust-快速入门指北引用与借用">Rust 快速入门指北[引用与借用]</span></h1>
+<img src="https://s2.loli.net/2026/01/04/kA9wNqIzTfLeQ7s.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1767517753573" style="zoom: 67%;">
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom:67%;">
+<p>由于所有权和作用域的作用，在我们使用函数的时候可能会不方便：对像 <code>String</code> 这类<strong>非 <code>Copy</code></strong> 类型，按值传参会发生 Move，从而导致所有权转移。有办法在<strong>不转移所有权</strong>的前提下还能对数据进行操作和处理吗？Rust 当然可以，接下来我们将通过介绍引用与借用来解释这里面的机制：</p>
+<p>[TOC]</p>
+<h2><span id="引用与可变引用">引用与可变引用</span></h2>
+<p>回到最早的例子：</p>
+<pre><code class="language-rust">fn take_ownership(some_string: String)-&gt; String {
+    println!("{}", some_string);
+    some_string
+}
+fn main()  {
+    let s1 = String::from("ownership test");
+    let mut s2 = s1;
+    s2 = take_ownership(s2);// 通过递交所有权和收回所有权来实现变量的延续
+    println!("{s2}, function!");
+}
+</code></pre>
+<p>我们可以提供一个 <code>String</code> 值的引用（reference）。<strong>引用</strong>（<em>reference</em>）像一个指针，因为它是一个地址，我们可以由此访问储存于该地址的属于其他变量的数据。与指针不同，引用在其生命周期内保证指向某个特定类型的有效值。</p>
+<p>修改例子为：</p>
+<pre><code class="language-rust">fn borrow_string(some_string: &amp;String) {  // 参数为 String 的引用（借用），不需要返回值
+    // some_string.push_str(", world"); // 暂时不启用
+    println!("{} function call", some_string);
+}  // 这里，some_string 离开了作用域。但因为它并不拥有引用值的所有权，所以什么也不会发生
+
+
+fn main() {
+    let s1 = String::from("ownership test");
+    let s2 = s1; // 这一行会发生 Move；这里保留 s2 只是为了和上一章例子呼应
+    borrow_string(&amp;s2);
+    println!("{s2}, function!");
+}
+</code></pre>
+<p>这里的<code>&amp;s2</code>为s2的引用，这个 &amp; 符号就是 <strong>引用</strong>，它们允许你使用值但不获取其所有权。其内存状态类似如下图1：</p>
+<img src="https://s2.loli.net/2025/11/27/gYf2IxValRN6yPL.png" alt="image-20251127211921949" style="zoom: 33%;">
+<p>我们将创建一个引用的行为称为 <strong>借用</strong>（<em>borrowing</em>）。正如现实生活中，如果一个人拥有某样东西，你可以从他那里借来。当你使用完后，必须还回去。因为我们并不拥有它的所有权。</p>
+<p>借用的时候，大多都是为了对被借用对象进行操作和更新，这里的例子我们同时也修改了<code>s2</code>为不可变对象，如果我们要对<code>s2</code>在函数里面进行更新和操作我们就要使用<strong>可变引用</strong>，其和可变变量一样，基于一个可变变量才能创建可变借用，我们修改例子：</p>
+<pre><code class="language-rust">fn borrow_string_mut(some_string: &amp;mut String) { // 可变借用
+    some_string.push_str(",  add something");
+    println!("{} function inside", some_string);
+} // 这里，some_string 离开了作用域。但因为它并不拥有引用值的所有权，所以什么也不会发生
+
+fn main() {
+    let s1 = String::from("ownership test");
+    let mut s2 = s1; // 修改为可变变量
+    borrow_string_mut(&amp;mut s2); // 传入可变引用
+    println!("{s2}, function out!");
+}
+</code></pre>
+<p>输出：</p>
+<pre><code class="language-text">ownership test, add something function inside
+ownership test, add something, function out!
+</code></pre>
+<p>可以看到 字符串添加了 <code>add something</code>的内容，你可能会好奇如果传入一个不可变的s2引用会怎么样，当然也是可以的，我们在函数里面不对它进行修改添加等操作，将一个可变变量以一个不可变变量的形式引用：</p>
+<pre><code class="language-text">warning: variable does not need to be mutable
+ --&gt; src/main.rs:9:13
+  |
+9 |         let mut s2 = s1;
+  |             ----^^
+  |             |
+  |             help: remove this `mut`
+  |
+  = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: `massflow_accelerator` (bin "massflow_accelerator") generated 1 warning
+</code></pre>
+<p>Rust的编译很智能，能提示出来，可以直接定义为不可变变量。</p>
+<p>可变引用有一个很大的限制：如果你有一个对该变量的可变引用，你就不能再创建对该变量的可变引用和不可变引用。尝试创建两个 <code>s</code> 的可变引用的代码会失败，但是创建多个不可变引用却是可以的，举个例子：</p>
+<pre><code class="language-rust">{
+    let s1 = String::from("ownership test");
+    let mut s2 = s1;
+
+    let s3: &amp;String = &amp;s2; // 创建一个不可变引用
+    let s4: &amp;String = &amp;s2; // 创建一个不可变引用
+
+    println!("s2: {}, s3: {}, s4: {}", s2, s3, s4);
+    borrow_string_mut(&amp;mut s2);
+    println!("{s2}, function out!");
+}
+</code></pre>
+<p>如果修改为：</p>
+<pre><code class="language-rust">{
+    let s1 = String::from("ownership test");
+    let mut s2 = s1;
+
+    let s3 = &amp;mut s2; // 创建一个可变引用
+    let s4: &amp;String = &amp;s2; // 创建一个不可变引用
+
+    println!("s2: {}, s3: {}, s4: {}", s2, s3, s4);
+}
+</code></pre>
+<p>则会报错：</p>
+<pre><code class="language-bash">   Compiling massflow_accelerator v0.1.0 (/home/neo/Desktop/Massflow_accelerator)
+error[E0502]: cannot borrow `s2` as immutable because it is also borrowed as mutable
+  --&gt; src/main.rs:12:27
+   |
+11 |         let s3 = &amp;mut s2; // 创建一个可变引用
+   |                  ------- mutable borrow occurs here
+12 |         let s4: &amp;String = &amp;s2; // 创建一个不可变引用
+   |                           ^^^ immutable borrow occurs here
+13 |         println!("s2: {}, s3: {}, s4: {}", s2, s3, s4);
+   |                                                -- mutable borrow later used here
+
+error[E0502]: cannot borrow `s2` as immutable because it is also borrowed as mutable
+  --&gt; src/main.rs:13:44
+   |
+11 |         let s3 = &amp;mut s2; // 创建一个可变引用
+   |                  ------- mutable borrow occurs here
+12 |         let s4: &amp;String = &amp;s2; // 创建一个不可变引用
+13 |         println!("s2: {}, s3: {}, s4: {}", s2, s3, s4);
+   |                                            ^^  -- mutable borrow later used here
+   |                                            |
+   |                                            immutable borrow occurs here
+   |
+   = note: this error originates in the macro `$crate::format_args_nl` which comes from the expansion of the macro `println` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+For more information about this error, try `rustc --explain E0502`.
+error: could not compile `massflow_accelerator` (bin "massflow_accelerator") due to 2 previous errors
+</code></pre>
+<p>这一限制以一种非常小心谨慎的方式允许可变性，防止同一时间对同一数据存在多个可变引用。因为大部分语言中变量任何时候都是可变的。这个限制的好处是 Rust 可以在编译时就避免数据竞争。<strong>数据竞争</strong>（<em>data race</em>）类似于竞态条件，它可由这三个行为造成：</p>
+<ul>
+<li>两个或更多指针同时访问同一数据。</li>
+<li>至少有一个指针被用来写入数据。</li>
+<li>没有同步数据访问的机制。</li>
+</ul>
+<h2><span id="悬垂引用dangling-references">悬垂引用（Dangling References）</span></h2>
+<p>在具有指针的语言中，很容易通过释放内存时保留指向它的指针而错误地生成一个<strong>悬垂指针</strong>（<em>dangling pointer</em>）—— 指向可能已被分配给其他用途的内存位置的指针。相比之下，在 Rust 中编译器确保引用永远也不会变成悬垂引用：</p>
+<p>常见的悬垂引用可以通过“作用域 + 所有权”相互影响的方式来展现：</p>
+<pre><code class="language-rust">fn main() {
+    let reference_to_nothing = dangle();// dangle 返回一个字符串的引用
+}
+
+fn dangle() -&gt; &amp;String {
+    let s = String::from("hello");// s 是一个新字符串
+
+    &amp;s// 返回字符串 s 的引用
+}// 这里 s 离开作用域并被丢弃。其内存被释放。
+</code></pre>
+<p>报错如下：</p>
+<pre><code class="language-bash">$ cargo run
+   Compiling ownership v0.1.0 (file:///projects/ownership)
+error[E0106]: missing lifetime specifier
+ --&gt; src/main.rs:5:16
+  |
+5 | fn dangle() -&gt; &amp;String {
+  |                ^ expected named lifetime parameter
+  |
+  = help: this function's return type contains a borrowed value, but there is no value for it to be borrowed from
+help: consider using the `'static` lifetime, but this is uncommon unless you're returning a borrowed value from a `const` or a `static`
+  |
+5 | fn dangle() -&gt; &amp;'static String {
+  |                 +++++++
+help: instead, you are more likely to want to return an owned value
+  |
+5 - fn dangle() -&gt; &amp;String {
+5 + fn dangle() -&gt; String {
+  |
+
+error[E0515]: cannot return reference to local variable `s`
+ --&gt; src/main.rs:8:5
+  |
+8 |     &amp;s
+  |     ^^ returns a reference to data owned by the current function
+
+Some errors have detailed explanations: E0106, E0515.
+For more information about an error, try `rustc --explain E0106`.
+error: could not compile `ownership` (bin "ownership") due to 2 previous errors
+</code></pre>
+<p>在报错信息里面涉及到了生命周期这个概念，目前还没介绍，后边会详细介绍。</p>
+<p>生命周期，作用域，借用，所有权等几个概念共同构建了Rust的内存管理部分，如果把C++的内存管理称之为手动模式，Python/Java称为自动模式，Rust就是半自动模式，其通过上述几个概念的相互作用最终构成了这种半自动模式。</p>
+<p>这里如想让代码正常运行，修改为返回s即可：</p>
+<pre><code class="language-rust">fn no_dangle() -&gt; String {
+    let s = String::from("hello");
+
+    s
+}//s的所有权被转移
+</code></pre>
+<h2><span id="总结">总结</span></h2>
+<ul>
+<li>在任意给定时间，<strong>要么</strong>只能有一个可变引用，<strong>要么</strong>只能有多个不可变引用。</li>
+<li>引用必须总是有效的。</li>
+<li>生命周期，作用域，借用，所有权等几个概念共同构建了Rust的内存管理部分</li>
+</ul>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2025/12/30/From%20JavaScript%20to%20TypeScript(2)/" title="From JavaScript to TypeScript"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: From JavaScript to TypeScript</span></a><a class="button is-default" href="/2025/11/28/Rust%20%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%E6%8C%87%E5%8C%97%5B%E6%89%80%E6%9C%89%E6%9D%83%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%5D/" title="Rust 快速入门指北[所有权与作用域]"><span class="has-text-weight-semibold">Next: Rust 快速入门指北[所有权与作用域]</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2026</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>

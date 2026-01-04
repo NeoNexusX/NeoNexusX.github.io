@@ -1,0 +1,593 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>From JavaScript to TypeScript</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="From JavaScript to TypeScript（2）Basic Variables and Number Types
+
+
+
+
+
+关键字
+保留字
+预定义
+字面量（Literal）
+变量的定义
+
+严格模式
+变量
+
+
+数值变量类型
+
+Number类型
+
+数值分隔符
+值的范围
+NaN
+
+
+BigInt类型
+非数值向的数值转换
+
+Number
+parseInt
+parseFloat
+
+
+
+
+
+
+关键字
+关键字（Keyword）就是 JavaScript 语言内部使用的一组名字（或称为命令）。这些名字具有特定的用途，用户不能自定义同名的标识符，具体内容如表所示。
+
+
+
+break
+delete
+if
+this
+while
+
+
+
+
+case
+do
+in
+throw
+with
+
+
+catch
+else
+inst.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">From JavaScript to TypeScript</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">From JavaScript to TypeScript（2）Basic Variables and Number Types</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">关键字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">保留字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">预定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">字面量（Literal）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">变量的定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">严格模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">数值变量类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Number类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">数值分隔符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">值的范围</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">NaN</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">BigInt类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">非数值向的数值转换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">Number</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">parseInt</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">parseFloat</span></a></li></ol></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/javascript"><i class="tag post-item-tag">javascript</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">From JavaScript to TypeScript</h1><time class="has-text-grey" datetime="2025-12-29T16:00:00.000Z">2025-12-30</time><article class="mt-2 post-content"><h1><span id="from-javascript-to-typescript2basic-variables-and-number-types">From JavaScript to TypeScript（2）Basic Variables and Number Types</span></h1>
+<img src="https://s2.loli.net/2026/01/03/h8HzEIaA6xZ3UjT.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1767453491323" style="zoom: 67%;">
+<img src="https://s2.loli.net/2025/12/30/ybuUSFvcs5MhCiE.jpg" alt="nodejs" style="zoom: 67%;">
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom:67%;">
+<!-- toc -->
+<ul>
+<li><a href="#%E5%85%B3%E9%94%AE%E5%AD%97">关键字</a></li>
+<li><a href="#%E4%BF%9D%E7%95%99%E5%AD%97">保留字</a></li>
+<li><a href="#%E9%A2%84%E5%AE%9A%E4%B9%89">预定义</a></li>
+<li><a href="#%E5%AD%97%E9%9D%A2%E9%87%8Fliteral">字面量（Literal）</a></li>
+<li><a href="#%E5%8F%98%E9%87%8F%E7%9A%84%E5%AE%9A%E4%B9%89">变量的定义</a>
+<ul>
+<li><a href="#%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F">严格模式</a></li>
+<li><a href="#%E5%8F%98%E9%87%8F">变量</a></li>
+</ul>
+</li>
+<li><a href="#%E6%95%B0%E5%80%BC%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B">数值变量类型</a>
+<ul>
+<li><a href="#number%E7%B1%BB%E5%9E%8B">Number类型</a>
+<ul>
+<li><a href="#%E6%95%B0%E5%80%BC%E5%88%86%E9%9A%94%E7%AC%A6">数值分隔符</a></li>
+<li><a href="#%E5%80%BC%E7%9A%84%E8%8C%83%E5%9B%B4">值的范围</a></li>
+<li><a href="#nan">NaN</a></li>
+</ul>
+</li>
+<li><a href="#bigint%E7%B1%BB%E5%9E%8B">BigInt类型</a></li>
+<li><a href="#%E9%9D%9E%E6%95%B0%E5%80%BC%E5%90%91%E7%9A%84%E6%95%B0%E5%80%BC%E8%BD%AC%E6%8D%A2">非数值向的数值转换</a>
+<ul>
+<li><a href="#number">Number</a></li>
+<li><a href="#parseint">parseInt</a></li>
+<li><a href="#parsefloat">parseFloat</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h2><span id="关键字">关键字</span></h2>
+<p>关键字（Keyword）就是 JavaScript 语言内部使用的一组名字（或称为命令）。这些名字具有特定的用途，用户不能自定义同名的标识符，具体内容如表所示。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>break</strong></th>
+<th style="text-align:center"><strong>delete</strong></th>
+<th style="text-align:center"><strong>if</strong></th>
+<th style="text-align:center"><strong>this</strong></th>
+<th style="text-align:center"><strong>while</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>case</strong></td>
+<td style="text-align:center"><strong>do</strong></td>
+<td style="text-align:center"><strong>in</strong></td>
+<td style="text-align:center"><strong>throw</strong></td>
+<td style="text-align:center"><strong>with</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>catch</strong></td>
+<td style="text-align:center"><strong>else</strong></td>
+<td style="text-align:center"><strong>instanceof</strong></td>
+<td style="text-align:center"><strong>try</strong></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>continue</strong></td>
+<td style="text-align:center"><strong>finally</strong></td>
+<td style="text-align:center"><strong>new</strong></td>
+<td style="text-align:center"><strong>typeof</strong></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>debugger（ECMAScript 5 新增）</strong></td>
+<td style="text-align:center"><strong>for</strong></td>
+<td style="text-align:center"><strong>return</strong></td>
+<td style="text-align:center"><strong>var</strong></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>default</strong></td>
+<td style="text-align:center"><strong>function</strong></td>
+<td style="text-align:center"><strong>switch</strong></td>
+<td style="text-align:center"><strong>void</strong></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h2><span id="保留字">保留字</span></h2>
+<p>保留字就是 JavaScript 语言内部预备使用的一组名字（或称为命令）。这些名字目前还没有具体的用途，是为 JavaScript 升级版本预留备用的，建议用户不要使用。具体说明如表所示。</p>
+<table>
+<thead>
+<tr>
+<th>abstract</th>
+<th>double</th>
+<th>goto</th>
+<th>native</th>
+<th>static</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>boolean</strong></td>
+<td><strong>enum</strong></td>
+<td><strong>implements</strong></td>
+<td><strong>package</strong></td>
+<td><strong>super</strong></td>
+</tr>
+<tr>
+<td><strong>byte</strong></td>
+<td><strong>export</strong></td>
+<td><strong>import</strong></td>
+<td><strong>private</strong></td>
+<td><strong>synchronized</strong></td>
+</tr>
+<tr>
+<td><strong>char</strong></td>
+<td><strong>extends</strong></td>
+<td><strong>int</strong></td>
+<td><strong>protected</strong></td>
+<td><strong>throws</strong></td>
+</tr>
+<tr>
+<td><strong>class</strong></td>
+<td><strong>final</strong></td>
+<td><strong>interface</strong></td>
+<td><strong>public</strong></td>
+<td><strong>transient</strong></td>
+</tr>
+<tr>
+<td><strong>const</strong></td>
+<td><strong>float</strong></td>
+<td><strong>long</strong></td>
+<td><strong>short</strong></td>
+<td><strong>volatile</strong></td>
+</tr>
+</tbody>
+</table>
+<p>ECMAScript 3 将 Java 所有关键字都列为保留字，而 ECMAScript 5 规定较为灵活，例如：</p>
+<ul>
+<li>在严格模式下，ES 5 变得更加谨慎，严格限制 implements、interface、let、package、private、protected、public、static、yield、eval（非保留字）、arguments（非保留字）的使用。</li>
+</ul>
+<h2><span id="预定义">预定义</span></h2>
+<p>JavaScript 预定义了很多全局变量和函数，用户也应该避免使用它们，具体说明如表所示。</p>
+<table>
+<thead>
+<tr>
+<th>arguments</th>
+<th>encodeURL</th>
+<th>Infinity</th>
+<th>Number</th>
+<th>RegExp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Array</strong></td>
+<td><strong>encodeURLComponent</strong></td>
+<td><strong>isFinite</strong></td>
+<td><strong>Object</strong></td>
+<td><strong>String</strong></td>
+</tr>
+<tr>
+<td><strong>Boolean</strong></td>
+<td><strong>Error</strong></td>
+<td><strong>isNaN</strong></td>
+<td><strong>parseFloat</strong></td>
+<td><strong>SyntaxError</strong></td>
+</tr>
+<tr>
+<td><strong>Date</strong></td>
+<td><strong>eval</strong></td>
+<td><strong>JSON</strong></td>
+<td><strong>parseInt</strong></td>
+<td><strong>TypeError</strong></td>
+</tr>
+<tr>
+<td><strong>decodeURL</strong></td>
+<td><strong>EvalError</strong></td>
+<td><strong>Math</strong></td>
+<td><strong>RangeError</strong></td>
+<td><strong>undefined</strong></td>
+</tr>
+<tr>
+<td><strong>decodeURLComponent</strong></td>
+<td><strong>Function</strong></td>
+<td><strong>NaN</strong></td>
+<td><strong>ReferenceError</strong></td>
+<td><strong>URLError</strong></td>
+</tr>
+</tbody>
+</table>
+<p>无论是在严格模式下还是在非严格模式下，都不要在定义变量名、函数名或者属性名时使用上面列举出的名字。</p>
+<h2><span id="字面量literal">字面量（Literal）</span></h2>
+<p>下面示例分别定义不同类型的直接量：</p>
+<p>字符串、数值、布尔值、正则表达式、特殊值、对象、数组和函数</p>
+<pre><code class="language-javascript">//1 Literal String 
+console.log("Hello, World!");
+//2 Literal Number
+console.log(1);
+//3 Literal Boolean
+console.log(true);
+//4 Null Literal
+console.log(null);
+//5 Literal regular expression
+console.log(/ab+c/);
+//6 Literal Array
+console.log([1, 2, 3]);
+//7 Literal Dictionary (Object)
+console.log({name: "John", age: 30});
+//8 function Literal
+console.log(function() { return "Hello"; });
+</code></pre>
+<p>输出结果：</p>
+<pre><code class="language-bash">Hello, World!
+1
+true
+null
+/ab+c/
+[ 1, 2, 3 ]
+{ name: 'John', age: 30 }
+[Function (anonymous)]
+</code></pre>
+<p>有趣的是，默认的log支持不同颜色来区分不同的变量：</p>
+<img src="https://s2.loli.net/2025/12/30/xkoeYhnvyCN8gI6.png" alt="image-20251230214518108" style="zoom: 50%;">
+<h2><span id="变量的定义">变量的定义</span></h2>
+<p>JavaScript 吸收了 Java、C 等语言的语法风格，但也存在一些独特的设定，下面将针对这些设定做出讲解。</p>
+<h3><span id="严格模式">严格模式</span></h3>
+<p>ES5 标准中增加了严格模式（Strict Mode）的概念。在这种模式下，一些不规范或不安全的写法会抛出错误；本质上，它更接近一种“更严格的 JavaScript 语义”。</p>
+<p>如果需要某个脚本使用严格模式，可在脚本开头加入：</p>
+<pre><code class="language-javascript">'use strict';
+</code></pre>
+<p>任何 JS 引擎看到这个编译指令之后都会切换到严格模式。<strong>比较特殊的是：ES6 的模块和类在默认情况下会自动启用严格模式</strong>。如果想要某个函数在该模式下执行，可以在函数开头添加这个指令：</p>
+<pre><code class="language-javascript">function doSomething(){
+	'use strict';
+}
+</code></pre>
+<h3><span id="变量">变量</span></h3>
+<p>在 ECMAScript 的语义下，变量是松散类型的：<strong>变量本质上是一个命名占位符；它保存的是值（或指向值的引用）</strong>。有 3 个关键字可以声明变量：</p>
+<ul>
+<li><strong>var</strong></li>
+<li><strong>let</strong></li>
+<li><strong>const</strong></li>
+</ul>
+<p><code>var</code> 关键字和另外两个关键字一样，后面跟一个变量名即可完成定义：</p>
+<pre><code class="language-javascript">var name;
+let name;
+const name;
+</code></pre>
+<p>三者存在很大的区别，这里就不详细介绍，我们等到下一篇作用域再进行。</p>
+<h2><span id="数值变量类型">数值变量类型</span></h2>
+<p>ES 规定了 7 种原始数据类型（Primitive Types）：</p>
+<ul>
+<li><strong>Undefined</strong></li>
+<li><strong>Null</strong></li>
+<li><strong>Boolean</strong></li>
+<li><strong>Number</strong></li>
+<li><strong>BigInt</strong></li>
+<li><strong>String</strong></li>
+<li><strong>Symbol</strong></li>
+</ul>
+<p>除此之外还有 <strong>Object</strong>（引用类型），它不是原始类型。</p>
+<p>这些类型足以表示各种常见数据。<strong>ECMAScript 的变量名通常采用驼峰命名：第一个单词首字母小写，后续单词首字母大写</strong>。</p>
+<h3><span id="number类型">Number类型</span></h3>
+<p>数值（Number）类型用来表示数值。JavaScript 中不区分整数和小数（浮点数），统一使用 Number 类型表示；其底层采用 IEEE 754 双精度浮点数（Float64）。如下例所示：</p>
+<pre><code class="language-javascript">// Number type variable
+var num = 42;
+console.log(num);//42
+
+var floatNum = 3.14;
+console.log(floatNum);//3.14
+</code></pre>
+<p>整数当然也支持 2 进制、8 进制、16 进制的字面量：</p>
+<pre><code class="language-javascript">'use strict';
+//binary type variable
+var binNum = 0b1010; // binary for 10
+console.log(binNum);
+
+//octal
+var octNum = 0o52; // octal for 42
+console.log(octNum);
+
+//octal (legacy)
+var octNum2 = 052; // octal for 42 (implicit)
+console.log(octNum2);
+
+//hexadecimal type variable
+var hexNum = 0x2A; // hexadecimal for 42
+console.log(hexNum);
+</code></pre>
+<p>需要注意的是，在严格模式下不允许使用隐式 8 进制声明，会报错：</p>
+<pre><code class="language-bash">/home/neo/Desktop/Example/JavaScript/example_variable.js:18
+var octNum2 = 052; // octal for 42 (older syntax)
+              ^^^
+
+SyntaxError: Octal literals are not allowed in strict mode.
+    at wrapSafe (node:internal/modules/cjs/loader:1378:20)
+    at Module._compile (node:internal/modules/cjs/loader:1428:41)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:174:12)
+    at node:internal/main/run_main_module:28:49
+
+Node.js v20.17.0
+</code></pre>
+<h4><span id="数值分隔符">数值分隔符</span></h4>
+<p>为了增加可读性，所有数值都可以使用下划线作为数值分隔符，解释器在解释的时候会自动忽略它们，比如：</p>
+<pre><code class="language-javascript">// BigInt type variable
+var bigIntNum = 1_000_000_000_000;
+console.log(bigIntNum); //1000000000000
+
+var bigfloatNum = 1_000_000.123_456;
+console.log(bigfloatNum); //1000000.123456
+</code></pre>
+<p>需要注意的是，下划线不能出现在字面量的开头或结尾，不能紧挨小数点，前面也不能有 0：</p>
+<pre><code class="language-javascript">var wrongNum1 = 1_000_.123; // Incorrect usage of underscore
+var wrongNum2 = 1._000; // Incorrect usage of underscore
+var wrongNum3 = 0_123; // Incorrect usage of underscore
+</code></pre>
+<h4><span id="值的范围">值的范围</span></h4>
+<p>数值的范围取决于 IEEE 754 标准。IEEE 754 浮点数采用二进制科学计数法，结构如下（以 double 为例）：</p>
+<ul>
+<li>1 位符号位（sign）</li>
+<li>11 位指数位（exponent）</li>
+<li>52 位尾数（fraction/mantissa）</li>
+</ul>
+<p>$$<br>
+(−1) ^{sign}×1.fraction×2^{exponent−1023}<br>
+$$</p>
+<p>JS 可以表示的<strong>最小的非 0 正数</strong>保存在 <code>Number.MIN_VALUE</code>，相反的<strong>最大值</strong>保存在 <code>Number.MAX_VALUE</code>。如果某次计算的绝对值超过了最大值，结果会变为 <code>Infinity</code> 或 <code>-Infinity</code>（取决于符号）；而当数值过小发生下溢时，结果会趋近于 <code>0</code>（可能变为 <code>0</code>）。如果要判断某个结果是否仍为有限数值，可以使用函数 <code>isFinite</code>；当结果为 <code>Infinity</code> 或 <code>-Infinity</code> 时会返回 <code>false</code>：</p>
+<pre><code class="language-javascript">var minValue = Number.MIN_VALUE;
+console.log(minValue);//5e-324
+
+var maxValue = Number.MAX_VALUE;
+console.log(maxValue);//1.7976931348623157e+308
+
+var infinityValue = Infinity;
+console.log(infinityValue);//Infinity
+
+var negativeInfinityValue = -Infinity;
+console.log(negativeInfinityValue);//-Infinity
+
+// isFinite
+var isFiniteValue = isFinite(100 / 0);
+console.log(isFiniteValue);//false
+</code></pre>
+<h4><span id="nan">NaN</span></h4>
+<p>还有一个特殊值 <code>NaN</code>（Not a Number），表示“不是一个可表示的数值结果”。例如对负数求平方根等操作会得到 <code>NaN</code>。需要注意的是，JS 提供的 <code>isNaN</code> 会先做类型转换，因此其行为可能和一些语言的“严格 NaN 判断”不一致：</p>
+<pre><code class="language-javascript">var notANumber = NaN;
+console.log(notANumber);//NaN
+
+isNaNValue = isNaN("123");
+console.log(isNaNValue);//false
+
+isNaNValue2 = isNaN(123);
+console.log(isNaNValue2);//false
+
+isNaNValue3 = isNaN(NaN);
+console.log(isNaNValue3);//true
+
+isNaNValue4 = isNaN("Hello");
+console.log(isNaNValue4);//true
+</code></pre>
+<p>字符串 “123” 会先被转换为数字 <code>123</code>，然后再判断。</p>
+<p>简单总结：<code>isNaN(x)</code> 会先尝试把 <code>x</code> 转成数字；如果转换后结果是 <code>NaN</code>，才返回 <code>true</code>。</p>
+<h3><span id="bigint类型">BigInt类型</span></h3>
+<p>BigInt 用于表示任意精度的大整数，超出普通 Number（即 IEEE 754 double）能精确表示的范围。BigInt 并不是把大数“转化”为能放入寄存器的数值，而是通过软件层面将大整数拆分成多个小块（通常每块是 32 位或 64 位），分别存储和运算。CPU 寄存器只能直接处理有限位数（如 32 位或 64 位）的整数。BigInt 的大数运算通常由 JavaScript 引擎用多段算法在内存中实现，分多步用寄存器处理每一小段，最后合成结果。</p>
+<p>它的设计目标之一是支持超过安全整数范围的整数：</p>
+<pre><code class="language-javascript">Number.MAX_SAFE_INTEGER; // 9007199254740991
+Number.MIN_SAFE_INTEGER; // -9007199254740991
+</code></pre>
+<p>这个范围的大整数。</p>
+<p>要创建 BigInt 可以使用如下方式：</p>
+<pre><code class="language-javascript">// BigInt test
+Number.MAX_SAFE_INTEGER; // 9007199254740991
+Number.MIN_SAFE_INTEGER; // -9007199254740991
+
+var bigIntNum = 111111111111111111n; // BigInt type variable
+console.log(bigIntNum);//111111111111111111n
+
+var bigIntNum2 = BigInt("12345678901234567890");
+console.log(bigIntNum2);//12345678901234567890n
+
+var bigIntNum3 = BigInt("0xFFFFFFFFF");
+console.log(bigIntNum3)//68719476735n
+</code></pre>
+<p>BigInt 支持几乎所有 Number 类型的算术运算，但其本身不支持如下运算符：</p>
+<ul>
+<li><code>&gt;&gt;&gt;</code>右移操作符</li>
+<li>一元<code>+</code>操作符</li>
+</ul>
+<p>BigInt 作为特殊类型与 Number 几乎完全独立，无法进行混合运算，但可以进行比较和排序。</p>
+<pre><code class="language-javascript">123 + 123n // type error
+</code></pre>
+<p>可以：</p>
+<pre><code class="language-javascript">console.log(123 &lt; 1234n); // true
+</code></pre>
+<h3><span id="非数值向的数值转换">非数值向的数值转换</span></h3>
+<p>有三个常用函数可以将非数值转换为数值：</p>
+<ul>
+<li><code>Number()</code>：用于将任何数据类型转换为数字</li>
+<li><code>parseInt()</code>：主要用于从字符串中解析整数</li>
+<li><code>parseFloat()</code>：主要用于从字符串中解析浮点数</li>
+</ul>
+<h4><span id="number">Number</span></h4>
+<p><code>Number()</code> 的转换规则相对复杂，包含以下内容：</p>
+<ol>
+<li>
+<p>字符串转 Number</p>
+<ul>
+<li>
+<p>纯数字字符串直接转为数字，如 “123” → 123</p>
+</li>
+<li>
+<p>如果字符串包含有效浮点值、十六进制值、科学计数法值也能转换，如 “3.14” → 3.14，“1e3” → 1000，<strong>字符串前面的 0 和空格都会被省略</strong>。</p>
+<ul>
+<li>
+<pre><code class="language-javascript">console.log(Number(" -123")); // -123
+console.log(Number("00001.1")); // 1.1
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>空字符串 “” 转为 0</p>
+</li>
+<li>
+<p>除此之外，非法数字字符串（如 “abc”）转为 NaN</p>
+<ul>
+<li>
+<pre><code class="language-javascript">console.log(Number("abc1.1")); // NaN
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>布尔值转 Number</p>
+<ul>
+<li>true → 1</li>
+<li>false → 0</li>
+</ul>
+</li>
+<li>
+<p>null 和 undefined</p>
+<ul>
+<li>null → 0</li>
+<li>undefined → NaN</li>
+</ul>
+</li>
+<li>
+<p>对象转 Number</p>
+<ul>
+<li>先调用对象的 valueOf()，再调用 toString()，最后尝试转换，如 {} → NaN，[1] → 1</li>
+</ul>
+</li>
+<li>
+<p>自动类型转换场景</p>
+<ul>
+<li>
+<p>算术运算符（如 +, -, *, /）会自动尝试将操作数转换为 Number</p>
+</li>
+<li>
+<p>比较运算符（如 &lt;, &gt;, ==）也会尝试转换</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>考虑到 <code>Number()</code> 的转换规则较复杂，在“把字符串转换为整数”的需求上通常使用 <code>parseInt()</code>；而在“把字符串转换为浮点数”的需求上使用 <code>parseFloat()</code>。二者用法相似，其中 <code>parseInt()</code> 的规则如下：</p>
+<h4><span id="parseint">parseInt</span></h4>
+<p><code>parseInt</code> 会从字符串第一个非空白字符开始解析：遇到非数字字符（不含开头的 <code>+</code>/<code>-</code>）就停止，并返回已解析的整数部分；如果第一个有效字符就不是数字（也不是 <code>+</code>/<code>-</code>），<strong>会立即返回 NaN（注意不是 0）</strong>。例如 <code>Number("")</code> 得到 0，但 <code>parseInt("")</code> 得到 NaN。</p>
+<pre><code class="language-javascript">console.log(parseInt("clue1234")); // NaN
+</code></pre>
+<p><code>parseInt</code> 还有第二个参数用于指定进制（radix）。例如强制按 16 进制解析可以传入 16；另外需要注意，<code>parseInt</code> 不会自动识别 <code>0b</code> 二进制前缀（因此下面例子只解析到开头的 <code>0</code>）：</p>
+<pre><code class="language-javascript">console.log(parseInt("1234blue")); // 1234
+console.log(parseInt("  0b1010")); // 0
+console.log(parseInt("0xA", 16)); // 10
+</code></pre>
+<p>需要注意的是，这三个函数的共同点在于，在 10 进制底数下都会<strong>自动忽略和省略开头多余的 0</strong>。</p>
+<pre><code class="language-javascript">console.log(parseInt("01010")); // 1010
+</code></pre>
+<h4><span id="parsefloat">parseFloat</span></h4>
+<p>相较于 <code>parseInt</code>，主要有两点：</p>
+<ul>
+<li>首先是没有进制参数，遇到 <code>0x</code> 这类输入通常只会解析到 <code>0</code>。</li>
+<li>其次是只有第一个小数点有效，其余小数点无效。</li>
+</ul>
+<pre><code class="language-javascript">console.log(parseFloat("  -123.45.56abc")); // -123.45
+</code></pre>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2025/12/30/From%20JavaScript%20to%20TypeScript(1)/" title="From JavaScript to TypeScript"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: From JavaScript to TypeScript</span></a><a class="button is-default" href="/2025/11/28/Rust%20%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%E6%8C%87%E5%8C%97%5B%E5%BC%95%E7%94%A8%E4%B8%8E%E5%80%9F%E7%94%A8%5D/" title="Rust 快速入门指北[引用与借用]"><span class="has-text-weight-semibold">Next: Rust 快速入门指北[引用与借用]</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2026</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>

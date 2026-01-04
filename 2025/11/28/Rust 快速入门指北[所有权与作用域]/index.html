@@ -1,0 +1,325 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>Rust 快速入门指北[所有权与作用域]</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="Rust 快速入门指北[所有权与作用域]
+
+
+所有权（ownership）
+所有权是一系列Rust用于内存管理的规则，相较于Python/Java的垃圾回收机制，Rust则通过所有权规则来对内存的使用和回收进行管理。
+Rust所有权规则
+Rust的所有权遵循以下规则：
+
+Rust 中的每一个值都有一个 所有者（owner）。
+值在任一时刻有且只有一个所有者。
+当所有者离开作用域，这个值将被丢弃。
+
+作用域
+作用域指的是一个项（item）在程序中有效的范围。
+假设在一个代码块**(Block)**:
+{
+    // 新的作用域开始
+    let s1 = &quot;hello&quot;; // 此处 s1 开始有效
+    println!(&quot;{}&quot;, s1);
+    //作用域结束
+}
+
+程序内存的分配机制
+系统的内.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Rust 快速入门指北[所有权与作用域]</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Rust 快速入门指北[所有权与作用域]</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">所有权（ownership）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Rust所有权规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">程序内存的分配机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">堆上数据的所有权和作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">堆变量的交互和移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">可变与不可变变量的移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">copy 和 clone</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">所有权和函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">返回值和作用域</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">总结</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Rust"><i class="tag post-item-tag">Rust</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Rust 快速入门指北[所有权与作用域]</h1><time class="has-text-grey" datetime="2025-11-27T16:00:00.000Z">2025-11-28</time><article class="mt-2 post-content"><h1><span id="rust-快速入门指北所有权与作用域">Rust 快速入门指北[所有权与作用域]</span></h1>
+<img src="https://s2.loli.net/2026/01/04/TinylHVZpO3kxae.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1767517637848" style="zoom: 67%;">
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom:67%;">
+<h2><span id="所有权ownership">所有权（<em>ownership</em>）</span></h2>
+<p>所有权是一系列Rust用于内存管理的规则，相较于Python/Java的垃圾回收机制，Rust则通过所有权规则来对内存的使用和回收进行管理。</p>
+<h3><span id="rust所有权规则">Rust所有权规则</span></h3>
+<p>Rust的所有权遵循以下规则：</p>
+<ul>
+<li>Rust 中的每一个值都有一个 所有者（owner）。</li>
+<li>值在任一时刻有且只有一个所有者。</li>
+<li>当所有者离开作用域，这个值将被丢弃。</li>
+</ul>
+<h2><span id="作用域">作用域</span></h2>
+<p>作用域指的是一个项（item）在程序中有效的范围。</p>
+<p>假设在一个代码块**(Block)**:</p>
+<pre><code class="language-rust">{
+    // 新的作用域开始
+    let s1 = "hello"; // 此处 s1 开始有效
+    println!("{}", s1);
+    //作用域结束
+}
+</code></pre>
+<h2><span id="程序内存的分配机制">程序内存的分配机制</span></h2>
+<p>系统的内存类型可分为：</p>
+<ul>
+<li><strong>全局段</strong>（Global segment）：负责存储全局变量和静态变量，生命周期等于程序执行的整个时间段。</li>
+<li><strong>代码段</strong>（Code segment）：包含组成我们程序的实际机器代码或指令，包括函数和方法。</li>
+<li><strong>栈</strong>（Stack）[有些错误的叫为 <strong>堆栈</strong>，早期翻译的旧称，实际上是不正确的]。用于局部变量、函数参数等。</li>
+<li><strong>堆</strong>（Heap）：灵活区域来存储大型数据，动态生命周期，在运行时按需分配或者释放。</li>
+</ul>
+<img src="https://s2.loli.net/2025/11/27/BQir9Z5JvSbDxE1.png" alt="image-20251127111940172" style="zoom:20%;" title="图1，程序内存分段">
+<p>在现代操作系统（Windows, Linux, macOS）中，每个程序启动时，操作系统都会给它分配一个独立的<strong>虚拟内存空间</strong>。也就是说程序拥有**自己独立的堆区域（逻辑上），但这个区域的“内存”是由操作系统授予的（物理上）。**操作系统管理所有的物理内存，它不关心你具体怎么用，它只负责按“页”（Page，通常是 4KB 大小）为单位，把内存“批发”给各个程序，当你的程序向系统申请内存的时候，操作系统就再划拨几页虚拟内存给你。</p>
+<p>上图1展示了，一个程序的内存的逻辑分段，当中的箭头表明了其扩展方向，当然操作系统不同其扩展方向不同，扩展方向分为：</p>
+<ul>
+<li><strong>上（Up）</strong>：指 <strong>高地址</strong>（High Address），例如 <code>0xFFFFFFFF</code>。</li>
+<li><strong>下（Down）</strong>：指 <strong>低地址</strong>（Low Address），例如 <code>0x00000000</code>。</li>
+</ul>
+<p>在Linux/x86下其模型可能是，下图2的形式，我们可以看到，Stack和Heap的位置发生了反转，不过这并不重要，重要的是二者延展方向是相对的。</p>
+<img src="https://s2.loli.net/2025/11/27/UxkVCz7T5t4rAgl.webp" alt="img" style="zoom:80%;">
+<p>按照上图的Linux主线程模型来说：</p>
+<ul>
+<li>栈的起始位置通常在内存的高地址区。当你往栈里压入数据（比如调用一个新的函数，或者声明一个新的局部变量）时，栈顶指针（Stack Pointer）会向 <strong>低地址</strong> 移动。</li>
+<li>堆的起始位置通常在内存的低地址区（在程序代码和静态数据区之上）。当你申请新的动态内存（如 Rust 的 <code>String::from</code> 或 C 的 <code>malloc</code>）时，堆的边界会向 <strong>高地址</strong> 移动。</li>
+<li>内存布局中，栈从高地址向下增长，堆从低地址向上增长，中间是空闲区。只要两者不碰头，程序就能运行。在实际中，由于64位系统虚拟内存空间极大，两者几乎不可能碰头。更常见的内存问题是：<strong>物理内存耗尽（OOM）</strong>，这通常发生在堆上，即申请的内存超过了物理内存上限；以及<strong>栈溢出</strong>，这是触碰了操作系统为栈设置的较小固定上限（如8MB），通常由无限递归等导致。</li>
+</ul>
+<p>堆和栈介绍：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/647302641">知乎，栈和堆的区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/36103513">知乎，栈和堆的延伸方向</a></li>
+</ul>
+<h2><span id="堆上数据的所有权和作用域">堆上数据的所有权和作用域</span></h2>
+<p>上述内容的代码块里面，<code>"hello"</code> 是一个字符串字面量（<code>&amp;'static str</code>），其字符串内容通常存放在程序的只读静态区域（可粗略理解为“全局/静态区”），生命周期贯穿整个程序运行。</p>
+<p>需要注意的是：<code>let s1 = "hello";</code> 这行代码里，栈上保存的是一个<strong>字符串切片</strong>（包含指针+长度，指向静态区的那段只读字符串），而不是把字符串内容本身拷贝到栈上。离开作用域时，<code>s1</code> 这个切片从栈上消失即可；而静态区的字符串字面量不会被释放。与之相对的堆数据变化较多，我们接下来将使用堆数据进行更详细的所有权和作用域介绍。</p>
+<p>Rust 有另一种字符串类型，<code>String</code>。这个类型管理被分配到堆上的数据，所以能够存储在编译时未知大小的文本。可以使用 <code>from</code> 函数基于字符串字面值来创建 <code>String</code>，如下：</p>
+<pre><code class="language-rust">{
+    let mut s = String::from("hello"); // 从此处起，s 是有效的
+    println!("{}", s);
+    s.push_str(", world!");
+    println!("{}", s);  // 使用 s
+} // 此作用域已结束，s 不再有效
+</code></pre>
+<h3><span id="堆变量的交互和移动">堆变量的交互和移动</span></h3>
+<p>在Rust中，堆变量的交互和移动与栈变量有很大区别，我们回顾下普通的栈变量：</p>
+<pre><code class="language-rust">{
+    let x = 5; // x 在此作用域内有效
+    let y = x + 2;
+    println!("y 的值是: {}", y);
+}
+</code></pre>
+<p>上述操作可以理解为：“将 <code>5</code> 绑定到 <code>x</code>；接着生成一个值 <code>x</code> 的拷贝并绑定到 <code>y</code>”</p>
+<p>但是在String里面情况发生了很大区别：</p>
+<pre><code class="language-rust">{
+    let s1 = String::from("hello");
+    let s2 = s1;
+    println!("{s1}, world!");
+}
+</code></pre>
+<img src="https://s2.loli.net/2025/11/27/YmHyB8qvA364cZC.png" alt="image-20251127173444714" style="zoom:33%;">
+<p>上图3展示了内存里面的结构形式，长度表示 <code>String</code> 的内容当前使用了多少字节的内存。容量是 <code>String</code> 从分配器总共获取了多少字节的内存。长度与容量的区别是很重要的，不过在当前上下文中并不重要，所以现在可以忽略容量。</p>
+<p>当我们将 <code>s1</code> 赋值给 <code>s2</code>，这里发生的是 <strong>移动（move）</strong>：</p>
+<ul>
+<li>底层表现为：把 <code>String</code> 在栈上的三元信息（指针、长度、容量）拷贝到 <code>s2</code>；</li>
+<li>但堆上的字符串内容<strong>不会</strong>被拷贝；</li>
+<li>同时，为避免二次释放，Rust 会让 <code>s1</code> 在语义上立即失效（不能再使用）。</li>
+</ul>
+<p>内存中数据的表现如下图4所示。</p>
+<img src="https://s2.loli.net/2025/11/27/NKTaImOycp3UlbH.png" alt="image-20251127173712663" style="zoom:33%;">
+<p>这和栈变量的复制形式有很大区别，栈变量的情况更类似如下图5：</p>
+<img src="https://s2.loli.net/2025/11/27/jnxq5pw1yAEg3Jl.png" alt="image-20251127174005558" style="zoom:33%;">
+<p>按照我们原来的所有权释放内存的<a href="###Rust%E6%89%80%E6%9C%89%E6%9D%83%E8%A7%84%E5%88%99">规则</a>：</p>
+<pre><code class="language-rust">    {
+      //进入作用域
+        let s1 = String::from("hello"); //此处S1生效
+        let s2 = s1; //此处S2生效
+        println!("{s1}, world!");
+    }// S1 和 S2 不再生效
+</code></pre>
+<p>当变量离开作用域后，Rust 自动调用 <code>drop</code> 函数并清理变量的堆内存。不过图 4 展示了两个数据指针指向了同一位置。这就有了一个问题：当 <code>s2</code> 和 <code>s1</code> 离开作用域，它们都会尝试释放相同的内存。这是一个叫做 <strong>二次释放</strong>（<em>double free</em>）的错误，也是之前提到过的内存安全性 bug 之一。两次释放（相同）内存会导致内存污染，它可能会导致潜在的安全漏洞。</p>
+<p>当然Rust在所有权的设计上做了一些调整，从而避免了这种情况的出现。实际上上述代码是无法通过编译的，其报错如下：</p>
+<pre><code class="language-bash">Compiling massflow_accelerator v0.1.0 ()
+warning: unused variable: `s2`
+ --&gt; src/main.rs:9:13
+  |
+9 |         let s2 = s1;
+  |             ^^ help: if this is intentional, prefix it with an underscore: `_s2`
+  |
+  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+error[E0382]: borrow of moved value: `s1`
+  --&gt; src/main.rs:10:20
+   |
+ 8 |         let s1 = String::from("hello");
+   |             -- move occurs because `s1` has type `String`, which does not implement the `Copy` trait
+ 9 |         let s2 = s1;
+   |                  -- value moved here
+10 |         println!("{s1}, world!");
+   |                    ^^ value borrowed here after move
+   |
+   = note: this error originates in the macro `$crate::format_args_nl` which comes from the expansion of the macro `println` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: consider cloning the value if the performance cost is acceptable
+   |
+ 9 |         let s2 = s1.clone();
+   |                    ++++++++
+
+For more information about this error, try `rustc --explain E0382`.
+warning: `massflow_accelerator` (bin "massflow_accelerator") generated 1 warning
+error: could not compile `massflow_accelerator` (bin "massflow_accelerator") due to 1 previous error
+</code></pre>
+<p>报错的关键有两部分：</p>
+<pre><code class="language-bash"> 8 |         let s1 = String::from("hello");
+   |             -- move occurs because `s1` has type `String`, which does not implement the `Copy` trait
+ 9 |         let s2 = s1;
+   |                  -- value moved here
+10 |         println!("{s1}, world!");
+   |                    ^^ value borrowed here after move
+</code></pre>
+<p>其中一个是<code>s1</code> has type <code>String</code>, which does not implement the <code>Copy</code> trait，另一个是 <code>value borrowed here after move</code></p>
+<p>造成第二个报错的原因是变量进行了<strong>移动</strong>(move)操作，移动之后变量就无效了，我们对移动操作的定义如下：</p>
+<p>类似如下的操作，我们都统称为<strong>移动</strong>：</p>
+<img src="https://s2.loli.net/2025/11/27/IHzEGwLNg4yoAmP.png" alt="image-20251127194509650" style="zoom:33%;">
+<p>其操作更像是浅拷贝，但实际上是拷贝指针、长度和容量而不拷贝数据，相较于拷贝操作，移动操作并没有保留第一个变量，所以其并不等价于浅拷贝。</p>
+<p>这样在移动之后，s1无效了，同时也避免了我们刚才所说的<strong>二次释放</strong>问题。</p>
+<h3><span id="可变与不可变变量的移动">可变与不可变变量的移动</span></h3>
+<p>上述过程中的移动操作都是建立在相同类型的变量下的，为了验证不可变与可变类型的转换，我们将撰写一个例子，输出可变之前的数据地址和堆地址，查看在移动过程中地址是否发生了改变：</p>
+<pre><code class="language-rust">{
+    let s1 = String::from("ownership test");
+
+    // 验证：打印 s1 指向的堆数据地址
+    println!("s1 指向的堆地址: {:p}", s1.as_ptr());
+    // 验证：打印 s1 变量本身的栈地址
+    println!("s1 变量的栈地址: {:p}", &amp;s1);
+
+    let mut s2 = s1;
+    // 此时 s1 已经失效 (Move)，不能再打印 s1 了
+
+    // 验证：打印 s2 指向的堆数据地址 (应该与 s1 的一样)
+    println!("s2 指向的堆地址: {:p}", s2.as_ptr());
+    // 验证：打印 s2 变量本身的栈地址 (应该与 s1 的不一样)
+    println!("s2 变量的栈地址: {:p}", &amp;s2);
+    //修改s2的堆上内容
+    take_ownership(&amp;mut s2);
+    println!("{s2}, function out!");
+}
+</code></pre>
+<p>输出：</p>
+<pre><code class="language-text">s1 指向的堆地址: 0x1047c1d60
+s1 变量的栈地址: 0x16bd261f8
+s2 指向的堆地址: 0x1047c1d60
+s2 变量的栈地址: 0x16bd262d0
+ownership test, add something function inside
+ownership test, add something, function out!
+</code></pre>
+<p>我们发现将不可变变量移交到可变变量后，变量本身（栈上的绑定/地址）发生了更新，但其指向的堆数据没有发生变化，且变得可操作了。</p>
+<h3><span id="copy-和-clone">copy 和 clone</span></h3>
+<p>关于第一个报错的原因，在讨论之前我们先说明一下，如何实现类似于图5的复制操作，也就是我们常说的深拷贝的操作。</p>
+<p>如果我们 <strong>确实</strong> 需要深度复制 <code>String</code> 中堆上的数据，而不仅仅是栈上的数据，可以使用一个叫做 <code>clone</code> 的常用方法：</p>
+<pre><code class="language-rust">    let s1 = String::from("hello");
+    let s2 = s1.clone();
+
+    println!("s1 = {s1}, s2 = {s2}");
+</code></pre>
+<p>这样两个变量都会同时存在，但这样会造成性能的浪费，相当消耗资源。</p>
+<p>在堆操作的数据往往如此，与此相对的对栈上的数据我们进行拷贝的时候不需要调用clone方法的：</p>
+<pre><code class="language-rust">  {
+      let x = 5; // x 在此作用域内有效
+      let mut y = x;
+      y = y + 1;
+      println!("x 的值是: {x},y 的值是: {y}");
+  }
+output ：x 的值是: 5,y 的值是: 6
+</code></pre>
+<p>对于整型（如 <code>i32</code>）来说，<strong>深拷贝和浅拷贝没有区别</strong>。整型的大小是固定的，完全存储在<strong>栈（Stack）<strong>上。整型不像</strong>String</strong>那样由“栈上的指针”指向“堆上的数据”，整型变量本身就持有数据的值。对于这一类数据长度固定的数据，没有深浅拷贝的区别，所以这里调用 <code>clone</code> 并不会与通常的浅拷贝有什么不同，我们可以不用管它。</p>
+<p>当然，这样的实现也是依赖于另一个叫做 <code>Copy</code> trait 的特殊注解，可以用在类似整型这样的存储在栈上的类型上，如果一个类型实现了 <code>Copy</code> trait，那么一个旧的变量在将其赋值给其他变量后仍然有效。</p>
+<p>同时Rust 不允许自身或其任何部分实现了 <code>Drop</code> trait 的类型使用 <code>Copy</code> trait。如果我们对其值离开作用域时需要特殊处理的类型使用 <code>Copy</code> 注解，将会出现一个编译时错误，这里实际上就能理解第一个报错： <code>move occurs because s1 has type String, which does not implement the Copy trait</code>,因为这里的<strong>String</strong>实际上持有<code>Drop</code> trait 。</p>
+<p>任何不需要分配内存或某种形式资源的类型都可以实现 <code>Copy</code>，如下是一些 <code>Copy</code> 的类型：</p>
+<ul>
+<li>所有整数类型，比如 <code>u32</code>。</li>
+<li>布尔类型，<code>bool</code>，它的值是 <code>true</code> 和 <code>false</code>。</li>
+<li>所有浮点数类型，比如 <code>f64</code>。</li>
+<li>字符类型，<code>char</code>。</li>
+<li>元组，当且仅当其包含的类型也都实现 <code>Copy</code> 的时候。比如，<code>(i32, i32)</code> 实现了 <code>Copy</code>，但 <code>(i32, String)</code> 就没有。</li>
+</ul>
+<h2><span id="所有权和函数">所有权和函数</span></h2>
+<p>将值传递给函数与给变量赋值的原理相似。向函数传递值可能会<strong>移动</strong>或者<strong>复制</strong>操作,触发操作的时候所有权产生变化，举个例子：</p>
+<pre><code class="language-rust">fn main() {
+      let s1 = String::from("ownership test");
+      let s2 = s1;
+      take_ownership(s2); //移动了ownership至函数
+      // println!("{s2}, world!"); // 没有启用
+  }
+
+fn take_ownership(some_string: String) {
+    println!("{}", some_string);
+} // 此作用域结束，some_string 不再有效，some_string 移出作用域并调用 `drop` 方法。
+  // 占用的内存被释放
+
+output：ownership test
+</code></pre>
+<p>如果我们启用，则会有以下报错：</p>
+<pre><code class="language-bash">   Compiling massflow_accelerator v0.1.0 (/Users/neo/Desktop/massflow_accelerator)
+error[E0382]: borrow of moved value: `s2`
+  --&gt; src/main.rs:11:20
+   |
+ 9 |         let s2 = s1;
+   |             -- move occurs because `s2` has type `String`, which does not implement the `Copy` trait
+10 |         take_ownership(s2);
+   |                        -- value moved here
+11 |         println!("{s2}, world!");
+   |                    ^^ value borrowed here after move
+   |
+note: consider changing this parameter type in function `take_ownership` to borrow instead if owning the value isn't necessary
+  --&gt; src/main.rs:22:32
+   |
+22 | fn take_ownership(some_string: String) {
+   |    --------------              ^^^^^^ this parameter takes ownership of the value
+   |    |
+   |    in this function
+   = note: this error originates in the macro `$crate::format_args_nl` which comes from the expansion of the macro `println` (in Nightly builds, run with -Z macro-backtrace for more info)
+</code></pre>
+<p>这也是Rust比较麻烦的地方，在其他编程语言里面，变量的生命周期不会这么转瞬即逝，不会随着作用域的变化而产生变化，<strong>即从调用函数的较大作用域进入较小的函数作用域的时候其变量本身的生命周期并没有发生变化</strong>。<strong>但是Rust恰恰相反，其生命周期与所有权，作用域等都存在一定关系，多个特性共同决定了变量的生命周期</strong>。</p>
+<h3><span id="返回值和作用域">返回值和作用域</span></h3>
+<p>返回值也可以转移所有权。示例 展示了一个返回了某些值的示例:</p>
+<pre><code class="language-rust">fn take_ownership(some_string: String)-&gt; String {
+    println!("{}", some_string);// some_string 进入作用域
+    some_string // 返回 some_string 并将其移至调用函数
+} 
+
+fn main(){
+    let s1 = String::from("ownership test");
+    let mut s2 = s1; //这里发生了第一次 Move。s1 的所有权移动给了 s2，s1 失效。
+    s2 = take_ownership(s2); //移交所有权并重新获取所有权
+    println!("{s2}, function!");
+}
+output：ownership test, function!
+</code></pre>
+<p>在 Rust 中，这里的 s2从技术上讲是一个<strong>全新的变量绑定</strong>，尽管它可能指向相同的堆内存数据（取决于编译器的优化），但在语义上发生了所有权的转移（Move）。</p>
+<p>函数调用<code>take_ownership(s2)</code>这里发生了第二次 Move。s2 的所有权移动进了函数 take_ownership 的参数 some_string中。此时，外部的 s2（在赋值前）暂时失去了对数据的所有权。</p>
+<h2><span id="总结">总结</span></h2>
+<p>变量的所有权总是遵循相同的模式：将值赋给另一个变量时它会移动。当持有堆中数据值的变量离开作用域时，其值将通过 <code>drop</code> 被清理掉，除非数据被移动为另一个变量所有。虽然这样是可以的，但是在每一个函数中都获取所有权并接着返回所有权有些啰嗦。如果我们想要函数使用一个值但不获取所有权该怎么办呢？</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2025/11/28/Rust%20%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%E6%8C%87%E5%8C%97%5B%E5%BC%95%E7%94%A8%E4%B8%8E%E5%80%9F%E7%94%A8%5D/" title="Rust 快速入门指北[引用与借用]"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Rust 快速入门指北[引用与借用]</span></a><a class="button is-default" href="/2025/11/28/Zerotier/" title="使用Zerotier实现内网穿透"><span class="has-text-weight-semibold">Next: 使用Zerotier实现内网穿透</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2026</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>
