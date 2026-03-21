@@ -1,0 +1,262 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>BionetServer-No1使用说明-基础篇</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="BionetServer-No1使用说明-基础篇
+
+
+Date: 2026.3.18
+Authors：NeoNeuxs, dlc
+
+
+系统信息篇
+
+系统硬盘分区
+
+课题组服务器网络拓扑图
+
+
+公用文件夹指南
+网络端口信息
+软件安装信息
+基于UI的方式远程连接服务器
+
+
+用户篇
+
+桌面服务
+
+Xfce桌面
+
+
+如何正确退出远程连接？
+如何关闭锁屏功能
+如何配置中文输入法
+基本的开发工具
+Anaconda使用说明
+服务器端的Anaconda如何使用？
+Matlab使用说明
+
+报错处理
+
+
+代理使用：
+R语言使用指南
+
+
+
+
+[TOC]
+系统信息篇
+系统硬盘分区
+目前系统是由这样的硬盘空间组成的,分为高速、中速、低速区：
+顾名思义，每个区域速度不同，速度不同的同时稳定性也存在一定的差异，稳定性和速度正好相反：
+D.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">BionetServer-No1使用说明-基础篇</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">BionetServer-No1使用说明-基础篇</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">系统信息篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">系统硬盘分区</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">课题组服务器网络拓扑图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">公用文件夹指南</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">网络端口信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">软件安装信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">基于UI的方式远程连接服务器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">用户篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">桌面服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Xfce桌面</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">如何正确退出远程连接？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">如何关闭锁屏功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">如何配置中文输入法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">基本的开发工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Anaconda使用说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">服务器端的Anaconda如何使用？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Matlab使用说明</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">报错处理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">代理使用：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">R语言使用指南</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Bionet"><i class="tag post-item-tag">Bionet</i></a><a href="/tags/ops"><i class="tag post-item-tag">ops</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">BionetServer-No1使用说明-基础篇</h1><time class="has-text-grey" datetime="2026-03-18T08:31:36.000Z">2026-03-18</time><article class="mt-2 post-content"><h1><span id="bionetserver-no1使用说明-基础篇">BionetServer-No1使用说明-基础篇</span></h1>
+<img src="https://s2.loli.net/2024/09/29/vNKRfOVDTng7wdL.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1727547378732" style="zoom:50%;">
+<img src="https://s2.loli.net/2023/09/18/zXu5EpoCmKH8FiJ.jpg" alt="标准监督" style="zoom: 50%;">
+<p>Date: 2026.3.18</p>
+<p>Authors：NeoNeuxs, dlc</p>
+<!-- toc -->
+<ul>
+<li><a href="#%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E7%AF%87">系统信息篇</a>
+<ul>
+<li><a href="#%E7%B3%BB%E7%BB%9F%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA">系统硬盘分区</a>
+<ul>
+<li><a href="#%E8%AF%BE%E9%A2%98%E7%BB%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E6%8B%93%E6%89%91%E5%9B%BE">课题组服务器网络拓扑图</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%AC%E7%94%A8%E6%96%87%E4%BB%B6%E5%A4%B9%E6%8C%87%E5%8D%97">公用文件夹指南</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E7%AB%AF%E5%8F%A3%E4%BF%A1%E6%81%AF">网络端口信息</a></li>
+<li><a href="#%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E4%BF%A1%E6%81%AF">软件安装信息</a></li>
+<li><a href="#%E5%9F%BA%E4%BA%8Eui%E7%9A%84%E6%96%B9%E5%BC%8F%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8">基于UI的方式远程连接服务器</a></li>
+</ul>
+</li>
+<li><a href="#%E7%94%A8%E6%88%B7%E7%AF%87">用户篇</a>
+<ul>
+<li><a href="#%E6%A1%8C%E9%9D%A2%E6%9C%8D%E5%8A%A1">桌面服务</a>
+<ul>
+<li><a href="#xfce%E6%A1%8C%E9%9D%A2">Xfce桌面</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E9%80%80%E5%87%BA%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5">如何正确退出远程连接？</a></li>
+<li><a href="#%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%AD%E9%94%81%E5%B1%8F%E5%8A%9F%E8%83%BD">如何关闭锁屏功能</a></li>
+<li><a href="#%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95">如何配置中文输入法</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E7%9A%84%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7">基本的开发工具</a></li>
+<li><a href="#anaconda%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">Anaconda使用说明</a></li>
+<li><a href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E7%9A%84anaconda%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8">服务器端的Anaconda如何使用？</a></li>
+<li><a href="#matlab%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">Matlab使用说明</a>
+<ul>
+<li><a href="#%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%86">报错处理</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BB%A3%E7%90%86%E4%BD%BF%E7%94%A8">代理使用：</a></li>
+<li><a href="#r%E8%AF%AD%E8%A8%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97">R语言使用指南</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p>[TOC]</p>
+<h1><span id="系统信息篇">系统信息篇</span></h1>
+<h2><span id="系统硬盘分区">系统硬盘分区</span></h2>
+<p>目前系统是由这样的硬盘空间组成的,分为高速、中速、低速区：</p>
+<p>顾名思义，每个区域速度不同，速度不同的同时稳定性也存在一定的差异，稳定性和速度正好相反：</p>
+<p><code>Data_NAS(Datasets) &gt; Samsung 860evo 512G  &gt; GLOWAY YCQ4TNVMe-M.2</code></p>
+<h3><span id="课题组服务器网络拓扑图">课题组服务器网络拓扑图</span></h3>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/69b8dc83df27f3bc58070a6d.png_neo" alt></p>
+<h2><span id="公用文件夹指南">公用文件夹指南</span></h2>
+<p><code>/home</code>文件夹：</p>
+<img src="https://s2.loli.net/2024/04/01/fm4gUGQCToIbkv8.png" alt="image-20240401202923240" style="zoom:80%;">
+<p>这其中包含了共享文件夹和用户文件夹，如图共享文件夹使用红框标注，用来传递文件</p>
+<p><img src="https://pic1.imgdb.cn/item/69b8dcb7df27f3bc58070b9a.png" alt></p>
+<p>一共包含两个文件夹：</p>
+<ul>
+<li>Datasets文件夹是用来放置公用数据集的，其命名需要遵循以下方式：<code>上传者_数据集名称_上传日期</code>。
+<ul>
+<li>此文件夹使用详见：<a target="_blank" rel="noopener" href="http://10.26.58.109/2024/09/29/NAS%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">NAS服务器使用说明</a></li>
+</ul>
+</li>
+<li>SoftWares文件夹比较特殊：安装了matlab等软件</li>
+</ul>
+<h2><span id="网络端口信息">网络端口信息</span></h2>
+<p><strong>端口的使用主要集中在容器。可以通过portainer来查看，portainer如何使用详见docker篇。</strong></p>
+<h2><span id="软件安装信息">软件安装信息</span></h2>
+<p>Anaconda：/home/anaconda</p>
+<p>Matlab：/home/SoftWares/Matlab</p>
+<p>Dcoker：/默认路径</p>
+<p>Jetbrains IDEs：/home/SoftWares/Jetbrain</p>
+<h2><span id="基于ui的方式远程连接服务器">基于UI的方式远程连接服务器</span></h2>
+<p>首先我们要确认是否连接到了校园网，在系统命令行上使用命令：</p>
+<pre><code class="language-bash">ping 10.26.58.61
+</code></pre>
+<p>结果如下则证明你在校园网内。</p>
+<img src="https://s2.loli.net/2024/05/13/Yts7QOiU1ymlfrS.png" alt="image-20240513224911484" style="zoom:67%;">
+<p>打开windos远程连接，在状态栏中搜索远程连接，对于Windows系统，家庭版往往没有此功能，需要升级至专业版，具体升级方法可以去某宝买一个激活码，价格在10元左右。询问店家如何激活升级。</p>
+<img src="https://s2.loli.net/2024/05/13/yiS3oGNWZaUFMbz.png" alt="image-20240513224939223" style="zoom:80%;">
+<p>打开远程桌面输入远程地址，打开选项：</p>
+<img src="https://s2.loli.net/2024/05/13/igJMIEtfhBOQC4Y.png" alt="image-20240513225154369" style="zoom:67%;">
+<p>打开选项之后，输入链接地址：10.26.58.61</p>
+<p>然后点击显示选项，参照我这里修改：</p>
+<img src="https://s2.loli.net/2024/05/13/sFaqp1WPLRJNeOx.png" alt="image-20240513225353292" style="zoom:67%;">
+<p>然后点击编辑，修改成你的用户名和密码，连接即可。</p>
+<img src="https://s2.loli.net/2024/05/13/NhkFSiZEv8rxVgX.png" alt="image-20240513225650039" style="zoom:67%;">
+<p>输入你的用户名和密码：</p>
+<img src="https://s2.loli.net/2024/05/13/AwEjJ9RDTV1qifg.png" alt="image-20240513225551955" style="zoom:67%;">
+<p>连接后进入桌面，即可开始使用，如遇到剪贴板不能互相传输、小文件不能传输，请关闭连接重开即可，文件传输依赖于NAS可以参考一下NAS篇介绍。</p>
+<h1><span id="用户篇">用户篇</span></h1>
+<h2><span id="桌面服务">桌面服务</span></h2>
+<h3><span id="xfce桌面">Xfce桌面</span></h3>
+<img src="https://s2.loli.net/2024/03/24/DGACKf3BFswoix1.png" alt="image-20240324173242318" style="zoom:80%;">
+<h2><span id="如何正确退出远程连接">如何正确退出远程连接？</span></h2>
+<p>开启远程链接之后如果按照以下操作，会话将会保持运行，占用资源，正确退出方法如下：</p>
+<img src="https://s2.loli.net/2024/03/25/mPSAMvcUsreYgQ7.png" alt="image-20240325115418950" style="zoom: 80%;">
+<h2><span id="如何关闭锁屏功能">如何关闭锁屏功能</span></h2>
+<p>在这里找到设置：</p>
+<img src="https://s2.loli.net/2024/04/20/Vv6n4ItDzgpUXsr.png" alt="image-20240420190046154" style="zoom:80%;">
+<img src="https://s2.loli.net/2024/04/20/LP43Aq8mX1I2ecb.png" alt="image-20240420190108244" style="zoom:67%;">
+<img src="https://s2.loli.net/2024/04/20/uIiRbpaY6Z2OBhx.png" alt="image-20240420190123305" style="zoom:67%;">
+<p>关闭即可。</p>
+<h2><span id="如何配置中文输入法">如何配置中文输入法</span></h2>
+<p>打开fctix 5：</p>
+<p><img src="https://s2.loli.net/2024/03/26/HzeqfrZxGpQOcmj.png" alt="image-20240326205930890"></p>
+<p>这里会提示运行fctix 5：</p>
+<p><img src="https://s2.loli.net/2024/03/26/Eeza317wogSMcli.png" alt="image-20240326210030357"></p>
+<p>在这里找到拼音：</p>
+<img src="https://s2.loli.net/2024/03/26/PX9Gdk5ElF8VI4C.png" alt="image-20240326210056577" style="zoom: 80%;">
+<p>点击添加并应用：</p>
+<img src="https://s2.loli.net/2024/03/26/8vgad9fEVwjA5yW.png" alt="image-20240326210139494" style="zoom:80%;">
+<p>找到语言设置：</p>
+<p><img src="https://s2.loli.net/2024/03/26/cDq7MzyRkbVBadi.png" alt="image-20240326210306567"></p>
+<p>更改设置如下，并登出，重新启动之后</p>
+<p><img src="https://s2.loli.net/2024/03/26/bCHiPtZSow3vcmu.png" alt="image-20240326210336015"></p>
+<img src="https://s2.loli.net/2024/03/26/tIrZ4owaCkPXvQc.png" alt="image-20240326210413055" style="zoom:80%;">
+<p>可以愉快使用：</p>
+<p><strong>注意输入法切换要使用ctrl+空格键</strong></p>
+<p><img src="https://s2.loli.net/2024/03/26/nIgFTsCrmcxbMzt.png" alt="image-20240326210456544"></p>
+<h2><span id="基本的开发工具">基本的开发工具</span></h2>
+<p>使用UI开发的基本工具都在：</p>
+<img src="https://s2.loli.net/2024/05/13/bRqM8GFJT9Hjs3C.png" alt="image-20240513230203466" style="zoom:67%;">
+<p>PyCharm使用的介绍这里不赘述，网上有很多，需要提醒的是选择Python Inter（python解释器）的时候</p>
+<h2><span id="anaconda使用说明">Anaconda使用说明</span></h2>
+<p>**禁止事项：严禁在用户个人目录下私自安装Anaconda</p>
+<h2><span id="服务器端的anaconda如何使用">服务器端的Anaconda如何使用？</span></h2>
+<p>在命令行中使用命令：</p>
+<pre><code class="language-bash"> conda activate base
+ conda env list # 看所有的conda环境有哪些
+</code></pre>
+<p><img src="https://s2.loli.net/2024/05/13/INaD3GAgvVC8TPy.png" alt="image-20240513230400329"></p>
+<p>注意base环境不可以使用，请自己建立环境：</p>
+<pre><code class="language-bash">conda create -n env_name python=3.10
+# 激活test0环境
+conda activate test0
+python --version # 可以激活后看python版本，验证一下
+</code></pre>
+<p>其中env_name为你想创建的环境的名字，python后边为创建的版本。</p>
+<h2><span id="matlab使用说明">Matlab使用说明</span></h2>
+<p><strong>禁止事项：严禁在用户个人目录下私自安装Matlab</strong></p>
+<p>matlab在路径：</p>
+<pre><code class="language-bash">/home/SoftWares/MATLAB/bin
+</code></pre>
+<p>在目录下右键打开命令行，运行matlab即可</p>
+<pre><code>./matlab
+</code></pre>
+<p>或者快捷方式在：</p>
+<img src="https://s2.loli.net/2024/06/07/TKCeJRObo98VyXQ.png" alt="image-20240607222500101" style="zoom:80%;">
+<img src="https://s2.loli.net/2024/06/07/vlaz2VtP8ZRCWsw.png" alt="image-20240607222559328" style="zoom:67%;">
+<p>**此命令行为matlab运行所使用，不要关闭。**开启后登陆个人matlab账号即可使用，安装的matlab皆为正版，需要根据学校引导来注册正版账号，引导内容在：<a target="_blank" rel="noopener" href="https://zhengban.xmu.edu.cn/matlab.html%EF%BC%8C%E6%9F%A5%E7%9C%8B%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7%E9%83%A8%E5%88%86%E4%BB%8B%E7%BB%8D%EF%BC%8C%E9%81%B5%E5%BE%AA%E6%8C%87%E5%8D%97%E3%80%82">https://zhengban.xmu.edu.cn/matlab.html，查看个人用户部分介绍，遵循指南。</a></p>
+<h4><span id="报错处理">报错处理</span></h4>
+<img src="https://s2.loli.net/2024/09/02/a2XJilmTOsoyQdU.png" alt="image-20240902193011563" style="zoom:50%;">
+<p>根据matlab官方指南，kill掉对应的进程即可，使用命令：</p>
+<pre><code>ps -fU 用户名 | grep MathWorksServiceHost
+</code></pre>
+<p><img src="https://s2.loli.net/2024/09/02/7Wz195ZHTEn3hwD.png" alt="image-20240902193935209"></p>
+<p>使用<code>kill -9  1220267</code>对应的进程号码即可。</p>
+<h2><span id="代理使用">代理使用：</span></h2>
+<pre><code class="language-bash"># 为终端设置临时代理
+export http_proxy=http://代理服务器IP:端口
+export https_proxy=http://代理服务器IP:端口
+
+# 为 Git 设置全局代理
+git config --global http.proxy http://代理服务器IP:端口
+git config --global https.proxy http://代理服务器IP:端口
+</code></pre>
+<h2><span id="r语言使用指南">R语言使用指南</span></h2>
+<p>为了方便R语言版本的切换，R语言通过浏览器访问，地址<code>10.26.58.61:8787</code>，详见<a target="_blank" rel="noopener" href="https://pleinelune-r.github.io/2025/08/05/R-Studio%E5%AE%B9%E5%99%A8%E4%BD%BF%E7%94%A8%E5%8F%8AMSI%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B/#%E4%BA%8C%E3%80%81RStudio%E6%A0%87%E5%87%86%E8%BF%9E%E6%8E%A5">RStudio</a></p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2026/03/18/NAS%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" title="NAS服务器使用说明"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: NAS服务器使用说明</span></a><a class="button is-default" href="/2026/02/12/Bionet-Server01%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%20%E2%80%94%E2%80%94%E7%BB%B4%E6%8A%A4%E7%AF%87/" title="BionetServer-No1-Ops"><span class="has-text-weight-semibold">下一页: BionetServer-No1-Ops</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2026</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>
