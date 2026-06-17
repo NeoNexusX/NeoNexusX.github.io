@@ -1,0 +1,195 @@
+<!DOCTYPE html><html class="appearance-auto" lang="chinese"><head><meta charset="UTF-8"><title>AI Agent Cookbook</title><meta name="description" content="YOU CAN REDO"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'G-E0GBC11CTD', 'neonexusx.github.io');
+ga('send', 'pageview');</script><!-- End Google Analytics -->
+<!-- Baidu Analytics --><script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?" + '1c102c8d6549c8317b34036a36f85904';
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
+自建 API 站使用说明本文介绍如何通过自建 API 中转站，统一管理和使用高质量模型 API。主要覆盖三类使用场景：
+
+使用 Cherry Studio 进行多模型对话。
+使用 cc-switch 管理 API 配置与模型代理。
+在 Codex 或 Claude Code 中接入自建 API 进行编程辅助。
+
+模型价格表：http://47.113.198.26/pricing
+注意
+包月计费，一般不限量。
+按量计费，一般按照价格计算。
+有些是混合计费，优先使用包月计费，不够用时使用其他渠道补充。
+对应的 API KEY 需要按照名字替换（文档中的 NEWAPI_CC_KEY 等为占位符，请替换为从主管处获取的真实 Key）。
+
+一、cc-switch：API 配置管理与代理工具cc-switch 是 .."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">NeoNexus's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">AI Agent Cookbook</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">自建 API 站使用说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">一、cc-switch：API 配置管理与代理工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">二、Claude Code 插件和命令行版本接入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">安装 Claude Code</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">插件和命令行版本接入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">1. 在 cc-switch 中添加供应商</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">使用国产系列模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">2. 重启 VS Code 并开始使用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">三、Claude 桌面版接入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">1. 桌面版下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">2. CC Switch 添加供应商</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">四、Codex 接入配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">1. 安装 Codex</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">2. 在 cc-switch 中添加配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">五、Cherry Studio 综合对话配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">1. 添加 API 供应商</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">2. 选择模型并添加到对话</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/AI"><i class="tag post-item-tag">AI</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">AI Agent Cookbook</h1><time class="has-text-grey" datetime="2026-06-17T12:46:25.000Z">2026-06-17</time><article class="mt-2 post-content"><p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/%5Blab.magiconch.com%5D%5B%E7%A6%8F%E9%9F%B3%E6%88%B0%E5%A3%AB%E6%A8%99%E9%A1%8C%E7%94%9F%E6%88%90%E5%99%A8%5D-1781699675177.jpg" alt="[lab.magiconch.com][福音戰士標題生成器]-1781699675177" style="zoom:50%;"></p>
+<h1><span id="自建-api-站使用说明">自建 API 站使用说明</span></h1><p>本文介绍如何通过自建 API 中转站，统一管理和使用高质量模型 API。主要覆盖三类使用场景：</p>
+<ul>
+<li>使用 Cherry Studio 进行多模型对话。</li>
+<li>使用 cc-switch 管理 API 配置与模型代理。</li>
+<li>在 Codex 或 Claude Code 中接入自建 API 进行编程辅助。</li>
+</ul>
+<p><strong>模型价格表</strong>：<a target="_blank" rel="noopener" href="http://47.113.198.26/pricing">http://47.113.198.26/pricing</a></p>
+<h3><span id="注意">注意</span></h3><ul>
+<li>包月计费，<strong>一般不限量</strong>。</li>
+<li>按量计费，<strong>一般按照价格计算</strong>。</li>
+<li><strong>有些是混合计费，优先使用包月计费，不够用时使用其他渠道补充</strong>。</li>
+<li><strong>对应的 API KEY 需要按照名字替换</strong>（文档中的 <code>NEWAPI_CC_KEY</code> 等为占位符，请替换为从主管处获取的真实 Key）。</li>
+</ul>
+<h2><span id="一-cc-switchapi-配置管理与代理工具">一、cc-switch：API 配置管理与代理工具</span></h2><p>cc-switch 是 API 配置管理和模型代理的核心工具，Claude Code、Codex、Cherry Studio 的配置均依赖它，建议最先安装。</p>
+<blockquote>
+<p>提示：请下载最新版本安装，无需与文档截图中的版本一致。</p>
+</blockquote>
+<p>下载地址：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/farion1231/cc-switch/releases">https://github.com/farion1231/cc-switch/releases</a></p>
+<p>macOS 选择：</p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260421193127674.png_neo" alt="image-20260421193127674"></p>
+<p>Windows 选择：</p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260421193151129.png_neo" alt="image-20260421193151129"></p>
+<h2><span id="二-claude-code-插件和命令行版本接入">二、Claude Code 插件和命令行版本接入</span></h2><h3><span id="安装-claude-code">安装 Claude Code</span></h3><p>Claude Code 可以通过命令行安装，也可以在 <strong>VS Code / PyCharm 插件市场</strong>中安装插件，推荐使用插件方式。</p>
+<blockquote>
+<p>提示：请安装最新版本的 Claude Code，无需与文档截图中的版本一致。</p>
+</blockquote>
+<p>VS Code 插件安装：</p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260421192539029.png_neo" alt="image-20260421192539029" style="zoom: 67%;"></p>
+<p>安装完成后不需要登录，保持当前状态即可：</p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260421222815328.png_neo" alt="image-20260421222815328" style="zoom:67%;"></p>
+<p><strong>桌面版与插件可以分开使用，二者在 cc-switch 中是独立渠道，无需来回切换配置即可切换模型。例如可以把桌面版设置为一个高速模型来回答问题，插件侧用于编码。桌面版的独立配置详见第三节</strong>：</p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260617211940772.png" alt="image-20260617211940772" style="zoom: 33%;"></p>
+<h3><span id="插件和命令行版本接入">插件和命令行版本接入</span></h3><p>接入支持的模型目前包括：</p>
+<ul>
+<li>DeepSeek V4 系列模型</li>
+<li>GLM 系列</li>
+<li>Kimi 系列</li>
+<li>MiniMax 系列</li>
+</ul>
+<h4><span id="1-在-cc-switch-中添加供应商">1. 在 cc-switch 中添加供应商</span></h4><p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260421222939862.png_neo" alt="image-20260421222939862" style="zoom:67%;"></p>
+<p>向下滚动，填写以下信息：</p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260427004611960.png_neo" alt="image-20260427004611960" style="zoom: 67%;"></p>
+<pre><code class="lang-text">供应商名称：NewAPI-cc
+API key：NEWAPI_CC_KEY【找主管人员要】
+请求地址：http://47.113.198.26
+</code></pre>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260617212412742.png" alt="image-20260617212412742" style="zoom: 50%;"></p>
+<p>获取模型配置信息：</p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260617212444764.png" alt="image-20260617212444764"></p>
+<h4><span id="使用国产系列模型">使用国产系列模型</span></h4><p>推荐使用国产模型配置，高性能且不限量。可先按此处使用 DeepSeek 配置，后续再尝试其他喜欢的模型：</p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260617212823420.png" alt="image-20260617212823420"></p>
+<p>向下滑动，下侧配置 JSON 应如下所示：</p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260617212951811.png" alt="image-20260617212951811"></p>
+<p>如果上方看到的不一样，可参考下方内容复制覆盖：</p>
+<pre><code class="lang-json">{
+  "effortLevel": "xhigh",
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "NEWAPI_CC_KEY【找主管人员要】",
+    "ANTHROPIC_BASE_URL": "http://47.113.198.26",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "deepseek-v4-flash",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL_NAME": "deepseek-v4-flash",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "deepseek-v4-pro[1M]",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL_NAME": "deepseek-v4-pro",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "deepseek-v4-pro[1M]",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL_NAME": "deepseek-v4-pro",
+    "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "1000000",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": 1,
+    "CLAUDE_CODE_EFFORT_LEVEL": "max",
+    "ENABLE_TOOL_SEARCH": "true",
+    "ANTHROPIC_MODEL": "deepseek-v4-pro",
+    "ANTHROPIC_DEFAULT_FABLE_MODEL": "deepseek-v4-pro[1M]",
+    "ANTHROPIC_DEFAULT_FABLE_MODEL_NAME": "deepseek-v4-pro"
+  },
+  "includeCoAuthoredBy": false
+}
+</code></pre>
+<p>注意：API Key 需在一行内填写，不要换行。配置后格式应如下图，如果格式不正确，请点击<strong>格式化</strong>。</p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260617213025954.png" alt="image-20260617213025954" style="zoom:67%;"></p>
+<h4><span id="2-重启-vs-code-并开始使用">2. 重启 VS Code 并开始使用</span></h4><p>配置完成后，重新打开 VS Code。看到对应状态后，即可开始使用 Claude Code 进行编码：</p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260421224052290.png_neo" alt="image-20260421224052290" style="zoom:80%;"></p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260421224101637.png_neo" alt="image-20260421224101637" style="zoom: 33%;"></p>
+<h2><span id="三-claude-桌面版接入">三、Claude 桌面版接入</span></h2><h3><span id="1-桌面版下载">1. 桌面版下载</span></h3><p>Claude Code 桌面版下载页：</p>
+<p><a target="_blank" rel="noopener" href="https://claude.com/product/claude-code">https://claude.com/product/claude-code</a></p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260617211734767.png" alt="image-20260617211734767" style="zoom: 33%;"></p>
+<h3><span id="2-cc-switch-添加供应商">2. CC Switch 添加供应商</span></h3><pre><code class="lang-text">供应商名称：NewAPI-cc
+API key：NEWAPI_CC_KEY【找主管人员要】
+请求地址：http://47.113.198.26
+</code></pre>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260617215053339.png" alt="image-20260617215053339" style="zoom:50%;"></p>
+<p>模型配置推荐如下，可参考截图或复制下方 JSON 覆盖：</p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260617215256740.png" alt="image-20260617215256740"></p>
+<h2><span id="四-codex-接入配置">四、Codex 接入配置</span></h2><h3><span id="1-安装-codex">1. 安装 Codex</span></h3><blockquote>
+<p>提示：请安装最新版本的 Codex，无需与文档截图中的版本一致。</p>
+</blockquote>
+<p>下载地址：</p>
+<p><a target="_blank" rel="noopener" href="https://openai.com/zh-Hans-CN/codex/">https://openai.com/zh-Hans-CN/codex/</a></p>
+<p>安装 Codex 后，先关闭 Codex：</p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260421222733327.png_neo" alt="image-20260421222733327" style="zoom:67%;"></p>
+<h3><span id="2-在-cc-switch-中添加配置">2. 在 cc-switch 中添加配置</span></h3><pre><code class="lang-text">供应商名称：NewAPI codex 专用
+Api key：NEWAPI_CODEX_KEY
+API 地址：http://47.113.198.26/v1
+</code></pre>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260421231440252.png_neo" alt="image-20260421231440252" style="zoom:80%;"></p>
+<p>修改完成后，重启 Codex。其他配置保持默认即可正常使用。</p>
+<p>Codex 目前仅支持 GPT 系列模型。</p>
+<h2><span id="五-cherry-studio-综合对话配置">五、Cherry Studio 综合对话配置</span></h2><h3><span id="1-添加-api-供应商">1. 添加 API 供应商</span></h3><p>打开 Cherry Studio，添加 API 配置：</p>
+<pre><code class="lang-text">API 密钥：NEWAPI_CHERRY_KEY
+API 地址：http://47.113.198.26
+</code></pre>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260421231811438.png_neo" alt="image-20260421231811438" style="zoom: 50%;"></p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260506150012340.png_neo" alt="image-20260506150012340" style="zoom: 33%;"></p>
+<h3><span id="2-选择模型并添加到对话">2. 选择模型并添加到对话</span></h3><p>选择需要使用的模型：</p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260421232309140.png_neo" alt="image-20260421232309140" style="zoom: 67%;"></p>
+<p>在右侧添加模型后，即可在对话中使用。</p>
+<p>需要注意的是，不同厂商的模型在添加之后需要修改请求格式。大部分模型不需要修改，部分模型需要修改：</p>
+<ul>
+<li>GPT 系列模型：OpenAI-Response 端点</li>
+<li>Claude 系列模型：Anthropic 端点</li>
+<li>Gemini 系列模型：Gemini 端点</li>
+<li>Kimi 系列模型：OpenAI 端点</li>
+<li>GLM 系列模型：Anthropic 端点 / OpenAI 端点</li>
+<li>MiniMax 系列模型：Anthropic 端点</li>
+<li>Mimo 系列模型：Anthropic 端点</li>
+</ul>
+<blockquote>
+<p>修改的原因在于各家接口标准不一致，为了满血体验最好按需修改。</p>
+</blockquote>
+<p>下面举两个例子。添加模型后点击模型设置：</p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260506150339942.png_neo" alt="image-20260506150339942" style="zoom: 50%;"></p>
+<p>Claude 系列模型：</p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260506150442656.png_neo" alt="image-20260506150442656" style="zoom:67%;"></p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260506150459853.png_neo" alt="image-20260506150459853" style="zoom:67%;"></p>
+<p>Google 系列端口修改：</p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260507163336410.png_neo" alt="image-20260507163336410"></p>
+<p><img src="https://neonexus-picture.oss-ap-southeast-1.aliyuncs.com/test/image-20260507163346370.png_neo" alt="image-20260507163346370" style="zoom:67%;"></p>
+<p>其他不需要改动。</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><em></em><a class="button is-default" href="/2026/03/18/Bionet-Server01%20Q&amp;A%E2%80%94%E2%80%94Docker%E7%AF%87/" title="BionetServer-No1. Q&amp;A-Docker"><span class="has-text-weight-semibold">Next: BionetServer-No1. Q&amp;A-Docker</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container" id="vcomments" data-comment_valine_id="hUPsiqArOXp6TNWbIGsRugoz-gzGzoHsz" data-comment_valine_key="bMOEIPDsFffDM5KYhZcZFDwr"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/NeoNexusX"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> NeoNexus 2026</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>Puravida & FreeWill</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script><script type="text/javascript">window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true,
+    tags: 'ams' // 如果需要支持自动编号
+ },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    enableMenu: true,
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        // 处理公式渲染完成后的回调函数
+        document.querySelectorAll('.MathJax').forEach((el) => {
+          el.parentNode.classList.add('has-jax');
+        });
+      });
+    }
+  }
+};</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script><script>function initMermaid() {
+  if (window.mermaid) {
+    mermaid.initialize({ theme: 'forest' });
+  }
+}</script></body></html>
